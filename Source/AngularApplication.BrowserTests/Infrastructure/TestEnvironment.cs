@@ -8,17 +8,17 @@ using Affecto.Authentication.Claims;
 using Affecto.Testing.UI.Selenium;
 using Autofac;
 using OpenQA.Selenium.Support.Extensions;
-using ServiceRegister.Application.Organization;
-using ServiceRegister.Application.Service;
-using ServiceRegister.Autofac;
-using ServiceRegister.Common;
-using ServiceRegister.Common.User;
-using ServiceRegister.Store.CodeFirst;
-using ServiceRegister.Tests.Infrastructure;
-using ServiceRegister.UserManagement;
+using OrganizationRegister.Application.Organization;
+using OrganizationRegister.Application.Service;
+using OrganizationRegister.Autofac;
+using OrganizationRegister.Common;
+using OrganizationRegister.Common.User;
+using OrganizationRegister.Store.CodeFirst;
+using OrganizationRegister.Tests.Infrastructure;
+using OrganizationRegister.UserManagement;
 using TechTalk.SpecFlow;
 
-namespace ServiceRegister.AngularApplication.BrowserTests.Infrastructure
+namespace OrganizationRegister.AngularApplication.BrowserTests.Infrastructure
 {
     [Binding]
     internal static class TestEnvironment

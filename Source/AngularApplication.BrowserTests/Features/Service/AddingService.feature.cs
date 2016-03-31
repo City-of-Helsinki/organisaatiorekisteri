@@ -11,7 +11,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace ServiceRegister.AngularApplication.BrowserTests.Features.Service
+namespace OrganizationRegister.AngularApplication.BrowserTests.Features.Service
 {
     using TechTalk.SpecFlow;
     
@@ -49,7 +49,7 @@ namespace ServiceRegister.AngularApplication.BrowserTests.Features.Service
             if (((TechTalk.SpecFlow.FeatureContext.Current != null) 
                         && (TechTalk.SpecFlow.FeatureContext.Current.FeatureInfo.Title != "AddingService")))
             {
-                ServiceRegister.AngularApplication.BrowserTests.Features.Service.AddingServiceFeature.FeatureSetup(null);
+                OrganizationRegister.AngularApplication.BrowserTests.Features.Service.AddingServiceFeature.FeatureSetup(null);
             }
         }
         

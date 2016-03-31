@@ -2,7 +2,7 @@
 using System.Configuration;
 using System.Security.Cryptography.X509Certificates;
 
-namespace ServiceRegister.Api.Authentication
+namespace OrganizationRegister.Api.Authentication
 {
     public class AuthenticationServerConfiguration : ConfigurationSection, IAuthenticationServerConfiguration
     {

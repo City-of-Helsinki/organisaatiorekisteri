@@ -2,7 +2,7 @@
 
 describe("Service", () =>
 {
-    var sut: ServiceRegister.Service;
+    var sut: OrganizationRegister.Service;
 
     function assertClassificationCollectionLength(length: number)
     {
@@ -15,25 +15,25 @@ describe("Service", () =>
     {
         it("Language names are listed separated with a comma", () =>
         {
-            sut = new ServiceRegister.Service(null, null, null, null, null, null, null, null,
-                new Array<ServiceRegister.Language>(new ServiceRegister.Language("fi", "finnish"), new ServiceRegister.Language("en", "english"),
-                    new ServiceRegister.Language("sv", "swedish")));
+            sut = new OrganizationRegister.Service(null, null, null, null, null, null, null, null,
+                new Array<OrganizationRegister.Language>(new OrganizationRegister.Language("fi", "finnish"), new OrganizationRegister.Language("en", "english"),
+                    new OrganizationRegister.Language("sv", "swedish")));
             expect(sut.languageNameList).toEqual("finnish, english, swedish");
         });
         it("Language names collection with one language", () =>
         {
-            sut = new ServiceRegister.Service(null, null, null, null, null, null, null, null,
-                new Array<ServiceRegister.Language>(new ServiceRegister.Language("fi", "finnish")));
+            sut = new OrganizationRegister.Service(null, null, null, null, null, null, null, null,
+                new Array<OrganizationRegister.Language>(new OrganizationRegister.Language("fi", "finnish")));
             expect(sut.languageNameList).toEqual("finnish");
         });
         it("Null language names collection", () =>
         {
-            sut = new ServiceRegister.Service();
+            sut = new OrganizationRegister.Service();
             expect(sut.languageNameList).toEqual("");
         });
         it("Empty language names collection", () =>
         {
-            sut = new ServiceRegister.Service(null, null, null, null, null, null, null, null, new Array<ServiceRegister.Language>());
+            sut = new OrganizationRegister.Service(null, null, null, null, null, null, null, null, new Array<OrganizationRegister.Language>());
             expect(sut.languageNameList).toEqual("");
         });
     });
@@ -42,7 +42,7 @@ describe("Service", () =>
     {
         it("Setting null classifications", () =>
         {
-            sut = new ServiceRegister.Service();
+            sut = new OrganizationRegister.Service();
 
             sut.setClassification(null, null, null);
 
@@ -50,11 +50,11 @@ describe("Service", () =>
         });
         it("Setting initial classifications", () =>
         {
-            var serviceClasses: Array<ServiceRegister.Hierarchical> = new Array<ServiceRegister.Hierarchical>(new ServiceRegister.Hierarchical("1", "class", null));
-            var targetGroups: Array<ServiceRegister.Hierarchical> = new Array<ServiceRegister.Hierarchical>(new ServiceRegister.Hierarchical("3", "class", null));
-            var lifeEvents: Array<ServiceRegister.Hierarchical> = new Array<ServiceRegister.Hierarchical>(new ServiceRegister.Hierarchical("4", "class", null));
+            var serviceClasses: Array<OrganizationRegister.Hierarchical> = new Array<OrganizationRegister.Hierarchical>(new OrganizationRegister.Hierarchical("1", "class", null));
+            var targetGroups: Array<OrganizationRegister.Hierarchical> = new Array<OrganizationRegister.Hierarchical>(new OrganizationRegister.Hierarchical("3", "class", null));
+            var lifeEvents: Array<OrganizationRegister.Hierarchical> = new Array<OrganizationRegister.Hierarchical>(new OrganizationRegister.Hierarchical("4", "class", null));
 
-            sut = new ServiceRegister.Service(null, null, null, null, null, null, null, null, new Array<ServiceRegister.Language>(), serviceClasses, null, targetGroups,
+            sut = new OrganizationRegister.Service(null, null, null, null, null, null, null, null, new Array<OrganizationRegister.Language>(), serviceClasses, null, targetGroups,
                 lifeEvents);
 
             assertClassificationCollectionLength(1);
@@ -64,14 +64,14 @@ describe("Service", () =>
         });
         it("Updating initial classifications", () =>
         {
-            var firstClassification: Array<ServiceRegister.Hierarchical> = new Array<ServiceRegister.Hierarchical>(new ServiceRegister.Hierarchical("1", "class", null));
-            var secondClassification: Array<ServiceRegister.Hierarchical> = new Array<ServiceRegister.Hierarchical>(new ServiceRegister.Hierarchical("2", "class", null));
-            var thirdClassification: Array<ServiceRegister.Hierarchical> = new Array<ServiceRegister.Hierarchical>(new ServiceRegister.Hierarchical("3", "class", null));
-            sut = new ServiceRegister.Service(null, null, null, null, null, null, null, null, new Array<ServiceRegister.Language>(), firstClassification, null, secondClassification,
+            var firstClassification: Array<OrganizationRegister.Hierarchical> = new Array<OrganizationRegister.Hierarchical>(new OrganizationRegister.Hierarchical("1", "class", null));
+            var secondClassification: Array<OrganizationRegister.Hierarchical> = new Array<OrganizationRegister.Hierarchical>(new OrganizationRegister.Hierarchical("2", "class", null));
+            var thirdClassification: Array<OrganizationRegister.Hierarchical> = new Array<OrganizationRegister.Hierarchical>(new OrganizationRegister.Hierarchical("3", "class", null));
+            sut = new OrganizationRegister.Service(null, null, null, null, null, null, null, null, new Array<OrganizationRegister.Language>(), firstClassification, null, secondClassification,
                 thirdClassification);
 
-            sut.setClassification(new ServiceRegister.Tree(thirdClassification), new ServiceRegister.Tree(secondClassification),
-                new ServiceRegister.Tree(firstClassification));
+            sut.setClassification(new OrganizationRegister.Tree(thirdClassification), new OrganizationRegister.Tree(secondClassification),
+                new OrganizationRegister.Tree(firstClassification));
 
             assertClassificationCollectionLength(1);
             expect(sut.serviceClasses[0]).toBe("3");
@@ -80,11 +80,11 @@ describe("Service", () =>
         });
         it("Setting hierarchical classification", () =>
         {
-            var child: ServiceRegister.Hierarchical = new ServiceRegister.Hierarchical("1.1.1", "leaf", null);
-            var childAndParent: ServiceRegister.Hierarchical = new ServiceRegister.Hierarchical("1.1", "child", new Array<ServiceRegister.Hierarchical>(child));
-            var parent: ServiceRegister.Hierarchical = new ServiceRegister.Hierarchical("1", "parent", new Array<ServiceRegister.Hierarchical>(childAndParent));
-            var serviceClasses: ServiceRegister.Tree = new ServiceRegister.Tree(new Array<ServiceRegister.Hierarchical>(parent));
-            sut = new ServiceRegister.Service();
+            var child: OrganizationRegister.Hierarchical = new OrganizationRegister.Hierarchical("1.1.1", "leaf", null);
+            var childAndParent: OrganizationRegister.Hierarchical = new OrganizationRegister.Hierarchical("1.1", "child", new Array<OrganizationRegister.Hierarchical>(child));
+            var parent: OrganizationRegister.Hierarchical = new OrganizationRegister.Hierarchical("1", "parent", new Array<OrganizationRegister.Hierarchical>(childAndParent));
+            var serviceClasses: OrganizationRegister.Tree = new OrganizationRegister.Tree(new Array<OrganizationRegister.Hierarchical>(parent));
+            sut = new OrganizationRegister.Service();
 
             sut.setClassification(serviceClasses, null, null);
 
@@ -95,25 +95,25 @@ describe("Service", () =>
         });
         it("Clearing classification", () =>
         {
-            var child: ServiceRegister.Hierarchical = new ServiceRegister.Hierarchical("1.1.1", "leaf", null);
-            var childAndParent: ServiceRegister.Hierarchical = new ServiceRegister.Hierarchical("1.1", "child", new Array<ServiceRegister.Hierarchical>(child));
-            var parent: ServiceRegister.Hierarchical = new ServiceRegister.Hierarchical("1", "parent", new Array<ServiceRegister.Hierarchical>(childAndParent));
-            var serviceClasses: ServiceRegister.Tree = new ServiceRegister.Tree(new Array<ServiceRegister.Hierarchical>(parent));
-            sut = new ServiceRegister.Service();
+            var child: OrganizationRegister.Hierarchical = new OrganizationRegister.Hierarchical("1.1.1", "leaf", null);
+            var childAndParent: OrganizationRegister.Hierarchical = new OrganizationRegister.Hierarchical("1.1", "child", new Array<OrganizationRegister.Hierarchical>(child));
+            var parent: OrganizationRegister.Hierarchical = new OrganizationRegister.Hierarchical("1", "parent", new Array<OrganizationRegister.Hierarchical>(childAndParent));
+            var serviceClasses: OrganizationRegister.Tree = new OrganizationRegister.Tree(new Array<OrganizationRegister.Hierarchical>(parent));
+            sut = new OrganizationRegister.Service();
 
             sut.setClassification(serviceClasses, null, null);
-            sut.setClassification(new ServiceRegister.Tree(), null, null);
+            sut.setClassification(new OrganizationRegister.Tree(), null, null);
 
             assertClassificationCollectionLength(0);
         });
         it("Setting classifications on the same level", () =>
         {
-            var child1: ServiceRegister.Hierarchical = new ServiceRegister.Hierarchical("1.1", "child", null);
-            var child2: ServiceRegister.Hierarchical = new ServiceRegister.Hierarchical("1.2", "child", null);
-            var parent1: ServiceRegister.Hierarchical = new ServiceRegister.Hierarchical("1", "parent", new Array<ServiceRegister.Hierarchical>(child1, child2));
-            var parent2: ServiceRegister.Hierarchical = new ServiceRegister.Hierarchical("2", "parent", null);
-            var serviceClasses: ServiceRegister.Tree = new ServiceRegister.Tree(new Array<ServiceRegister.Hierarchical>(parent1, parent2));
-            sut = new ServiceRegister.Service();
+            var child1: OrganizationRegister.Hierarchical = new OrganizationRegister.Hierarchical("1.1", "child", null);
+            var child2: OrganizationRegister.Hierarchical = new OrganizationRegister.Hierarchical("1.2", "child", null);
+            var parent1: OrganizationRegister.Hierarchical = new OrganizationRegister.Hierarchical("1", "parent", new Array<OrganizationRegister.Hierarchical>(child1, child2));
+            var parent2: OrganizationRegister.Hierarchical = new OrganizationRegister.Hierarchical("2", "parent", null);
+            var serviceClasses: OrganizationRegister.Tree = new OrganizationRegister.Tree(new Array<OrganizationRegister.Hierarchical>(parent1, parent2));
+            sut = new OrganizationRegister.Service();
 
             sut.setClassification(serviceClasses, null, null);
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ServiceRegister.Api.AuthenticatedUser
+namespace OrganizationRegister.Api.AuthenticatedUser
 {
     public class AuthenticatedUserNotResolvedException : Exception
     {

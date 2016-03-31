@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
-using ServiceRegister.Api.Settings;
-using ServiceRegister.Application.User;
+using OrganizationRegister.Api.Settings;
+using OrganizationRegister.Application.User;
 
-namespace ServiceRegister.Api.Tests.Settings
+namespace OrganizationRegister.Api.Tests.Settings
 {
     [TestClass]
     public class RoleMapperTests

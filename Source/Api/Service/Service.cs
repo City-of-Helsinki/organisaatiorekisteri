@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using ServiceRegister.Api.Classification;
-using ServiceRegister.Common;
+using OrganizationRegister.Api.Classification;
+using OrganizationRegister.Common;
 
-namespace ServiceRegister.Api.Service
+namespace OrganizationRegister.Api.Service
 {
     public class Service
     {

@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using Affecto.Patterns.Cqrs;
-using ServiceRegister.Application.Organization;
-using ServiceRegister.Application.Service;
-using ServiceRegister.Common;
-using ServiceRegister.Tests.Infrastructure;
-using TechTalk.SpecFlow;
 using Affecto.Testing.SpecFlow;
 using Autofac;
-using ServiceRegister.Application.Classification;
-using ServiceRegister.Commanding.Service.Commands;
+using OrganizationRegister.Application.Classification;
+using OrganizationRegister.Application.Organization;
+using OrganizationRegister.Application.Service;
+using OrganizationRegister.Commanding.Service.Commands;
+using OrganizationRegister.Common;
+using OrganizationRegister.Tests.Infrastructure;
+using TechTalk.SpecFlow;
 
-namespace ServiceRegister.AngularApplication.BrowserTests.Infrastructure
+namespace OrganizationRegister.AngularApplication.BrowserTests.Infrastructure
 {
     [Binding]
     internal class DataGenerationSteps

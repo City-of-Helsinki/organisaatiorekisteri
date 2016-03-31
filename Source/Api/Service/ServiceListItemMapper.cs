@@ -1,8 +1,8 @@
 ﻿using Affecto.Mapping.AutoMapper;
 using AutoMapper;
-using ServiceRegister.Application.Service;
+using OrganizationRegister.Application.Service;
 
-namespace ServiceRegister.Api.Service
+namespace OrganizationRegister.Api.Service
 {
     internal class ServiceListItemMapper : OneWayMapper<IServiceListItem, ServiceListItem>
     {

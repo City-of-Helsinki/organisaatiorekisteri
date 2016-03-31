@@ -1,8 +1,8 @@
 ﻿using System;
-using ServiceRegister.Api.Organization;
-using ServiceRegister.Api.Settings;
+using OrganizationRegister.Api.Organization;
+using OrganizationRegister.Api.Settings;
 
-namespace ServiceRegister.Api.User
+namespace OrganizationRegister.Api.User
 {
     public class UserListItem
     {

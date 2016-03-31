@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
-using ServiceRegister.Api.Classification;
-using ServiceRegister.Api.Service;
-using ServiceRegister.Application.Classification;
-using ServiceRegister.Application.Service;
-using ServiceRegister.Common;
+using OrganizationRegister.Api.Classification;
+using OrganizationRegister.Api.Service;
+using OrganizationRegister.Application.Classification;
+using OrganizationRegister.Application.Service;
+using OrganizationRegister.Common;
 
-namespace ServiceRegister.Api.Tests.Service
+namespace OrganizationRegister.Api.Tests.Service
 {
     [TestClass]
     public class ServiceMapperTests

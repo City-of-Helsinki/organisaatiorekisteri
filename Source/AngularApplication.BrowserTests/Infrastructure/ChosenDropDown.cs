@@ -3,7 +3,7 @@ using System.Linq;
 using Affecto.Testing.UI.Selenium;
 using OpenQA.Selenium;
 
-namespace ServiceRegister.AngularApplication.BrowserTests.Infrastructure
+namespace OrganizationRegister.AngularApplication.BrowserTests.Infrastructure
 {
     internal class ChosenDropDown
     {

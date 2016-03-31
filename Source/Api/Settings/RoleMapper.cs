@@ -1,8 +1,8 @@
 ﻿using Affecto.Mapping.AutoMapper;
 using AutoMapper;
-using ServiceRegister.Application.User;
+using OrganizationRegister.Application.User;
 
-namespace ServiceRegister.Api.Settings
+namespace OrganizationRegister.Api.Settings
 {
     public class RoleMapper : OneWayMapper<IRole, Role>
     {

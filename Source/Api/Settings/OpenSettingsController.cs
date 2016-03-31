@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Web.Http;
 using Affecto.Mapping;
 using Affecto.WebApi.Toolkit.CustomRoutes;
-using ServiceRegister.Application.Settings;
-using ServiceRegister.Application.User;
-using ServiceRegister.Common;
+using OrganizationRegister.Application.Settings;
+using OrganizationRegister.Application.User;
+using OrganizationRegister.Common;
 
-namespace ServiceRegister.Api.Settings
+namespace OrganizationRegister.Api.Settings
 {
     [RoutePrefix("v1/serviceregister")]
     public class OpenSettingsController : ApiController

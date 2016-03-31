@@ -3,7 +3,7 @@ using System.Security.Claims;
 using System.Web.Http;
 using Affecto.WebApi.Toolkit.CustomRoutes;
 
-namespace ServiceRegister.Api.AuthenticatedUser
+namespace OrganizationRegister.Api.AuthenticatedUser
 {
     [RoutePrefix("v1/serviceregister")]
     public class AuthorizedAuthenticatedUserController : ApiController

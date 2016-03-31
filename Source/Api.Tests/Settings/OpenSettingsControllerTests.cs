@@ -5,12 +5,12 @@ using System.Web.Http.Results;
 using Affecto.Mapping;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
-using ServiceRegister.Api.Settings;
-using ServiceRegister.Application.Settings;
-using ServiceRegister.Application.User;
-using ServiceRegister.Common;
+using OrganizationRegister.Api.Settings;
+using OrganizationRegister.Application.Settings;
+using OrganizationRegister.Application.User;
+using OrganizationRegister.Common;
 
-namespace ServiceRegister.Api.Tests.Settings
+namespace OrganizationRegister.Api.Tests.Settings
 {
     [TestClass]
     public class OpenSettingsControllerTests

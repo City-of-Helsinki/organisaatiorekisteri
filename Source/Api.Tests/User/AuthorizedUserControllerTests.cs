@@ -7,12 +7,12 @@ using System.Web.Http.Results;
 using Affecto.Mapping;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
-using ServiceRegister.Api.Organization;
-using ServiceRegister.Api.User;
-using ServiceRegister.Application.Organization;
-using ServiceRegister.Application.User;
+using OrganizationRegister.Api.Organization;
+using OrganizationRegister.Api.User;
+using OrganizationRegister.Application.Organization;
+using OrganizationRegister.Application.User;
 
-namespace ServiceRegister.Api.Tests.User
+namespace OrganizationRegister.Api.Tests.User
 {
     [TestClass]
     public class AuthorizedUserControllerTests

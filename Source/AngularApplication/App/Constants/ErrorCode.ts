@@ -1,6 +1,6 @@
 ﻿"use strict";
 
-module ServiceRegister
+module OrganizationRegister
 {
     export class ErrorCode
     {
@@ -8,7 +8,5 @@ module ServiceRegister
         {
             return "INSUFFICIENT_PERMISSIONS";
         }
-
-   
     }
 } 

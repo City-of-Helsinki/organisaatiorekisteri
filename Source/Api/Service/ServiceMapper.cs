@@ -1,10 +1,10 @@
 ﻿using Affecto.Mapping.AutoMapper;
 using AutoMapper;
-using ServiceRegister.Api.Classification;
-using ServiceRegister.Application.Classification;
-using ServiceRegister.Application.Service;
+using OrganizationRegister.Api.Classification;
+using OrganizationRegister.Application.Classification;
+using OrganizationRegister.Application.Service;
 
-namespace ServiceRegister.Api.Service
+namespace OrganizationRegister.Api.Service
 {
     public class ServiceMapper : OneWayMapper<IService, Service>
     {

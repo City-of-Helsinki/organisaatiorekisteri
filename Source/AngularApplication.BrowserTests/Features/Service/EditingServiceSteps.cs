@@ -3,11 +3,11 @@ using System.Linq;
 using System.Threading;
 using Affecto.Testing.SpecFlow;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ServiceRegister.AngularApplication.BrowserTests.Infrastructure;
-using ServiceRegister.Tests.Infrastructure;
+using OrganizationRegister.AngularApplication.BrowserTests.Infrastructure;
+using OrganizationRegister.Tests.Infrastructure;
 using TechTalk.SpecFlow;
 
-namespace ServiceRegister.AngularApplication.BrowserTests.Features.Service
+namespace OrganizationRegister.AngularApplication.BrowserTests.Features.Service
 {
     [Binding]
     [Scope(Feature = "EditingService")]

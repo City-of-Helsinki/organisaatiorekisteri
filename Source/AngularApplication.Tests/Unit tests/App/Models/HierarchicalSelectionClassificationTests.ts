@@ -2,8 +2,8 @@
 
 describe("hierarchical selection classification", () =>
 {
-    var sut: ServiceRegister.HierarchicalSelectionClassification;
-    var availableClasses: ServiceRegister.Tree;
+    var sut: OrganizationRegister.HierarchicalSelectionClassification;
+    var availableClasses: OrganizationRegister.Tree;
 
     // Creates the following tree:
     // 1            2
@@ -11,15 +11,15 @@ describe("hierarchical selection classification", () =>
     //  2.1.1   2.1.2
     function createClassificationWithHierarchyOfAvailableClasses()
     {
-        var class211: ServiceRegister.Hierarchical = new ServiceRegister.Hierarchical("2.1.1", "leaf1", null);
-        var class212: ServiceRegister.Hierarchical = new ServiceRegister.Hierarchical("2.1.2", "leaf2", null);
-        var class21: ServiceRegister.Hierarchical = new ServiceRegister.Hierarchical("2.1", "child1", new Array<ServiceRegister.Hierarchical>(class211, class212));
-        var class22: ServiceRegister.Hierarchical = new ServiceRegister.Hierarchical("2.2", "child2", null);
-        var class1: ServiceRegister.Hierarchical = new ServiceRegister.Hierarchical("1", "root1", null);
-        var class2: ServiceRegister.Hierarchical = new ServiceRegister.Hierarchical("2", "root2", new Array<ServiceRegister.Hierarchical>(class21, class22));
+        var class211: OrganizationRegister.Hierarchical = new OrganizationRegister.Hierarchical("2.1.1", "leaf1", null);
+        var class212: OrganizationRegister.Hierarchical = new OrganizationRegister.Hierarchical("2.1.2", "leaf2", null);
+        var class21: OrganizationRegister.Hierarchical = new OrganizationRegister.Hierarchical("2.1", "child1", new Array<OrganizationRegister.Hierarchical>(class211, class212));
+        var class22: OrganizationRegister.Hierarchical = new OrganizationRegister.Hierarchical("2.2", "child2", null);
+        var class1: OrganizationRegister.Hierarchical = new OrganizationRegister.Hierarchical("1", "root1", null);
+        var class2: OrganizationRegister.Hierarchical = new OrganizationRegister.Hierarchical("2", "root2", new Array<OrganizationRegister.Hierarchical>(class21, class22));
         
-        availableClasses = new ServiceRegister.Tree(new Array<ServiceRegister.Hierarchical>(class1, class2));
-        sut = new ServiceRegister.HierarchicalSelectionClassification(availableClasses);        
+        availableClasses = new OrganizationRegister.Tree(new Array<OrganizationRegister.Hierarchical>(class1, class2));
+        sut = new OrganizationRegister.HierarchicalSelectionClassification(availableClasses);        
     }
 
     describe("adding a class", () =>

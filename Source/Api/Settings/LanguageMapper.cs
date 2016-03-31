@@ -1,9 +1,9 @@
 ﻿using Affecto.Mapping.AutoMapper;
 using AutoMapper;
-using ServiceRegister.Application.Settings;
-using ServiceRegister.Common;
+using OrganizationRegister.Application.Settings;
+using OrganizationRegister.Common;
 
-namespace ServiceRegister.Api.Settings
+namespace OrganizationRegister.Api.Settings
 {
     internal class LanguageMapper : OneWayMapper<ILanguage, Language>
     {

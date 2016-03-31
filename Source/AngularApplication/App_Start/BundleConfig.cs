@@ -4,7 +4,7 @@ using Affecto.AngularJS.TypeScript.BusyIndication;
 using Affecto.AngularJS.TypeScript.ExceptionHandling;
 using Affecto.AngularJS.TypeScript.Login;
 
-namespace ServiceRegister.AngularApplication
+namespace OrganizationRegister.AngularApplication
 {
     public class BundleConfig
     {

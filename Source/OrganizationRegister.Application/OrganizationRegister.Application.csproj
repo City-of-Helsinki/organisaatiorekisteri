@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4F322916-C66E-415E-A4A9-45407618B62D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OrganizationRegister.Application</RootNamespace>
+    <AssemblyName>OrganizationRegister.Application</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Affecto.Identifiers, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Affecto.Identifiers.1.3.0\lib\net45\Affecto.Identifiers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Affecto.Identifiers.Finnish, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Affecto.Identifiers.Finnish.2.1.0\lib\net45\Affecto.Identifiers.Finnish.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Affecto.Patterns.Specification, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Affecto.Patterns.Specification.1.2.0\lib\net40\Affecto.Patterns.Specification.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classification\Class.cs" />
+    <Compile Include="Classification\ClassFactory.cs" />
+    <Compile Include="Classification\HierarchicalClass.cs" />
+    <Compile Include="Classification\IClass.cs" />
+    <Compile Include="Classification\IClassification.cs" />
+    <Compile Include="Classification\IClassificationRepository.cs" />
+    <Compile Include="Classification\IHierarchicalClass.cs" />
+    <Compile Include="IHierarchical.cs" />
+    <Compile Include="IOrderable.cs" />
+    <Compile Include="Localization\LocalizedProperty.cs" />
+    <Compile Include="Localization\LocalizedTexts.cs" />
+    <Compile Include="Localization\LocalizedTextsContainer.cs" />
+    <Compile Include="Location\Address.cs" />
+    <Compile Include="Location\PostOfficeBoxAddress.cs" />
+    <Compile Include="Location\StreetAddress.cs" />
+    <Compile Include="Location\IPostalAddress.cs" />
+    <Compile Include="Location\IVisitingAddressQualifiers.cs" />
+    <Compile Include="Location\PostalAddresses.cs" />
+    <Compile Include="Localization\MandatoryLocalizedSingleTexts.cs" />
+    <Compile Include="HierarchicalCollection.cs" />
+    <Compile Include="Organization\IBasicInformation.cs" />
+    <Compile Include="Organization\IContactInformation.cs" />
+    <Compile Include="Organization\IOrganizationName.cs" />
+    <Compile Include="Organization\IOrganizationRepository.cs" />
+    <Compile Include="Organization\IOrganizationService.cs" />
+    <Compile Include="Location\IVisitingAddress.cs" />
+    <Compile Include="Organization\OrganizationName.cs" />
+    <Compile Include="Organization\SubOrganization.cs" />
+    <Compile Include="Service\Dto\Service.cs" />
+    <Compile Include="Service\IBasicInformation.cs" />
+    <Compile Include="Service\IService.cs" />
+    <Compile Include="Service\IServiceListItem.cs" />
+    <Compile Include="Service\IServiceRepository.cs" />
+    <Compile Include="Service\IServiceService.cs" />
+    <Compile Include="Service\Service.cs" />
+    <Compile Include="Service\ServiceFactory.cs" />
+    <Compile Include="OrderableCollection.cs" />
+    <Compile Include="Service\ServiceListItem.cs" />
+    <Compile Include="Service\ServiceService.cs" />
+    <Compile Include="Settings\ILanguage.cs" />
+    <Compile Include="Settings\ISettingsRepository.cs" />
+    <Compile Include="Settings\ISettingsService.cs" />
+    <Compile Include="User\IRole.cs" />
+    <Compile Include="User\IUser.cs" />
+    <Compile Include="User\IUserListItem.cs" />
+    <Compile Include="User\IUserService.cs" />
+    <Compile Include="Settings\Language.cs" />
+    <Compile Include="Settings\LanguageFactory.cs" />
+    <Compile Include="Validation\BusinessIdentifierValidationResult.cs" />
+    <Compile Include="Organization\HierarchicalOrganization.cs" />
+    <Compile Include="Validation\IBusinessIdentifierValidationResult.cs" />
+    <Compile Include="Organization\IHierarchicalOrganization.cs" />
+    <Compile Include="Organization\IOrganization.cs" />
+    <Compile Include="Localization\LocalizedSingleTexts.cs" />
+    <Compile Include="Organization\Organization.cs" />
+    <Compile Include="Organization\OrganizationFactory.cs" />
+    <Compile Include="Organization\OrganizationService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validation\InvalidBusinessIdentifierReason.cs" />
+    <Compile Include="Validation\IValidationService.cs" />
+    <Compile Include="Settings\SettingsService.cs" />
+    <Compile Include="Validation\ValidationService.cs" />
+    <Compile Include="WebPages.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OrganizationRegister.Common\OrganizationRegister.Common.csproj">
+      <Project>{39415FC6-B6EF-4EE6-8E95-DF098E6B7394}</Project>
+      <Name>ServiceRegister.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

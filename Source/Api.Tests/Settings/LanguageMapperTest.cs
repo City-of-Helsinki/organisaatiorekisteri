@@ -1,10 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
-using ServiceRegister.Api.Settings;
-using ServiceRegister.Application.Settings;
-using ServiceRegister.Common;
+using OrganizationRegister.Api.Settings;
+using OrganizationRegister.Application.Settings;
+using OrganizationRegister.Common;
 
-namespace ServiceRegister.Api.Tests.Settings
+namespace OrganizationRegister.Api.Tests.Settings
 {
     [TestClass]
     public class LanguageMapperTest

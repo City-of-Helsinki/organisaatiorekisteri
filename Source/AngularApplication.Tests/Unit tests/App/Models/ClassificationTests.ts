@@ -2,46 +2,46 @@
 
 describe("classification", () =>
 {
-    var sut: ServiceRegister.Classification;
-    var availableClasses: ServiceRegister.Tree;
+    var sut: OrganizationRegister.Classification;
+    var availableClasses: OrganizationRegister.Tree;
 
     function createSingleClassClassificationAndSelectOnlyClass(classId: string)
     {
-        availableClasses = new ServiceRegister.Tree(new Array<ServiceRegister.Hierarchical>(new ServiceRegister.Hierarchical(classId, "class", null)));
-        sut = new ServiceRegister.Classification(availableClasses);
+        availableClasses = new OrganizationRegister.Tree(new Array<OrganizationRegister.Hierarchical>(new OrganizationRegister.Hierarchical(classId, "class", null)));
+        sut = new OrganizationRegister.Classification(availableClasses);
         sut.toggleSelection(classId, true);
     }
 
     function createRootAndChildClassClassificationAndSelectChildClass(rootClassId: string, childClassId: string)
     {
-        availableClasses = new ServiceRegister.Tree(new Array<ServiceRegister.Hierarchical>(new ServiceRegister.Hierarchical(rootClassId, "root",
-            new Array<ServiceRegister.Hierarchical>(new ServiceRegister.Hierarchical(childClassId, "leaf", null)))));
-        sut = new ServiceRegister.Classification(availableClasses);
+        availableClasses = new OrganizationRegister.Tree(new Array<OrganizationRegister.Hierarchical>(new OrganizationRegister.Hierarchical(rootClassId, "root",
+            new Array<OrganizationRegister.Hierarchical>(new OrganizationRegister.Hierarchical(childClassId, "leaf", null)))));
+        sut = new OrganizationRegister.Classification(availableClasses);
         sut.toggleSelection(childClassId, true);
     }
 
     function createSingleClassClassificationWithTheClassAdded(classId: string)
     {
-        availableClasses = new ServiceRegister.Tree(new Array<ServiceRegister.Hierarchical>(new ServiceRegister.Hierarchical(classId, "class", null)));
+        availableClasses = new OrganizationRegister.Tree(new Array<OrganizationRegister.Hierarchical>(new OrganizationRegister.Hierarchical(classId, "class", null)));
         var addedIds: Array<string> = new Array<string>(classId);
-        sut = new ServiceRegister.Classification(availableClasses, addedIds);        
+        sut = new OrganizationRegister.Classification(availableClasses, addedIds);        
     }
 
     describe("initialization without pre-added classes", () =>
     {
         it("nothing is selected", () =>
         {
-            sut = new ServiceRegister.Classification(availableClasses);
+            sut = new OrganizationRegister.Classification(availableClasses);
             expect(sut.isClassSelected()).toBeFalsy();
         });
         it("nothing is added", () =>
         {
-            sut = new ServiceRegister.Classification(availableClasses);
+            sut = new OrganizationRegister.Classification(availableClasses);
             expect(sut.areClassesAdded()).toBeFalsy();
         });
         it("nothing is expanded", () =>
         {
-            sut = new ServiceRegister.Classification(availableClasses);
+            sut = new OrganizationRegister.Classification(availableClasses);
             expect(sut.expandedAvailable.length).toBe(0);
         });
     });
@@ -65,7 +65,7 @@ describe("classification", () =>
         });
         it("nothing is expanded", () =>
         {
-            sut = new ServiceRegister.Classification(availableClasses);
+            sut = new OrganizationRegister.Classification(availableClasses);
             expect(sut.expandedAvailable.length).toBe(0);
         });
     });
@@ -101,16 +101,16 @@ describe("classification", () =>
     {
         it("unavailable class cannot be added", () =>
         {
-            availableClasses = new ServiceRegister.Tree(new Array<ServiceRegister.Hierarchical>());
-            sut = new ServiceRegister.Classification(availableClasses);
+            availableClasses = new OrganizationRegister.Tree(new Array<OrganizationRegister.Hierarchical>());
+            sut = new OrganizationRegister.Classification(availableClasses);
             sut.toggleSelection("1", true);
 
             expect(() => sut.addSelected()).toThrow();
         });
         it("nothing is added if nothing is selected", () =>
         {
-            availableClasses = new ServiceRegister.Tree(new Array<ServiceRegister.Hierarchical>());
-            sut = new ServiceRegister.Classification(availableClasses);
+            availableClasses = new OrganizationRegister.Tree(new Array<OrganizationRegister.Hierarchical>());
+            sut = new OrganizationRegister.Classification(availableClasses);
 
             sut.addSelected();
 
@@ -132,9 +132,9 @@ describe("classification", () =>
         {
             var rootClassId: string = "1";
             var childClassId: string = "1.1";
-            availableClasses = new ServiceRegister.Tree(new Array<ServiceRegister.Hierarchical>(new ServiceRegister.Hierarchical(rootClassId, "root",
-                new Array<ServiceRegister.Hierarchical>(new ServiceRegister.Hierarchical(childClassId, "leaf", null)))));
-            sut = new ServiceRegister.Classification(availableClasses);
+            availableClasses = new OrganizationRegister.Tree(new Array<OrganizationRegister.Hierarchical>(new OrganizationRegister.Hierarchical(rootClassId, "root",
+                new Array<OrganizationRegister.Hierarchical>(new OrganizationRegister.Hierarchical(childClassId, "leaf", null)))));
+            sut = new OrganizationRegister.Classification(availableClasses);
             sut.toggleSelection(rootClassId, true);
 
             sut.addSelected();
@@ -162,8 +162,8 @@ describe("classification", () =>
     {
         it("nothing is removed if nothing is available", () =>
         {
-            availableClasses = new ServiceRegister.Tree(new Array<ServiceRegister.Hierarchical>());
-            sut = new ServiceRegister.Classification(availableClasses);
+            availableClasses = new OrganizationRegister.Tree(new Array<OrganizationRegister.Hierarchical>());
+            sut = new OrganizationRegister.Classification(availableClasses);
 
             sut.remove("1");
 
@@ -184,9 +184,9 @@ describe("classification", () =>
         {
             var rootClassId: string = "1";
             var childClassId: string = "1.1";
-            availableClasses = new ServiceRegister.Tree(new Array<ServiceRegister.Hierarchical>(new ServiceRegister.Hierarchical(rootClassId, "root",
-                new Array<ServiceRegister.Hierarchical>(new ServiceRegister.Hierarchical(childClassId, "leaf", null)))));
-            sut = new ServiceRegister.Classification(availableClasses);
+            availableClasses = new OrganizationRegister.Tree(new Array<OrganizationRegister.Hierarchical>(new OrganizationRegister.Hierarchical(rootClassId, "root",
+                new Array<OrganizationRegister.Hierarchical>(new OrganizationRegister.Hierarchical(childClassId, "leaf", null)))));
+            sut = new OrganizationRegister.Classification(availableClasses);
             sut.toggleSelection(rootClassId, true);
             sut.addSelected();
             sut.toggleSelection(childClassId, true);
@@ -225,10 +225,10 @@ describe("classification", () =>
     {
         it("expanding all expands classes with children", () =>
         {
-            availableClasses = new ServiceRegister.Tree(new Array<ServiceRegister.Hierarchical>(new ServiceRegister.Hierarchical("1", "root",
-                new Array<ServiceRegister.Hierarchical>(new ServiceRegister.Hierarchical("1.1", "leaf", null))),
-                new ServiceRegister.Hierarchical("2", "another root", null)));
-            sut = new ServiceRegister.Classification(availableClasses);
+            availableClasses = new OrganizationRegister.Tree(new Array<OrganizationRegister.Hierarchical>(new OrganizationRegister.Hierarchical("1", "root",
+                new Array<OrganizationRegister.Hierarchical>(new OrganizationRegister.Hierarchical("1.1", "leaf", null))),
+                new OrganizationRegister.Hierarchical("2", "another root", null)));
+            sut = new OrganizationRegister.Classification(availableClasses);
 
             sut.expandAvailable();
 
@@ -238,7 +238,7 @@ describe("classification", () =>
         it("collapsing all", () =>
         {
             createRootAndChildClassClassificationAndSelectChildClass("1", "1.1");
-            sut = new ServiceRegister.Classification(availableClasses);
+            sut = new OrganizationRegister.Classification(availableClasses);
             sut.expandAvailable();
 
             sut.collapseAvailable();

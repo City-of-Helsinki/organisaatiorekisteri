@@ -1,19 +1,19 @@
 ﻿using Affecto.Mapping;
-using ServiceRegister.Api.Classification;
-using ServiceRegister.Api.Organization;
-using ServiceRegister.Api.Service;
-using ServiceRegister.Api.Settings;
-using ServiceRegister.Api.User;
-using ServiceRegister.Api.Validation;
-using ServiceRegister.Application.Classification;
-using ServiceRegister.Application.Organization;
-using ServiceRegister.Application.Service;
-using ServiceRegister.Application.Settings;
-using ServiceRegister.Application.User;
-using ServiceRegister.Application.Validation;
-using ServiceRegister.Common;
+using OrganizationRegister.Api.Classification;
+using OrganizationRegister.Api.Organization;
+using OrganizationRegister.Api.Service;
+using OrganizationRegister.Api.Settings;
+using OrganizationRegister.Api.User;
+using OrganizationRegister.Api.Validation;
+using OrganizationRegister.Application.Classification;
+using OrganizationRegister.Application.Organization;
+using OrganizationRegister.Application.Service;
+using OrganizationRegister.Application.Settings;
+using OrganizationRegister.Application.User;
+using OrganizationRegister.Application.Validation;
+using OrganizationRegister.Common;
 
-namespace ServiceRegister.Api
+namespace OrganizationRegister.Api
 {
     public class MapperFactory
     {

@@ -1,9 +1,9 @@
 using Affecto.Mapping;
 using NSubstitute;
-using ServiceRegister.Api.Service;
-using ServiceRegister.Application.Service;
+using OrganizationRegister.Api.Service;
+using OrganizationRegister.Application.Service;
 
-namespace ServiceRegister.Api.Tests.Service
+namespace OrganizationRegister.Api.Tests.Service
 {
     public abstract class ServiceControllerTests
     {

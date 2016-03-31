@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
-using ServiceRegister.Api.Service;
-using ServiceRegister.Application.Service;
-using ServiceRegister.Common;
+using OrganizationRegister.Api.Service;
+using OrganizationRegister.Application.Service;
+using OrganizationRegister.Common;
 
-namespace ServiceRegister.Api.Tests.Service
+namespace OrganizationRegister.Api.Tests.Service
 {
     [TestClass]
     public class ServiceListItemMapperTests

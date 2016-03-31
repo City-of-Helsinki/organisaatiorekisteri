@@ -4,10 +4,10 @@ using System.Linq;
 using System.Web.Http.Results;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
-using ServiceRegister.Api.Service;
-using ServiceRegister.Application.Service;
+using OrganizationRegister.Api.Service;
+using OrganizationRegister.Application.Service;
 
-namespace ServiceRegister.Api.Tests.Service
+namespace OrganizationRegister.Api.Tests.Service
 {
     [TestClass]
     public class OpenServiceControllerTests : ServiceControllerTests

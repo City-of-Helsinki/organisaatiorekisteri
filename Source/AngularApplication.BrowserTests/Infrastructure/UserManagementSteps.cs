@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using TechTalk.SpecFlow;
 
-namespace ServiceRegister.AngularApplication.BrowserTests.Infrastructure
+namespace OrganizationRegister.AngularApplication.BrowserTests.Infrastructure
 {
     [Binding]
     internal class UserManagementSteps

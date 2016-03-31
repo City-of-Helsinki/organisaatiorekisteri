@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ServiceRegister.Api.User
+namespace OrganizationRegister.Api.User
 {
     public class User
     {

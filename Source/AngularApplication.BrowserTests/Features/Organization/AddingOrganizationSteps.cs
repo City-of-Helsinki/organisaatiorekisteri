@@ -1,9 +1,9 @@
 ﻿using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ServiceRegister.AngularApplication.BrowserTests.Infrastructure;
+using OrganizationRegister.AngularApplication.BrowserTests.Infrastructure;
 using TechTalk.SpecFlow;
 
-namespace ServiceRegister.AngularApplication.BrowserTests.Features.Organization
+namespace OrganizationRegister.AngularApplication.BrowserTests.Features.Organization
 {
     [Binding]
     [Scope(Feature = "AddingOrganization")]

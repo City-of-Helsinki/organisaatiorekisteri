@@ -4,12 +4,12 @@ using System.Web.Http.Results;
 using Affecto.Patterns.Cqrs;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
-using ServiceRegister.Api.Service;
-using ServiceRegister.Application.Service;
-using ServiceRegister.Commanding.Service.Commands;
-using ServiceRegister.Common;
+using OrganizationRegister.Api.Service;
+using OrganizationRegister.Application.Service;
+using OrganizationRegister.Commanding.Service.Commands;
+using OrganizationRegister.Common;
 
-namespace ServiceRegister.Api.Tests.Service
+namespace OrganizationRegister.Api.Tests.Service
 {
     [TestClass]
     public class AuthorizedServiceControllerTests : ServiceControllerTests

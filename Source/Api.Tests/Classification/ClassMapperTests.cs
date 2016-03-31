@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
-using ServiceRegister.Api.Classification;
-using ServiceRegister.Application.Classification;
+using OrganizationRegister.Api.Classification;
+using OrganizationRegister.Application.Classification;
 
-namespace ServiceRegister.Api.Tests.Classification
+namespace OrganizationRegister.Api.Tests.Classification
 {
     [TestClass]
     public class ClassMapperTests

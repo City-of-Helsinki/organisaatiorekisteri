@@ -2,10 +2,10 @@
 using Affecto.Mapping;
 using Affecto.Mapping.AutoMapper;
 using AutoMapper;
-using ServiceRegister.Api.Settings;
-using ServiceRegister.Application.User;
+using OrganizationRegister.Api.Settings;
+using OrganizationRegister.Application.User;
 
-namespace ServiceRegister.Api.User
+namespace OrganizationRegister.Api.User
 {
     public class UserListItemMapper : OneWayMapper<IUserListItem, UserListItem>
     {

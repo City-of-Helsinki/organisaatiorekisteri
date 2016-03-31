@@ -1,9 +1,9 @@
 ﻿using Affecto.Mapping.AutoMapper;
 using AutoMapper;
-using ServiceRegister.Application.Location;
-using ServiceRegister.Application.Organization;
+using OrganizationRegister.Application.Location;
+using OrganizationRegister.Application.Organization;
 
-namespace ServiceRegister.Api.Organization
+namespace OrganizationRegister.Api.Organization
 {
     internal class OrganizationMapper : OneWayMapper<IOrganization, Organization>
     {

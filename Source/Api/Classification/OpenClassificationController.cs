@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Web.Http;
 using Affecto.Mapping;
 using Affecto.WebApi.Toolkit.CustomRoutes;
-using ServiceRegister.Application.Classification;
+using OrganizationRegister.Application.Classification;
 
-namespace ServiceRegister.Api.Classification
+namespace OrganizationRegister.Api.Classification
 {
     [RoutePrefix("v1/serviceregister")]
     public class OpenClassificationController : ApiController

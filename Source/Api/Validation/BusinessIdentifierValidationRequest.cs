@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ServiceRegister.Api.Validation
+namespace OrganizationRegister.Api.Validation
 {
     public class BusinessIdentifierValidationRequest
     {

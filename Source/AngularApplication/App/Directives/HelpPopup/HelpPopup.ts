@@ -1,6 +1,6 @@
 ﻿"use strict";
 
-module ServiceRegister
+module OrganizationRegister
 {
     export var HelpPopupFactory: angular.IDirectiveFactory = ($sce: angular.ISCEService): HelpPopup =>
     {

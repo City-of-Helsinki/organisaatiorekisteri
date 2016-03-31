@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using ServiceRegister.Common;
+using OrganizationRegister.Common;
 
-namespace ServiceRegister.Api.Location
+namespace OrganizationRegister.Api.Location
 {
     public class VisitingAddress
     {

@@ -1,4 +1,4 @@
-# Kansallinen palvelutietovaranto - Palvelurekisteri
+# Helsingin kaupungin organisaatiorekisteri
 
 
 ### Build status

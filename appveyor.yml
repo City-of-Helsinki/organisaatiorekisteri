@@ -10,7 +10,7 @@ assembly_info:
   assembly_informational_version: $(CUSTOM_INFORMATIONAL_VERSION)
 
 before_build:
-- cmd: nuget restore "Source\ServiceRegister.sln"
+- cmd: nuget restore "Source\OrganizationRegister.sln"
 
 build:
   verbosity: minimal
@@ -24,9 +24,9 @@ nuget:
   disable_publish_on_pr: true
 
 artifacts:
-  - path: 'Source\Api\obj\octopacked\ServiceRegister.API.*.nupkg'
+  - path: 'Source\Api\obj\octopacked\OrganizationRegister.API.*.nupkg'
     name: ServiceRegister API OctoPack
-  - path: 'Source\AngularApplication\obj\octopacked\ServiceRegister.UI.*.nupkg'
+  - path: 'Source\AngularApplication\obj\octopacked\OrganizationRegister.UI.*.nupkg'
     name: ServiceRegister UI OctoPack
 
 test:

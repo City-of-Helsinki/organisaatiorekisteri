@@ -11,17 +11,17 @@ using Affecto.Logging;
 using Affecto.WebApi.Toolkit;
 using Autofac;
 using Autofac.Integration.WebApi;
-using ServiceRegister.Api.AuthenticatedUser;
-using ServiceRegister.Api.Authentication;
-using ServiceRegister.Api.Classification;
-using ServiceRegister.Api.Organization;
-using ServiceRegister.Api.Service;
-using ServiceRegister.Api.Settings;
-using ServiceRegister.Api.User;
-using ServiceRegister.Api.Validation;
+using OrganizationRegister.Api.AuthenticatedUser;
+using OrganizationRegister.Api.Authentication;
+using OrganizationRegister.Api.Classification;
+using OrganizationRegister.Api.Organization;
+using OrganizationRegister.Api.Service;
+using OrganizationRegister.Api.Settings;
+using OrganizationRegister.Api.User;
+using OrganizationRegister.Api.Validation;
 using Module = Autofac.Module;
 
-namespace ServiceRegister.Api
+namespace OrganizationRegister.Api
 {
     public class WebApiModule : Module
     {

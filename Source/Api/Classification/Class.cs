@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ServiceRegister.Api.Classification
+namespace OrganizationRegister.Api.Classification
 {
     public class Class
     {

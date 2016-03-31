@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Web.Http;
 using Affecto.WebApi.Toolkit.CustomRoutes;
-using ServiceRegister.Application.Validation;
+using OrganizationRegister.Application.Validation;
 
-namespace ServiceRegister.Api.Validation
+namespace OrganizationRegister.Api.Validation
 {
     [RoutePrefix("v1/serviceregister")]
     public class AuthorizedValidationController : ApiController

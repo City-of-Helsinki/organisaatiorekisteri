@@ -2,10 +2,10 @@
 using Affecto.Mapping;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
-using ServiceRegister.Api.Validation;
-using ServiceRegister.Application.Validation;
+using OrganizationRegister.Api.Validation;
+using OrganizationRegister.Application.Validation;
 
-namespace ServiceRegister.Api.Tests.Validation
+namespace OrganizationRegister.Api.Tests.Validation
 {
     [TestClass]
     public class AuthorizedValidationControllerTests

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Web.Http;
 using Affecto.Mapping;
 using Affecto.WebApi.Toolkit.CustomRoutes;
-using ServiceRegister.Application.Service;
+using OrganizationRegister.Application.Service;
 
-namespace ServiceRegister.Api.Service
+namespace OrganizationRegister.Api.Service
 {
     [RoutePrefix("v1/serviceregister")]
     public class OpenServiceController : ApiController

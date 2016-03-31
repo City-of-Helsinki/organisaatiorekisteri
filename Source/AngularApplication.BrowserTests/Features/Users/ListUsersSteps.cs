@@ -1,10 +1,10 @@
 ﻿using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ServiceRegister.AngularApplication.BrowserTests.Infrastructure;
-using ServiceRegister.Tests.Infrastructure;
+using OrganizationRegister.AngularApplication.BrowserTests.Infrastructure;
+using OrganizationRegister.Tests.Infrastructure;
 using TechTalk.SpecFlow;
 
-namespace ServiceRegister.AngularApplication.BrowserTests.Features.Users
+namespace OrganizationRegister.AngularApplication.BrowserTests.Features.Users
 {
     [Binding]
     [Scope(Feature = "ListUsers")]

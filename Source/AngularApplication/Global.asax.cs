@@ -6,7 +6,7 @@ using System.Web.Routing;
 using Affecto.Logging;
 using Affecto.Logging.Log4Net;
 
-namespace ServiceRegister.AngularApplication
+namespace OrganizationRegister.AngularApplication
 {
     public class MvcApplication : HttpApplication
     {

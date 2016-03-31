@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Web.Http;
-using Affecto.WebApi.Toolkit.CustomRoutes;
 using Affecto.Patterns.Cqrs;
-using ServiceRegister.Application.Service;
-using ServiceRegister.Commanding.Service.Commands;
+using Affecto.WebApi.Toolkit.CustomRoutes;
+using OrganizationRegister.Application.Service;
+using OrganizationRegister.Commanding.Service.Commands;
 
-namespace ServiceRegister.Api.Service
+namespace OrganizationRegister.Api.Service
 {
     [RoutePrefix("v1/serviceregister")]
     public class AuthorizedServiceController : ApiController

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Affecto.AuthenticationServer.Claims;
 
-namespace ServiceRegister.Api.AuthenticatedUser
+namespace OrganizationRegister.Api.AuthenticatedUser
 {
     public class AuthenticatedUser : Affecto.AuthenticationServer.Claims.AuthenticatedUser
     {

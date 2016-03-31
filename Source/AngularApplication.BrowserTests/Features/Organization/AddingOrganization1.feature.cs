@@ -11,7 +11,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace ServiceRegister.AngularApplication.BrowserTests.Features.Organization
+namespace OrganizationRegister.AngularApplication.BrowserTests.Features.Organization
 {
     using TechTalk.SpecFlow;
     
@@ -49,7 +49,7 @@ namespace ServiceRegister.AngularApplication.BrowserTests.Features.Organization
             if (((TechTalk.SpecFlow.FeatureContext.Current != null) 
                         && (TechTalk.SpecFlow.FeatureContext.Current.FeatureInfo.Title != "AddingOrganization")))
             {
-                ServiceRegister.AngularApplication.BrowserTests.Features.Organization.AddingOrganizationFeature.FeatureSetup(null);
+                OrganizationRegister.AngularApplication.BrowserTests.Features.Organization.AddingOrganizationFeature.FeatureSetup(null);
             }
         }
         

@@ -1,8 +1,8 @@
 ﻿using Affecto.Mapping.AutoMapper;
 using AutoMapper;
-using ServiceRegister.Application.Classification;
+using OrganizationRegister.Application.Classification;
 
-namespace ServiceRegister.Api.Classification
+namespace OrganizationRegister.Api.Classification
 {
     public class ClassMapper : OneWayMapper<IClass, Class>
     {

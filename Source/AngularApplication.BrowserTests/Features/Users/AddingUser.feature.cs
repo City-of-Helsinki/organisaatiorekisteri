@@ -11,7 +11,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace ServiceRegister.AngularApplication.BrowserTests.Features.Users
+namespace OrganizationRegister.AngularApplication.BrowserTests.Features.Users
 {
     using TechTalk.SpecFlow;
     
@@ -49,7 +49,7 @@ namespace ServiceRegister.AngularApplication.BrowserTests.Features.Users
             if (((TechTalk.SpecFlow.FeatureContext.Current != null) 
                         && (TechTalk.SpecFlow.FeatureContext.Current.FeatureInfo.Title != "AddingUser")))
             {
-                ServiceRegister.AngularApplication.BrowserTests.Features.Users.AddingUserFeature.FeatureSetup(null);
+                OrganizationRegister.AngularApplication.BrowserTests.Features.Users.AddingUserFeature.FeatureSetup(null);
             }
         }
         
