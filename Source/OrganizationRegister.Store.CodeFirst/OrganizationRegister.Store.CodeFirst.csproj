@@ -70,6 +70,10 @@
   <ItemGroup>
     <Compile Include="EntityFrameworkModule.cs" />
     <Compile Include="IStoreContext.cs" />
+    <Compile Include="Migrations\201604011205486_Initial.cs" />
+    <Compile Include="Migrations\201604011205486_Initial.Designer.cs">
+      <DependentUpon>201604011205486_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\OrganizationRegisterDbMigration.cs" />
     <Compile Include="Model\Address.cs" />
@@ -123,6 +127,11 @@
       <Project>{39415FC6-B6EF-4EE6-8E95-DF098E6B7394}</Project>
       <Name>ServiceRegister.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201604011205486_Initial.resx">
+      <DependentUpon>201604011205486_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
