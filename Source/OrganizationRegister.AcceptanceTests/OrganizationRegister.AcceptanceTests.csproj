@@ -224,7 +224,6 @@
     </None>
     <None Include="Features\Settings.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Organization\UpdatingOrganizationPostalAddresses.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

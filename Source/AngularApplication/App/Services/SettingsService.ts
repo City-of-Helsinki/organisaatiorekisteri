@@ -12,7 +12,7 @@ module OrganizationRegister
 
         public getOrganizationTypes(): angular.IPromise<Array<string>>
         {
-            return this.$http.get(this.apiBaseUrl + "serviceregister/organizationtypes", { cache: true })
+            return this.$http.get(this.apiBaseUrl + "organizationregister/organizationtypes", { cache: true })
                 .then((response: angular.IHttpPromiseCallbackArg<any>): Array<string> =>
                 {
                     return response.data;
@@ -21,7 +21,7 @@ module OrganizationRegister
 
         public getUserRoles(): angular.IPromise<Array<UserRole>>
         {
-            return this.$http.get(this.apiBaseUrl + "serviceregister/roles", { cache: true })
+            return this.$http.get(this.apiBaseUrl + "organizationregister/roles", { cache: true })
                 .then((response: angular.IHttpPromiseCallbackArg<any>): Array<UserRole> =>
                 {
                     return UserRoleMapper.map(response.data);
@@ -30,7 +30,7 @@ module OrganizationRegister
 
         public getWebPageTypes(): angular.IPromise<Array<string>>
         {
-            return this.$http.get(this.apiBaseUrl + "serviceregister/webpagetypes", { cache: true })
+            return this.$http.get(this.apiBaseUrl + "organizationregister/webpagetypes", { cache: true })
                 .then((response: angular.IHttpPromiseCallbackArg<any>): Array<string> =>
                 {
                     return response.data;

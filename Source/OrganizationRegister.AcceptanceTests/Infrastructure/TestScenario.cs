@@ -51,7 +51,7 @@ namespace OrganizationRegister.AcceptanceTests.Infrastructure
 
         private static void RegisterProductionCodeModules(ContainerBuilder builder)
         {
-            builder.RegisterModule<ServiceRegisterModule>();
+            builder.RegisterModule<OrganizationRegisterModule>();
         }
 
         private static void BuildContainer(ContainerBuilder builder)

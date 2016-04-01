@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OrganizationRegister.Common.User;
 
-namespace ServiceRegister.Common.Tests.User
+namespace OrganizationRegister.Common.Tests.User
 {
     [TestClass]
     public class OrganizationIdTests

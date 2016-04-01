@@ -143,7 +143,7 @@ namespace OrganizationRegister.AngularApplication.BrowserTests.Infrastructure
 
         private static void RegisterProductionCodeModules(ContainerBuilder builder)
         {
-            builder.RegisterModule<ServiceRegisterModule>();
+            builder.RegisterModule<OrganizationRegisterModule>();
             builder.RegisterModule<EntityFrameworkModule>();
             builder.RegisterModule(new UserManagementModule(false));
         }

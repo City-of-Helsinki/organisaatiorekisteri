@@ -7,7 +7,7 @@ using OrganizationRegister.Store.CodeFirst;
 
 namespace OrganizationRegister.Autofac
 {
-    public class ServiceRegisterModule : Module
+    public class OrganizationRegisterModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {

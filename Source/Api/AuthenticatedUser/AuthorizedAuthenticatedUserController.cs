@@ -5,7 +5,7 @@ using Affecto.WebApi.Toolkit.CustomRoutes;
 
 namespace OrganizationRegister.Api.AuthenticatedUser
 {
-    [RoutePrefix("v1/serviceregister")]
+    [RoutePrefix("v1/organizationregister")]
     public class AuthorizedAuthenticatedUserController : ApiController
     {
         [HttpGet]

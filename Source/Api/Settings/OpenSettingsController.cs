@@ -8,7 +8,7 @@ using OrganizationRegister.Application.User;
 
 namespace OrganizationRegister.Api.Settings
 {
-    [RoutePrefix("v1/serviceregister")]
+    [RoutePrefix("v1/organizationregister")]
     public class OpenSettingsController : ApiController
     {
         private readonly Lazy<ISettingsService> settingsService;

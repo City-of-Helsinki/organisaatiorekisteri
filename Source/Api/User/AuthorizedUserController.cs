@@ -9,7 +9,7 @@ using OrganizationRegister.Application.User;
 
 namespace OrganizationRegister.Api.User
 {
-    [RoutePrefix("v1/serviceregister")]
+    [RoutePrefix("v1/organizationregister")]
     public class AuthorizedUserController : ApiController
     {
         private readonly IUserService userService;

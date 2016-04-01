@@ -38,7 +38,7 @@ namespace OrganizationRegister.AngularApplication
                 "~/Scripts/angular-tree-control.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/scripts")
-                .IncludeDirectory("~/Scripts/ServiceRegister/", "*.js")
+                .IncludeDirectory("~/Scripts/OrganizationRegister/", "*.js")
                 .IncludeDirectory("~/Scripts/affecto/", "*.js"));
 
             bundles.Add(BaseBundle.Create("~/bundles/base"));

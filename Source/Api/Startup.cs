@@ -31,7 +31,7 @@ namespace OrganizationRegister.Api
             var builder = new ContainerBuilder();
 
             builder.RegisterModule<WebApiModule>();
-            builder.RegisterModule<ServiceRegisterModule>();
+            builder.RegisterModule<OrganizationRegisterModule>();
 
             bool useMockDatabase = (ConfigurationManager.AppSettings["useMockDatabase"] == "true");
             if (useMockDatabase)

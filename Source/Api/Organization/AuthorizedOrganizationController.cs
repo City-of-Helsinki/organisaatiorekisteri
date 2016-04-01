@@ -6,7 +6,7 @@ using OrganizationRegister.Application.Organization;
 
 namespace OrganizationRegister.Api.Organization
 {
-    [RoutePrefix("v1/serviceregister")]
+    [RoutePrefix("v1/organizationregister")]
     public class AuthorizedOrganizationController : ApiController
     {
         private readonly IOrganizationService organizationService;

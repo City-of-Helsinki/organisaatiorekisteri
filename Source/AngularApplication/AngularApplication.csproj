@@ -215,7 +215,7 @@
     <Content Include="Scripts\angular-unsavedChanges\unsavedChanges.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
-    <Content Include="Scripts\ServiceRegister\ViewScripts.js" />
+    <Content Include="Scripts\OrganizationRegister\ViewScripts.js" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-cookies.js" />
@@ -319,8 +319,8 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\ServiceRegister\main.js" />
-    <Content Include="Scripts\ServiceRegister\plugins.js" />
+    <Content Include="Scripts\OrganizationRegister\main.js" />
+    <Content Include="Scripts\OrganizationRegister\plugins.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />

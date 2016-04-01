@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using OrganizationRegister.Common.User;
 
-namespace ServiceRegister.Common.Tests.User
+namespace OrganizationRegister.Common.Tests.User
 {
     [TestClass]
     public class AuthenticationExtensionMethodsTests

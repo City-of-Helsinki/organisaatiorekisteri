@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ServiceRegister.Store.CodeFirst.Mocking")]
+[assembly: AssemblyTitle("OrganizationRegister.Store.CodeFirst.Mocking")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ServiceRegister.Store.CodeFirst.Mocking")]
+[assembly: AssemblyProduct("OrganizationRegister.Store.CodeFirst.Mocking")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -11,7 +11,7 @@ namespace OrganizationRegister.Store.CodeFirst
 {
     internal class StoreContext : DbContext, IStoreContext
     {
-        public const string ConfigurationKey = "ServiceRegisterContext";
+        public const string ConfigurationKey = "OrganizationRegisterContext";
 
         private readonly string schemaName;
 

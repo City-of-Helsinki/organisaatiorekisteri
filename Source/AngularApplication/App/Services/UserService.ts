@@ -12,7 +12,7 @@ module OrganizationRegister
 
         public getUser(userId: string): angular.IPromise<User>
         {
-            return this.$http.get(this.apiBaseUrl + "serviceregister/users/" + userId)
+            return this.$http.get(this.apiBaseUrl + "organizationregister/users/" + userId)
                 .then((response: angular.IHttpPromiseCallbackArg<any>): User =>
                 {
                     return UserMapper.map(response.data);
@@ -21,7 +21,7 @@ module OrganizationRegister
 
         public getUsers(organizationId: string): angular.IPromise<Array<UserListItem>>
         {
-            return this.$http.get(this.apiBaseUrl + "serviceregister/organizations/" + organizationId + "/users")
+            return this.$http.get(this.apiBaseUrl + "organizationregister/organizations/" + organizationId + "/users")
                 .then((response: angular.IHttpPromiseCallbackArg<any>): Array<UserListItem> =>
                 {
                     return UserListItemMapper.map(response.data);
@@ -30,7 +30,7 @@ module OrganizationRegister
 
         public getUserRoles(): angular.IPromise<Array<UserRole>>
         {
-            return this.$http.get(this.apiBaseUrl + "serviceregister/users/userroles", true)
+            return this.$http.get(this.apiBaseUrl + "organizationregister/users/userroles", true)
                 .then((response: angular.IHttpPromiseCallbackArg<any>): Array<UserRole> =>
                 {
                     return UserRoleMapper.map(response.data);
@@ -39,7 +39,7 @@ module OrganizationRegister
 
         public addUser(user: User): angular.IPromise<string>
         {
-            return this.$http.post(this.apiBaseUrl + "serviceregister/users/", user)
+            return this.$http.post(this.apiBaseUrl + "organizationregister/users/", user)
                 .then((response: angular.IHttpPromiseCallbackArg<any>): string =>
                 {
                     return response.data;
@@ -48,7 +48,7 @@ module OrganizationRegister
 
         public isExistingUser(emailAddress: string): angular.IPromise<boolean>
         {
-            return this.$http.post(this.apiBaseUrl + "serviceregister/users/isexisting", "\"" + emailAddress + "\"")
+            return this.$http.post(this.apiBaseUrl + "organizationregister/users/isexisting", "\"" + emailAddress + "\"")
                 .then((response: angular.IHttpPromiseCallbackArg<any>): boolean =>
                 {
                     return response.data;
@@ -57,7 +57,7 @@ module OrganizationRegister
 
         public validatePasswordStrength(password: string): angular.IPromise<boolean>
         {
-            return this.$http.post(this.apiBaseUrl + "serviceregister/users/password", "\"" + password + "\"")
+            return this.$http.post(this.apiBaseUrl + "organizationregister/users/password", "\"" + password + "\"")
                 .then((response: angular.IHttpPromiseCallbackArg<any>): boolean =>
                 {
                     return response.data;

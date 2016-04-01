@@ -5,7 +5,7 @@ using OrganizationRegister.Application.Validation;
 
 namespace OrganizationRegister.Api.Validation
 {
-    [RoutePrefix("v1/serviceregister")]
+    [RoutePrefix("v1/organizationregister")]
     public class AuthorizedValidationController : ApiController
     {
         private readonly IValidationService validationService;
