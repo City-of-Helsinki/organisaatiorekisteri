@@ -73,7 +73,7 @@ function createApplication(): angular.IModule
 {
     var applicationModules: Array<string> = new Array<string>();
     var referenceModules: Array<string> = [
-        "ngRoute", "ngResource", "ngCookies", "pascalprecht.translate", "unsavedChanges", "localytics.directives", "Affecto.BusyIndication", "OrganizationRegister.Settings",
+        "ngRoute", "ngResource", "ngCookies", "pascalprecht.translate", "unsavedChanges", "Affecto.BusyIndication", "OrganizationRegister.Settings",
         "Affecto.ExceptionHandling", "Affecto.Login", "treeControl"
     ];
     applicationModules.forEach(mod => referenceModules.push(mod));

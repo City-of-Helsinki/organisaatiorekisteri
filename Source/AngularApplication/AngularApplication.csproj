@@ -215,11 +215,6 @@
     <Content Include="Scripts\angular-unsavedChanges\unsavedChanges.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
-    <Content Include="Scripts\chosen.jquery.js" />
-    <Content Include="Scripts\chosen.jquery.min.js" />
-    <Content Include="Scripts\chosen.js" />
-    <Content Include="Scripts\chosen.proto.js" />
-    <Content Include="Scripts\chosen.proto.min.js" />
     <Content Include="Scripts\ServiceRegister\ViewScripts.js" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
