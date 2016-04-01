@@ -2,7 +2,6 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OrganizationRegister.AcceptanceTests.Infrastructure;
-using OrganizationRegister.Application.Settings;
 using TechTalk.SpecFlow;
 
 namespace OrganizationRegister.AcceptanceTests.Features
@@ -13,7 +12,6 @@ namespace OrganizationRegister.AcceptanceTests.Features
     {
         private IReadOnlyCollection<string> providerTypes;
         private IReadOnlyCollection<string> webPageTypes;
-        private IList<ILanguage> languages;
 
         [Given(@"the following organization types exist:")]
         public void GivenTheFollowingProviderTypesExist(Table dbProviderTypes)
@@ -67,42 +65,6 @@ namespace OrganizationRegister.AcceptanceTests.Features
             {
                 Repository.AddLanguage(languageRow["Language code"], languageRow["Language name"]);
             }
-        }
-
-        [Given(@"the following languages can be used with services")]
-        public void GivenTheFollowingLanguagesCanBeUsedWithServices(Table languagesTable)
-        {
-            Repository.RemoveAllServiceLanguages();
-            foreach (TableRow languageRow in languagesTable.Rows)
-            {
-                Repository.AddServiceLanguage(languageRow["Language code"], GetOrderNumber(languageRow));
-        }
-        }
-
-        [When(@"service languages are retrieved")]
-        public void WhenServiceLanguagesAreRetrieved()
-        {
-            languages = SettingsService.GetServiceLanguages().ToList();
-        }
-
-        [Then(@"the following service languages are returned in the following order:")]
-        public void ThenTheFollowingServiceLanguagesAreReturnedInTheFollowingOrder(Table expectedLanguages)
-        {
-            Assert.AreEqual(expectedLanguages.RowCount, languages.Count);
-            for (int i = 0; i < expectedLanguages.RowCount; i++)
-            {
-                ILanguage language = languages[i];
-                TableRow expectedLanguage = expectedLanguages.Rows[i];
-                Assert.AreEqual(expectedLanguage["Language code"], language.Code);
-                Assert.AreEqual(expectedLanguage["Language name"], language.Name);
-
-            }
-        }
-
-        private static int? GetOrderNumber(TableRow languageRow)
-        {
-            string orderNumber = languageRow["Order number"];
-            return string.IsNullOrWhiteSpace(orderNumber) ? (int?) null : int.Parse(orderNumber);
         }
     }
 }

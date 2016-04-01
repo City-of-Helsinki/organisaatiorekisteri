@@ -21,11 +21,6 @@ namespace OrganizationRegister.Application.Settings
             return repository.GetOrganizationTypeNames();
         }
 
-        public IEnumerable<ILanguage> GetServiceLanguages()
-        {
-            return repository.GetServiceLanguages();
-        }
-
         public IEnumerable<string> GetWebPageTypes()
         {
             return repository.GetWebPageTypes();

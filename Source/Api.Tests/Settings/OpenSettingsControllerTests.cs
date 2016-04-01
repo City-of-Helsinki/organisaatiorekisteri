@@ -8,7 +8,6 @@ using NSubstitute;
 using OrganizationRegister.Api.Settings;
 using OrganizationRegister.Application.Settings;
 using OrganizationRegister.Application.User;
-using OrganizationRegister.Common;
 
 namespace OrganizationRegister.Api.Tests.Settings
 {
@@ -19,7 +18,6 @@ namespace OrganizationRegister.Api.Tests.Settings
         private Lazy<ISettingsService> settingsService;
         private Lazy<IUserService> userService;
         private MapperFactory mapperFactory;
-        private IMapper<ILanguage, Language> languageMapper;
 
         [TestInitialize]
         public void Setup()
@@ -27,8 +25,6 @@ namespace OrganizationRegister.Api.Tests.Settings
             settingsService = new Lazy<ISettingsService>(() => Substitute.For<ISettingsService>());
             userService = new Lazy<IUserService>(() => Substitute.For<IUserService>());
             mapperFactory = Substitute.For<MapperFactory>();
-            languageMapper = Substitute.For<IMapper<ILanguage, Language>>();
-            mapperFactory.CreateLanguageMapper().Returns(languageMapper);
             sut = new OpenSettingsController(settingsService, userService, mapperFactory);
         }
 
@@ -79,23 +75,6 @@ namespace OrganizationRegister.Api.Tests.Settings
             Assert.AreEqual(2, result.Content.Count);
             Assert.AreSame(expectedRole1, result.Content.First());
             Assert.AreSame(expectedRole2, result.Content.Last());
-        }
-
-        [TestMethod]
-        public void GetServiceLanguages()
-        {
-            ILanguage language = Substitute.For<ILanguage>();
-            List<ILanguage> expectedListOfLanguages = new List<ILanguage> { language };
-            Language expectedLanguage = new Language("fi", "suomi");
-
-            languageMapper.Map(language).Returns(expectedLanguage);
-            settingsService.Value.GetServiceLanguages().Returns(expectedListOfLanguages);
-
-            var result = sut.GetServiceLanguages() as OkNegotiatedContentResult<IEnumerable<Language>>;
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual(expectedListOfLanguages.Count, result.Content.Count());
-            Assert.AreSame(expectedLanguage, result.Content.Single());
         }
     }
 }

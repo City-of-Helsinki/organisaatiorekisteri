@@ -9,7 +9,6 @@ using Affecto.Testing.UI.Selenium;
 using Autofac;
 using OpenQA.Selenium.Support.Extensions;
 using OrganizationRegister.Application.Organization;
-using OrganizationRegister.Application.Service;
 using OrganizationRegister.Autofac;
 using OrganizationRegister.Common;
 using OrganizationRegister.Common.User;
@@ -38,7 +37,6 @@ namespace OrganizationRegister.AngularApplication.BrowserTests.Infrastructure
         private static readonly int DaysToKeepOldFailedTestData = int.Parse(ConfigurationManager.AppSettings.Get("daysToKeepOldFailedTestData"));
         
         private static IOrganizationService organizationService;
-        private static IServiceService serviceService;
         private static UserManagementTestEnvironment userManagementTestEnvironment;
         private static TestUserContext userContext;
         private static IContainer container;
@@ -77,7 +75,6 @@ namespace OrganizationRegister.AngularApplication.BrowserTests.Infrastructure
         private static void SetupCurrentScenarioContext()
         {
             ScenarioContext.Current.Set(organizationService);
-            ScenarioContext.Current.Set(serviceService);
             ScenarioContext.Current.Set(container);
         }
 
@@ -85,7 +82,6 @@ namespace OrganizationRegister.AngularApplication.BrowserTests.Infrastructure
         {
             container = builder.Build();
             organizationService = container.Resolve<IOrganizationService>();
-            serviceService = container.Resolve<IServiceService>();
             userManagementTestEnvironment = container.Resolve<UserManagementTestEnvironment>();
             userContext = container.Resolve<TestUserContext>();
         }
@@ -126,10 +122,6 @@ namespace OrganizationRegister.AngularApplication.BrowserTests.Infrastructure
         {
             foreach (IOrganizationName organization in organizationService.GetMainOrganizations())
             {
-                foreach (IServiceListItem service in serviceService.GetServices(organization.Id))
-                {
-                    serviceService.RemoveService(organization.Id, service.Id);
-                }
                 organizationService.RemoveOrganization(organization.Id);
             }
 

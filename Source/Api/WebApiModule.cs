@@ -13,9 +13,7 @@ using Autofac;
 using Autofac.Integration.WebApi;
 using OrganizationRegister.Api.AuthenticatedUser;
 using OrganizationRegister.Api.Authentication;
-using OrganizationRegister.Api.Classification;
 using OrganizationRegister.Api.Organization;
-using OrganizationRegister.Api.Service;
 using OrganizationRegister.Api.Settings;
 using OrganizationRegister.Api.User;
 using OrganizationRegister.Api.Validation;
@@ -36,14 +34,11 @@ namespace OrganizationRegister.Api
             builder.RegisterWebApiFilterProvider(GlobalConfiguration.Configuration);
 
             RegisterControllerFilters<OpenOrganizationController>(builder, requireHttps);
-            RegisterControllerFilters<OpenServiceController>(builder, requireHttps);
             RegisterControllerFilters<OpenSettingsController>(builder, requireHttps);
-            RegisterControllerFilters<OpenClassificationController>(builder, requireHttps);
 
             RegisterAuthorizedControllerFilters<AuthorizedValidationController>(builder, requireHttps);
             RegisterAuthorizedControllerFilters<AuthorizedAuthenticatedUserController>(builder, requireHttps);
             RegisterAuthorizedControllerFilters<AuthorizedOrganizationController>(builder, requireHttps);
-            RegisterAuthorizedControllerFilters<AuthorizedServiceController>(builder, requireHttps);
             RegisterAuthorizedControllerFilters<AuthorizedUserController>(builder, requireHttps);
 
             builder.RegisterInstance(AuthenticationServerConfiguration.Settings).As<IAuthenticationServerConfiguration>();

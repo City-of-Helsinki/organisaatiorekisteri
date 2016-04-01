@@ -245,27 +245,12 @@
     <Compile Include="Authentication\Certificate.cs" />
     <Compile Include="Authentication\CertificateNotFoundException.cs" />
     <Compile Include="Authentication\IdentityServerOptionsFactory.cs" />
-    <Compile Include="Classification\Class.cs" />
-    <Compile Include="Classification\ClassesSearchResult.cs" />
-    <Compile Include="Classification\ClassMapper.cs" />
-    <Compile Include="Classification\OpenClassificationController.cs" />
-    <Compile Include="Classification\HierarchicalClass.cs" />
-    <Compile Include="Classification\HierarchicalClassMapper.cs" />
     <Compile Include="Authentication\AuthenticationServerConfiguration.cs" />
     <Compile Include="Authentication\IAuthenticationServerConfiguration.cs" />
     <Compile Include="Organization\AuthorizedOrganizationController.cs" />
     <Compile Include="Organization\OpenOrganizationController.cs" />
     <Compile Include="Organization\OrganizationName.cs" />
     <Compile Include="Organization\OrganizationNameMapper.cs" />
-    <Compile Include="Service\BasicInformation.cs" />
-    <Compile Include="Service\Classification.cs" />
-    <Compile Include="Service\Service.cs" />
-    <Compile Include="Service\AuthorizedServiceController.cs" />
-    <Compile Include="Service\ServiceMapper.cs" />
-    <Compile Include="Service\ServiceListItem.cs" />
-    <Compile Include="Service\ServiceListItemMapper.cs" />
-    <Compile Include="Service\OpenServiceController.cs" />
-    <Compile Include="Settings\LanguageMapper.cs" />
     <Compile Include="Settings\RoleMapper.cs" />
     <Compile Include="Settings\OpenSettingsController.cs" />
     <Compile Include="Settings\Role.cs" />
@@ -305,10 +290,6 @@
     <ProjectReference Include="..\OrganizationRegister.Application\OrganizationRegister.Application.csproj">
       <Project>{4F322916-C66E-415E-A4A9-45407618B62D}</Project>
       <Name>ServiceRegister.Application</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OrganizationRegister.Commanding\OrganizationRegister.Commanding.csproj">
-      <Project>{4D2570B2-7E34-44B1-A510-9752357FB913}</Project>
-      <Name>ServiceRegister.Commanding</Name>
     </ProjectReference>
     <ProjectReference Include="..\OrganizationRegister.Common\OrganizationRegister.Common.csproj">
       <Project>{39415FC6-B6EF-4EE6-8E95-DF098E6B7394}</Project>

@@ -65,10 +65,6 @@
       <Project>{4F322916-C66E-415E-A4A9-45407618B62D}</Project>
       <Name>ServiceRegister.Application</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OrganizationRegister.Commanding\OrganizationRegister.Commanding.csproj">
-      <Project>{4d2570b2-7e34-44b1-a510-9752357fb913}</Project>
-      <Name>ServiceRegister.Commanding</Name>
-    </ProjectReference>
     <ProjectReference Include="..\OrganizationRegister.Store.CodeFirst\OrganizationRegister.Store.CodeFirst.csproj">
       <Project>{531DD032-A527-4B0C-84CB-D14066F3CEC8}</Project>
       <Name>ServiceRegister.Store.CodeFirst</Name>

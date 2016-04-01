@@ -123,30 +123,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>OrganizationTreeTests.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\Service\EditingServiceSteps.cs" />
     <Compile Include="Features\Organization\AddingOrganization1.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AddingOrganization.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\Organization\AddingOrganizationSteps.cs" />
-    <Compile Include="Features\Service\AddingService.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AddingService.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Features\Service\AddingServiceSteps.cs" />
     <Compile Include="Features\Users\AddingUser.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AddingUser.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\Users\AddingUserSteps.cs" />
-    <Compile Include="Features\Service\EditingService.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EditingService.feature</DependentUpon>
-    </Compile>
     <Compile Include="Infrastructure\AngularTree.cs" />
     <Compile Include="Features\Users\ListUsers.feature.cs">
       <AutoGen>True</AutoGen>
@@ -154,9 +142,6 @@
       <DependentUpon>ListUsers.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\Users\ListUsersSteps.cs" />
-    <Compile Include="Infrastructure\ChosenDropDown.cs" />
-    <Compile Include="Infrastructure\ClassificationSelection.cs" />
-    <Compile Include="Infrastructure\DataGenerationSteps.cs" />
     <Compile Include="Infrastructure\TestEnvironment.cs" />
     <Compile Include="Infrastructure\UserManagementSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -173,17 +158,9 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>OrganizationTreeTests.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\Service\AddingService.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>AddingService.feature.cs</LastGenOutput>
-    </None>
     <None Include="Features\Users\AddingUser.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>AddingUser.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Features\Service\EditingService.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>EditingService.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Users\ListUsers.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
@@ -201,10 +178,6 @@
     <ProjectReference Include="..\OrganizationRegister.Application\OrganizationRegister.Application.csproj">
       <Project>{4F322916-C66E-415E-A4A9-45407618B62D}</Project>
       <Name>ServiceRegister.Application</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OrganizationRegister.Commanding\OrganizationRegister.Commanding.csproj">
-      <Project>{4D2570B2-7E34-44B1-A510-9752357FB913}</Project>
-      <Name>ServiceRegister.Commanding</Name>
     </ProjectReference>
     <ProjectReference Include="..\OrganizationRegister.Common\OrganizationRegister.Common.csproj">
       <Project>{39415FC6-B6EF-4EE6-8E95-DF098E6B7394}</Project>

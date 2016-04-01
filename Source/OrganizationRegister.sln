@@ -43,10 +43,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrganizationRegister.UserMa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrganizationRegister.Tests.Infrastructure", "OrganizationRegister.Tests.Infrastructure\OrganizationRegister.Tests.Infrastructure.csproj", "{4937C612-A14C-4BAA-B937-65B09D046E3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrganizationRegister.Commanding", "OrganizationRegister.Commanding\OrganizationRegister.Commanding.csproj", "{4D2570B2-7E34-44B1-A510-9752357FB913}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrganizationRegister.Commanding.Tests", "OrganizationRegister.Commanding.Tests\OrganizationRegister.Commanding.Tests.csproj", "{4CA1F64E-1098-43AB-8C14-EE380F219AAC}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrganizationRegister.Common.Tests", "OrganizationRegister.Common.Tests\OrganizationRegister.Common.Tests.csproj", "{1E3A5143-7E3A-4EA2-B40E-F9C822F63C12}"
 EndProject
 Global
@@ -161,19 +157,6 @@ Global
 		{4937C612-A14C-4BAA-B937-65B09D046E3D}.Octopus Deployment - UI|Any CPU.ActiveCfg = Release|Any CPU
 		{4937C612-A14C-4BAA-B937-65B09D046E3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4937C612-A14C-4BAA-B937-65B09D046E3D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4D2570B2-7E34-44B1-A510-9752357FB913}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4D2570B2-7E34-44B1-A510-9752357FB913}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4D2570B2-7E34-44B1-A510-9752357FB913}.Octopus Deployment - API|Any CPU.ActiveCfg = Release|Any CPU
-		{4D2570B2-7E34-44B1-A510-9752357FB913}.Octopus Deployment - API|Any CPU.Build.0 = Release|Any CPU
-		{4D2570B2-7E34-44B1-A510-9752357FB913}.Octopus Deployment - UI|Any CPU.ActiveCfg = Release|Any CPU
-		{4D2570B2-7E34-44B1-A510-9752357FB913}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4D2570B2-7E34-44B1-A510-9752357FB913}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4CA1F64E-1098-43AB-8C14-EE380F219AAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4CA1F64E-1098-43AB-8C14-EE380F219AAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4CA1F64E-1098-43AB-8C14-EE380F219AAC}.Octopus Deployment - API|Any CPU.ActiveCfg = Release|Any CPU
-		{4CA1F64E-1098-43AB-8C14-EE380F219AAC}.Octopus Deployment - UI|Any CPU.ActiveCfg = Release|Any CPU
-		{4CA1F64E-1098-43AB-8C14-EE380F219AAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4CA1F64E-1098-43AB-8C14-EE380F219AAC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1E3A5143-7E3A-4EA2-B40E-F9C822F63C12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1E3A5143-7E3A-4EA2-B40E-F9C822F63C12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E3A5143-7E3A-4EA2-B40E-F9C822F63C12}.Octopus Deployment - API|Any CPU.ActiveCfg = Release|Any CPU
@@ -203,8 +186,6 @@ Global
 		{54ED5CD0-DCC3-4AEF-A3E2-D6C74A7B4052} = {14BFFD71-813A-43F8-870A-5CDD481BDC35}
 		{7126B985-27D8-45FF-9C58-89665E36237C} = {F027BC9A-408B-487F-87DA-22D0F037F70C}
 		{4937C612-A14C-4BAA-B937-65B09D046E3D} = {F027BC9A-408B-487F-87DA-22D0F037F70C}
-		{4D2570B2-7E34-44B1-A510-9752357FB913} = {14BFFD71-813A-43F8-870A-5CDD481BDC35}
-		{4CA1F64E-1098-43AB-8C14-EE380F219AAC} = {F027BC9A-408B-487F-87DA-22D0F037F70C}
 		{1E3A5143-7E3A-4EA2-B40E-F9C822F63C12} = {F027BC9A-408B-487F-87DA-22D0F037F70C}
 	EndGlobalSection
 EndGlobal

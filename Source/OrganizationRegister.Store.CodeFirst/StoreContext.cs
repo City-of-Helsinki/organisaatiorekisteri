@@ -45,22 +45,11 @@ namespace OrganizationRegister.Store.CodeFirst
         public IDbSet<OrganizationType> OrganizationTypes { get; set; }
         public IDbSet<WebPageType> WebPageTypes { get; set; }
         public IDbSet<Organization> Organizations { get; set; }
-        public IDbSet<Service> Services { get; set; }
         public IDbSet<Address> Addresses { get; set; }
         public IDbSet<PhoneNumber> PhoneNumbers { get; set; }
         public IDbSet<EmailAddress> EmailAddresses { get; set; }
         public IDbSet<WebPage> WebPages { get; set; }
-        public IDbSet<LifeEvent> LifeEvents { get; set; }
-        public IDbSet<ServiceClass> ServiceClasses { get; set; }
-        public IDbSet<OntologyTerm> OntologyTerms { get; set; }
-        public IDbSet<TargetGroup> TargetGroups { get; set; }
-        public IDbSet<AvailableServiceLanguage> ServiceLanguages { get; set; }
         public IDbSet<AvailableDataLanguage> DataLanguages { get; set; }
-        public IDbSet<ServiceServiceClass> ServiceServiceClasses { get; set; }
-        public IDbSet<ServiceLifeEvent> ServiceLifeEvents { get; set; }
-        public IDbSet<ServiceOntologyTerm> ServiceOntologyTerms { get; set; }
-        public IDbSet<ServiceKeyword> ServiceKeywords { get; set; }
-        public IDbSet<ServiceTargetGroup> ServiceTargetGroups { get; set; }
 
         public OrganizationType GetOrganizationType(string type)
         {
@@ -91,12 +80,6 @@ namespace OrganizationRegister.Store.CodeFirst
             return languageQuery.Execute(languageCode) as AvailableDataLanguage;
         }
 
-        public AvailableServiceLanguage GetServiceLanguage(string languageCode)
-        {
-            var languageQuery = new LanguageQuery(ServiceLanguages);
-            return languageQuery.Execute(languageCode) as AvailableServiceLanguage;
-        }
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema(schemaName);
@@ -125,20 +108,7 @@ namespace OrganizationRegister.Store.CodeFirst
             modelBuilder.Configurations.Add(new OrganizationTypeConfiguration());
             modelBuilder.Configurations.Add(new WebPageTypeConfiguration());
             modelBuilder.Configurations.Add(new WebPageConfiguration());
-            modelBuilder.Configurations.Add(new AvailableServiceLanguageConfiguration());
             modelBuilder.Configurations.Add(new AvailableDataLanguageConfiguration());
-            modelBuilder.Configurations.Add(new ServiceLanguageConfiguration());
-            modelBuilder.Configurations.Add(new ServiceConfiguration());
-            modelBuilder.Configurations.Add(new ServiceLanguageSpecificationConfiguration());
-            modelBuilder.Configurations.Add(new LifeEventConfiguration());
-            modelBuilder.Configurations.Add(new ServiceClassConfiguration());
-            modelBuilder.Configurations.Add(new OntologyTermConfiguration());
-            modelBuilder.Configurations.Add(new TargetGroupConfiguration());
-            modelBuilder.Configurations.Add(new ServiceServiceClassConfiguration());
-            modelBuilder.Configurations.Add(new ServiceLifeEventConfiguration());
-            modelBuilder.Configurations.Add(new ServiceOntologyTermConfiguration());
-            modelBuilder.Configurations.Add(new ServiceKeywordConfiguration());
-            modelBuilder.Configurations.Add(new ServiceTargetGroupConfiguration());
         }
     }
 }

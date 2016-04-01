@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OrganizationRegister.Application.Classification;
 using OrganizationRegister.Application.Organization;
 using OrganizationRegister.Common;
 
@@ -27,7 +26,7 @@ namespace OrganizationRegister.Application.Tests.Organization
         [TestMethod]
         public void ObjectOfDifferentTypeIsNotMyChild()
         {
-            Assert.IsFalse(sut.IsMyChild(CreateHierarchicalClass()));
+            Assert.IsFalse(sut.IsMyChild(CreateHierarchicalOrganization()));
         }
 
         [TestMethod]
@@ -37,16 +36,9 @@ namespace OrganizationRegister.Application.Tests.Organization
             sut.AddChildren(null);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void AddChildrenOfDifferentType()
+        private static HierarchicalOrganization CreateHierarchicalOrganization()
         {
-            sut.AddChildren(new List<IHierarchical> { CreateHierarchicalClass() });
-        }
-
-        private static HierarchicalClass CreateHierarchicalClass()
-        {
-            return new HierarchicalClass(Guid.NewGuid(), "class", "sourceid", null, null);
+            return new HierarchicalOrganization(Guid.NewGuid(), new List<LocalizedText> { new LocalizedText("fi", "org2") }, null);
         }
     }
 }

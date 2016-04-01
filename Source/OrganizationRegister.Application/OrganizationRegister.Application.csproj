@@ -52,15 +52,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classification\Class.cs" />
-    <Compile Include="Classification\ClassFactory.cs" />
-    <Compile Include="Classification\HierarchicalClass.cs" />
-    <Compile Include="Classification\IClass.cs" />
-    <Compile Include="Classification\IClassification.cs" />
-    <Compile Include="Classification\IClassificationRepository.cs" />
-    <Compile Include="Classification\IHierarchicalClass.cs" />
     <Compile Include="IHierarchical.cs" />
-    <Compile Include="IOrderable.cs" />
     <Compile Include="Localization\LocalizedProperty.cs" />
     <Compile Include="Localization\LocalizedTexts.cs" />
     <Compile Include="Localization\LocalizedTextsContainer.cs" />
@@ -80,26 +72,12 @@
     <Compile Include="Location\IVisitingAddress.cs" />
     <Compile Include="Organization\OrganizationName.cs" />
     <Compile Include="Organization\SubOrganization.cs" />
-    <Compile Include="Service\Dto\Service.cs" />
-    <Compile Include="Service\IBasicInformation.cs" />
-    <Compile Include="Service\IService.cs" />
-    <Compile Include="Service\IServiceListItem.cs" />
-    <Compile Include="Service\IServiceRepository.cs" />
-    <Compile Include="Service\IServiceService.cs" />
-    <Compile Include="Service\Service.cs" />
-    <Compile Include="Service\ServiceFactory.cs" />
-    <Compile Include="OrderableCollection.cs" />
-    <Compile Include="Service\ServiceListItem.cs" />
-    <Compile Include="Service\ServiceService.cs" />
-    <Compile Include="Settings\ILanguage.cs" />
     <Compile Include="Settings\ISettingsRepository.cs" />
     <Compile Include="Settings\ISettingsService.cs" />
     <Compile Include="User\IRole.cs" />
     <Compile Include="User\IUser.cs" />
     <Compile Include="User\IUserListItem.cs" />
     <Compile Include="User\IUserService.cs" />
-    <Compile Include="Settings\Language.cs" />
-    <Compile Include="Settings\LanguageFactory.cs" />
     <Compile Include="Validation\BusinessIdentifierValidationResult.cs" />
     <Compile Include="Organization\HierarchicalOrganization.cs" />
     <Compile Include="Validation\IBusinessIdentifierValidationResult.cs" />

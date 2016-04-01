@@ -5,7 +5,6 @@ using Affecto.Mapping;
 using Affecto.WebApi.Toolkit.CustomRoutes;
 using OrganizationRegister.Application.Settings;
 using OrganizationRegister.Application.User;
-using OrganizationRegister.Common;
 
 namespace OrganizationRegister.Api.Settings
 {
@@ -60,15 +59,6 @@ namespace OrganizationRegister.Api.Settings
             IMapper<IRole, Role> mapper = mapperFactory.CreateRoleMapper();
 
             return Ok(mapper.Map(roles));
-        }
-
-        [HttpGet]
-        [GetRoute("servicelanguages")]
-        public IHttpActionResult GetServiceLanguages()
-        {
-            var mapper = mapperFactory.CreateLanguageMapper();
-            IEnumerable<Language> serviceLanguages = mapper.Map(settingsService.Value.GetServiceLanguages());
-            return Ok(serviceLanguages);
         }
     }
 }

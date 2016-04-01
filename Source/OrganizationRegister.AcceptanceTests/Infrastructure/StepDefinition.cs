@@ -2,9 +2,7 @@
 using Affecto.Patterns.Cqrs;
 using Autofac;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OrganizationRegister.Application.Classification;
 using OrganizationRegister.Application.Organization;
-using OrganizationRegister.Application.Service;
 using OrganizationRegister.Application.Settings;
 using OrganizationRegister.Application.Validation;
 using TechTalk.SpecFlow;
@@ -13,13 +11,11 @@ namespace OrganizationRegister.AcceptanceTests.Infrastructure
 {
     internal class StepDefinition
     {
-        private const string ServiceRegisterException = "IdentityManagementServiceException";
+        private const string OrganizationRegisterException = "OrganizationRegisterException";
 
         private IOrganizationService organizationService;
         private ISettingsService settingsService;
         private IValidationService validationService;
-        private IServiceService serviceService;
-        private IClassificationRepository classificationRepository;
         private ICommandBus commandBus;
 
         protected static MockRepository Repository
@@ -66,32 +62,6 @@ namespace OrganizationRegister.AcceptanceTests.Infrastructure
             }
         }
 
-        protected IServiceService ServiceService
-        {
-            get
-            {
-                if (serviceService == null)
-                {
-                    IContainer container = Get<IContainer>();
-                    serviceService = container.Resolve<IServiceService>();
-                }
-                return serviceService;
-            }
-        }
-
-        protected IClassificationRepository ClassificationRepository
-        {
-            get
-            {
-                if (classificationRepository == null)
-                {
-                    IContainer container = Get<IContainer>();
-                    classificationRepository = container.Resolve<IClassificationRepository>();
-                }
-                return classificationRepository;
-            }
-        }
-
         protected void SendCommand(ICommand command)
         {
             CommandBus.Send(Envelope.Create(command));
@@ -105,14 +75,14 @@ namespace OrganizationRegister.AcceptanceTests.Infrastructure
             }
             catch (Exception e)
             {
-                ScenarioContext.Current.Add(ServiceRegisterException, e);
+                ScenarioContext.Current.Add(OrganizationRegisterException, e);
             }
         }
 
         protected static void AssertCaughtException<TException>() where TException : Exception
         {
-            Assert.IsTrue(ScenarioContext.Current.Get<Exception>(ServiceRegisterException) is TException);
-            ScenarioContext.Current.Remove(ServiceRegisterException);
+            Assert.IsTrue(ScenarioContext.Current.Get<Exception>(OrganizationRegisterException) is TException);
+            ScenarioContext.Current.Remove(OrganizationRegisterException);
         }
 
         private ICommandBus CommandBus

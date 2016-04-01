@@ -107,19 +107,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Features\ClassificationSteps.cs" />
-    <Compile Include="Features\Classification.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Classification.feature</DependentUpon>
-    </Compile>
     <Compile Include="Features\Organization\GettingOrganization.feature.cs">
       <DependentUpon>GettingOrganization.feature</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Features\Organization\GettingOrganizationSteps.cs" />
-    <Compile Include="Features\Service\AddingServiceSteps.cs" />
     <Compile Include="Features\Organization\AddingOrganization.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -138,12 +131,6 @@
       <DependentUpon>DeletingOrganization.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\Organization\DeletingOrganizationSteps.cs" />
-    <Compile Include="Features\Service\UpdatingServiceClassification.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UpdatingServiceClassification.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Features\Service\UpdatingServiceClassificationSteps.cs" />
     <Compile Include="Features\Settings.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -174,17 +161,6 @@
       <DependentUpon>UpdatingOrganizationVisitingAddress.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\Organization\UpdatingOrganizationVisitingAddressSteps.cs" />
-    <Compile Include="Features\Service\AddingService.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AddingService.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Features\Service\UpdatingServiceBasicInformation.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UpdatingServiceBasicInformation.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Features\Service\UpdatingServiceBasicInformationSteps.cs" />
     <Compile Include="Features\ValidatingData.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -192,13 +168,10 @@
     </Compile>
     <Compile Include="Features\ValidatingDataSteps.cs" />
     <Compile Include="Infrastructure\AddressHelper.cs" />
-    <Compile Include="Infrastructure\ClassHelper.cs" />
     <Compile Include="Infrastructure\LocalizedTextHelper.cs" />
     <Compile Include="Infrastructure\MockRepository.cs" />
     <Compile Include="Infrastructure\OrganizationHelper.cs" />
     <Compile Include="Infrastructure\OrganizationSteps.cs" />
-    <Compile Include="Infrastructure\ServiceHelper.cs" />
-    <Compile Include="Infrastructure\ServiceSteps.cs" />
     <Compile Include="Infrastructure\StepDefinition.cs" />
     <Compile Include="Infrastructure\TestScenario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -211,10 +184,6 @@
     <ProjectReference Include="..\OrganizationRegister.Application\OrganizationRegister.Application.csproj">
       <Project>{4F322916-C66E-415E-A4A9-45407618B62D}</Project>
       <Name>ServiceRegister.Application</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OrganizationRegister.Commanding\OrganizationRegister.Commanding.csproj">
-      <Project>{4D2570B2-7E34-44B1-A510-9752357FB913}</Project>
-      <Name>ServiceRegister.Commanding</Name>
     </ProjectReference>
     <ProjectReference Include="..\OrganizationRegister.Common\OrganizationRegister.Common.csproj">
       <Project>{39415FC6-B6EF-4EE6-8E95-DF098E6B7394}</Project>
@@ -237,10 +206,6 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Features\Classification.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Classification.feature.cs</LastGenOutput>
-    </None>
     <None Include="Features\Organization\AddingOrganization.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>AddingOrganization.feature.cs</LastGenOutput>
@@ -256,10 +221,6 @@
     <None Include="Features\Organization\DeletingOrganization.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>DeletingOrganization.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Features\Service\UpdatingServiceClassification.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>UpdatingServiceClassification.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Settings.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
@@ -280,14 +241,6 @@
     <None Include="Features\Organization\UpdatingOrganizationVisitingAddress.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>UpdatingOrganizationVisitingAddress.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Features\Service\AddingService.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>AddingService.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Features\Service\UpdatingServiceBasicInformation.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>UpdatingServiceBasicInformation.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\ValidatingData.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
