@@ -89,28 +89,6 @@ function registerRoutes($routeProvider: angular.route.IRouteProvider): void
             controller: "OrganizationRegister.OrganizationTreeController",
             templateUrl: "App/Views/Index.html"
         })
-        .when("/Organizations/:organizationId/NewService",
-            {
-            controller: "OrganizationRegister.ServiceController",
-            templateUrl: "App/Views/AddServiceWizard.html",
-            resolve:
-                {
-                    editedSection: () =>
-                    {
-                        return OrganizationRegister.EditedServiceSection.BasicInfromation;
-                    }
-                }
-        })
-        .when("/Organizations/:organizationId/Services",
-        {
-            controller: "OrganizationRegister.ServiceSearchController",
-            templateUrl: "App/Views/Services.html"
-        })
-        .when("/Organizations/:organizationId/Services/:serviceId",
-        {
-            controller: "OrganizationRegister.ServiceController",
-            templateUrl: "App/Views/Service.html"
-        })
         .when(OrganizationRegister.Route.login,
         {
             controller: "OrganizationRegister.LoginController",
@@ -171,8 +149,6 @@ function registerControllers(): void
     Affecto.Registration.registerController(OrganizationRegister.OrganizationController, "OrganizationRegister.OrganizationController");
     Affecto.Registration.registerController(OrganizationRegister.OrganizationTreeController, "OrganizationRegister.OrganizationTreeController");
     Affecto.Registration.registerController(OrganizationRegister.UserController, "OrganizationRegister.UserController");
-    Affecto.Registration.registerController(OrganizationRegister.ServiceController, "OrganizationRegister.ServiceController");
-    Affecto.Registration.registerController(OrganizationRegister.ServiceSearchController, "OrganizationRegister.ServiceSearchController");
     Affecto.Registration.registerController(OrganizationRegister.LoginController, "OrganizationRegister.LoginController");
     Affecto.Registration.registerController(OrganizationRegister.UserSearchController, "OrganizationRegister.UserSearchController");
 }
@@ -184,8 +160,6 @@ function registerServices(): void
     Affecto.Registration.registerService(OrganizationRegister.ValidationService, "OrganizationRegister.ValidationService");
     Affecto.Registration.registerService(OrganizationRegister.UserService, "OrganizationRegister.UserService");
     Affecto.Registration.registerService(OrganizationRegister.AuthenticatedUserFactory, "OrganizationRegister.AuthenticatedUserFactory");
-    Affecto.Registration.registerService(OrganizationRegister.ServiceService, "OrganizationRegister.ServiceService");
-    Affecto.Registration.registerService(OrganizationRegister.ClassificationService, "OrganizationRegister.ClassificationService");
 }
 
 function registerDirectives(): void

@@ -77,10 +77,6 @@
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\typings\jasmine\jasmine.d.ts" />
     <TypeScriptCompile Include="Unit tests\App\Models\AvailablePostalAddressTypesTests.ts" />
-    <TypeScriptCompile Include="Unit tests\App\Models\ClassificationTests.ts" />
-    <TypeScriptCompile Include="Unit tests\App\Models\HierarchicalSelectionClassificationTests.ts" />
-    <TypeScriptCompile Include="Unit tests\App\Models\LanguagesTests.ts" />
-    <TypeScriptCompile Include="Unit tests\App\Models\OntologyTermsTests.ts" />
     <TypeScriptCompile Include="Unit tests\App\Models\OrganizationTests.ts" />
     <TypeScriptCompile Include="..\AngularApplication\App\**\*.ts">
       <Link>TypeScriptReferences\App\%(RecursiveDir)%(FileName)</Link>
@@ -91,7 +87,6 @@
     <TypeScriptCompile Include="..\AngularApplication\Scripts\affecto\**\*.ts">
       <Link>TypeScriptReferences\Scripts\affecto\%(RecursiveDir)%(FileName)</Link>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Unit tests\App\Models\ServiceTests.ts" />
     <TypeScriptCompile Include="Unit tests\App\Models\WebPageTests.ts" />
   </ItemGroup>
   <ItemGroup>

@@ -41,7 +41,6 @@
                 <div class="container" data-ng-show="controller.isUserLoggedIn">
                     <ul data-ng-show="controller.isServiceInformationSectionActive()">
                         <li><a data-ng-href="#/">Organisaatiot</a></li>
-                        <li><a data-ng-href="#/Organizations/{{controller.user.organizationId}}/Services">Palvelut</a></li>
                     </ul>
                     <ul data-ng-show="controller.isAdministrationSectionActive()">
                         <li><a data-ng-href="#/Organizations/{{controller.user.organizationId}}/Users">Käyttäjät</a></li>
@@ -78,7 +77,6 @@
         angular
             .module('OrganizationRegister.Settings', [])
             .constant('apiBaseUrl', '@apiBaseUrl')
-	        .constant('maxOntologyTermSearchResults', '@OrganizationRegisterApiConfiguration.Settings.MaxOntologyTermSearchResults')
             .constant('apiGetUserUrl', '@string.Format("{0}organizationregister/authenticateduser", apiBaseUrl)')
             .constant('tokenServiceUrl', '@tokenServiceConfiguration.Url')
             .constant('tokenServiceClientId', '@tokenServiceConfiguration.ClientId')
