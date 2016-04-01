@@ -2,7 +2,7 @@ using Affecto.EntityFramework.PostgreSql;
 
 namespace OrganizationRegister.Store.CodeFirst.Migrations
 {
-    public abstract class ServiceRegisterDbMigration : PostgreSqlDbMigration
+    public abstract class OrganizationRegisterDbMigration : PostgreSqlDbMigration
     {
         protected override string ResolveSchemaName()
         {
