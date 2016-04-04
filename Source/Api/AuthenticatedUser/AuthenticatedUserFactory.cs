@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using Affecto.AuthenticationServer.Claims;
-using ServiceRegister.Common.User;
+using OrganizationRegister.Common.User;
 
-namespace ServiceRegister.Api.AuthenticatedUser
+namespace OrganizationRegister.Api.AuthenticatedUser
 {
     internal class AuthenticatedUserFactory : AuthenticatedUserFactory<AuthenticatedUser>
     {

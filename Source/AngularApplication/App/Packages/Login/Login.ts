@@ -14,7 +14,7 @@ loginModule.config([
     {
         localStorageServiceProvider
             .setStorageType("sessionStorage")
-            .setPrefix("ServiceRegister")
+            .setPrefix("OrganizationRegister")
             .setNotify(false, false);
     }
 ]);

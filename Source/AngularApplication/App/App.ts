@@ -1,8 +1,8 @@
 ﻿"use strict";
 
-var serviceRegisterApplication: angular.IModule = createApplication();
+var organizationRegisterApplication: angular.IModule = createApplication();
 
-serviceRegisterApplication.config([
+organizationRegisterApplication.config([
     "$httpProvider", ($httpProvider: angular.IHttpProvider) =>
     {
         //initialize common if not there
@@ -19,14 +19,14 @@ serviceRegisterApplication.config([
     }
 ]);
 
-serviceRegisterApplication.config(["$routeProvider", ($routeProvider: angular.route.IRouteProvider) =>
+organizationRegisterApplication.config(["$routeProvider", ($routeProvider: angular.route.IRouteProvider) =>
     {
         registerRoutes($routeProvider);
     }
 ]);
 
 
-serviceRegisterApplication.config([
+organizationRegisterApplication.config([
     "$translateProvider", ($translateProvider: angular.translate.ITranslateProvider) =>
     {
         $translateProvider
@@ -35,7 +35,7 @@ serviceRegisterApplication.config([
     }
 ]);  
 
-serviceRegisterApplication.config([
+organizationRegisterApplication.config([
     "unsavedWarningsConfigProvider", (unsavedWarningsConfigProvider: any) =>
     {
         unsavedWarningsConfigProvider.navigateMessage = "UNSAVED_CHANGES_ON_PAGE_LEAVE";
@@ -43,19 +43,19 @@ serviceRegisterApplication.config([
     }
 ]);
 
-serviceRegisterApplication.constant("handledErrorCodes", []);
-initializeLoginConstants(ServiceRegister.UrlParameter.requestedRoute, ServiceRegister.Route.login);
+organizationRegisterApplication.constant("handledErrorCodes", []);
+initializeLoginConstants(OrganizationRegister.UrlParameter.requestedRoute, OrganizationRegister.Route.login);
 
-serviceRegisterApplication.run([
+organizationRegisterApplication.run([
     "$rootScope", "authenticationService", "requestedRouteService", "$location",
     ($rootScope: any, authenticationService: Affecto.Login.IAuthenticationService, requestedRouteService: Affecto.Login.RequestedRouteService,
         $location: angular.ILocationService) =>
     {
-        $rootScope.EditedOrganizationSection = ServiceRegister.EditedOrganizationSection;
+        $rootScope.EditedOrganizationSection = OrganizationRegister.EditedOrganizationSection;
         $rootScope.$on("$routeChangeStart", (event: angular.IAngularEvent, next: any, current: any) =>
         {
             var currentPath: string = $location.path();
-            if (currentPath !== Affecto.ExceptionHandling.Routes.error && currentPath !== ServiceRegister.Route.login && !authenticationService.isAuthenticated())
+            if (currentPath !== Affecto.ExceptionHandling.Routes.error && currentPath !== OrganizationRegister.Route.login && !authenticationService.isAuthenticated())
             {
                 event.preventDefault();
                 requestedRouteService.route = currentPath;
@@ -73,12 +73,12 @@ function createApplication(): angular.IModule
 {
     var applicationModules: Array<string> = new Array<string>();
     var referenceModules: Array<string> = [
-        "ngRoute", "ngResource", "ngCookies", "pascalprecht.translate", "unsavedChanges", "localytics.directives", "Affecto.BusyIndication", "ServiceRegister.Settings",
+        "ngRoute", "ngResource", "ngCookies", "pascalprecht.translate", "unsavedChanges", "Affecto.BusyIndication", "OrganizationRegister.Settings",
         "Affecto.ExceptionHandling", "Affecto.Login", "treeControl"
     ];
     applicationModules.forEach(mod => referenceModules.push(mod));
 
-    return angular.module("ServiceRegister", referenceModules);    
+    return angular.module("OrganizationRegister", referenceModules);
 }
 
 function registerRoutes($routeProvider: angular.route.IRouteProvider): void
@@ -86,55 +86,33 @@ function registerRoutes($routeProvider: angular.route.IRouteProvider): void
     $routeProvider
         .when("/",
         {
-            controller: "ServiceRegister.OrganizationTreeController",
+            controller: "OrganizationRegister.OrganizationTreeController",
             templateUrl: "App/Views/Index.html"
         })
-        .when("/Organizations/:organizationId/NewService",
-            {
-            controller: "ServiceRegister.ServiceController",
-            templateUrl: "App/Views/AddServiceWizard.html",
-            resolve:
-                {
-                    editedSection: () =>
-                    {
-                        return ServiceRegister.EditedServiceSection.BasicInfromation;
-                    }
-                }
-        })
-        .when("/Organizations/:organizationId/Services",
+        .when(OrganizationRegister.Route.login,
         {
-            controller: "ServiceRegister.ServiceSearchController",
-            templateUrl: "App/Views/Services.html"
-        })
-        .when("/Organizations/:organizationId/Services/:serviceId",
-        {
-            controller: "ServiceRegister.ServiceController",
-            templateUrl: "App/Views/Service.html"
-        })
-        .when(ServiceRegister.Route.login,
-        {
-            controller: "ServiceRegister.LoginController",
+            controller: "OrganizationRegister.LoginController",
             templateUrl: "App/Views/Login.html"
         })
         .when("/Organizations/:organizationId/Users",
         {
-            controller: "ServiceRegister.UserSearchController",
+            controller: "OrganizationRegister.UserSearchController",
             templateUrl: "App/Views/Users.html"
         })
         .when("/Organizations/:organizationId/NewUser",
         {
-            controller: "ServiceRegister.UserController",
+            controller: "OrganizationRegister.UserController",
             templateUrl: "App/Views/AddUser.html"
         })
         .when("/Organizations",
         {
-            controller: "ServiceRegister.OrganizationController",
+            controller: "OrganizationRegister.OrganizationController",
             templateUrl: "App/Views/AddOrganizationWizard.html",
             resolve:
             {
                 editedSection: () =>
                 {
-                    return ServiceRegister.EditedOrganizationSection.BasicInfromation;
+                    return OrganizationRegister.EditedOrganizationSection.BasicInfromation;
                 }
             }
 })
@@ -144,13 +122,13 @@ function registerRoutes($routeProvider: angular.route.IRouteProvider): void
         })
         .when("/Organizations/:parentOrganizationId/Organizations",
         {
-            controller: "ServiceRegister.OrganizationController",
+            controller: "OrganizationRegister.OrganizationController",
             templateUrl: "App/Views/AddOrganizationWizard.html",
             resolve:
             {
                 editedSection: () =>
                 {
-                    return ServiceRegister.EditedOrganizationSection.BasicInfromation;
+                    return OrganizationRegister.EditedOrganizationSection.BasicInfromation;
                 }
             }
         })
@@ -167,42 +145,38 @@ function registerRoutes($routeProvider: angular.route.IRouteProvider): void
 
 function registerControllers(): void
 {
-    Affecto.Registration.registerController(ServiceRegister.MainNavigationController, "ServiceRegister.MainNavigationController");
-    Affecto.Registration.registerController(ServiceRegister.OrganizationController, "ServiceRegister.OrganizationController");
-    Affecto.Registration.registerController(ServiceRegister.OrganizationTreeController, "ServiceRegister.OrganizationTreeController");
-    Affecto.Registration.registerController(ServiceRegister.UserController, "ServiceRegister.UserController");
-    Affecto.Registration.registerController(ServiceRegister.ServiceController, "ServiceRegister.ServiceController");
-    Affecto.Registration.registerController(ServiceRegister.ServiceSearchController, "ServiceRegister.ServiceSearchController");
-    Affecto.Registration.registerController(ServiceRegister.LoginController, "ServiceRegister.LoginController");
-    Affecto.Registration.registerController(ServiceRegister.UserSearchController, "ServiceRegister.UserSearchController");
+    Affecto.Registration.registerController(OrganizationRegister.MainNavigationController, "OrganizationRegister.MainNavigationController");
+    Affecto.Registration.registerController(OrganizationRegister.OrganizationController, "OrganizationRegister.OrganizationController");
+    Affecto.Registration.registerController(OrganizationRegister.OrganizationTreeController, "OrganizationRegister.OrganizationTreeController");
+    Affecto.Registration.registerController(OrganizationRegister.UserController, "OrganizationRegister.UserController");
+    Affecto.Registration.registerController(OrganizationRegister.LoginController, "OrganizationRegister.LoginController");
+    Affecto.Registration.registerController(OrganizationRegister.UserSearchController, "OrganizationRegister.UserSearchController");
 }
 
 function registerServices(): void
 {
-    Affecto.Registration.registerService(ServiceRegister.OrganizationService, "ServiceRegister.OrganizationService");
-    Affecto.Registration.registerService(ServiceRegister.SettingsService, "ServiceRegister.SettingsService");
-    Affecto.Registration.registerService(ServiceRegister.ValidationService, "ServiceRegister.ValidationService");
-    Affecto.Registration.registerService(ServiceRegister.UserService, "ServiceRegister.UserService");
-    Affecto.Registration.registerService(ServiceRegister.AuthenticatedUserFactory, "ServiceRegister.AuthenticatedUserFactory");
-    Affecto.Registration.registerService(ServiceRegister.ServiceService, "ServiceRegister.ServiceService");
-    Affecto.Registration.registerService(ServiceRegister.ClassificationService, "ServiceRegister.ClassificationService");
+    Affecto.Registration.registerService(OrganizationRegister.OrganizationService, "OrganizationRegister.OrganizationService");
+    Affecto.Registration.registerService(OrganizationRegister.SettingsService, "OrganizationRegister.SettingsService");
+    Affecto.Registration.registerService(OrganizationRegister.ValidationService, "OrganizationRegister.ValidationService");
+    Affecto.Registration.registerService(OrganizationRegister.UserService, "OrganizationRegister.UserService");
+    Affecto.Registration.registerService(OrganizationRegister.AuthenticatedUserFactory, "OrganizationRegister.AuthenticatedUserFactory");
 }
 
 function registerDirectives(): void
 {
-    Affecto.Registration.registerDirectiveFactory(ServiceRegister.IgnoreDirtyFormFieldFactory, "ServiceRegister.IgnoreDirtyFormField");
-    Affecto.Registration.registerDirectiveFactory(ServiceRegister.HelpPopupFactory, "ServiceRegister.HelpPopup");
+    Affecto.Registration.registerDirectiveFactory(OrganizationRegister.IgnoreDirtyFormFieldFactory, "OrganizationRegister.IgnoreDirtyFormField");
+    Affecto.Registration.registerDirectiveFactory(OrganizationRegister.HelpPopupFactory, "OrganizationRegister.HelpPopup");
 };
 
 function createTranslations(): angular.translate.ITranslationTable
 {
     var translations: angular.translate.ITranslationTable = {};
     translations["ERROR_UNDEFINED"] = "Tapahtui tunnistamaton virhe";
-    translations["ERROR_" + ServiceRegister.ErrorCode.insufficientPermissions] = "Ei käyttöoikeuksia";
+    translations["ERROR_" + OrganizationRegister.ErrorCode.insufficientPermissions] = "Ei käyttöoikeuksia";
     translations["UNSAVED_CHANGES_ON_PAGE_LEAVE"] = "Tallentamattomat muutokset menetetään poistuttaessa sivulta.";
     translations["UNSAVED_CHANGES_ON_PAGE_RELOAD"] = "Tallentamattomat muutokset menetetään sivun uudelleenlatauksessa.";
-    translations[ServiceRegister.PostalAddressType[ServiceRegister.PostalAddressType.SameAsVisitingAddress]] = "Sama kuin käyntiosoite";
-    translations[ServiceRegister.PostalAddressType[ServiceRegister.PostalAddressType.SeparateStreetAddress]] = "Muu osoite";
-    translations[ServiceRegister.PostalAddressType[ServiceRegister.PostalAddressType.PostOfficeBoxAddress]] = "PL-osoite";
+    translations[OrganizationRegister.PostalAddressType[OrganizationRegister.PostalAddressType.SameAsVisitingAddress]] = "Sama kuin käyntiosoite";
+    translations[OrganizationRegister.PostalAddressType[OrganizationRegister.PostalAddressType.SeparateStreetAddress]] = "Muu osoite";
+    translations[OrganizationRegister.PostalAddressType[OrganizationRegister.PostalAddressType.PostOfficeBoxAddress]] = "PL-osoite";
     return translations;
 }

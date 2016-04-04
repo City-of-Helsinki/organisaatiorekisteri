@@ -1,7 +1,7 @@
 ﻿using System;
 using IdentityServer3.AccessTokenValidation;
 
-namespace ServiceRegister.Api.Authentication
+namespace OrganizationRegister.Api.Authentication
 {
     internal class IdentityServerOptionsFactory
     {

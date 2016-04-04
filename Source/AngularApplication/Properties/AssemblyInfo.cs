@@ -1,3 +1,3 @@
 ﻿using System.Reflection;
 
-[assembly: AssemblyTitle("Palvelutietovaranto UI")]
+[assembly: AssemblyTitle("Organisaatiorekisteri UI")]

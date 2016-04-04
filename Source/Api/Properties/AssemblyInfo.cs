@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 
-[assembly: AssemblyTitle("Palvelutietovaranto API")]
+[assembly: AssemblyTitle("Organisaatiorekisteri API")]
 
-[assembly: InternalsVisibleTo("ServiceRegister.Api.Tests")]
+[assembly: InternalsVisibleTo("OrganizationRegister.Api.Tests")]

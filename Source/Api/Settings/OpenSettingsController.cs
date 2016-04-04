@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Web.Http;
 using Affecto.Mapping;
 using Affecto.WebApi.Toolkit.CustomRoutes;
-using ServiceRegister.Application.Settings;
-using ServiceRegister.Application.User;
-using ServiceRegister.Common;
+using OrganizationRegister.Application.Settings;
+using OrganizationRegister.Application.User;
 
-namespace ServiceRegister.Api.Settings
+namespace OrganizationRegister.Api.Settings
 {
-    [RoutePrefix("v1/serviceregister")]
+    [RoutePrefix("v1/organizationregister")]
     public class OpenSettingsController : ApiController
     {
         private readonly Lazy<ISettingsService> settingsService;
@@ -60,15 +59,6 @@ namespace ServiceRegister.Api.Settings
             IMapper<IRole, Role> mapper = mapperFactory.CreateRoleMapper();
 
             return Ok(mapper.Map(roles));
-        }
-
-        [HttpGet]
-        [GetRoute("servicelanguages")]
-        public IHttpActionResult GetServiceLanguages()
-        {
-            var mapper = mapperFactory.CreateLanguageMapper();
-            IEnumerable<Language> serviceLanguages = mapper.Map(settingsService.Value.GetServiceLanguages());
-            return Ok(serviceLanguages);
         }
     }
 }

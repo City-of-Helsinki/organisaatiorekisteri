@@ -9,8 +9,8 @@
     <ProjectGuid>{48FAE938-92DD-49AA-BBA5-56D4301F04C7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ServiceRegister.Api.Tests</RootNamespace>
-    <AssemblyName>ServiceRegister.Api.Tests</AssemblyName>
+    <RootNamespace>OrganizationRegister.Api.Tests</RootNamespace>
+    <AssemblyName>OrganizationRegister.Api.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -123,21 +123,12 @@
     <Reference Include="System.Net.Http.WebRequest" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classification\HierarchicalClassMapperTests.cs" />
-    <Compile Include="Classification\OpenClassificationControllerTests.cs" />
-    <Compile Include="Classification\ClassMapperTests.cs" />
     <Compile Include="Organization\AuthorizedOrganizationControllerTests.cs" />
     <Compile Include="Organization\OpenOrganizationControllerTests.cs" />
     <Compile Include="Organization\OrganizationControllerTests.cs" />
     <Compile Include="Organization\OrganizationNameMapperTests.cs" />
-    <Compile Include="Service\AuthorizedServiceControllerTests.cs" />
-    <Compile Include="Service\OpenServiceControllerTests.cs" />
-    <Compile Include="Service\ServiceControllerTests.cs" />
-    <Compile Include="Service\ServiceListItemMapperTests.cs" />
-    <Compile Include="Service\ServiceMapperTests.cs" />
     <Compile Include="Settings\OpenSettingsControllerTests.cs" />
     <Compile Include="Settings\RoleMapperTests.cs" />
-    <Compile Include="Settings\LanguageMapperTest.cs" />
     <Compile Include="User\AuthorizedUserControllerTests.cs" />
     <Compile Include="Organization\HierarchicalOrganizationMapperTests.cs" />
     <Compile Include="User\UserListItemMapperTests.cs" />
@@ -159,15 +150,11 @@
       <Project>{19D06D66-A7A4-405B-976F-46DEBAF523B7}</Project>
       <Name>Api</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ServiceRegister.Application\ServiceRegister.Application.csproj">
+    <ProjectReference Include="..\OrganizationRegister.Application\OrganizationRegister.Application.csproj">
       <Project>{4F322916-C66E-415E-A4A9-45407618B62D}</Project>
       <Name>ServiceRegister.Application</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ServiceRegister.Commanding\ServiceRegister.Commanding.csproj">
-      <Project>{4D2570B2-7E34-44B1-A510-9752357FB913}</Project>
-      <Name>ServiceRegister.Commanding</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ServiceRegister.Common\ServiceRegister.Common.csproj">
+    <ProjectReference Include="..\OrganizationRegister.Common\OrganizationRegister.Common.csproj">
       <Project>{39415FC6-B6EF-4EE6-8E95-DF098E6B7394}</Project>
       <Name>ServiceRegister.Common</Name>
     </ProjectReference>

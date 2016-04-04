@@ -13,16 +13,16 @@ using IdentityServer3.AccessTokenValidation;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Newtonsoft.Json.Serialization;
+using OrganizationRegister.Api;
+using OrganizationRegister.Api.Authentication;
+using OrganizationRegister.Autofac;
+using OrganizationRegister.Store.CodeFirst;
+using OrganizationRegister.Store.CodeFirst.Mocking;
+using OrganizationRegister.UserManagement;
 using Owin;
-using ServiceRegister.Api;
-using ServiceRegister.Api.Authentication;
-using ServiceRegister.Autofac;
-using ServiceRegister.Store.CodeFirst;
-using ServiceRegister.Store.CodeFirst.Mocking;
-using ServiceRegister.UserManagement;
 
 [assembly: OwinStartup(typeof(Startup))]
-namespace ServiceRegister.Api
+namespace OrganizationRegister.Api
 {
     public class Startup
     {
@@ -31,7 +31,7 @@ namespace ServiceRegister.Api
             var builder = new ContainerBuilder();
 
             builder.RegisterModule<WebApiModule>();
-            builder.RegisterModule<ServiceRegisterModule>();
+            builder.RegisterModule<OrganizationRegisterModule>();
 
             bool useMockDatabase = (ConfigurationManager.AppSettings["useMockDatabase"] == "true");
             if (useMockDatabase)

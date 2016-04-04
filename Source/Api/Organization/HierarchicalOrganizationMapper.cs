@@ -1,8 +1,8 @@
 ﻿using Affecto.Mapping.AutoMapper;
 using AutoMapper;
-using ServiceRegister.Application.Organization;
+using OrganizationRegister.Application.Organization;
 
-namespace ServiceRegister.Api.Organization
+namespace OrganizationRegister.Api.Organization
 {
     internal class HierarchicalOrganizationMapper : OneWayMapper<IHierarchicalOrganization, HierarchicalOrganization>
     {

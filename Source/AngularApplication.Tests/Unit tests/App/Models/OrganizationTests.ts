@@ -2,8 +2,8 @@
 
 describe("Organization", () =>
 {
-    var sut: ServiceRegister.Organization;
-    sut = new ServiceRegister.Organization();
+    var sut: OrganizationRegister.Organization;
+    sut = new OrganizationRegister.Organization();
 
     describe("municipality", () =>
     {
@@ -104,7 +104,7 @@ describe("Organization", () =>
             sut.phoneNumber = null;
             sut.phoneCallFee = null;
             sut.emailAddress = null;
-            sut.webPages = new Array<ServiceRegister.WebPage>();
+            sut.webPages = new Array<OrganizationRegister.WebPage>();
             expect(sut.hasContactInformation()).toBeFalsy();
         });
         it("has no contact information when phone number, call fee, email address or web pages are empty", () =>
@@ -112,7 +112,7 @@ describe("Organization", () =>
             sut.phoneNumber = "";
             sut.phoneCallFee = "";
             sut.emailAddress = "";
-            sut.webPages = new Array<ServiceRegister.WebPage>();
+            sut.webPages = new Array<OrganizationRegister.WebPage>();
             expect(sut.hasContactInformation()).toBeFalsy();
         });
         it("has contact information when phone number is set", () =>
@@ -120,7 +120,7 @@ describe("Organization", () =>
             sut.phoneNumber = "112";
             sut.phoneCallFee = null;
             sut.emailAddress = null;
-            sut.webPages = new Array<ServiceRegister.WebPage>();
+            sut.webPages = new Array<OrganizationRegister.WebPage>();
             expect(sut.hasContactInformation()).toBeTruthy();
         });
         it("has contact information when phone call cost is set", () =>
@@ -128,7 +128,7 @@ describe("Organization", () =>
             sut.phoneCallFee = "ppm";
             sut.phoneNumber = null;
             sut.emailAddress = null;
-            sut.webPages = new Array<ServiceRegister.WebPage>();
+            sut.webPages = new Array<OrganizationRegister.WebPage>();
             expect(sut.hasContactInformation()).toBeTruthy();
         });
         it("has contact information when email address is set", () =>
@@ -136,12 +136,12 @@ describe("Organization", () =>
             sut.emailAddress = "me@here.fi";
             sut.phoneCallFee = null;
             sut.phoneNumber = null;
-            sut.webPages = new Array<ServiceRegister.WebPage>();
+            sut.webPages = new Array<OrganizationRegister.WebPage>();
             expect(sut.hasContactInformation()).toBeTruthy();
         });
         it("has contact information when there are web pages", () =>
         {
-            sut.webPages.push(new ServiceRegister.WebPage("home", "www.home.fi", "type"));
+            sut.webPages.push(new OrganizationRegister.WebPage("home", "www.home.fi", "type"));
             sut.phoneCallFee = null;
             sut.emailAddress = null;
             sut.phoneNumber = null;
@@ -268,37 +268,37 @@ describe("Organization", () =>
     {
         it("post office box address type is available when no addresses are given", () =>
         {
-            expect(sut.postalAddressTypes.available.contains(ServiceRegister.PostalAddressType[ServiceRegister.PostalAddressType.PostOfficeBoxAddress])).toBeTruthy();
+            expect(sut.postalAddressTypes.available.contains(OrganizationRegister.PostalAddressType[OrganizationRegister.PostalAddressType.PostOfficeBoxAddress])).toBeTruthy();
         });
         it("separate street address type is available when no addresses are given", () =>
         {
-            expect(sut.postalAddressTypes.available.contains(ServiceRegister.PostalAddressType[ServiceRegister.PostalAddressType.SeparateStreetAddress])).toBeTruthy();
+            expect(sut.postalAddressTypes.available.contains(OrganizationRegister.PostalAddressType[OrganizationRegister.PostalAddressType.SeparateStreetAddress])).toBeTruthy();
         });
         it("same as visiting address type is not available when no addresses are given", () =>
         {
-            expect(sut.postalAddressTypes.available.contains(ServiceRegister.PostalAddressType[ServiceRegister.PostalAddressType.SameAsVisitingAddress])).toBeFalsy();
+            expect(sut.postalAddressTypes.available.contains(OrganizationRegister.PostalAddressType[OrganizationRegister.PostalAddressType.SameAsVisitingAddress])).toBeFalsy();
         });
         it("adding an address type adds it to the type collection", () =>
         {
-            sut.postalAddressTypes.add(ServiceRegister.PostalAddressType[ServiceRegister.PostalAddressType.PostOfficeBoxAddress]);
-            expect(sut.postalAddressTypes.contains(ServiceRegister.PostalAddressType.PostOfficeBoxAddress)).toBeTruthy();
+            sut.postalAddressTypes.add(OrganizationRegister.PostalAddressType[OrganizationRegister.PostalAddressType.PostOfficeBoxAddress]);
+            expect(sut.postalAddressTypes.contains(OrganizationRegister.PostalAddressType.PostOfficeBoxAddress)).toBeTruthy();
         });
         it("adding a post office box address removes it from available address types", () =>
         {
-            sut.postalAddressTypes.add(ServiceRegister.PostalAddressType[ServiceRegister.PostalAddressType.PostOfficeBoxAddress]);
-            expect(sut.postalAddressTypes.available.contains(ServiceRegister.PostalAddressType[ServiceRegister.PostalAddressType.PostOfficeBoxAddress])).toBeFalsy();
+            sut.postalAddressTypes.add(OrganizationRegister.PostalAddressType[OrganizationRegister.PostalAddressType.PostOfficeBoxAddress]);
+            expect(sut.postalAddressTypes.available.contains(OrganizationRegister.PostalAddressType[OrganizationRegister.PostalAddressType.PostOfficeBoxAddress])).toBeFalsy();
         });
         it("adding a separate postal address removes street addresses from available address types", () =>
         {
-            sut.postalAddressTypes.add(ServiceRegister.PostalAddressType[ServiceRegister.PostalAddressType.SeparateStreetAddress]);
-            expect(sut.postalAddressTypes.available.contains(ServiceRegister.PostalAddressType[ServiceRegister.PostalAddressType.SeparateStreetAddress])).toBeFalsy();
-            expect(sut.postalAddressTypes.available.contains(ServiceRegister.PostalAddressType[ServiceRegister.PostalAddressType.SameAsVisitingAddress])).toBeFalsy();
+            sut.postalAddressTypes.add(OrganizationRegister.PostalAddressType[OrganizationRegister.PostalAddressType.SeparateStreetAddress]);
+            expect(sut.postalAddressTypes.available.contains(OrganizationRegister.PostalAddressType[OrganizationRegister.PostalAddressType.SeparateStreetAddress])).toBeFalsy();
+            expect(sut.postalAddressTypes.available.contains(OrganizationRegister.PostalAddressType[OrganizationRegister.PostalAddressType.SameAsVisitingAddress])).toBeFalsy();
         });
         it("adding a same as visiting postal address removes street addresses from available address types", () =>
         {
-            sut.postalAddressTypes.add(ServiceRegister.PostalAddressType[ServiceRegister.PostalAddressType.SameAsVisitingAddress]);
-            expect(sut.postalAddressTypes.available.contains(ServiceRegister.PostalAddressType[ServiceRegister.PostalAddressType.SeparateStreetAddress])).toBeFalsy();
-            expect(sut.postalAddressTypes.available.contains(ServiceRegister.PostalAddressType[ServiceRegister.PostalAddressType.SameAsVisitingAddress])).toBeFalsy();
+            sut.postalAddressTypes.add(OrganizationRegister.PostalAddressType[OrganizationRegister.PostalAddressType.SameAsVisitingAddress]);
+            expect(sut.postalAddressTypes.available.contains(OrganizationRegister.PostalAddressType[OrganizationRegister.PostalAddressType.SeparateStreetAddress])).toBeFalsy();
+            expect(sut.postalAddressTypes.available.contains(OrganizationRegister.PostalAddressType[OrganizationRegister.PostalAddressType.SameAsVisitingAddress])).toBeFalsy();
         });
     });
 
@@ -497,35 +497,35 @@ describe("Organization", () =>
     {
         it("web page is not added without a name", () =>
         {
-            sut.webPages = new Array<ServiceRegister.WebPage>();
+            sut.webPages = new Array<OrganizationRegister.WebPage>();
             sut.addWebPage("", "http://www.google.fi", "type");
             expect(sut.webPages.length).toBe(0);
         });
         it("web page is not added without a url", () =>
         {
-            sut.webPages = new Array<ServiceRegister.WebPage>();
+            sut.webPages = new Array<OrganizationRegister.WebPage>();
             sut.addWebPage("Google", null, "type");
             expect(sut.webPages.length).toBe(0);
         });
         it("web page is not added without a type", () =>
         {
-            sut.webPages = new Array<ServiceRegister.WebPage>();
+            sut.webPages = new Array<OrganizationRegister.WebPage>();
             sut.addWebPage("Google", "http://www.google.fi", null);
             expect(sut.webPages.length).toBe(0);
         });
         it("name, url and type are added", () =>
         {
-            sut.webPages = new Array<ServiceRegister.WebPage>();
+            sut.webPages = new Array<OrganizationRegister.WebPage>();
             sut.addWebPage("Google", "http://www.google.fi", "type");
             expect(sut.webPages.length).toBe(1);
 
-            var addedSite: ServiceRegister.WebPage = sut.webPages[0];
+            var addedSite: OrganizationRegister.WebPage = sut.webPages[0];
             expect(addedSite.name).toEqual("Google");
             expect(addedSite.address).toEqual("http://www.google.fi");
         });
         it("same url cannot be added twice", () =>
         {
-            sut.webPages = new Array<ServiceRegister.WebPage>();
+            sut.webPages = new Array<OrganizationRegister.WebPage>();
             sut.addWebPage("Google", "http://www.google.fi", "type");
             sut.addWebPage("Google", "http://www.google.fi", "type");
             expect(sut.webPages.length).toBe(1);
@@ -554,7 +554,7 @@ describe("Organization", () =>
             sut.removeWebPage("http://www.google.fi");
             expect(sut.webPages.length).toBe(1);
 
-            var remainingSite: ServiceRegister.WebPage = sut.webPages[0];
+            var remainingSite: OrganizationRegister.WebPage = sut.webPages[0];
             expect(remainingSite.name).toEqual("Global google");
             expect(remainingSite.address).toEqual("http://www.google.com");
         });

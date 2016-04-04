@@ -4,7 +4,7 @@ using Affecto.AngularJS.TypeScript.BusyIndication;
 using Affecto.AngularJS.TypeScript.ExceptionHandling;
 using Affecto.AngularJS.TypeScript.Login;
 
-namespace ServiceRegister.AngularApplication
+namespace OrganizationRegister.AngularApplication
 {
     public class BundleConfig
     {
@@ -34,16 +34,11 @@ namespace ServiceRegister.AngularApplication
             bundles.Add(new ScriptBundle("~/bundles/angular-unsavedChanges").Include(
                 "~/Scripts/angular-unsavedChanges/unsavedChanges.min.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/chosen").Include(
-                "~/Scripts/chosen.jquery.js",
-                "~/Scripts/chosen.proto.js",
-                "~/Scripts/chosen.js"));
-
             bundles.Add(new ScriptBundle("~/bundles/treecontrol").Include(
                 "~/Scripts/angular-tree-control.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/scripts")
-                .IncludeDirectory("~/Scripts/ServiceRegister/", "*.js")
+                .IncludeDirectory("~/Scripts/OrganizationRegister/", "*.js")
                 .IncludeDirectory("~/Scripts/affecto/", "*.js"));
 
             bundles.Add(BaseBundle.Create("~/bundles/base"));
@@ -56,7 +51,6 @@ namespace ServiceRegister.AngularApplication
                 .IncludeDirectory("~/App/Constants/", "*.js")
                 .IncludeDirectory("~/App/Exceptions/", "*.js")
                 .Include("~/App/Models/OrganizationName.js")
-                .Include("~/App/Models/Classification.js")
                 .IncludeDirectory("~/App/Models/", "*.js")
                 .IncludeDirectory("~/App/Mapping/", "*.js")
                 .IncludeDirectory("~/App/Services/", "*.js")

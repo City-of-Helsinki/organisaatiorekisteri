@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
-using ServiceRegister.Api.Organization;
-using ServiceRegister.Application.Location;
-using ServiceRegister.Application.Organization;
-using ServiceRegister.Common;
-using StreetAddress = ServiceRegister.Application.Location.StreetAddress;
+using OrganizationRegister.Api.Organization;
+using OrganizationRegister.Application.Location;
+using OrganizationRegister.Application.Organization;
+using OrganizationRegister.Common;
+using StreetAddress = OrganizationRegister.Application.Location.StreetAddress;
 
-namespace ServiceRegister.Api.Tests.Organization
+namespace OrganizationRegister.Api.Tests.Organization
 {
     [TestClass]
     public class OrganizationMapperTests

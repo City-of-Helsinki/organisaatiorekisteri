@@ -12,8 +12,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ServiceRegister.AngularApplication.Tests</RootNamespace>
-    <AssemblyName>ServiceRegister.AngularApplication.Tests</AssemblyName>
+    <RootNamespace>OrganizationRegister.AngularApplication.Tests</RootNamespace>
+    <AssemblyName>OrganizationRegister.AngularApplication.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -25,7 +25,7 @@
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <TypeScriptToolsVersion>1.5</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.7</TypeScriptToolsVersion>
     <UseGlobalApplicationHostFile />
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -77,10 +77,6 @@
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\typings\jasmine\jasmine.d.ts" />
     <TypeScriptCompile Include="Unit tests\App\Models\AvailablePostalAddressTypesTests.ts" />
-    <TypeScriptCompile Include="Unit tests\App\Models\ClassificationTests.ts" />
-    <TypeScriptCompile Include="Unit tests\App\Models\HierarchicalSelectionClassificationTests.ts" />
-    <TypeScriptCompile Include="Unit tests\App\Models\LanguagesTests.ts" />
-    <TypeScriptCompile Include="Unit tests\App\Models\OntologyTermsTests.ts" />
     <TypeScriptCompile Include="Unit tests\App\Models\OrganizationTests.ts" />
     <TypeScriptCompile Include="..\AngularApplication\App\**\*.ts">
       <Link>TypeScriptReferences\App\%(RecursiveDir)%(FileName)</Link>
@@ -91,7 +87,6 @@
     <TypeScriptCompile Include="..\AngularApplication\Scripts\affecto\**\*.ts">
       <Link>TypeScriptReferences\Scripts\affecto\%(RecursiveDir)%(FileName)</Link>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Unit tests\App\Models\ServiceTests.ts" />
     <TypeScriptCompile Include="Unit tests\App\Models\WebPageTests.ts" />
   </ItemGroup>
   <ItemGroup>

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Web.Http;
 using Affecto.WebApi.Toolkit.CustomRoutes;
-using ServiceRegister.Api.Location;
-using ServiceRegister.Application.Organization;
+using OrganizationRegister.Api.Location;
+using OrganizationRegister.Application.Organization;
 
-namespace ServiceRegister.Api.Organization
+namespace OrganizationRegister.Api.Organization
 {
-    [RoutePrefix("v1/serviceregister")]
+    [RoutePrefix("v1/organizationregister")]
     public class AuthorizedOrganizationController : ApiController
     {
         private readonly IOrganizationService organizationService;

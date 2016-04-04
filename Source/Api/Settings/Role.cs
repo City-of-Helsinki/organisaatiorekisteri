@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ServiceRegister.Api.Settings
+namespace OrganizationRegister.Api.Settings
 {
     public class Role
     {

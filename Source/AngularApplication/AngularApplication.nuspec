@@ -1,14 +1,13 @@
 ﻿<?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>ServiceRegister.UI</id>
-    <title>Service Register UI</title>
-    <description>Service Register AngularJS UI</description>
+    <id>OrganizationRegister.UI</id>
+    <title>Organization Register UI</title>
+    <description>Organization Register AngularJS UI</description>
     <authors>Affecto</authors>
     <version>$version$</version>
     <releaseNotes>
-      Fix organization layout text wrapping.
-      Fix organization post office box postal address postal code validation.
+      First release matching the organization implementation of Finnish national service register.
     </releaseNotes>
   </metadata>
 </package>

@@ -1,6 +1,6 @@
 ﻿"use strict";
 
-module ServiceRegister
+module OrganizationRegister
 {
     export class SettingsService
     {
@@ -12,25 +12,16 @@ module ServiceRegister
 
         public getOrganizationTypes(): angular.IPromise<Array<string>>
         {
-            return this.$http.get(this.apiBaseUrl + "serviceregister/organizationtypes", { cache: true })
+            return this.$http.get(this.apiBaseUrl + "organizationregister/organizationtypes", { cache: true })
                 .then((response: angular.IHttpPromiseCallbackArg<any>): Array<string> =>
                 {
                     return response.data;
                 });
         }
 
-        public getServiceLanguages(): angular.IPromise<Array<Language>>
-        {
-            return this.$http.get(this.apiBaseUrl + "serviceregister/servicelanguages", { cache: true })
-                .then((response: angular.IHttpPromiseCallbackArg<any>): Array<Language> =>
-                {
-                    return LanguageMapper.map(response.data);
-                });            
-        }
-
         public getUserRoles(): angular.IPromise<Array<UserRole>>
         {
-            return this.$http.get(this.apiBaseUrl + "serviceregister/roles", { cache: true })
+            return this.$http.get(this.apiBaseUrl + "organizationregister/roles", { cache: true })
                 .then((response: angular.IHttpPromiseCallbackArg<any>): Array<UserRole> =>
                 {
                     return UserRoleMapper.map(response.data);
@@ -39,7 +30,7 @@ module ServiceRegister
 
         public getWebPageTypes(): angular.IPromise<Array<string>>
         {
-            return this.$http.get(this.apiBaseUrl + "serviceregister/webpagetypes", { cache: true })
+            return this.$http.get(this.apiBaseUrl + "organizationregister/webpagetypes", { cache: true })
                 .then((response: angular.IHttpPromiseCallbackArg<any>): Array<string> =>
                 {
                     return response.data;

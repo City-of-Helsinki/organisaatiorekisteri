@@ -1,19 +1,13 @@
 ﻿using Affecto.Mapping;
-using ServiceRegister.Api.Classification;
-using ServiceRegister.Api.Organization;
-using ServiceRegister.Api.Service;
-using ServiceRegister.Api.Settings;
-using ServiceRegister.Api.User;
-using ServiceRegister.Api.Validation;
-using ServiceRegister.Application.Classification;
-using ServiceRegister.Application.Organization;
-using ServiceRegister.Application.Service;
-using ServiceRegister.Application.Settings;
-using ServiceRegister.Application.User;
-using ServiceRegister.Application.Validation;
-using ServiceRegister.Common;
+using OrganizationRegister.Api.Organization;
+using OrganizationRegister.Api.Settings;
+using OrganizationRegister.Api.User;
+using OrganizationRegister.Api.Validation;
+using OrganizationRegister.Application.Organization;
+using OrganizationRegister.Application.User;
+using OrganizationRegister.Application.Validation;
 
-namespace ServiceRegister.Api
+namespace OrganizationRegister.Api
 {
     public class MapperFactory
     {
@@ -37,39 +31,14 @@ namespace ServiceRegister.Api
             return new OrganizationMapper();
         }
 
-        public virtual IMapper<IServiceListItem, ServiceListItem> CreateServiceNameMapper()
-        {
-            return new ServiceListItemMapper();
-        }
-
-        public virtual IMapper<IService, Service.Service> CreateServiceMapper()
-        {
-            return new ServiceMapper();
-        }
-
         public virtual IMapper<IRole, Role> CreateRoleMapper()
         {
             return new RoleMapper();
         }
 
-        public virtual IMapper<ILanguage, Language> CreateLanguageMapper()
-        {
-            return new LanguageMapper();
-        }
-
-        public virtual IMapper<IHierarchicalClass, HierarchicalClass> CreateHierarchicalClassMapper()
-        {
-            return new HierarchicalClassMapper();
-        }
-
         public virtual IMapper<IUserListItem, UserListItem> CreateUserListItemMapper()
         {
             return new UserListItemMapper(CreateRoleMapper());
-        }
-
-        public virtual IMapper<IClass, Class> CreateClassMapper()
-        {
-            return new ClassMapper();
         }
     }
 }

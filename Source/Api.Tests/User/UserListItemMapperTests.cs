@@ -2,11 +2,11 @@
 using Affecto.Mapping;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
-using ServiceRegister.Api.Settings;
-using ServiceRegister.Api.User;
-using ServiceRegister.Application.User;
+using OrganizationRegister.Api.Settings;
+using OrganizationRegister.Api.User;
+using OrganizationRegister.Application.User;
 
-namespace ServiceRegister.Api.Tests.User
+namespace OrganizationRegister.Api.Tests.User
 {
     [TestClass]
     public class UserListItemMapperTests

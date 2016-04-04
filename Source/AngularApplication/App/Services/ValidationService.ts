@@ -1,6 +1,6 @@
 ﻿"use strict";
 
-module ServiceRegister
+module OrganizationRegister
 {
     export class ValidationService
     {
@@ -12,7 +12,7 @@ module ServiceRegister
 
         public validateBusinessId(businessId: string, organizationId: string, allowDuplicates: boolean): angular.IPromise<BusinessIdentifierValidationResult>
         {
-            return this.$http.post(this.apiBaseUrl + "serviceregister/businessid", this.createBusinessIdValidationObject(businessId, organizationId, allowDuplicates))
+            return this.$http.post(this.apiBaseUrl + "organizationregister/businessid", this.createBusinessIdValidationObject(businessId, organizationId, allowDuplicates))
                 .then((response: angular.IHttpPromiseCallbackArg<any>): BusinessIdentifierValidationResult =>
                 {
                     return new BusinessIdentifierValidationResult(response.data.isValid, response.data.reasonForInvalidity);
@@ -21,7 +21,7 @@ module ServiceRegister
 
         public validatePhoneNumber(phoneNumber: string): angular.IPromise<boolean>
         {
-            return this.$http.post(this.apiBaseUrl + "serviceregister/phonenumber", "\"" + phoneNumber + "\"")
+            return this.$http.post(this.apiBaseUrl + "organizationregister/phonenumber", "\"" + phoneNumber + "\"")
                 .then((response: angular.IHttpPromiseCallbackArg<any>): boolean =>
                 {
                     return response.data;
@@ -30,7 +30,7 @@ module ServiceRegister
 
         public validateEmailAddress(emailAddress: string): angular.IPromise<boolean>
         {
-            return this.$http.post(this.apiBaseUrl + "serviceregister/emailaddress", "\"" + emailAddress + "\"")
+            return this.$http.post(this.apiBaseUrl + "organizationregister/emailaddress", "\"" + emailAddress + "\"")
                 .then((response: angular.IHttpPromiseCallbackArg<any>): boolean =>
                 {
                     return response.data;
@@ -39,7 +39,7 @@ module ServiceRegister
 
         public validateWebAddress(webAddress: string): angular.IPromise<boolean>
         {
-            return this.$http.post(this.apiBaseUrl + "serviceregister/webaddress", "\"" + webAddress + "\"")
+            return this.$http.post(this.apiBaseUrl + "organizationregister/webaddress", "\"" + webAddress + "\"")
                 .then((response: angular.IHttpPromiseCallbackArg<any>): boolean =>
                 {
                     return response.data;
@@ -48,7 +48,7 @@ module ServiceRegister
 
         public validatePostalCode(postalCode: string): angular.IPromise<boolean>
         {
-            return this.$http.post(this.apiBaseUrl + "serviceregister/postalcode", "\"" + postalCode + "\"")
+            return this.$http.post(this.apiBaseUrl + "organizationregister/postalcode", "\"" + postalCode + "\"")
                 .then((response: angular.IHttpPromiseCallbackArg<any>): boolean =>
                 {
                     return response.data;
@@ -57,7 +57,7 @@ module ServiceRegister
 
         public validatePostOfficeBoxPostalCode(postalCode: string): angular.IPromise<boolean>
         {
-            return this.$http.post(this.apiBaseUrl + "serviceregister/postofficeboxpostalcode", "\"" + postalCode + "\"")
+            return this.$http.post(this.apiBaseUrl + "organizationregister/postofficeboxpostalcode", "\"" + postalCode + "\"")
                 .then((response: angular.IHttpPromiseCallbackArg<any>): boolean =>
                 {
                     return response.data;

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using Affecto.WebApi.Toolkit.CustomRoutes;
-using ServiceRegister.Api.Organization;
-using ServiceRegister.Application.Organization;
-using ServiceRegister.Application.User;
+using OrganizationRegister.Api.Organization;
+using OrganizationRegister.Application.Organization;
+using OrganizationRegister.Application.User;
 
-namespace ServiceRegister.Api.User
+namespace OrganizationRegister.Api.User
 {
-    [RoutePrefix("v1/serviceregister")]
+    [RoutePrefix("v1/organizationregister")]
     public class AuthorizedUserController : ApiController
     {
         private readonly IUserService userService;

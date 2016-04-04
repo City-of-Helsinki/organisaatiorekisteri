@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ServiceRegister.Api</RootNamespace>
-    <AssemblyName>ServiceRegister.Api</AssemblyName>
+    <RootNamespace>OrganizationRegister.Api</RootNamespace>
+    <AssemblyName>OrganizationRegister.Api</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -245,27 +245,12 @@
     <Compile Include="Authentication\Certificate.cs" />
     <Compile Include="Authentication\CertificateNotFoundException.cs" />
     <Compile Include="Authentication\IdentityServerOptionsFactory.cs" />
-    <Compile Include="Classification\Class.cs" />
-    <Compile Include="Classification\ClassesSearchResult.cs" />
-    <Compile Include="Classification\ClassMapper.cs" />
-    <Compile Include="Classification\OpenClassificationController.cs" />
-    <Compile Include="Classification\HierarchicalClass.cs" />
-    <Compile Include="Classification\HierarchicalClassMapper.cs" />
     <Compile Include="Authentication\AuthenticationServerConfiguration.cs" />
     <Compile Include="Authentication\IAuthenticationServerConfiguration.cs" />
     <Compile Include="Organization\AuthorizedOrganizationController.cs" />
     <Compile Include="Organization\OpenOrganizationController.cs" />
     <Compile Include="Organization\OrganizationName.cs" />
     <Compile Include="Organization\OrganizationNameMapper.cs" />
-    <Compile Include="Service\BasicInformation.cs" />
-    <Compile Include="Service\Classification.cs" />
-    <Compile Include="Service\Service.cs" />
-    <Compile Include="Service\AuthorizedServiceController.cs" />
-    <Compile Include="Service\ServiceMapper.cs" />
-    <Compile Include="Service\ServiceListItem.cs" />
-    <Compile Include="Service\ServiceListItemMapper.cs" />
-    <Compile Include="Service\OpenServiceController.cs" />
-    <Compile Include="Settings\LanguageMapper.cs" />
     <Compile Include="Settings\RoleMapper.cs" />
     <Compile Include="Settings\OpenSettingsController.cs" />
     <Compile Include="Settings\Role.cs" />
@@ -298,31 +283,27 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ServiceRegister.Autofac\ServiceRegister.Autofac.csproj">
+    <ProjectReference Include="..\OrganizationRegister.Autofac\OrganizationRegister.Autofac.csproj">
       <Project>{153BB75E-6161-4012-AFF4-FED808779C65}</Project>
       <Name>ServiceRegister.Autofac</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ServiceRegister.Application\ServiceRegister.Application.csproj">
+    <ProjectReference Include="..\OrganizationRegister.Application\OrganizationRegister.Application.csproj">
       <Project>{4F322916-C66E-415E-A4A9-45407618B62D}</Project>
       <Name>ServiceRegister.Application</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ServiceRegister.Commanding\ServiceRegister.Commanding.csproj">
-      <Project>{4D2570B2-7E34-44B1-A510-9752357FB913}</Project>
-      <Name>ServiceRegister.Commanding</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ServiceRegister.Common\ServiceRegister.Common.csproj">
+    <ProjectReference Include="..\OrganizationRegister.Common\OrganizationRegister.Common.csproj">
       <Project>{39415FC6-B6EF-4EE6-8E95-DF098E6B7394}</Project>
       <Name>ServiceRegister.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ServiceRegister.Store.CodeFirst.Mocking\ServiceRegister.Store.CodeFirst.Mocking.csproj">
+    <ProjectReference Include="..\OrganizationRegister.Store.CodeFirst.Mocking\OrganizationRegister.Store.CodeFirst.Mocking.csproj">
       <Project>{72B6DD69-C4EB-4CC5-9F37-D3A2D8B40CAA}</Project>
       <Name>ServiceRegister.Store.CodeFirst.Mocking</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ServiceRegister.Store.CodeFirst\ServiceRegister.Store.CodeFirst.csproj">
+    <ProjectReference Include="..\OrganizationRegister.Store.CodeFirst\OrganizationRegister.Store.CodeFirst.csproj">
       <Project>{531DD032-A527-4B0C-84CB-D14066F3CEC8}</Project>
       <Name>ServiceRegister.Store.CodeFirst</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ServiceRegister.UserManagement\ServiceRegister.UserManagement.csproj">
+    <ProjectReference Include="..\OrganizationRegister.UserManagement\OrganizationRegister.UserManagement.csproj">
       <Project>{54ED5CD0-DCC3-4AEF-A3E2-D6C74A7B4052}</Project>
       <Name>ServiceRegister.UserManagement</Name>
     </ProjectReference>

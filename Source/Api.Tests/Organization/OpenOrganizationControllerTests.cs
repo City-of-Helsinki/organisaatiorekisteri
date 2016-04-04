@@ -4,10 +4,10 @@ using System.Linq;
 using System.Web.Http.Results;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
-using ServiceRegister.Api.Organization;
-using ServiceRegister.Application.Organization;
+using OrganizationRegister.Api.Organization;
+using OrganizationRegister.Application.Organization;
 
-namespace ServiceRegister.Api.Tests.Organization
+namespace OrganizationRegister.Api.Tests.Organization
 {
     [TestClass]
     public class OpenOrganizationControllerTests : OrganizationControllerTests

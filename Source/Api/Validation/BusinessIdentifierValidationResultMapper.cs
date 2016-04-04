@@ -1,8 +1,8 @@
 ﻿using Affecto.Mapping.AutoMapper;
 using AutoMapper;
-using ServiceRegister.Application.Validation;
+using OrganizationRegister.Application.Validation;
 
-namespace ServiceRegister.Api.Validation
+namespace OrganizationRegister.Api.Validation
 {
     internal class BusinessIdentifierValidationResultMapper : OneWayMapper<IBusinessIdentifierValidationResult, BusinessIdentifierValidationResult>
     {

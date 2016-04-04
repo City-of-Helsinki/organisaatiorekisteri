@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
-using ServiceRegister.Api.Organization;
-using ServiceRegister.Application;
-using ServiceRegister.Application.Localization;
-using ServiceRegister.Application.Organization;
-using ServiceRegister.Common;
+using OrganizationRegister.Api.Organization;
+using OrganizationRegister.Application.Localization;
+using OrganizationRegister.Application.Organization;
+using OrganizationRegister.Common;
 
-namespace ServiceRegister.Api.Tests.Organization
+namespace OrganizationRegister.Api.Tests.Organization
 {
     [TestClass]
     public class HierarchicalOrganizationMapperTests

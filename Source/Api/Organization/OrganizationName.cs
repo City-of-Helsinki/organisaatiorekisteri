@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using ServiceRegister.Common;
+using OrganizationRegister.Common;
 
-namespace ServiceRegister.Api.Organization
+namespace OrganizationRegister.Api.Organization
 {
     public class OrganizationName
     {

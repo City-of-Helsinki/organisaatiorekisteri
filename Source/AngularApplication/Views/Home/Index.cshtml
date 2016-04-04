@@ -1,9 +1,8 @@
-﻿@using ServiceRegister.AngularApplication.Configuration
-
-@{ ViewBag.Title = "Palvelutietovaranto"; }
+﻿@using OrganizationRegister.AngularApplication.Configuration
+@{ ViewBag.Title = "Organisaatiorekisteri"; }
 
 <header id="page-header" role="banner">
-    <div class="header-top" data-ng-controller="ServiceRegister.MainNavigationController as controller">
+    <div class="header-top" data-ng-controller="OrganizationRegister.MainNavigationController as controller">
         <div class="container">
             <h1>
                 <a href="#/" class="logo-link">
@@ -42,7 +41,6 @@
                 <div class="container" data-ng-show="controller.isUserLoggedIn">
                     <ul data-ng-show="controller.isServiceInformationSectionActive()">
                         <li><a data-ng-href="#/">Organisaatiot</a></li>
-                        <li><a data-ng-href="#/Organizations/{{controller.user.organizationId}}/Services">Palvelut</a></li>
                     </ul>
                     <ul data-ng-show="controller.isAdministrationSectionActive()">
                         <li><a data-ng-href="#/Organizations/{{controller.user.organizationId}}/Users">Käyttäjät</a></li>
@@ -71,16 +69,15 @@
 @section scripts
 {
     @{
-        var apiBaseUrl = ServiceRegisterApiConfiguration.Settings.BaseUrl;
+        var apiBaseUrl = OrganizationRegisterApiConfiguration.Settings.BaseUrl;
         var tokenServiceConfiguration = AccessTokenServiceConfiguration.Settings;
     }
 
     <script type="text/javascript">
         angular
-            .module('ServiceRegister.Settings', [])
+            .module('OrganizationRegister.Settings', [])
             .constant('apiBaseUrl', '@apiBaseUrl')
-	    .constant('maxOntologyTermSearchResults', '@ServiceRegisterApiConfiguration.Settings.MaxOntologyTermSearchResults')
-            .constant('apiGetUserUrl', '@string.Format("{0}serviceregister/authenticateduser", apiBaseUrl)')
+            .constant('apiGetUserUrl', '@string.Format("{0}organizationregister/authenticateduser", apiBaseUrl)')
             .constant('tokenServiceUrl', '@tokenServiceConfiguration.Url')
             .constant('tokenServiceClientId', '@tokenServiceConfiguration.ClientId')
             .constant('tokenServiceClientSecret', '@tokenServiceConfiguration.ClientSecret')

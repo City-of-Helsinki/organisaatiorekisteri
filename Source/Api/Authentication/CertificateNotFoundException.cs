@@ -1,6 +1,6 @@
 using System;
 
-namespace ServiceRegister.Api.Authentication
+namespace OrganizationRegister.Api.Authentication
 {
     public class CertificateNotFoundException : Exception
     {

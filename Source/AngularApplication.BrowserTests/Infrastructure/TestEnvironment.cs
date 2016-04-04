@@ -8,17 +8,16 @@ using Affecto.Authentication.Claims;
 using Affecto.Testing.UI.Selenium;
 using Autofac;
 using OpenQA.Selenium.Support.Extensions;
-using ServiceRegister.Application.Organization;
-using ServiceRegister.Application.Service;
-using ServiceRegister.Autofac;
-using ServiceRegister.Common;
-using ServiceRegister.Common.User;
-using ServiceRegister.Store.CodeFirst;
-using ServiceRegister.Tests.Infrastructure;
-using ServiceRegister.UserManagement;
+using OrganizationRegister.Application.Organization;
+using OrganizationRegister.Autofac;
+using OrganizationRegister.Common;
+using OrganizationRegister.Common.User;
+using OrganizationRegister.Store.CodeFirst;
+using OrganizationRegister.Tests.Infrastructure;
+using OrganizationRegister.UserManagement;
 using TechTalk.SpecFlow;
 
-namespace ServiceRegister.AngularApplication.BrowserTests.Infrastructure
+namespace OrganizationRegister.AngularApplication.BrowserTests.Infrastructure
 {
     [Binding]
     internal static class TestEnvironment
@@ -38,7 +37,6 @@ namespace ServiceRegister.AngularApplication.BrowserTests.Infrastructure
         private static readonly int DaysToKeepOldFailedTestData = int.Parse(ConfigurationManager.AppSettings.Get("daysToKeepOldFailedTestData"));
         
         private static IOrganizationService organizationService;
-        private static IServiceService serviceService;
         private static UserManagementTestEnvironment userManagementTestEnvironment;
         private static TestUserContext userContext;
         private static IContainer container;
@@ -77,7 +75,6 @@ namespace ServiceRegister.AngularApplication.BrowserTests.Infrastructure
         private static void SetupCurrentScenarioContext()
         {
             ScenarioContext.Current.Set(organizationService);
-            ScenarioContext.Current.Set(serviceService);
             ScenarioContext.Current.Set(container);
         }
 
@@ -85,7 +82,6 @@ namespace ServiceRegister.AngularApplication.BrowserTests.Infrastructure
         {
             container = builder.Build();
             organizationService = container.Resolve<IOrganizationService>();
-            serviceService = container.Resolve<IServiceService>();
             userManagementTestEnvironment = container.Resolve<UserManagementTestEnvironment>();
             userContext = container.Resolve<TestUserContext>();
         }
@@ -126,10 +122,6 @@ namespace ServiceRegister.AngularApplication.BrowserTests.Infrastructure
         {
             foreach (IOrganizationName organization in organizationService.GetMainOrganizations())
             {
-                foreach (IServiceListItem service in serviceService.GetServices(organization.Id))
-                {
-                    serviceService.RemoveService(organization.Id, service.Id);
-                }
                 organizationService.RemoveOrganization(organization.Id);
             }
 
@@ -151,7 +143,7 @@ namespace ServiceRegister.AngularApplication.BrowserTests.Infrastructure
 
         private static void RegisterProductionCodeModules(ContainerBuilder builder)
         {
-            builder.RegisterModule<ServiceRegisterModule>();
+            builder.RegisterModule<OrganizationRegisterModule>();
             builder.RegisterModule<EntityFrameworkModule>();
             builder.RegisterModule(new UserManagementModule(false));
         }

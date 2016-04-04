@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using ServiceRegister.Api.Location;
-using ServiceRegister.Common;
+using OrganizationRegister.Api.Location;
+using OrganizationRegister.Common;
 
-namespace ServiceRegister.Api.Organization
+namespace OrganizationRegister.Api.Organization
 {
     public class Organization
     {

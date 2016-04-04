@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B4D83699-659F-4575-B3E9-AED8307C5F71}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OrganizationRegister.AcceptanceTests</RootNamespace>
+    <AssemblyName>OrganizationRegister.AcceptanceTests</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Affecto.Configuration.Extensions, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Affecto.Configuration.Extensions.2.0.0\lib\net40\Affecto.Configuration.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Affecto.EntityFramework.PostgreSql, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Affecto.EntityFramework.PostgreSql.2.0.0\lib\net45\Affecto.EntityFramework.PostgreSql.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Affecto.Identifiers.Finnish, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Affecto.Identifiers.Finnish.2.1.0\lib\net45\Affecto.Identifiers.Finnish.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Affecto.Patterns.Cqrs, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Affecto.Patterns.Cqrs.2.0.0\lib\portable-net45+sl50+win+wpa81+wp80\Affecto.Patterns.Cqrs.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Affecto.Patterns.Specification, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Affecto.Patterns.Specification.1.2.0\lib\net40\Affecto.Patterns.Specification.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Affecto.Testing.SpecFlow, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Affecto.Testing.SpecFlow.1.1.0\lib\net45\Affecto.Testing.SpecFlow.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework6.Npgsql, Version=3.0.3.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework6.Npgsql.3.0.3\lib\net45\EntityFramework6.Npgsql.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Npgsql, Version=3.0.3.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.3.0.3\lib\net45\Npgsql.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NSubstitute, Version=1.9.2.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\NSubstitute.1.9.2.0\lib\net45\NSubstitute.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="TechTalk.SpecFlow, Version=1.9.0.77, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
+      <HintPath>..\packages\SpecFlow.1.9.0\lib\net35\TechTalk.SpecFlow.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <Choose>
+    <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+  <ItemGroup>
+    <Compile Include="Features\Organization\GettingOrganization.feature.cs">
+      <DependentUpon>GettingOrganization.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Features\Organization\GettingOrganizationSteps.cs" />
+    <Compile Include="Features\Organization\AddingOrganization.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddingOrganization.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Organization\AddingOrganizationSteps.cs" />
+    <Compile Include="Features\Organization\DeactivatingOrganization.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeactivatingOrganization.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Organization\DeactivatingOrganizationSteps.cs" />
+    <Compile Include="Features\Organization\DeletingOrganization.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeletingOrganization.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Organization\DeletingOrganizationSteps.cs" />
+    <Compile Include="Features\Settings.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Settings.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\SettingsSteps.cs" />
+    <Compile Include="Features\Organization\UpdatingOrganizationPostalAddresses.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UpdatingOrganizationPostalAddresses.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Organization\UpdatingOrganizationBasicInformation.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UpdatingOrganizationBasicInformation.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Organization\UpdatingOrganizationBasicInformationSteps.cs" />
+    <Compile Include="Features\Organization\UpdatingOrganizationContactInformationSteps.cs" />
+    <Compile Include="Features\Organization\UpdatingOrganizationContactInformation.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UpdatingOrganizationContactInformation.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Organization\UpdatingOrganizationPostalAddressesSteps.cs" />
+    <Compile Include="Features\Organization\UpdatingOrganizationVisitingAddress.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UpdatingOrganizationVisitingAddress.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Organization\UpdatingOrganizationVisitingAddressSteps.cs" />
+    <Compile Include="Features\ValidatingData.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ValidatingData.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\ValidatingDataSteps.cs" />
+    <Compile Include="Infrastructure\AddressHelper.cs" />
+    <Compile Include="Infrastructure\LocalizedTextHelper.cs" />
+    <Compile Include="Infrastructure\MockRepository.cs" />
+    <Compile Include="Infrastructure\OrganizationHelper.cs" />
+    <Compile Include="Infrastructure\OrganizationSteps.cs" />
+    <Compile Include="Infrastructure\StepDefinition.cs" />
+    <Compile Include="Infrastructure\TestScenario.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OrganizationRegister.Autofac\OrganizationRegister.Autofac.csproj">
+      <Project>{153BB75E-6161-4012-AFF4-FED808779C65}</Project>
+      <Name>ServiceRegister.Autofac</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OrganizationRegister.Application\OrganizationRegister.Application.csproj">
+      <Project>{4F322916-C66E-415E-A4A9-45407618B62D}</Project>
+      <Name>ServiceRegister.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OrganizationRegister.Common\OrganizationRegister.Common.csproj">
+      <Project>{39415FC6-B6EF-4EE6-8E95-DF098E6B7394}</Project>
+      <Name>ServiceRegister.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OrganizationRegister.Store.CodeFirst.Mocking\OrganizationRegister.Store.CodeFirst.Mocking.csproj">
+      <Project>{72B6DD69-C4EB-4CC5-9F37-D3A2D8B40CAA}</Project>
+      <Name>ServiceRegister.Store.CodeFirst.Mocking</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OrganizationRegister.Store.CodeFirst\OrganizationRegister.Store.CodeFirst.csproj">
+      <Project>{531dd032-a527-4b0c-84cb-d14066f3cec8}</Project>
+      <Name>ServiceRegister.Store.CodeFirst</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OrganizationRegister.Tests.Infrastructure\OrganizationRegister.Tests.Infrastructure.csproj">
+      <Project>{4937c612-a14c-4baa-b937-65b09d046e3d}</Project>
+      <Name>ServiceRegister.Tests.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Features\Organization\AddingOrganization.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AddingOrganization.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Organization\DeactivatingOrganization.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>DeactivatingOrganization.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Organization\GettingOrganization.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>GettingOrganization.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Organization\DeletingOrganization.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>DeletingOrganization.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Settings.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+    </None>
+    <None Include="Features\Organization\UpdatingOrganizationPostalAddresses.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>UpdatingOrganizationPostalAddresses.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Organization\UpdatingOrganizationBasicInformation.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>UpdatingOrganizationBasicInformation.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Organization\UpdatingOrganizationContactInformation.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>UpdatingOrganizationContactInformation.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Organization\UpdatingOrganizationVisitingAddress.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>UpdatingOrganizationVisitingAddress.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\ValidatingData.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ValidatingData.feature.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <Choose>
+    <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.CodedUITestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

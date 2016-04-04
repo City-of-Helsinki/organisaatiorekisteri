@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace ServiceRegister.AngularApplication
+namespace OrganizationRegister.AngularApplication
 {
     public class RouteConfig
     {

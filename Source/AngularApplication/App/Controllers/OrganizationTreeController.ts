@@ -1,6 +1,6 @@
 ﻿"use strict";
 
-module ServiceRegister
+module OrganizationRegister
 {
     export class OrganizationTreeController implements Affecto.Base.IController
     {

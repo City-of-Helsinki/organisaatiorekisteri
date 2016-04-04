@@ -11,17 +11,15 @@ using Affecto.Logging;
 using Affecto.WebApi.Toolkit;
 using Autofac;
 using Autofac.Integration.WebApi;
-using ServiceRegister.Api.AuthenticatedUser;
-using ServiceRegister.Api.Authentication;
-using ServiceRegister.Api.Classification;
-using ServiceRegister.Api.Organization;
-using ServiceRegister.Api.Service;
-using ServiceRegister.Api.Settings;
-using ServiceRegister.Api.User;
-using ServiceRegister.Api.Validation;
+using OrganizationRegister.Api.AuthenticatedUser;
+using OrganizationRegister.Api.Authentication;
+using OrganizationRegister.Api.Organization;
+using OrganizationRegister.Api.Settings;
+using OrganizationRegister.Api.User;
+using OrganizationRegister.Api.Validation;
 using Module = Autofac.Module;
 
-namespace ServiceRegister.Api
+namespace OrganizationRegister.Api
 {
     public class WebApiModule : Module
     {
@@ -36,14 +34,11 @@ namespace ServiceRegister.Api
             builder.RegisterWebApiFilterProvider(GlobalConfiguration.Configuration);
 
             RegisterControllerFilters<OpenOrganizationController>(builder, requireHttps);
-            RegisterControllerFilters<OpenServiceController>(builder, requireHttps);
             RegisterControllerFilters<OpenSettingsController>(builder, requireHttps);
-            RegisterControllerFilters<OpenClassificationController>(builder, requireHttps);
 
             RegisterAuthorizedControllerFilters<AuthorizedValidationController>(builder, requireHttps);
             RegisterAuthorizedControllerFilters<AuthorizedAuthenticatedUserController>(builder, requireHttps);
             RegisterAuthorizedControllerFilters<AuthorizedOrganizationController>(builder, requireHttps);
-            RegisterAuthorizedControllerFilters<AuthorizedServiceController>(builder, requireHttps);
             RegisterAuthorizedControllerFilters<AuthorizedUserController>(builder, requireHttps);
 
             builder.RegisterInstance(AuthenticationServerConfiguration.Settings).As<IAuthenticationServerConfiguration>();

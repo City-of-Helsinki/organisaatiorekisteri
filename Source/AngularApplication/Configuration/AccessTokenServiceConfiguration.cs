@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Configuration;
 
-namespace ServiceRegister.AngularApplication.Configuration
+namespace OrganizationRegister.AngularApplication.Configuration
 {
     public class AccessTokenServiceConfiguration : ConfigurationSection
     {
