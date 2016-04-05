@@ -57,8 +57,8 @@
       <HintPath>..\packages\Affecto.Patterns.Cqrs.2.0.0\lib\portable-net45+sl50+win+wpa81+wp80\Affecto.Patterns.Cqrs.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Affecto.Testing.SpecFlow, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Affecto.Testing.SpecFlow.1.1.0\lib\net45\Affecto.Testing.SpecFlow.dll</HintPath>
+    <Reference Include="Affecto.Testing.SpecFlow, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Affecto.Testing.SpecFlow.1.2.0\lib\net45\Affecto.Testing.SpecFlow.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Affecto.Testing.UI.Selenium, Version=1.7.0.0, Culture=neutral, processorArchitecture=MSIL">

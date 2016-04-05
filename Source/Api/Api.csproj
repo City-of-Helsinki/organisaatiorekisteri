@@ -74,8 +74,8 @@
       <HintPath>..\packages\Affecto.Patterns.Cqrs.2.0.0\lib\portable-net45+sl50+win+wpa81+wp80\Affecto.Patterns.Cqrs.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Affecto.WebApi.Toolkit, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Affecto.WebApi.Toolkit.1.6.0\lib\net45\Affecto.WebApi.Toolkit.dll</HintPath>
+    <Reference Include="Affecto.WebApi.Toolkit, Version=1.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Affecto.WebApi.Toolkit.1.7.0\lib\net45\Affecto.WebApi.Toolkit.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Autofac">
