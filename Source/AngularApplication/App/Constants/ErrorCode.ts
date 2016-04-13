@@ -8,5 +8,9 @@ module OrganizationRegister
         {
             return "INSUFFICIENT_PERMISSIONS";
         }
+        public static get externalLoginValidationFailed(): string
+        {
+            return "EXTERNAL_LOGIN_VALIDATION_FAILED";
+        }
     }
 } 

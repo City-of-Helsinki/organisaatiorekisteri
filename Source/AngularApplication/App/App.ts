@@ -94,6 +94,11 @@ function registerRoutes($routeProvider: angular.route.IRouteProvider): void
             controller: "OrganizationRegister.LoginController",
             templateUrl: "App/Views/Login.html"
         })
+        .when("/ExternalLogin",
+        {
+            controller: "OrganizationRegister.ExternalLoginController",
+            templateUrl: "App/Views/ExternalLogin.html"
+        })
         .when("/Organizations/:organizationId/Users",
         {
             controller: "OrganizationRegister.UserSearchController",
@@ -173,6 +178,7 @@ function createTranslations(): angular.translate.ITranslationTable
     var translations: angular.translate.ITranslationTable = {};
     translations["ERROR_UNDEFINED"] = "Tapahtui tunnistamaton virhe";
     translations["ERROR_" + OrganizationRegister.ErrorCode.insufficientPermissions] = "Ei käyttöoikeuksia";
+    translations["ERROR_" + OrganizationRegister.ErrorCode.externalLoginValidationFailed] = "Virhe käyttäjän tunnistamisessa";
     translations["UNSAVED_CHANGES_ON_PAGE_LEAVE"] = "Tallentamattomat muutokset menetetään poistuttaessa sivulta.";
     translations["UNSAVED_CHANGES_ON_PAGE_RELOAD"] = "Tallentamattomat muutokset menetetään sivun uudelleenlatauksessa.";
     translations[OrganizationRegister.PostalAddressType[OrganizationRegister.PostalAddressType.SameAsVisitingAddress]] = "Sama kuin käyntiosoite";
