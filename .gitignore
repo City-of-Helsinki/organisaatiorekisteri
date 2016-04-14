@@ -194,3 +194,10 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
+
+# Custom project-specific ignores
+/Source/AngularApplication/**/*.css
+/Source/AngularApplication/**/*.js
+/Source/AngularApplication/**/*.js.map
+/Source/AngularApplication.Tests/**/*.js
+/Source/AngularApplication.Tests/**/*.js.map
