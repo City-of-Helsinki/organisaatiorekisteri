@@ -28,6 +28,4 @@ function initializeLoginConstants(requestedRouteUrlParameter: string, loginRoute
 {
     loginModule.constant("requestedRouteUrlParameter", requestedRouteUrlParameter);
     loginModule.constant("loginRoute", loginRoute);
-    loginModule.constant("useExternalLogin", false);
-    loginModule.constant("externalLoginPage", "");
 }

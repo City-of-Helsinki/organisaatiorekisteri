@@ -1,4 +1,5 @@
-﻿@using OrganizationRegister.AngularApplication.Configuration
+﻿@using System.Configuration
+@using OrganizationRegister.AngularApplication.Configuration
 @{ ViewBag.Title = "Organisaatiorekisteri"; }
 
 <header id="page-header" role="banner">
@@ -81,7 +82,9 @@
             .constant('tokenServiceUrl', '@tokenServiceConfiguration.Url')
             .constant('tokenServiceClientId', '@tokenServiceConfiguration.ClientId')
             .constant('tokenServiceClientSecret', '@tokenServiceConfiguration.ClientSecret')
-            .constant('tokenServiceScope', '@tokenServiceConfiguration.Scope');
+            .constant('tokenServiceScope', '@tokenServiceConfiguration.Scope')
+            .constant('useExternalLogin', @ConfigurationManager.AppSettings.AllKeys.Where(k => k == "useExternalLogin").Select(k => ConfigurationManager.AppSettings[k]).DefaultIfEmpty("false").FirstOrDefault())
+            .constant('externalLoginPage', '@ConfigurationManager.AppSettings.AllKeys.Where(k => k == "externalLoginPage").Select(k => ConfigurationManager.AppSettings[k]).DefaultIfEmpty(null).FirstOrDefault()');
 
         $(document).ready(function () {
             $(".main-navigation li a").click(function () {

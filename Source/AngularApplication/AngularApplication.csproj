@@ -26,7 +26,7 @@
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <TypeScriptToolsVersion>1.7</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
     <TargetFrameworkProfile />
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
@@ -81,6 +81,14 @@
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="Kentor.AuthServices, Version=0.17.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Kentor.AuthServices.0.17.2\lib\net45\Kentor.AuthServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Kentor.AuthServices.HttpModule, Version=0.17.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Kentor.AuthServices.HttpModule.0.17.2\lib\net45\Kentor.AuthServices.HttpModule.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -101,6 +109,8 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Services" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Runtime.Serialization" />
@@ -158,6 +168,7 @@
   <ItemGroup>
     <Content Include="App\Directives\HelpPopup\HelpPopup.html" />
     <Content Include="App\Packages\BusyIndication\Directives\BusyIndicator.html" />
+    <Content Include="App\Views\ExternalLogin.html" />
     <Content Include="App\Views\OrganizationPartials\EditBasicInformation.html" />
     <Content Include="App\Views\OrganizationPartials\EditContactInformation.html" />
     <Content Include="App\Views\OrganizationPartials\EditPostalAddress.html" />
@@ -353,6 +364,7 @@
     <TypeScriptCompile Include="App\Constants\Permission.ts" />
     <TypeScriptCompile Include="App\Constants\Route.ts" />
     <TypeScriptCompile Include="App\Constants\UrlParameter.ts" />
+    <TypeScriptCompile Include="App\Controllers\ExternalLoginController.ts" />
     <TypeScriptCompile Include="App\Controllers\IOrganizationRoute.ts" />
     <TypeScriptCompile Include="App\Controllers\IUserRoute.ts" />
     <TypeScriptCompile Include="App\Controllers\LoginController.ts" />
