@@ -55,7 +55,8 @@ organizationRegisterApplication.run([
         $rootScope.$on("$routeChangeStart", (event: angular.IAngularEvent, next: any, current: any) =>
         {
             var currentPath: string = $location.path();
-            if (currentPath !== Affecto.ExceptionHandling.Routes.error && currentPath !== OrganizationRegister.Route.login && !authenticationService.isAuthenticated())
+            if (currentPath !== Affecto.ExceptionHandling.Routes.error && currentPath !== OrganizationRegister.Route.login && currentPath !== OrganizationRegister.Route.externalLogin &&
+                !authenticationService.isAuthenticated())
             {
                 event.preventDefault();
                 requestedRouteService.route = currentPath;
@@ -94,7 +95,7 @@ function registerRoutes($routeProvider: angular.route.IRouteProvider): void
             controller: "OrganizationRegister.LoginController",
             templateUrl: "App/Views/Login.html"
         })
-        .when("/ExternalLogin",
+        .when(OrganizationRegister.Route.externalLogin,
         {
             controller: "OrganizationRegister.ExternalLoginController",
             templateUrl: "App/Views/ExternalLogin.html"
@@ -155,6 +156,7 @@ function registerControllers(): void
     Affecto.Registration.registerController(OrganizationRegister.OrganizationTreeController, "OrganizationRegister.OrganizationTreeController");
     Affecto.Registration.registerController(OrganizationRegister.UserController, "OrganizationRegister.UserController");
     Affecto.Registration.registerController(OrganizationRegister.LoginController, "OrganizationRegister.LoginController");
+    Affecto.Registration.registerController(OrganizationRegister.ExternalLoginController, "OrganizationRegister.ExternalLoginController");
     Affecto.Registration.registerController(OrganizationRegister.UserSearchController, "OrganizationRegister.UserSearchController");
 }
 

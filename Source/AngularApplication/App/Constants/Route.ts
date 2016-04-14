@@ -9,6 +9,11 @@ module OrganizationRegister
             return "/Login";
         }
 
+        public static get externalLogin(): string
+        {
+            return "/Login/External";
+        }
+
         public static get frontPage(): string
         {
             return "/";
