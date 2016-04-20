@@ -81,12 +81,12 @@
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="Kentor.AuthServices, Version=0.17.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Kentor.AuthServices.0.17.2\lib\net45\Kentor.AuthServices.dll</HintPath>
+    <Reference Include="Kentor.AuthServices, Version=0.17.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Kentor.AuthServices.0.17.0\lib\net45\Kentor.AuthServices.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Kentor.AuthServices.HttpModule, Version=0.17.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Kentor.AuthServices.HttpModule.0.17.2\lib\net45\Kentor.AuthServices.HttpModule.dll</HintPath>
+    <Reference Include="Kentor.AuthServices.HttpModule, Version=0.17.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Kentor.AuthServices.HttpModule.0.17.0\lib\net45\Kentor.AuthServices.HttpModule.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
@@ -211,7 +211,7 @@
     </Content>
     <Content Include="Content\temporary.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\font\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\angular-local-storage.js" />
     <Content Include="Scripts\angular-local-storage.min.js" />
@@ -323,10 +323,10 @@
     <Content Include="Content\partials\_angulartree.scss" />
     <Content Include="Content\Packages\BusyIndication\BusyIndication.scss" />
     <Content Include="Content\Packages\BusyIndication\BusyIndication.css.map" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\font\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\font\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\font\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\font\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
