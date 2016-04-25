@@ -4,19 +4,15 @@ module OrganizationRegister
 {
     export class ExternalLoginController implements Affecto.Base.IController
     {
-        public static $inject = ["$scope", "$location", "authenticationService", "busyIndicationService", "requestedRouteService"];
+        public static $inject = ["$scope", "$location", "authenticationService", "busyIndicationService", "requestedRouteService", "$routeParams"];
 
-        constructor(private $scope: Affecto.Base.IControllerScope,
-            private $location: ng.ILocationService,
-            private authenticationService: Affecto.Login.IAuthenticationService,
-            private busyIndicationService: Affecto.BusyIndication.IBusyIndicationService,
-            private routeService: Affecto.Login.RequestedRouteService)
+        constructor(private $scope: Affecto.Base.IControllerScope, private $location: ng.ILocationService, private authenticationService: Affecto.Login.IAuthenticationService,
+            private busyIndicationService: Affecto.BusyIndication.IBusyIndicationService, private routeService: Affecto.Login.RequestedRouteService,
+            $routeParams: IExternalLogInRoute)
         {
             $scope.controller = this;
             this.busyIndicationService.showBusyIndicator("Kirjaudutaan sisään...");
-
-            // todo: is grant type correct?
-            this.authenticationService.logInWithCookie()
+            this.authenticationService.logInWithAccessToken($routeParams.access_token)
                 .then(this.onLogInCompleted, this.onLogInError);
         }
 
@@ -24,7 +20,7 @@ module OrganizationRegister
         {
             this.busyIndicationService.hideBusyIndicator();
             var requestedRoute: string = this.routeService.route;
-            if (requestedRoute && requestedRoute !== Route.login)
+            if (requestedRoute && requestedRoute !== Route.login && requestedRoute !== Route.externalLogin)
             {
                 this.$location.path(requestedRoute);
             }

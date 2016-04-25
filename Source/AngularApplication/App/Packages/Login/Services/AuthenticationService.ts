@@ -6,6 +6,7 @@ module Affecto.Login
     {
         logInWithCredentials(userName: string, password: string): angular.IPromise<void>;
         logInWithCookie(): angular.IPromise<void>;
+        logInWithAccessToken(accessToken: string): angular.IPromise<void>;
         logOut(): void;
         isAuthenticated(): boolean;
         getAccessToken(): string;
@@ -59,6 +60,20 @@ module Affecto.Login
             return this.logIn("grant_type=fedauth", true);
         }
 
+        public logInWithAccessToken(accessToken: string): angular.IPromise<void>
+        {
+            this.setAccessToken(accessToken);
+            return this.$http.get(this.apiGetUserUrl)
+                .then((response: angular.IHttpPromiseCallbackArg<any>) =>
+                {
+                    if (response != null && response.data != null)
+                    {
+                        this.setAuthenticatedUser(this.authenticatedUserFactory.createUser(response.data));
+                        this.$rootScope.$broadcast(Events.userLoggedIn);
+                    }
+                });
+        }
+
         public logOut(): void
         {
             this.clearAuthenticationState();
@@ -95,7 +110,7 @@ module Affecto.Login
             }
             else
             {
-                this.$window.location.href = this.externalLoginPage;
+                this.$window.location.href = HtmlContent.unescape(this.externalLoginPage);
             }
         }
 
@@ -105,10 +120,10 @@ module Affecto.Login
 
             return this.$http
                 .post(this.tokenServiceUrl, grant,
-                    {
-                        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                        withCredentials: includeCredentials
-                    })
+                {
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    withCredentials: includeCredentials
+                })
                 .error((data: any): void =>
                 {
                     var deferred: angular.IDeferred<any> = this.$q.defer();
@@ -116,16 +131,7 @@ module Affecto.Login
                 })
                 .then((response: angular.IHttpPromiseCallbackArg<any>) =>
                 {
-                    this.setAccessToken(response.data.access_token);
-                    return this.$http.get(this.apiGetUserUrl);
-                })
-                .then((response: angular.IHttpPromiseCallbackArg<any>) =>
-                {
-                    if (response != null && response.data != null)
-                    {
-                        this.setAuthenticatedUser(this.authenticatedUserFactory.createUser(response.data));
-                        this.$rootScope.$broadcast(Events.userLoggedIn);
-                    }
+                    return this.logInWithAccessToken(response.data.access_token);
                 });
         }
 
