@@ -63,7 +63,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Affecto.AngularJS.TypeScript.Login, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Affecto.AngularJS.TypeScript.Login.2.2.0-prerelease01\lib\net45\Affecto.AngularJS.TypeScript.Login.dll</HintPath>
+      <HintPath>..\packages\Affecto.AngularJS.TypeScript.Login.2.2.0\lib\net45\Affecto.AngularJS.TypeScript.Login.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Affecto.Logging, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
