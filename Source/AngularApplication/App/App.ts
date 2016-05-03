@@ -55,7 +55,8 @@ organizationRegisterApplication.run([
         $rootScope.$on("$routeChangeStart", (event: angular.IAngularEvent, next: any, current: any) =>
         {
             var currentPath: string = $location.path();
-            if (currentPath !== Affecto.ExceptionHandling.Routes.error && currentPath !== OrganizationRegister.Route.login && !authenticationService.isAuthenticated())
+            if (currentPath !== Affecto.ExceptionHandling.Routes.error && currentPath !== OrganizationRegister.Route.login && currentPath !== OrganizationRegister.Route.externalLogin &&
+                currentPath !== OrganizationRegister.Route.logout && !authenticationService.isAuthenticated())
             {
                 event.preventDefault();
                 requestedRouteService.route = currentPath;
@@ -93,6 +94,15 @@ function registerRoutes($routeProvider: angular.route.IRouteProvider): void
         {
             controller: "OrganizationRegister.LoginController",
             templateUrl: "App/Views/Login.html"
+        })
+        .when(OrganizationRegister.Route.externalLogin,
+        {
+            controller: "OrganizationRegister.ExternalLoginController",
+            templateUrl: "App/Views/ExternalLogin.html"
+        })
+        .when(OrganizationRegister.Route.logout,
+        {
+            templateUrl: "App/Views/Logout.html"
         })
         .when("/Organizations/:organizationId/Users",
         {
@@ -150,6 +160,7 @@ function registerControllers(): void
     Affecto.Registration.registerController(OrganizationRegister.OrganizationTreeController, "OrganizationRegister.OrganizationTreeController");
     Affecto.Registration.registerController(OrganizationRegister.UserController, "OrganizationRegister.UserController");
     Affecto.Registration.registerController(OrganizationRegister.LoginController, "OrganizationRegister.LoginController");
+    Affecto.Registration.registerController(OrganizationRegister.ExternalLoginController, "OrganizationRegister.ExternalLoginController");
     Affecto.Registration.registerController(OrganizationRegister.UserSearchController, "OrganizationRegister.UserSearchController");
 }
 
@@ -173,6 +184,7 @@ function createTranslations(): angular.translate.ITranslationTable
     var translations: angular.translate.ITranslationTable = {};
     translations["ERROR_UNDEFINED"] = "Tapahtui tunnistamaton virhe";
     translations["ERROR_" + OrganizationRegister.ErrorCode.insufficientPermissions] = "Ei käyttöoikeuksia";
+    translations["ERROR_" + OrganizationRegister.ErrorCode.externalLoginValidationFailed] = "Virhe käyttäjän tunnistamisessa";
     translations["UNSAVED_CHANGES_ON_PAGE_LEAVE"] = "Tallentamattomat muutokset menetetään poistuttaessa sivulta.";
     translations["UNSAVED_CHANGES_ON_PAGE_RELOAD"] = "Tallentamattomat muutokset menetetään sivun uudelleenlatauksessa.";
     translations[OrganizationRegister.PostalAddressType[OrganizationRegister.PostalAddressType.SameAsVisitingAddress]] = "Sama kuin käyntiosoite";
