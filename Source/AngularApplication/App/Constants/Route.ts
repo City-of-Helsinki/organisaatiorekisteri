@@ -9,6 +9,11 @@ module OrganizationRegister
             return "/Login";
         }
 
+        public static get logout(): string
+        {
+            return "/Logout";
+        }
+
         public static get externalLogin(): string
         {
             return "/Login/External";

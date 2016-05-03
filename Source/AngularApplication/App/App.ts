@@ -56,7 +56,7 @@ organizationRegisterApplication.run([
         {
             var currentPath: string = $location.path();
             if (currentPath !== Affecto.ExceptionHandling.Routes.error && currentPath !== OrganizationRegister.Route.login && currentPath !== OrganizationRegister.Route.externalLogin &&
-                !authenticationService.isAuthenticated())
+                currentPath !== OrganizationRegister.Route.logout && !authenticationService.isAuthenticated())
             {
                 event.preventDefault();
                 requestedRouteService.route = currentPath;
@@ -99,6 +99,10 @@ function registerRoutes($routeProvider: angular.route.IRouteProvider): void
         {
             controller: "OrganizationRegister.ExternalLoginController",
             templateUrl: "App/Views/ExternalLogin.html"
+        })
+        .when(OrganizationRegister.Route.logout,
+        {
+            templateUrl: "App/Views/Logout.html"
         })
         .when("/Organizations/:organizationId/Users",
         {
