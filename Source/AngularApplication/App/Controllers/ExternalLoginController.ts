@@ -20,6 +20,7 @@ module OrganizationRegister
         {
             this.busyIndicationService.hideBusyIndicator();
             var requestedRoute: string = this.routeService.route;
+            this.$location.search({ }); // removes query parameters
             if (requestedRoute && requestedRoute !== Route.login && requestedRoute !== Route.externalLogin)
             {
                 this.$location.path(requestedRoute);
