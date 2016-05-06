@@ -124,7 +124,7 @@ namespace OrganizationRegister.UserManagement
             return user.Id;
         }
 
-        public IEnumerable<IUserListItem> GetUsers(Guid organizationId)
+        public IEnumerable<IUserListItem> GetInternalUsers(Guid organizationId)
         {
             Guid userOrganizationId = userContext.GetUserOrganizationId();
             if (organizationId == userOrganizationId)
@@ -138,7 +138,7 @@ namespace OrganizationRegister.UserManagement
 
             string organizationIdString = OrganizationId.Convert(organizationId);
             IEnumerable<IdentityManagement.Model.IUser> users = identityManagementService.GetUsers(CustomPropertyName.OrganizationId.ToString(),
-                organizationIdString);
+                organizationIdString, IdentityManagement.Model.AccountType.Password);
 
             var mapper = mapperFactory.CreateUserMapper();
             return mapper.Map(users).ToList();

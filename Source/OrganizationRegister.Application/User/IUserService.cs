@@ -7,7 +7,7 @@ namespace OrganizationRegister.Application.User
     {
         Guid AddUser(Guid roleId, Guid organizationId, string emailAddress, string password, string lastName, string firstName, string phoneNumber);
         IEnumerable<IRole> GetRoles();
-        IEnumerable<IUserListItem> GetUsers(Guid organizationId);
+        IEnumerable<IUserListItem> GetInternalUsers(Guid organizationId);
         bool IsExistingUser(string emailAddress);
         bool ValidatePasswordStrength(string password);
     }

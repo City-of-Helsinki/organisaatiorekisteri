@@ -21,7 +21,7 @@ module OrganizationRegister
 
         public getUsers(organizationId: string): angular.IPromise<Array<UserListItem>>
         {
-            return this.$http.get(this.apiBaseUrl + "organizationregister/organizations/" + organizationId + "/users")
+            return this.$http.get(this.apiBaseUrl + "organizationregister/organizations/" + organizationId + "/internalusers")
                 .then((response: angular.IHttpPromiseCallbackArg<any>): Array<UserListItem> =>
                 {
                     return UserListItemMapper.map(response.data);
