@@ -123,7 +123,7 @@ namespace OrganizationRegister.Api.Tests.User
         [ExpectedException(typeof(ArgumentException))]
         public void OrganizationIdCannotBeEmptyWhenGettingUsers()
         {
-            sut.GetUsers(Guid.Empty);
+            sut.GetInternalUsers(Guid.Empty);
         }
 
         [TestMethod]
@@ -143,9 +143,9 @@ namespace OrganizationRegister.Api.Tests.User
             var appUsers = new List<IUserListItem> { appUser1, appUser2 };
 
             organizationService.GetOrganizationName(organizationId).Returns(appOrganization);
-            userService.GetUsers(organizationId).Returns(appUsers);
+            userService.GetInternalUsers(organizationId).Returns(appUsers);
 
-            var result = sut.GetUsers(organizationId) as OkNegotiatedContentResult<IEnumerable<UserListItem>>;
+            var result = sut.GetInternalUsers(organizationId) as OkNegotiatedContentResult<IEnumerable<UserListItem>>;
 
             Assert.IsNotNull(result);
             IEnumerable<UserListItem> users = result.Content;

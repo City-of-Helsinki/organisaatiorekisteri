@@ -272,9 +272,10 @@ namespace OrganizationRegister.UserManagement.Tests
             mapper.Map(returnedUsers[1]).Returns(expectedUsers[1]);
             mapperFactory.CreateUserMapper().Returns(mapper);
 
-            identityManagementService.GetUsers(CustomPropertyName.OrganizationId.ToString(), organizationId.ToString("D")).Returns(returnedUsers);
+            identityManagementService.GetUsers(CustomPropertyName.OrganizationId.ToString(), organizationId.ToString("D"), IdentityManagement.Model.AccountType.Password)
+                .Returns(returnedUsers);
 
-            IEnumerable<IUserListItem> result = sut.GetUsers(organizationId);
+            IEnumerable<IUserListItem> result = sut.GetInternalUsers(organizationId);
 
             Assert.AreEqual(2, result.Count());
             Assert.AreSame(expectedUsers[0], result.First());
@@ -309,9 +310,10 @@ namespace OrganizationRegister.UserManagement.Tests
             mapper.Map(returnedUsers[1]).Returns(expectedUsers[1]);
             mapperFactory.CreateUserMapper().Returns(mapper);
 
-            identityManagementService.GetUsers(CustomPropertyName.OrganizationId.ToString(), organizationId.ToString("D")).Returns(returnedUsers);
+            identityManagementService.GetUsers(CustomPropertyName.OrganizationId.ToString(), organizationId.ToString("D"), IdentityManagement.Model.AccountType.Password)
+                .Returns(returnedUsers);
 
-            IEnumerable<IUserListItem> result = sut.GetUsers(organizationId);
+            IEnumerable<IUserListItem> result = sut.GetInternalUsers(organizationId);
 
             Assert.AreEqual(2, result.Count());
             Assert.AreSame(expectedUsers[0], result.First());
@@ -333,7 +335,7 @@ namespace OrganizationRegister.UserManagement.Tests
                 .When(u => u.CheckPermission(Permissions.Users.ViewAllUsers))
                 .Do(callInfo => { throw new InsufficientPermissionsException(Permissions.Users.ViewAllUsers); });
 
-            sut.GetUsers(organizationId);
+            sut.GetInternalUsers(organizationId);
         }
 
         [TestMethod]
