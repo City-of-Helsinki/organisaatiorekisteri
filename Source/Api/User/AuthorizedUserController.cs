@@ -71,8 +71,8 @@ namespace OrganizationRegister.Api.User
         }
 
         [HttpGet]
-        [GetRoute("organizations/{organizationId}/users")]
-        public IHttpActionResult GetUsers(Guid organizationId)
+        [GetRoute("organizations/{organizationId}/internalusers")]
+        public IHttpActionResult GetInternalUsers(Guid organizationId)
         {
             if (organizationId == Guid.Empty)
             {
@@ -80,7 +80,7 @@ namespace OrganizationRegister.Api.User
             }
 
             IOrganizationName organization = organizationService.Value.GetOrganizationName(organizationId);
-            List<IUserListItem> users = userService.GetUsers(organizationId).ToList();
+            List<IUserListItem> users = userService.GetInternalUsers(organizationId).ToList();
 
             var organizationMapper = mapperFactory.CreateOrganizationNameMapper();
             var userMapper = mapperFactory.CreateUserListItemMapper();
