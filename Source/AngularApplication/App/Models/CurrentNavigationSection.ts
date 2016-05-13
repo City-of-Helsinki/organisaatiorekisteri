@@ -4,7 +4,7 @@ module OrganizationRegister
 {
     export enum CurrentNavigationSection
     {
-        AdministrationSection,
-        ServiceInformationSection
+        Users,
+        Organizations
     };
 }
