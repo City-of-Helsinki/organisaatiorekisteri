@@ -9,12 +9,12 @@
 <div class="row">
     <div class="col-xs-4">
         <select id="postalAddressType" data-ng-model="controller.toBeAddedPostalAddressType"
-                data-ng-disabled="!controller.hasAvailablePostalAddressTypes()"
+                data-ng-disabled="!controller.canAddPostalAddress()"
                 data-ng-options="type | translate for type in controller.model.postalAddressTypes.available.types"></select>
     </div>
     <div class="col-xs-4">
         <button id="addOrganizationPostalAddress" type="button" class="button add" data-ng-click="controller.addOrganizationPostalAddress()"
-                data-ng-disabled="!controller.hasAvailablePostalAddressTypes()">
+                data-ng-disabled="!controller.canAddPostalAddress()">
             Lisää
         </button>
     </div>
