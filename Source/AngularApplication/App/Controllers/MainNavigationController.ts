@@ -16,8 +16,7 @@ module OrganizationRegister
         {
             super($scope, authenticationService);
             $scope.controller = this;
-
-            this.currentSection = CurrentNavigationSection.Organizations;
+            this.setCurrentSection();
         }
 
         public logOut()
@@ -56,6 +55,23 @@ module OrganizationRegister
         protected onUserLoggedIn(): void
         {
             this.currentSection = CurrentNavigationSection.Organizations;
+        }
+
+        private isInUserPage(): boolean
+        {
+            return this.$location.path().indexOf("User") !== -1;
+        }
+
+        private setCurrentSection(): void
+        {
+            if (this.isInUserPage())
+            {
+                this.currentSection = CurrentNavigationSection.Users;
+            }
+            else
+            {
+                this.currentSection = CurrentNavigationSection.Organizations;
+            }            
         }
     }
 }
