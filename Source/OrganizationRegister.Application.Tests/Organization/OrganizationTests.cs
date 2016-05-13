@@ -379,6 +379,52 @@ namespace OrganizationRegister.Application.Tests.Organization
                 new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "Turku") }, true);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void CannotUseVisitingAddressAsPostalAddressAndDefinePostOfficeBoxAddressSimultaneously()
+        {
+            sut = CreateSut();
+            sut.SetVisitingAddress(new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "katu 1") }, "12345", 
+                new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "Turku") });
+            sut.SetPostalAddress(null, null, null, true);
+
+            sut.SetPostalAddress("10", "12345", new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "Turku") });
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void CannotDefinePostOfficeBoxAddressAndUseVisitingAddressAsPostalAddressSimultaneously()
+        {
+            sut = CreateSut();
+            sut.SetVisitingAddress(new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "katu 1") }, "12345",
+                new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "Turku") });
+            sut.SetPostalAddress("10", "12345", new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "Turku") });
+
+            sut.SetPostalAddress(null, null, null, true);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void CannotDefineSeparateStreetPostalAddressAndPostOfficeBoxAddressSimultaneously()
+        {
+            sut = CreateSut();
+            sut.SetPostalAddress(new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "katu 1") }, "12345", 
+                new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "Turku") }, false);
+
+            sut.SetPostalAddress("10", "12345", new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "Turku") });
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void CannotDefinePostOfficeBoxAddressAndSeparateStreetAddressAsPostalAddressSimultaneously()
+        {
+            sut = CreateSut();
+            sut.SetPostalAddress("10", "12345", new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "Turku") });
+
+            sut.SetPostalAddress(new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "katu 1") }, "12345",
+                new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "Turku") }, false);
+        }
+
         private static Application.Organization.Organization CreateSut()
         {
             return new Application.Organization.Organization(Guid.NewGuid(), 1, ValidBusinessId, Oid, Type, null, 

@@ -54,7 +54,7 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
         [Then(@"setting the postal address fails")]
         public void ThenSettingThePostalAddressFails()
         {
-            AssertCaughtException<ArgumentException>();
+            AssertCaughtException<Exception>();
         }
 
         [Given(@"the following postal post office box address is set to the organization:")]
