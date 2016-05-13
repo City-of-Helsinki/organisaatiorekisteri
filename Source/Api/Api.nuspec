@@ -7,7 +7,7 @@
     <authors>Affecto</authors>
     <version>$version$</version>
     <releaseNotes>
-      Smaller page header.
+      Maximum one postal address per organization.
     </releaseNotes>
   </metadata>
 </package>
