@@ -113,8 +113,8 @@ namespace OrganizationRegister.Application.Organization
             IEnumerable<LocalizedText> streetAddressPostalDistricts, string postOfficeBox, string postOfficeBoxAddressPostalCode, IEnumerable<LocalizedText> postOfficeBoxAddressPostalDistricts)
         {
             Organization organization = GetOrganization(organizationId) as Organization;
-            organization.SetPostalAddress(streetAddresses, streetAddressPostalCode, streetAddressPostalDistricts, useVisitingAddress);
-            organization.SetPostalAddress(postOfficeBox, postOfficeBoxAddressPostalCode, postOfficeBoxAddressPostalDistricts);
+            organization.SetPostalAddress(useVisitingAddress, streetAddresses, streetAddressPostalCode, streetAddressPostalDistricts, postOfficeBox, 
+                postOfficeBoxAddressPostalCode, postOfficeBoxAddressPostalDistricts);
             organizationRepository.UpdateOrganizationPostalAddresses(organizationId, organization);
             organizationRepository.SaveChanges();
         }

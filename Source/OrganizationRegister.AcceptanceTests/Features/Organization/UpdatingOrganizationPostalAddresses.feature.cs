@@ -322,11 +322,11 @@ this.FeatureBackground();
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Setting invalid post office box address postal code")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Changing from post office box postal address to street address")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "UpdatingOrganizationPostalAddresses")]
-        public virtual void SettingInvalidPostOfficeBoxAddressPostalCode()
+        public virtual void ChangingFromPostOfficeBoxPostalAddressToStreetAddress()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Setting invalid post office box address postal code", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Changing from post office box postal address to street address", ((string[])(null)));
 #line 54
 this.ScenarioSetup(scenarioInfo);
 #line 3
@@ -340,11 +340,123 @@ this.FeatureBackground();
             table12.AddRow(new string[] {
                         "Turku",
                         "Åbo",
-                        "251000",
+                        "21501",
                         "10"});
 #line 55
- testRunner.When("the following postal post office box address is set to the organization:", ((string)(null)), table12, "When ");
+ testRunner.Given("the following postal post office box address is set to the organization:", ((string)(null)), table12, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Finnish street address",
+                        "Swedish street address",
+                        "Finnish postal district",
+                        "Swedish postal district",
+                        "Postal code"});
+            table13.AddRow(new string[] {
+                        "Helsinginkatu 15",
+                        "Helsinforsgatan 15",
+                        "Turku",
+                        "Åbo",
+                        "25100"});
 #line 58
+ testRunner.When("the following postal street address is set to the organization:", ((string)(null)), table13, "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Finnish street address",
+                        "Swedish street address",
+                        "Finnish postal district",
+                        "Swedish postal district",
+                        "Postal code"});
+            table14.AddRow(new string[] {
+                        "Helsinginkatu 15",
+                        "Helsinforsgatan 15",
+                        "Turku",
+                        "Åbo",
+                        "25100"});
+#line 61
+ testRunner.Then("the organization has the following postal street address:", ((string)(null)), table14, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Changing from street postal address to post office box address")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "UpdatingOrganizationPostalAddresses")]
+        public virtual void ChangingFromStreetPostalAddressToPostOfficeBoxAddress()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Changing from street postal address to post office box address", ((string[])(null)));
+#line 65
+this.ScenarioSetup(scenarioInfo);
+#line 3
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Finnish street address",
+                        "Swedish street address",
+                        "Finnish postal district",
+                        "Swedish postal district",
+                        "Postal code"});
+            table15.AddRow(new string[] {
+                        "Helsingintie 15",
+                        "Helsinforsvägen 15",
+                        "Turku",
+                        "Åbo",
+                        "21500"});
+#line 66
+ testRunner.Given("the following postal street address is set to the organization:", ((string)(null)), table15, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Finnish postal district",
+                        "Swedish postal district",
+                        "Postal code",
+                        "post office box"});
+            table16.AddRow(new string[] {
+                        "Turku",
+                        "Åbo",
+                        "25101",
+                        "11"});
+#line 69
+ testRunner.When("the following postal post office box address is set to the organization:", ((string)(null)), table16, "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Finnish postal district",
+                        "Swedish postal district",
+                        "Postal code",
+                        "post office box"});
+            table17.AddRow(new string[] {
+                        "Turku",
+                        "Åbo",
+                        "25101",
+                        "11"});
+#line 72
+ testRunner.Then("the organization has the following postal post office box address:", ((string)(null)), table17, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Setting invalid post office box address postal code")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "UpdatingOrganizationPostalAddresses")]
+        public virtual void SettingInvalidPostOfficeBoxAddressPostalCode()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Setting invalid post office box address postal code", ((string[])(null)));
+#line 76
+this.ScenarioSetup(scenarioInfo);
+#line 3
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Finnish postal district",
+                        "Swedish postal district",
+                        "Postal code",
+                        "post office box"});
+            table18.AddRow(new string[] {
+                        "Turku",
+                        "Åbo",
+                        "251000",
+                        "10"});
+#line 77
+ testRunner.When("the following postal post office box address is set to the organization:", ((string)(null)), table18, "When ");
+#line 80
  testRunner.Then("setting the postal address fails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -356,24 +468,24 @@ this.FeatureBackground();
         public virtual void SettingInvalidPostOfficeBox()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Setting invalid post office box", ((string[])(null)));
-#line 60
+#line 82
 this.ScenarioSetup(scenarioInfo);
 #line 3
 this.FeatureBackground();
 #line hidden
-            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
                         "Finnish postal district",
                         "Swedish postal district",
                         "Postal code",
                         "post office box"});
-            table13.AddRow(new string[] {
+            table19.AddRow(new string[] {
                         "Turku",
                         "Åbo",
                         "25101",
                         "o"});
-#line 61
- testRunner.When("the following postal post office box address is set to the organization:", ((string)(null)), table13, "When ");
-#line 64
+#line 83
+ testRunner.When("the following postal post office box address is set to the organization:", ((string)(null)), table19, "When ");
+#line 86
  testRunner.Then("setting the postal address fails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -385,12 +497,12 @@ this.FeatureBackground();
         public virtual void SettingBothStreetAndPostOfficeBoxOrganizationPostalAddress()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Setting both street and post office box organization postal address", ((string[])(null)));
-#line 66
+#line 88
 this.ScenarioSetup(scenarioInfo);
 #line 3
 this.FeatureBackground();
 #line hidden
-            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
                         "Finnish street address",
                         "Swedish street address",
                         "Finnish street address postal district",
@@ -400,7 +512,7 @@ this.FeatureBackground();
                         "Finnish post office box address postal district",
                         "Swedish post office box address postal district",
                         "post office box address postal code"});
-            table14.AddRow(new string[] {
+            table20.AddRow(new string[] {
                         "Helsinginkatu 15",
                         "Helsinforsgatan 15",
                         "Turku",
@@ -410,9 +522,9 @@ this.FeatureBackground();
                         "Turku",
                         "Åbo",
                         "25101"});
-#line 67
- testRunner.When("the following postal address is set to the organization:", ((string)(null)), table14, "When ");
-#line 70
+#line 89
+ testRunner.When("the following postal address is set to the organization:", ((string)(null)), table20, "When ");
+#line 92
  testRunner.Then("setting the postal address fails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -424,12 +536,12 @@ this.FeatureBackground();
         public virtual void UsingOrganizationVisitingAddressAsThePostalAddress()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Using organization visiting address as the postal address", ((string[])(null)));
-#line 72
+#line 94
 this.ScenarioSetup(scenarioInfo);
 #line 3
 this.FeatureBackground();
 #line hidden
-            TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
                         "Finnish street address",
                         "Swedish street address",
                         "Finnish postal district",
@@ -437,7 +549,7 @@ this.FeatureBackground();
                         "Finnish qualifier",
                         "Swedish qualifier",
                         "Postal code"});
-            table15.AddRow(new string[] {
+            table21.AddRow(new string[] {
                         "Helsingintie 15",
                         "Helsinforsvägen 15",
                         "Turku",
@@ -445,12 +557,12 @@ this.FeatureBackground();
                         "Vaaleanpunaisen possun vieressä",
                         "Nära svin",
                         "21500"});
-#line 73
- testRunner.Given("the following visiting address is set to the organization:", ((string)(null)), table15, "Given ");
-#line 76
+#line 95
+ testRunner.Given("the following visiting address is set to the organization:", ((string)(null)), table21, "Given ");
+#line 98
  testRunner.When("the postal address of the organization is set to be the same as the visting addre" +
                     "ss", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 77
+#line 99
  testRunner.Then("the postal address of the organization is the same as the visiting address", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -464,14 +576,14 @@ this.FeatureBackground();
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Using organization visiting address as the postal address when there is no visiti" +
                     "ng address", ((string[])(null)));
-#line 79
+#line 101
 this.ScenarioSetup(scenarioInfo);
 #line 3
 this.FeatureBackground();
-#line 80
+#line 102
  testRunner.When("the postal address of the organization is set to be the same as the visting addre" +
                     "ss", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 81
+#line 103
  testRunner.Then("setting the postal address fails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -483,12 +595,12 @@ this.FeatureBackground();
         public virtual void ClearedVisitingAddressCannotBeUsedAsAPostalAddress()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Cleared visiting address cannot be used as a postal address", ((string[])(null)));
-#line 83
+#line 105
 this.ScenarioSetup(scenarioInfo);
 #line 3
 this.FeatureBackground();
 #line hidden
-            TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
                         "Finnish street address",
                         "Swedish street address",
                         "Finnish postal district",
@@ -496,7 +608,7 @@ this.FeatureBackground();
                         "Finnish qualifier",
                         "Swedish qualifier",
                         "Postal code"});
-            table16.AddRow(new string[] {
+            table22.AddRow(new string[] {
                         "Helsingintie 15",
                         "Helsinforsvägen 15",
                         "Turku",
@@ -504,14 +616,14 @@ this.FeatureBackground();
                         "Vaaleanpunaisen possun vieressä",
                         "Nära svin",
                         "21500"});
-#line 84
- testRunner.Given("the following visiting address is set to the organization:", ((string)(null)), table16, "Given ");
-#line 87
+#line 106
+ testRunner.Given("the following visiting address is set to the organization:", ((string)(null)), table22, "Given ");
+#line 109
  testRunner.And("the postal address of the organization is set to be the same as the visting addre" +
                     "ss", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 88
+#line 110
  testRunner.When("visiting address of the organization is set as empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 89
+#line 111
  testRunner.Then("the postal address of the organization is not the same as the visiting address", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
