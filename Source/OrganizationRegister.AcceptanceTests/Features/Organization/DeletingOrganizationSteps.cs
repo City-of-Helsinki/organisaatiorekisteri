@@ -34,9 +34,7 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
             OrganizationService.SetOrganizationVisitingAddress(organizationId, new List<LocalizedText> { new LocalizedText(LanguageCode, "Katu 1 A 12") }, "13245",
                 new List<LocalizedText> { new LocalizedText(LanguageCode, "Kylä") }, new List<LocalizedText> { new LocalizedText(LanguageCode, "Kulmassa") });
             OrganizationService.SetOrganizationPostalAddresses(organizationId, false, new List<LocalizedText> { new LocalizedText(LanguageCode, "Katu 2 B 1") },
-                "78945",
-                new List<LocalizedText> { new LocalizedText(LanguageCode, "Kaupunki") }, "10", "23561",
-                new List<LocalizedText> { new LocalizedText(LanguageCode, "Kaupunki") });
+                "78945", new List<LocalizedText> { new LocalizedText(LanguageCode, "Kaupunki") }, null, null, null);
         }
     }
 }

@@ -3,7 +3,11 @@
 describe("Organization", () =>
 {
     var sut: OrganizationRegister.Organization;
-    sut = new OrganizationRegister.Organization();
+
+    beforeEach(() =>
+    {
+        sut = new OrganizationRegister.Organization();
+    });
 
     describe("municipality", () =>
     {
@@ -299,6 +303,20 @@ describe("Organization", () =>
             sut.postalAddressTypes.add(OrganizationRegister.PostalAddressType[OrganizationRegister.PostalAddressType.SameAsVisitingAddress]);
             expect(sut.postalAddressTypes.available.contains(OrganizationRegister.PostalAddressType[OrganizationRegister.PostalAddressType.SeparateStreetAddress])).toBeFalsy();
             expect(sut.postalAddressTypes.available.contains(OrganizationRegister.PostalAddressType[OrganizationRegister.PostalAddressType.SameAsVisitingAddress])).toBeFalsy();
+        });
+        it("postal address can be added when there are no postal addresses", () =>
+        {
+            expect(sut.canAddPostalAddress()).toBeTruthy();
+        });
+        it("only one postal address can be added", () =>
+        {
+            sut.postalAddressTypes.add(OrganizationRegister.PostalAddressType[OrganizationRegister.PostalAddressType.SeparateStreetAddress]);
+            expect(sut.canAddPostalAddress()).toBeFalsy();
+        });
+        it("trying to add a second postal address", () =>
+        {
+            sut.postalAddressTypes.add(OrganizationRegister.PostalAddressType[OrganizationRegister.PostalAddressType.SeparateStreetAddress]);
+            expect(() => sut.postalAddressTypes.add(OrganizationRegister.PostalAddressType[OrganizationRegister.PostalAddressType.PostOfficeBoxAddress])).toThrow();
         });
     });
 

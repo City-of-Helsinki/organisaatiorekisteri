@@ -160,13 +160,13 @@ module OrganizationRegister
             return this.model == null || !this.model.isAdded();
         }
 
-        public hasAvailablePostalAddressTypes(): boolean
+        public canAddPostalAddress(): boolean
         {
             if (this.model == null)
             {
                 return false;
             }
-            return this.model.postalAddressTypes.available.any();
+            return this.model.canAddPostalAddress();
         }
 
         public resetAllFormFieldsAsValid(): void

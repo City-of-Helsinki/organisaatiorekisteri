@@ -15,6 +15,11 @@ module OrganizationRegister
 
         public add(addressType: string): void
         {
+            if (this.added.length > 0)
+            {
+                throw new Error("Only one postal address can be added.");
+            }
+
             if (PostalAddressType[PostalAddressType.PostOfficeBoxAddress] === addressType)
             {
                 this.added.push(PostalAddressType.PostOfficeBoxAddress);
@@ -78,6 +83,11 @@ module OrganizationRegister
             {
                 this.available.setUnavailable(PostalAddressType.SameAsVisitingAddress);
             }
+        }
+
+        public canAddPostalAddress(): boolean
+        {
+            return this.available.any() && this.added.length === 0;
         }
     }
 }

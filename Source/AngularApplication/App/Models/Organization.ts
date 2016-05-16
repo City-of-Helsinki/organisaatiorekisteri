@@ -319,5 +319,10 @@ module OrganizationRegister
             this.postalAddressTypes.setSameAsVisitingAddressPostalAddressAvailability(this.hasVisitingAddressParts());
             this.postalAddressTypes.setSeparateStreetAddressPostalAddressAvailability();
         }
+
+        public canAddPostalAddress(): boolean
+        {
+            return this.postalAddressTypes.canAddPostalAddress();
+        }
     }
 }
