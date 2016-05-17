@@ -22,19 +22,22 @@ namespace OrganizationRegister.Application.Location
         public PostOfficeBoxAddress PostOfficeBoxAddress { get; private set; }
         public bool UseVisitingAddress { get; private set; }
 
-        public void Set(IReadOnlyCollection<LocalizedText> streetAddresses, string postalCode, IReadOnlyCollection<LocalizedText> postalDistricts, bool useVisitingAddress)
+        public void Set(bool useVisitingAddress, IReadOnlyCollection<LocalizedText> streetAddresses, string streetAddressPostalCode, 
+            IReadOnlyCollection<LocalizedText> streetAddressPostalDistricts, string postOfficeBox, string postOfficeBoxAddressPostalCode,
+            IReadOnlyCollection<LocalizedText> postOfficeBoxAddressPostalDistricts)
         {
-            StreetAddress = StreetAddress.Create(languageCodes, streetAddresses, postalCode, postalDistricts);
-            if (useVisitingAddress && StreetAddress.IsDefined)
+            UseVisitingAddress = useVisitingAddress;
+            StreetAddress = StreetAddress.Create(languageCodes, streetAddresses, streetAddressPostalCode, streetAddressPostalDistricts);
+            PostOfficeBoxAddress = PostOfficeBoxAddress.Create(languageCodes, postOfficeBox, postOfficeBoxAddressPostalCode, postOfficeBoxAddressPostalDistricts);
+
+            if (UseVisitingAddress && StreetAddress.IsDefined)
             {
                 throw new ArgumentException("Cannot use both a separate street address and the visiting address as postal addresses.");
             }
-            UseVisitingAddress = useVisitingAddress;
-        }
-
-        public void Set(string postOfficeBox, string postalCode, List<LocalizedText> postalDistricts)
-        {
-            PostOfficeBoxAddress = PostOfficeBoxAddress.Create(languageCodes, postOfficeBox, postalCode, postalDistricts);
+            if (PostOfficeBoxAddress.IsDefined && (StreetAddress.IsDefined || UseVisitingAddress))
+            {
+                throw new InvalidOperationException("Cannot use both post office box and street address postal addresses.");
+            }
         }
     }
 }

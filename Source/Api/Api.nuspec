@@ -7,7 +7,7 @@
     <authors>Affecto</authors>
     <version>$version$</version>
     <releaseNotes>
-      First release matching the organization implementation of Finnish national service register.
+      Maximum one postal address per organization.
     </releaseNotes>
   </metadata>
 </package>

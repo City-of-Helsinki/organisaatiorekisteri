@@ -51,6 +51,28 @@ Scenario: Setting a post office box address as organization postal address again
 	| Finnish postal district | Swedish postal district | Postal code | post office box |
 	| Turku                   | Åbo                     | 25101       | 11              |
 
+Scenario: Changing from post office box postal address to street address
+	Given the following postal post office box address is set to the organization:
+	| Finnish postal district | Swedish postal district | Postal code | post office box |
+	| Turku                   | Åbo                     | 21501       | 10              |
+	When the following postal street address is set to the organization:
+	| Finnish street address | Swedish street address | Finnish postal district | Swedish postal district | Postal code |
+	| Helsinginkatu 15       | Helsinforsgatan 15     | Turku                   | Åbo                     | 25100       |
+	Then the organization has the following postal street address:
+	| Finnish street address | Swedish street address | Finnish postal district | Swedish postal district | Postal code |
+	| Helsinginkatu 15       | Helsinforsgatan 15     | Turku                   | Åbo                     | 25100       |
+
+Scenario: Changing from street postal address to post office box address
+	Given the following postal street address is set to the organization:
+	| Finnish street address | Swedish street address | Finnish postal district | Swedish postal district | Postal code |
+	| Helsingintie 15        | Helsinforsvägen 15     | Turku                   | Åbo                     | 21500       |
+	When the following postal post office box address is set to the organization:
+	| Finnish postal district | Swedish postal district | Postal code | post office box |
+	| Turku                   | Åbo                     | 25101       | 11              |
+	Then the organization has the following postal post office box address:
+	| Finnish postal district | Swedish postal district | Postal code | post office box |
+	| Turku                   | Åbo                     | 25101       | 11              |
+
 Scenario: Setting invalid post office box address postal code
 	When the following postal post office box address is set to the organization:
 	| Finnish postal district | Swedish postal district | Postal code | post office box |
@@ -67,12 +89,7 @@ Scenario: Setting both street and post office box organization postal address
 	When the following postal address is set to the organization:
 	| Finnish street address | Swedish street address | Finnish street address postal district | Swedish street address postal district | Street address postal code | post office box | Finnish post office box address postal district | Swedish post office box address postal district | post office box address postal code |
 	| Helsinginkatu 15       | Helsinforsgatan 15     | Turku                                  | Åbo                                    | 25100                      | 11              | Turku                                           | Åbo                                             | 25101                               |
-	Then the organization has the following postal street address:
-	| Finnish street address | Swedish street address | Finnish postal district | Swedish postal district | Postal code |
-	| Helsinginkatu 15       | Helsinforsgatan 15     | Turku                   | Åbo                     | 25100       |
-	And the organization has the following postal post office box address:
-	| Finnish postal district | Swedish postal district | Postal code | post office box |
-	| Turku                   | Åbo                     | 25101       | 11              |
+	Then setting the postal address fails
 
 Scenario: Using organization visiting address as the postal address
 	Given the following visiting address is set to the organization:

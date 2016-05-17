@@ -21,8 +21,8 @@ namespace OrganizationRegister.Application.Organization
             organization.VisitingAddressQualifiers = visitingAddressQualifier;
             organization.SetCallInformation(phoneNumber, phoneCallFee);
             organization.SetVisitingAddress(visitingStreetAddresses, visitingAddressPostalCode, visitingAddressLocalities);
-            organization.SetPostalAddress(postalStreetAddresses, postalStreetAddressPostalCode, postalStreetAddressLocalities, useVisitingAddressAsPostalAddress);
-            organization.SetPostalAddress(postalAddressPostOfficeBox, postalPostOfficeBoxAddressPostalCode, postalPostOfficeBoxAddressLocalities);
+            organization.SetPostalAddress(useVisitingAddressAsPostalAddress, postalStreetAddresses, postalStreetAddressPostalCode, postalStreetAddressLocalities,
+                postalAddressPostOfficeBox, postalPostOfficeBoxAddressPostalCode, postalPostOfficeBoxAddressLocalities);
             return organization;
         }
 

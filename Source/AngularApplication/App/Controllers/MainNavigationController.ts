@@ -16,8 +16,7 @@ module OrganizationRegister
         {
             super($scope, authenticationService);
             $scope.controller = this;
-
-            this.currentSection = CurrentNavigationSection.ServiceInformationSection;
+            this.setCurrentSection();
         }
 
         public logOut()
@@ -33,29 +32,46 @@ module OrganizationRegister
             }
         }
 
-        public isAdministrationSectionActive(): boolean
+        public areUsersActive(): boolean
         {
-            return this.currentSection === CurrentNavigationSection.AdministrationSection;
+            return this.currentSection === CurrentNavigationSection.Users;
         }
 
-        public isServiceInformationSectionActive(): boolean
+        public areOrganizationsActive(): boolean
         {
-            return this.currentSection === CurrentNavigationSection.ServiceInformationSection;
+            return this.currentSection === CurrentNavigationSection.Organizations;
         }
 
-        public changeToServiceInformationSection(): void
+        public changeToOrganizations(): void
         {
-            this.currentSection = CurrentNavigationSection.ServiceInformationSection;
+            this.currentSection = CurrentNavigationSection.Organizations;
         }
 
-        public changeToAdministrationSection(): void
+        public changeToUsers(): void
         {
-            this.currentSection = CurrentNavigationSection.AdministrationSection;
+            this.currentSection = CurrentNavigationSection.Users;
         }
 
         protected onUserLoggedIn(): void
         {
-            this.currentSection = CurrentNavigationSection.ServiceInformationSection;
+            this.currentSection = CurrentNavigationSection.Organizations;
+        }
+
+        private isInUserPage(): boolean
+        {
+            return this.$location.path().indexOf("User") !== -1;
+        }
+
+        private setCurrentSection(): void
+        {
+            if (this.isInUserPage())
+            {
+                this.currentSection = CurrentNavigationSection.Users;
+            }
+            else
+            {
+                this.currentSection = CurrentNavigationSection.Organizations;
+            }            
         }
     }
 }

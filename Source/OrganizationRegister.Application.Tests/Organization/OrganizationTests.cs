@@ -346,8 +346,8 @@ namespace OrganizationRegister.Application.Tests.Organization
         {
             sut = CreateSut();
 
-            sut.SetPostalAddress(new List<LocalizedText> { new LocalizedText("en", "street 1") }, "12345",
-                new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "Helsinki") }, false);
+            sut.SetPostalAddress(false, new List<LocalizedText> { new LocalizedText("en", "street 1") }, "12345",
+                new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "Helsinki") }, null, null, null);
         }
 
         [TestMethod]
@@ -356,8 +356,8 @@ namespace OrganizationRegister.Application.Tests.Organization
         {
             sut = CreateSut();
 
-            sut.SetPostalAddress(new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "katu 1") }, "12345",
-                new List<LocalizedText> { new LocalizedText("sv", "Åbo") }, false);
+            sut.SetPostalAddress(false, new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "katu 1") }, "12345",
+                new List<LocalizedText> { new LocalizedText("sv", "Åbo") }, null, null, null);
         }
 
         [TestMethod]
@@ -366,7 +366,7 @@ namespace OrganizationRegister.Application.Tests.Organization
         {
             sut = CreateSut();
 
-            sut.SetPostalAddress("10", "12345", new List<LocalizedText> { new LocalizedText("sv", "Åbo") });
+            sut.SetPostalAddress(false, null, null, null, "10", "12345", new List<LocalizedText> { new LocalizedText("sv", "Åbo") });
         }
 
         [TestMethod]
@@ -375,8 +375,29 @@ namespace OrganizationRegister.Application.Tests.Organization
         {
             sut = CreateSut();
 
-            sut.SetPostalAddress(new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "katu 1") }, "12345",
-                new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "Turku") }, true);
+            sut.SetPostalAddress(true, new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "katu 1") }, "12345",
+                new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "Turku") }, null, null, null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void CannotUseVisitingAddressAsPostalAddressAndDefinePostOfficeBoxAddressSimultaneously()
+        {
+            sut = CreateSut();
+            sut.SetVisitingAddress(new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "katu 1") }, "12345", 
+                new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "Turku") });
+
+            sut.SetPostalAddress(true, null, null, null, "10", "12345", new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "Turku") });
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void CannotDefineSeparateStreetPostalAddressAndPostOfficeBoxAddressSimultaneously()
+        {
+            sut = CreateSut();
+
+            sut.SetPostalAddress(false, new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "katu 1") }, "12345", 
+                new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "Turku") }, "10", "12345", new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "Turku") });
         }
 
         private static Application.Organization.Organization CreateSut()

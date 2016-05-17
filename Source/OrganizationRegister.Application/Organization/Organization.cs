@@ -179,18 +179,17 @@ namespace OrganizationRegister.Application.Organization
                 localities == null ? null : localities.ToList());
         }
 
-        public void SetPostalAddress(IEnumerable<LocalizedText> streetAddresses, string postalCode, IEnumerable<LocalizedText> localities, bool useVisitingAddress)
+        public void SetPostalAddress(bool useVisitingAddress, IEnumerable<LocalizedText> streetAddresses, string streetAddressPostalCode,
+            IEnumerable<LocalizedText> streetAddressPostalDistricts, string postOfficeBox, string postOfficeBoxAddressPostalCode, 
+            IEnumerable<LocalizedText> postOfficeBoxAddressPostalDistricts)
         {
             if (useVisitingAddress && (VisitingAddress == null || !VisitingAddress.IsDefined))
             {
                 throw new ArgumentException("Cannot use undefined visiting address as the postal address.");
             }
-            postalAddresses.Set(streetAddresses == null ? null : streetAddresses.ToList(), postalCode, localities == null ? null : localities.ToList(), useVisitingAddress);
-        }
-
-        public void SetPostalAddress(string postOfficeBox, string postalCode, IEnumerable<LocalizedText> localities)
-        {
-            postalAddresses.Set(postOfficeBox, postalCode, localities == null ? null : localities.ToList());
+            postalAddresses.Set(useVisitingAddress, streetAddresses == null ? null : streetAddresses.ToList(), streetAddressPostalCode, 
+                streetAddressPostalDistricts == null ? null : streetAddressPostalDistricts.ToList(), postOfficeBox, postOfficeBoxAddressPostalCode, 
+                postOfficeBoxAddressPostalDistricts == null ? null : postOfficeBoxAddressPostalDistricts.ToList());
         }
 
         private void SetMunicipalityCode(string newMunicipalityCode)
