@@ -1,4 +1,4 @@
-﻿<div class="row">
+﻿<div class="row" data-ng-show="controller.model.hasPostalStreetAddressPostalCode() || !controller.model.hasPostalPostOfficeBoxAddressPostalCode()">
     <div class="col-xs-6">
         <label>Katuosoite</label>
         {{ controller.model.effectivePostalStreetAddressStreet }}
