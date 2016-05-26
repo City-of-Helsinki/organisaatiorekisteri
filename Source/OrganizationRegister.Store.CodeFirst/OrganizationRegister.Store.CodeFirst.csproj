@@ -74,6 +74,10 @@
     <Compile Include="Migrations\201604011205486_Initial.Designer.cs">
       <DependentUpon>201604011205486_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605261029595_AddOrganizationValidity.cs" />
+    <Compile Include="Migrations\201605261029595_AddOrganizationValidity.Designer.cs">
+      <DependentUpon>201605261029595_AddOrganizationValidity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\OrganizationRegisterDbMigration.cs" />
     <Compile Include="Model\Address.cs" />
@@ -131,6 +135,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201604011205486_Initial.resx">
       <DependentUpon>201604011205486_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605261029595_AddOrganizationValidity.resx">
+      <DependentUpon>201605261029595_AddOrganizationValidity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
