@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using OrganizationRegister.Common;
 
 namespace OrganizationRegister.Api.Organization
@@ -11,5 +12,7 @@ namespace OrganizationRegister.Api.Organization
         public string Type { get; set; }
         public string MunicipalityCode { get; set; }
         public string Oid { get; set; }
+        public DateTime? ValidFrom { get; set; }
+        public DateTime? ValidTo { get; set; }
     }
 }

@@ -155,6 +155,9 @@ namespace OrganizationRegister.Application.Organization
             return descriptions.GetValue(languageCode);
         }
 
+        public DateTime? ValidFrom { get; private set; }
+        public DateTime? ValidTo { get; private set; }
+
         public void SetType(string newType, string newMunicipalityCode)
         {
             Type = newType;
@@ -190,6 +193,16 @@ namespace OrganizationRegister.Application.Organization
             postalAddresses.Set(useVisitingAddress, streetAddresses == null ? null : streetAddresses.ToList(), streetAddressPostalCode, 
                 streetAddressPostalDistricts == null ? null : streetAddressPostalDistricts.ToList(), postOfficeBox, postOfficeBoxAddressPostalCode, 
                 postOfficeBoxAddressPostalDistricts == null ? null : postOfficeBoxAddressPostalDistricts.ToList());
+        }
+
+        public void SetValidity(DateTime? validFrom, DateTime? validTo)
+        {
+            if (validFrom.HasValue && validTo.HasValue && validFrom.Value > validTo.Value)
+            {
+                throw new ArgumentException("Invalid date range. Valid from date must be before valid to date.");
+            }
+            ValidFrom = validFrom;
+            ValidTo = validTo;
         }
 
         private void SetMunicipalityCode(string newMunicipalityCode)

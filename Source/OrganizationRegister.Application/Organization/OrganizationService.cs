@@ -24,24 +24,26 @@ namespace OrganizationRegister.Application.Organization
             this.settingsRepository = settingsRepository;
         }
 
-        public Guid AddOrganization(string businessId, string oid, string type, string municipalityCode, IEnumerable<LocalizedText> names, 
-            IEnumerable<LocalizedText> descriptions)
+        public Guid AddOrganization(string businessId, string oid, string type, string municipalityCode, IEnumerable<LocalizedText> names, IEnumerable<LocalizedText> descriptions, 
+            DateTime? validFrom, DateTime? validTo)
         {
             IReadOnlyCollection<string> languageCodes = settingsRepository.GetDataLanguageCodes();
             // TODO: Wrap id generation into a service
             var id = Guid.NewGuid();
             var organization = new Organization(id, businessId, oid, type, municipalityCode, names, languageCodes) { Descriptions = descriptions };
+            organization.SetValidity(validFrom, validTo);
             organizationRepository.AddOrganizationAndSave(organization);
             return id;
         }
 
         public Guid AddSubOrganization(Guid parentOrganizationId, string businessId, string oid, string type, string municipalityCode, IEnumerable<LocalizedText> names,
-            IEnumerable<LocalizedText> descriptions)
+            IEnumerable<LocalizedText> descriptions, DateTime? validFrom, DateTime? validTo)
         {
             IReadOnlyCollection<string> languageCodes = settingsRepository.GetDataLanguageCodes();
             // TODO: Wrap id generation into a service
             var id = Guid.NewGuid();
             var organization = new SubOrganization(id, businessId, oid, type, municipalityCode, names, languageCodes) { Descriptions = descriptions };
+            organization.SetValidity(validFrom, validTo);
             organizationRepository.AddSubOrganizationAndSave(parentOrganizationId, organization);
             return id;
         }

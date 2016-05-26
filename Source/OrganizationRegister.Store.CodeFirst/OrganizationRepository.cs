@@ -108,7 +108,7 @@ namespace OrganizationRegister.Store.CodeFirst
             string emailAddress = (dbOrganization.EmailAddress != null) ? dbOrganization.EmailAddress.Email : null;
 
             return OrganizationFactory.CreateOrganization(id, dbOrganization.NumericId, dbOrganization.BusinessId, dbOrganization.Oid, dbOrganization.Type.Name,
-                dbOrganization.GetNames(), dbOrganization.GetDescriptions(), dbOrganization.MunicipalityCode,
+                dbOrganization.GetNames(), dbOrganization.GetDescriptions(), dbOrganization.MunicipalityCode, dbOrganization.ValidFrom, dbOrganization.ValidTo,
                 phoneNumber, callChargeInfo, emailAddress, CreateWebPages(webPages),
                 CreateStreetAddresses(visitingAddressId, languageSpecificAddressData), dbOrganization.GetStreetAddressPostalCode(),
                 CreateLocalities(visitingAddressId, languageSpecificAddressData), CreateAddressQualifiers(visitingAddressId, languageSpecificAddressData),

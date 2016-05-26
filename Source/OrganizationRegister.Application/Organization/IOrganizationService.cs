@@ -6,9 +6,10 @@ namespace OrganizationRegister.Application.Organization
 {
     public interface IOrganizationService
     {
-        Guid AddOrganization(string businessId, string oid, string type, string municipalityCode, IEnumerable<LocalizedText> names, IEnumerable<LocalizedText> descriptions);
+        Guid AddOrganization(string businessId, string oid, string type, string municipalityCode, IEnumerable<LocalizedText> names, IEnumerable<LocalizedText> descriptions, 
+            DateTime? validFrom, DateTime? validTo);
         Guid AddSubOrganization(Guid parentOrganizationId, string businessId, string oid, string type, string municipalityCode, IEnumerable<LocalizedText> names, 
-            IEnumerable<LocalizedText> descriptions);
+            IEnumerable<LocalizedText> descriptions, DateTime? validFrom, DateTime? validTo);
         IEnumerable<IHierarchicalOrganization> GetActiveOrganizationHierarchy();
         IEnumerable<IOrganizationName> GetActiveOrganizations();
         IEnumerable<IOrganizationName> GetActiveMainOrganizations();

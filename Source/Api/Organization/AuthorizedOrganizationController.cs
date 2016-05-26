@@ -34,7 +34,7 @@ namespace OrganizationRegister.Api.Organization
             }
 
             Guid organizationId = organizationService.AddOrganization(organization.BusinessId, organization.Oid, organization.Type, organization.MunicipalityCode,
-                organization.Names, organization.Descriptions);
+                organization.Names, organization.Descriptions, organization.ValidFrom, organization.ValidTo);
             return Ok(organizationId);
         }
 
@@ -48,7 +48,7 @@ namespace OrganizationRegister.Api.Organization
             }
 
             Guid subOrganizationId = organizationService.AddSubOrganization(parentOrganizationId, organization.BusinessId, organization.Oid, organization.Type, 
-                organization.MunicipalityCode, organization.Names, organization.Descriptions);
+                organization.MunicipalityCode, organization.Names, organization.Descriptions, organization.ValidFrom, organization.ValidTo);
             return Ok(subOrganizationId);
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using Affecto.Testing.SpecFlow;
 using OrganizationRegister.AcceptanceTests.Infrastructure;
@@ -16,7 +17,13 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
         public void GivenTheFollowingCompanyIsAdded(Table basicInformation)
         {
             TableRow info = basicInformation.Rows.Single();
-            OrganizationService.AddOrganization(info["Business id"], info.GetOptionalValue("Oid"), "Yritys", null, LocalizedTextHelper.CreateNamesCollection(info), null);
+            OrganizationService.AddOrganization(info["Business id"], info.GetOptionalValue("Oid"), "Yritys", null, LocalizedTextHelper.CreateNamesCollection(info), null,
+                ConvertToDate(info.GetOptionalValue("Valid from")), ConvertToDate(info.GetOptionalValue("Valid to")));
+        }
+
+        private DateTime? ConvertToDate(string dateString)
+        {
+            return string.IsNullOrWhiteSpace(dateString) ? (DateTime?)null : DateTime.ParseExact(dateString, "dd.MM.yyyy", CultureInfo.InvariantCulture);
         }
 
         [When(@"the following basic information is set to the previously added organization:")]
@@ -49,7 +56,8 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
             TableRow info = basicInformation.Rows.Single();
             IHierarchicalOrganization parent = OrganizationHelper.GetOrganization(OrganizationService.GetActiveOrganizationHierarchy().ToList(), parentOrganizationName);
             OrganizationService.AddSubOrganization(parent.Id, info["Business id"], info.GetOptionalValue("Oid"), "Yritys", null,
-                LocalizedTextHelper.CreateNamesCollection(info), LocalizedTextHelper.CreateDescriptionsCollection(info));
+                LocalizedTextHelper.CreateNamesCollection(info), LocalizedTextHelper.CreateDescriptionsCollection(info), ConvertToDate(info.GetOptionalValue("Valid from")),
+                ConvertToDate(info.GetOptionalValue("Valid to")));
         }
 
         [When(@"the following basic information is set to organization '(.+)':")]
