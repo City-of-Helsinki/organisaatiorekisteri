@@ -81,6 +81,28 @@ namespace OrganizationRegister.Api.Tests.Organization
         }
 
         [TestMethod]
+        public void ValidFromIsMapped()
+        {
+            DateTime? validFrom = DateTime.Today;
+            source.ValidFrom.Returns(validFrom);
+
+            destination = sut.Map(source);
+
+            Assert.AreEqual(validFrom, destination.ValidFrom);
+        }
+
+        [TestMethod]
+        public void ValidToIsMapped()
+        {
+            DateTime? validTo = DateTime.Today;
+            source.ValidTo.Returns(validTo);
+
+            destination = sut.Map(source);
+
+            Assert.AreEqual(validTo, destination.ValidTo);
+        }
+
+        [TestMethod]
         public void NamesAreMapped()
         {
             IEnumerable<LocalizedText> names = new List<LocalizedText>
