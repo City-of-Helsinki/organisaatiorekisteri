@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using Affecto.Testing.SpecFlow;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -22,13 +21,8 @@ namespace OrganizationRegister.AcceptanceTests.Infrastructure
         {
             TableRow company = companies.Rows.Single();
             Try(() => OrganizationService.AddOrganization(company.GetOptionalValue("Business id"), company.GetOptionalValue("Oid"), company["Type"], null,
-                LocalizedTextHelper.CreateNamesCollection(company), LocalizedTextHelper.CreateDescriptionsCollection(company), ConvertToDate(company.GetOptionalValue("Valid from")),
-                ConvertToDate(company.GetOptionalValue("Valid to"))));
-        }
-
-        private DateTime? ConvertToDate(string dateString)
-        {
-            return string.IsNullOrWhiteSpace(dateString) ? (DateTime?)null : DateTime.ParseExact(dateString, "dd.MM.yyyy", CultureInfo.InvariantCulture);
+                LocalizedTextHelper.CreateNamesCollection(company), LocalizedTextHelper.CreateDescriptionsCollection(company), company.GetOptionalFinnishDate("Valid from"),
+                company.GetOptionalFinnishDate("Valid to")));
         }
 
         [Given(@"there is an organization")]
