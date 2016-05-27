@@ -9,6 +9,7 @@
     <releaseNotes>
       Smaller page header.
       Maximum one postal address per organization.
+      Added organization validity period.
     </releaseNotes>
   </metadata>
 </package>
