@@ -9,24 +9,18 @@ using OrganizationRegister.Store.CodeFirst.Querying;
 
 namespace OrganizationRegister.Store.CodeFirst
 {
-    internal class StoreContext : DbContext, IStoreContext
+    internal class StoreContext : PostgreSqlDbContext, IStoreContext
     {
         public const string ConfigurationKey = "OrganizationRegisterContext";
 
-        private readonly string schemaName;
-
         public StoreContext(string schemaName)
-            : base(ConfigurationKey)
+            : base(schemaName, true, ConfigurationKey)
         {
             if (schemaName == null)
             {
                 throw new ArgumentNullException("schemaName");
             }
-
-            this.schemaName = schemaName;
-
-            Configuration.LazyLoadingEnabled = true;
-            Configuration.ProxyCreationEnabled = true;
+            Configure();
         }
 
         public StoreContext()
@@ -35,10 +29,9 @@ namespace OrganizationRegister.Store.CodeFirst
         }
 
         protected StoreContext(DbConnection connection)
-            : base(connection, true)
+            : base("", true, connection, true)
         {
-            Configuration.LazyLoadingEnabled = true;
-            Configuration.ProxyCreationEnabled = true;
+            Configure();
         }
 
         public IDbSet<Language> Languages { get; set; }
@@ -82,21 +75,9 @@ namespace OrganizationRegister.Store.CodeFirst
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.HasDefaultSchema(schemaName);
-            modelBuilder.Conventions.Add(new LowerCasePropertyNameConvention());
-            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
-            
-            modelBuilder.Types().Configure(configuration =>
-            {
-                string name = configuration.ClrType.Name.ToLower();
-                configuration.ToTable(name);
-            });
+            base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Properties().Configure(configuration =>
-            {
-                string name = configuration.ClrPropertyInfo.Name.ToLower();
-                configuration.HasColumnName(name);
-            });
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
 
             modelBuilder.Configurations.Add(new AddressConfiguration());
             modelBuilder.Configurations.Add(new AddressLanguageSpecificationConfiguration());
@@ -109,6 +90,12 @@ namespace OrganizationRegister.Store.CodeFirst
             modelBuilder.Configurations.Add(new WebPageTypeConfiguration());
             modelBuilder.Configurations.Add(new WebPageConfiguration());
             modelBuilder.Configurations.Add(new AvailableDataLanguageConfiguration());
+        }
+
+        private void Configure()
+        {
+            Configuration.LazyLoadingEnabled = true;
+            Configuration.ProxyCreationEnabled = true;
         }
     }
 }
