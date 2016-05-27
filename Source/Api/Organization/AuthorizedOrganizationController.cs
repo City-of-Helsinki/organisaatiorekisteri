@@ -61,7 +61,7 @@ namespace OrganizationRegister.Api.Organization
                 throw new ArgumentNullException("information");
             }
             organizationService.SetOrganizationBasicInformation(organizationId, information.BusinessId, information.Oid, information.Names, information.Descriptions, 
-                information.Type, information.MunicipalityCode);
+                information.Type, information.MunicipalityCode, information.ValidFrom, information.ValidTo);
             return Ok();
         }
 

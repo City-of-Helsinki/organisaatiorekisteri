@@ -224,6 +224,8 @@ namespace OrganizationRegister.Api.Tests.Organization
             const string oid = "132456";
             const string finnishLanguageCode = "fi";
             const string type = "Kunta";
+            DateTime? validFrom = DateTime.Today;
+            DateTime? validTo = DateTime.Today.AddDays(1);
 
             BasicInformation information = new BasicInformation
             {
@@ -238,7 +240,9 @@ namespace OrganizationRegister.Api.Tests.Organization
                 },
                 Type = type,
                 MunicipalityCode = municipalityCode,
-                Oid = oid
+                Oid = oid,
+                ValidFrom = validFrom,
+                ValidTo = validTo
             };
 
             sut.SetOrganizationBasicInformation(organizationId, information);
@@ -247,8 +251,7 @@ namespace OrganizationRegister.Api.Tests.Organization
                 Arg.Is<IEnumerable<LocalizedText>>(texts => texts.Count() == 1 && texts.Any(text => text.LanguageCode.Equals(finnishLanguageCode) && 
                     text.LocalizedValue.Equals(finnishName))),
                 Arg.Is<IEnumerable<LocalizedText>>(texts => texts.Count() == 1 && texts.Any(text => text.LanguageCode.Equals(finnishLanguageCode) && 
-                    text.LocalizedValue.Equals(finnishDescription))),
-                type, municipalityCode);
+                    text.LocalizedValue.Equals(finnishDescription))), type, municipalityCode, validFrom, validTo);
         }
 
         [TestMethod]

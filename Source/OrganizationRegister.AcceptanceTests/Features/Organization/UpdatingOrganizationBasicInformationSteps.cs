@@ -27,8 +27,8 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
         {
             TableRow info = basicInformation.Rows.Single();
             Try(() => OrganizationService.SetOrganizationBasicInformation(CurrentScenarioContext.OrganizationId, info["Business id"], info.GetOptionalValue("Oid"), 
-                LocalizedTextHelper.CreateNamesCollection(info), LocalizedTextHelper.CreateDescriptionsCollection(info), info["Type"], 
-                info.GetOptionalValue("Municipality code")));
+                LocalizedTextHelper.CreateNamesCollection(info), LocalizedTextHelper.CreateDescriptionsCollection(info), info["Type"], info.GetOptionalValue("Municipality code"),
+                info.GetOptionalFinnishDate("Valid from"), info.GetOptionalFinnishDate("Valid to")));
         }
 
         [Then(@"the organization has the following basic information:")]
@@ -61,7 +61,7 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
             IOrganizationName organization = OrganizationService.GetActiveOrganizations().Single(o => o.Names.Any(name => name.LocalizedValue.Equals(organizationName)));
             Try(() => OrganizationService.SetOrganizationBasicInformation(organization.Id, info["Business id"], info.GetOptionalValue("Oid"),
                 LocalizedTextHelper.CreateNamesCollection(info), LocalizedTextHelper.CreateDescriptionsCollection(info), info["Type"],
-                info.GetOptionalValue("Municipality code")));
+                info.GetOptionalValue("Municipality code"), info.GetOptionalFinnishDate("Valid from"), info.GetOptionalFinnishDate("Valid to")));
         }
 
         [Then(@"the organization '(.+)' has the following basic information:")]

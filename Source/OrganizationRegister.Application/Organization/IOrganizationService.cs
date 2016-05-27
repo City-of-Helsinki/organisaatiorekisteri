@@ -15,8 +15,8 @@ namespace OrganizationRegister.Application.Organization
         IEnumerable<IOrganizationName> GetActiveMainOrganizations();
         IEnumerable<IOrganizationName> GetMainOrganizations();
         IOrganization GetOrganization(Guid organizationId);
-        void SetOrganizationBasicInformation(Guid organizationId, string businessId, string oid, IEnumerable<LocalizedText> names, IEnumerable<LocalizedText> descriptions,
-            string type, string municipalityCode);
+        void SetOrganizationBasicInformation(Guid organizationId, string businessId, string oid, IEnumerable<LocalizedText> names, IEnumerable<LocalizedText> descriptions, 
+            string type, string municipalityCode, DateTime? validFrom, DateTime? validTo);
         void SetOrganizationContactInformation(Guid organizationId, string phoneNumber, string phoneCallFee, string emailAddress, IEnumerable<WebPage> webSites);
         void SetOrganizationVisitingAddress(Guid organizationId, IEnumerable<LocalizedText> streetAddresses, string postalCode, IEnumerable<LocalizedText> postalDistricts, 
             IEnumerable<LocalizedText> qualifiers);

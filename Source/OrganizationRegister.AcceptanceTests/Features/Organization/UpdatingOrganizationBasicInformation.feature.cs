@@ -94,7 +94,9 @@ this.FeatureBackground();
                         "Finnish name",
                         "Swedish name",
                         "Finnish description",
-                        "Swedish description"});
+                        "Swedish description",
+                        "Valid from",
+                        "Valid to"});
             table1.AddRow(new string[] {
                         "1069622-4",
                         "654321",
@@ -102,7 +104,9 @@ this.FeatureBackground();
                         "Affecto",
                         "Affecto",
                         "Ohjelmistoyritys",
-                        "Programvara företaget"});
+                        "Programvara företaget",
+                        "12.11.2015",
+                        "20.10.2016"});
 #line 7
  testRunner.When("the following basic information is set to the organization:", ((string)(null)), table1, "When ");
 #line hidden
@@ -113,7 +117,9 @@ this.FeatureBackground();
                         "Finnish name",
                         "Swedish name",
                         "Finnish description",
-                        "Swedish description"});
+                        "Swedish description",
+                        "Valid from",
+                        "Valid to"});
             table2.AddRow(new string[] {
                         "1069622-4",
                         "654321",
@@ -121,7 +127,9 @@ this.FeatureBackground();
                         "Affecto",
                         "Affecto",
                         "Ohjelmistoyritys",
-                        "Programvara företaget"});
+                        "Programvara företaget",
+                        "12.11.2015",
+                        "20.10.2016"});
 #line 10
  testRunner.Then("the organization has the following basic information:", ((string)(null)), table2, "Then ");
 #line hidden
@@ -287,7 +295,9 @@ this.FeatureBackground();
                         "Finnish name",
                         "Swedish name",
                         "Finnish description",
-                        "Swedish description"});
+                        "Swedish description",
+                        "Valid from",
+                        "Valid to"});
             table10.AddRow(new string[] {
                         "1069622-4",
                         "654321",
@@ -295,7 +305,9 @@ this.FeatureBackground();
                         "Affecto",
                         "Affecto",
                         "Ohjelmistoyritys",
-                        "Programvara företaget"});
+                        "Programvara företaget",
+                        "12.11.2015",
+                        "20.10.2016"});
 #line 42
  testRunner.Given("the following basic information is set to the organization:", ((string)(null)), table10, "Given ");
 #line hidden
@@ -519,6 +531,37 @@ this.FeatureBackground();
 #line 96
  testRunner.When("the following basic information is set to the organization:", ((string)(null)), table24, "When ");
 #line 99
+ testRunner.Then("setting the basic information fails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Setting invalid validity")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "UpdatingOrganizationBasicInformation")]
+        public virtual void SettingInvalidValidity()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Setting invalid validity", ((string[])(null)));
+#line 101
+this.ScenarioSetup(scenarioInfo);
+#line 3
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Business id",
+                        "Type",
+                        "Finnish name",
+                        "Valid from",
+                        "Valid to"});
+            table25.AddRow(new string[] {
+                        "1069622-4",
+                        "Yritys",
+                        "Affecto",
+                        "01.01.2012",
+                        "01.01.2010"});
+#line 102
+ testRunner.When("the following basic information is set to the organization:", ((string)(null)), table25, "When ");
+#line 105
  testRunner.Then("setting the basic information fails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
