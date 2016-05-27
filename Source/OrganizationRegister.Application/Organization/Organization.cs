@@ -197,12 +197,17 @@ namespace OrganizationRegister.Application.Organization
 
         public void SetValidity(DateTime? validFrom, DateTime? validTo)
         {
-            if (validFrom.HasValue && validTo.HasValue && validFrom.Value > validTo.Value)
+            ValidFrom = validFrom.HasValue ? validFrom.Value.Date : (DateTime?)null;
+            ValidTo = validTo.HasValue ? validTo.Value.Date : (DateTime?)null;
+            if (!IsValidValidityDateRange())
             {
                 throw new ArgumentException("Invalid date range. Valid from date must be before valid to date.");
             }
-            ValidFrom = validFrom;
-            ValidTo = validTo;
+        }
+
+        private bool IsValidValidityDateRange()
+        {
+            return ValidFrom.HasValue && ValidTo.HasValue && ValidFrom.Value <= ValidTo.Value;
         }
 
         private void SetMunicipalityCode(string newMunicipalityCode)

@@ -400,6 +400,21 @@ namespace OrganizationRegister.Application.Tests.Organization
                 new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "Turku") }, "10", "12345", new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "Turku") });
         }
 
+        [TestMethod]
+        public void SettingValidityDoesNotSetTime()
+        {
+            const int year = 2010;
+            const int month = 1;
+            const int day = 2;
+
+            sut = CreateSut();
+
+            sut.SetValidity(new DateTime(year, month, day, 11, 11, 11), new DateTime(year, month, day, 10, 10, 10));
+
+            Assert.AreEqual(new DateTime(year, month, day, 0, 0, 0), sut.ValidFrom);
+            Assert.AreEqual(new DateTime(year, month, day, 0, 0, 0), sut.ValidTo);
+        }
+
         private static Application.Organization.Organization CreateSut()
         {
             return new Application.Organization.Organization(Guid.NewGuid(), 1, ValidBusinessId, Oid, Type, null, 
