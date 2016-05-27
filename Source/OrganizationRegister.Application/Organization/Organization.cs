@@ -201,13 +201,13 @@ namespace OrganizationRegister.Application.Organization
             ValidTo = validTo.HasValue ? validTo.Value.Date : (DateTime?)null;
             if (!IsValidValidityDateRange())
             {
-                throw new ArgumentException("Invalid date range. Valid from date must be before valid to date.");
+                throw new ArgumentException(string.Format("Invalid date range. Valid from date '{0}' must be before valid to date '{1}'.", ValidFrom, ValidTo));
             }
         }
 
         private bool IsValidValidityDateRange()
         {
-            return ValidFrom.HasValue && ValidTo.HasValue && ValidFrom.Value <= ValidTo.Value;
+            return !ValidFrom.HasValue || !ValidTo.HasValue || ValidFrom.Value <= ValidTo.Value;
         }
 
         private void SetMunicipalityCode(string newMunicipalityCode)
