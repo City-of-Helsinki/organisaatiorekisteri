@@ -32,7 +32,7 @@
                                 "Tarkista oman organisaatiosi Y-tunnuksen käytön käytäntö: Joillain organisaatioilla on vain yksi yhteinen Y-tunnus, toisilla myös alaorganisaatioilla on omat Y-tunnuksensa. Varmista, että annat alaorganisaatiolle oikean Y-tunnuksen."]' />
         </label>
         <input id="organizationBusinessId" type="text" class="form-control" name="businessId" maxlength="9" data-ng-model="controller.model.businessId"
-               data-ng-required="!controller.isSubOrganizationBeingAdded()" data-ng-blur="controller.validateBusinessId()" />
+               data-ng-required="!controller.isSubOrganization()" data-ng-blur="controller.validateBusinessId()" />
         <div id="organizationBusinessIdErrorMessage" aria-live="polite" class="validation-message" data-ng-show="!controller.validBusinessId">
             {{ controller.businessIdErrorMessage }}
         </div>

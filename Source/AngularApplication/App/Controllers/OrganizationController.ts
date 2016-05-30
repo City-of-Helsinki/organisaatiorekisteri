@@ -58,16 +58,11 @@ module OrganizationRegister
         public get editBusinessIdentifierLabel(): string
         {
             var label: string = "Y-tunnus";
-            if (this.isSubOrganizationBeingAdded())
+            if (this.isSubOrganization())
             {
                 return label;
             }
             return label + "*";
-        }
-
-        public canSaveBasicInformation(): boolean
-        {
-            return this.validBusinessId;
         }
 
         public canSaveContactInformation(): boolean
@@ -152,9 +147,9 @@ module OrganizationRegister
             return this.editedSection === EditedOrganizationSection.PostalAddress;
         }
 
-        public isSubOrganizationBeingAdded(): boolean
+        public isSubOrganization(): boolean
         {
-            return this.parentOrganizationId != null;
+            return this.parentOrganizationId != null || (this.model != null && this.model.isSubOrganization);
         }
 
         public canAddingBeCancelled(): boolean
@@ -474,8 +469,7 @@ module OrganizationRegister
         {
             if (this.model.hasBusinessId())
             {
-                var allowDuplicates: boolean = this.isSubOrganizationBeingAdded() || this.model.isSubOrganization;
-                return this.validationService.validateBusinessId(this.model.businessId, this.model.id, allowDuplicates)
+                return this.validationService.validateBusinessId(this.model.businessId, this.model.id, this.isSubOrganization())
                     .then(this.setBusinessIdValidity);
             }
             else

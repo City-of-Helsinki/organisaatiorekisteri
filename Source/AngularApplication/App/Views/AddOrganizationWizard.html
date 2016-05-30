@@ -51,12 +51,12 @@
                         <div class="right">
                             <button id="addOrganizationFirstStepSaveAndQuitButton" type="submit" class="button cancel" data-ng-click="controller.saveOrganizationBasicInformationAndQuit()"
                                     data-ng-show="controller.isBasicInformationBeingEdited()"
-                                    data-ng-disabled="controller.basicInformationForm.$invalid || !controller.canSaveBasicInformation()">
+                                    data-ng-disabled="controller.basicInformationForm.$invalid">
                                 Tallenna keskeneräisenä
                             </button>
                             <button id="addOrganizationFirstStepSaveAndNextButton" type="submit" class="button scroll-button" data-go-step="#step2"
                                     data-ng-click="controller.saveOrganizationBasicInformationAndMoveToNextStep()" data-ng-show="controller.isBasicInformationBeingEdited()"
-                                    data-ng-disabled="controller.basicInformationForm.$invalid || !controller.canSaveBasicInformation()">
+                                    data-ng-disabled="controller.basicInformationForm.$invalid">
                                 Siirry seuraavaan
                             </button>
                         </div>
