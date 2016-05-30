@@ -41,6 +41,7 @@ module OrganizationRegister
             $scope.model = this.model;
 
             this.validBusinessId = true;
+            this.validValidity = true;
             this.validPhoneNumber = true;
             this.validEmailAddress = true;
             this.validWebPageUrl = true;
