@@ -26,7 +26,7 @@ module OrganizationRegister
         public postalAddressTypes: PostalAddressTypes;
 
         constructor(public id?: string, public numericId?: number, public names?: Array<LocalizedText>, public businessId?: string, private descriptions?: Array<LocalizedText>,
-            public oid?: string, public type?: string, public municipalityCode?: number, public phoneNumber?: string, public phoneCallFee?: string,
+            public oid?: string, public type?: string, public municipalityCode?: number, public validFrom?: Date, public validTo?: Date, public phoneNumber?: string, public phoneCallFee?: string,
             public emailAddress?: string, public webPages?: Array<WebPage>, public visitingAddress?: StreetAddress, public visitingAddressQualifiers?: Array<LocalizedText>,
             public useVisitingAddressAsPostalAddress?: boolean, public postalStreetAddress?: StreetAddress, public postalPostOfficeBoxAddress?: PostOfficeBoxAddress,
             public isSubOrganization?: boolean)
@@ -323,6 +323,11 @@ module OrganizationRegister
         public canAddPostalAddress(): boolean
         {
             return this.postalAddressTypes.canAddPostalAddress();
+        }
+
+        public isValidValidity(): boolean
+        {
+            return this.validFrom != null && this.validTo != null && this.validFrom <= this.validTo;
         }
     }
 }

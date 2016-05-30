@@ -9,6 +9,7 @@ module OrganizationRegister
         public organizationTypes: Array<string>;
         public webPageTypes: Array<string>;
         public validBusinessId: boolean;
+        public validValidity: boolean;
         public validPhoneNumber: boolean;
         public validEmailAddress: boolean;
         public validWebPageUrl: boolean;
@@ -495,6 +496,11 @@ module OrganizationRegister
             }
         }
 
+        public validateValidity(): void
+        {
+            this.setValidityValidity(this.model.isValidValidity());
+        }
+
         public validatePhoneNumber(): void
         {
             if (this.model.hasPhoneNumber())
@@ -774,6 +780,13 @@ module OrganizationRegister
         {
             this.validEditedWebPageUrl = isValid;
             this.setFormFieldValidity(this.contactInformationForm, "editedWebPage", isValid);
+        }
+
+        private setValidityValidity(isValid: boolean): void
+        {
+            this.validValidity = isValid;
+            this.setFormFieldValidity(this.basicInformationForm, "validFrom", isValid);
+            this.setFormFieldValidity(this.basicInformationForm, "validTo", isValid);
         }
 
         private setFormFieldValidity = (form: angular.IFormController, fieldName: string, isValid: boolean): void =>

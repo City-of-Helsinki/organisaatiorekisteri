@@ -57,3 +57,20 @@
     <div class="col-xs-6">
     </div>
 </div>
+<div class="row">
+    <div class="col-xs-6">
+        <label>
+            Voimassaolo alkaa
+        </label>
+        <input id="organizationValidFrom" type="date" class="form-control" name="validFrom" data-ng-model="controller.model.validFrom" data-ng-blur="controller.validateValidity()" />
+        <div id="organizationValidityErrorMessage" aria-live="polite" class="validation-message" data-ng-show="!controller.validValidity">
+            Voimassaolo ei voi alkaa sen päättymisen jälkeen
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <label>
+            Voimassaolo päättyy
+        </label>
+        <input id="organizationValidTo" type="date" class="form-control" name="validTo" data-ng-model="controller.model.validTo" data-ng-blur="controller.validateValidity()" />
+    </div>
+</div>
