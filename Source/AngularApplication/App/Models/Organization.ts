@@ -7,6 +7,8 @@ module OrganizationRegister
         public name: string;
         public description: string;
         public descriptionAsHtml: string;
+        public validFromText: string;
+        public validToText: string;
         public webPageUrl: string;
         public webPageName: string;
         public webPageType: string;
@@ -40,12 +42,19 @@ module OrganizationRegister
                 this.description = descriptions[0].localizedValue;
                 this.descriptionAsHtml = Affecto.HtmlContent.escapeAndReplaceNewLines(this.description);
             }
+            this.setValidityTexts();
             this.initializeVisitingAddress(visitingAddress, visitingAddressQualifiers);
             this.initializePostalAddress(postalStreetAddress, postalPostOfficeBoxAddress);
             if (this.webPages == null)
             {
                 this.webPages = new Array<WebPage>();
             }
+        }
+
+        private setValidityTexts()
+        {
+            this.validFromText = Affecto.DateConverter.toFinnishDate(this.validFrom);
+            this.validToText = Affecto.DateConverter.toFinnishDate(this.validTo);            
         }
 
         private initializeVisitingAddress(visitingAddress?: StreetAddress, visitingAddressQualifiers?: Array<LocalizedText>): void
@@ -149,6 +158,7 @@ module OrganizationRegister
             this.names = new Array<LocalizedText>(new LocalizedText("fi", this.name));
             this.descriptions = new Array<LocalizedText>(new LocalizedText("fi", this.description));
             this.descriptionAsHtml = Affecto.HtmlContent.escapeAndReplaceNewLines(this.description);
+            this.setValidityTexts();
         }
 
         public generateVisitingAddressLocalizedTexts(): void
