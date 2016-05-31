@@ -18,6 +18,8 @@ module OrganizationRegister
         public validPostalStreetAddressPostalCode: boolean;
         public validPostalPostOfficeBoxAddressPostalCode: boolean;
         public webPageEditModeOn: boolean;
+        public isValidFromCalendarShown: boolean;
+        public isValidToCalendarShown: boolean;
         public businessIdErrorMessage: string;
         public webPageUrlBeforeEditing: string;
         public toBeAddedPostalAddressType: string;
@@ -49,7 +51,10 @@ module OrganizationRegister
             this.validVisitingAddressPostalCode = true;
             this.validPostalStreetAddressPostalCode = true;
             this.validPostalPostOfficeBoxAddressPostalCode = true;
+
             this.webPageEditModeOn = false;
+            this.isValidFromCalendarShown = false;
+            this.isValidToCalendarShown = false;
 
             this.fetchServerData($routeParams);
             this.initializeEditedSection($route);
@@ -92,6 +97,16 @@ module OrganizationRegister
                 return false;
             }
             return this.model.postalAddressTypes.contains(PostalAddressType.PostOfficeBoxAddress);
+        }
+
+        public showValidFromCalendar(): void
+        {
+            this.isValidFromCalendarShown = true;
+        }
+
+        public showValidToCalendar(): void
+        {
+            this.isValidToCalendarShown = true;
         }
 
         public showSeparateStreetPostalAddress(): boolean
@@ -169,6 +184,7 @@ module OrganizationRegister
         public resetAllFormFieldsAsValid(): void
         {
             this.setFormFieldValidity(this.basicInformationForm, "businessId", true);
+            this.setValidityValidity(true);
             this.setEmailAddressValidity(true);
             this.setPhonenNumberValidity(true);
             this.setVisitingAddressPostalCodeValidity(true);

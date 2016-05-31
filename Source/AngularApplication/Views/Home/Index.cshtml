@@ -7,7 +7,7 @@
         <div class="container">
             <h1>
                 <a href="#/" class="logo-link">
-                    <img src="~/Content/img/logo.png" />
+                    <img src="~/Content/img/logo.png"/>
                 </a>
             </h1>
             <div class="site-options md-right">
@@ -76,4 +76,5 @@
             .constant('useExternalLogin', @ConfigurationManager.AppSettings.AllKeys.Where(k => k == "useExternalLogin").Select(k => ConfigurationManager.AppSettings[k]).DefaultIfEmpty("false").FirstOrDefault())
             .constant('externalLoginPage', '@ConfigurationManager.AppSettings.AllKeys.Where(k => k == "externalLoginPage").Select(k => ConfigurationManager.AppSettings[k]).DefaultIfEmpty(null).FirstOrDefault()');
     </script>
+    <script type="text/javascript" src=@ConfigurationManager.AppSettings["angularLocale"]></script>
 }

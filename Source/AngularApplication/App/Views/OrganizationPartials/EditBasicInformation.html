@@ -62,7 +62,9 @@
         <label>
             Voimassaolo alkaa
         </label>
-        <input id="organizationValidFrom" type="date" class="form-control" name="validFrom" data-ng-model="controller.model.validFrom" data-ng-blur="controller.validateValidity()" />
+        <input id="organizationValidFrom" type="text" class="form-control" name="validFrom" data-ng-model="controller.model.validFrom" data-ng-blur="controller.validateValidity()"
+                data-uib-datepicker-popup="dd.MM.yyyy" data-is-open="controller.isValidFromCalendarShown" data-show-button-bar="false" 
+                data-datepicker-options="{'startingDay': 1, 'formatDayTitle': 'MM yyyy'}" data-ng-click="controller.showValidFromCalendar()"/>
         <div id="organizationValidityErrorMessage" aria-live="polite" class="validation-message" data-ng-show="!controller.validValidity">
             Voimassaolo ei voi alkaa sen päättymisen jälkeen
         </div>
@@ -71,6 +73,8 @@
         <label>
             Voimassaolo päättyy
         </label>
-        <input id="organizationValidTo" type="date" class="form-control" name="validTo" data-ng-model="controller.model.validTo" data-ng-blur="controller.validateValidity()" />
+        <input id="organizationValidTo" type="text" class="form-control" name="validTo" data-ng-model="controller.model.validTo" data-ng-blur="controller.validateValidity()"
+               data-uib-datepicker-popup="dd.MM.yyyy" data-is-open="controller.isValidToCalendarShown" data-show-button-bar="false"
+               data-datepicker-options="{'startingDay': 1, 'formatDayTitle': 'MM yyyy'}" data-ng-click="controller.showValidToCalendar()" />
     </div>
 </div>
