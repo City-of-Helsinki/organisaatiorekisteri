@@ -223,6 +223,7 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\partials\_datepicker.scss" />
     <None Include="Scripts\jquery-2.2.2.intellisense.js" />
     <Content Include="Scripts\jquery-2.2.2.js" />
     <Content Include="Scripts\jquery-2.2.2.min.js" />
@@ -295,7 +296,7 @@
     <Content Include="Content\partials\_normalize.scss" />
     <Content Include="Content\partials\_organizationmap.scss" />
     <Content Include="Content\partials\_print.scss" />
-    <Content Include="Content\partials\_ptv.scss" />
+    <Content Include="Content\partials\_or.scss" />
     <Content Include="Content\partials\_rem.scss" />
     <Content Include="Content\partials\_reset.scss" />
     <Content Include="Content\partials\_styleguide.scss" />
