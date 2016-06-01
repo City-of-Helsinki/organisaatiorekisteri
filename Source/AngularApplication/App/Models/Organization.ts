@@ -9,6 +9,8 @@ module OrganizationRegister
         public descriptionAsHtml: string;
         public validFromText: string;
         public validToText: string;
+        public validFrom: string; // Web API data
+        public validTo: string; // Web API data
         public webPageUrl: string;
         public webPageName: string;
         public webPageType: string;
@@ -28,7 +30,7 @@ module OrganizationRegister
         public postalAddressTypes: PostalAddressTypes;
 
         constructor(public id?: string, public numericId?: number, public names?: Array<LocalizedText>, public businessId?: string, private descriptions?: Array<LocalizedText>,
-            public oid?: string, public type?: string, public municipalityCode?: number, public validFrom?: Date, public validTo?: Date, public phoneNumber?: string, public phoneCallFee?: string,
+            public oid?: string, public type?: string, public municipalityCode?: number, public validFromDate?: Date, public validToDate?: Date, public phoneNumber?: string, public phoneCallFee?: string,
             public emailAddress?: string, public webPages?: Array<WebPage>, public visitingAddress?: StreetAddress, public visitingAddressQualifiers?: Array<LocalizedText>,
             public useVisitingAddressAsPostalAddress?: boolean, public postalStreetAddress?: StreetAddress, public postalPostOfficeBoxAddress?: PostOfficeBoxAddress,
             public isSubOrganization?: boolean)
@@ -53,8 +55,10 @@ module OrganizationRegister
 
         private setValidityTexts()
         {
-            this.validFromText = Affecto.DateConverter.toFinnishDate(this.validFrom);
-            this.validToText = Affecto.DateConverter.toFinnishDate(this.validTo);            
+            this.validFromText = Affecto.DateConverter.toFinnishDate(this.validFromDate);
+            this.validToText = Affecto.DateConverter.toFinnishDate(this.validToDate);
+            this.validFrom = Affecto.DateConverter.toISO8601Date(this.validFromDate);
+            this.validTo = Affecto.DateConverter.toISO8601Date(this.validToDate);
         }
 
         private initializeVisitingAddress(visitingAddress?: StreetAddress, visitingAddressQualifiers?: Array<LocalizedText>): void
@@ -337,7 +341,7 @@ module OrganizationRegister
 
         public isValidValidity(): boolean
         {
-            return this.validFrom != null && this.validTo != null && this.validFrom <= this.validTo;
+            return this.validFromDate != null && this.validToDate != null && this.validFromDate <= this.validToDate;
         }
     }
 }

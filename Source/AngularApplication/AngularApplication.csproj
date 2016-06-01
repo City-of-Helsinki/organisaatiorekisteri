@@ -74,8 +74,8 @@
       <HintPath>..\packages\Affecto.Logging.Log4Net.2.0.0\lib\net40\Affecto.Logging.Log4Net.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Affecto.TypeScript.Common, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Affecto.TypeScript.Common.1.4.0\lib\net45\Affecto.TypeScript.Common.dll</HintPath>
+    <Reference Include="Affecto.TypeScript.Common, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Affecto.TypeScript.Common.1.5.0\lib\net45\Affecto.TypeScript.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Antlr3.Runtime">
