@@ -341,7 +341,7 @@ module OrganizationRegister
 
         public isValidValidity(): boolean
         {
-            return this.validFromDate != null && this.validToDate != null && this.validFromDate <= this.validToDate;
+            return this.validFromDate == null || this.validToDate == null || this.validFromDate <= this.validToDate;
         }
     }
 }
