@@ -48,6 +48,15 @@ module Affecto
             }
         }
 
+        // Returns string in format yyyy-MM-dd
+        public static toISO8601Date(date: any): string
+        {
+            return this.doConversion(date, (dateObject: Date) =>
+            {
+                return this.getISO8601Date(dateObject);
+            });
+        }
+
         public static toFinnishDate(date: any): string
         {
             return this.doConversion(date, (dateObject: Date) =>
@@ -78,10 +87,19 @@ module Affecto
             return input;
         }
 
+        private static getISO8601Date(date: Date): string
+        {
+            return date.getFullYear() + '-' + this.getMonth(date) + '-' + date.getDate();
+        }
+
         private static getFinnishDate(date: Date): string
         {
-            var month: number = date.getMonth() + 1;
-            return date.getDate() + "." + month + "." + date.getFullYear();
+            return date.getDate() + "." + this.getMonth(date) + "." + date.getFullYear();
+        }
+
+        private static getMonth(date: Date): number
+        {
+            return date.getMonth() + 1;
         }
 
         private static getTime(date: Date): string

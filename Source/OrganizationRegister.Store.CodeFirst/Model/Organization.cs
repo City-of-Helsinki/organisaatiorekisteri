@@ -29,6 +29,8 @@ namespace OrganizationRegister.Store.CodeFirst.Model
         public string BusinessId { get; set; }
         public int? MunicipalityCode { get; set; }
         public string Oid { get; set; }
+        public DateTime? ValidTo { get; set; }
+        public DateTime? ValidFrom { get; set; }
         public bool Active { get; set; }
         public bool? StreetAddressAsPostalAddress { get; set; }
         public virtual ICollection<OrganizationLanguageSpecification> LanguageSpecifications { get; set; }
@@ -223,6 +225,8 @@ namespace OrganizationRegister.Store.CodeFirst.Model
             Oid = information.Oid;
             Type = context.GetOrganizationType(information.Type);
             SetMunicipalityCode(information.MunicipalityCode);
+            ValidFrom = information.ValidFrom;
+            ValidTo = information.ValidTo;
 
             RemoveAllLanguageSpecificData();
 

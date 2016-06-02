@@ -6,16 +6,17 @@ namespace OrganizationRegister.Application.Organization
 {
     public interface IOrganizationService
     {
-        Guid AddOrganization(string businessId, string oid, string type, string municipalityCode, IEnumerable<LocalizedText> names, IEnumerable<LocalizedText> descriptions);
+        Guid AddOrganization(string businessId, string oid, string type, string municipalityCode, IEnumerable<LocalizedText> names, IEnumerable<LocalizedText> descriptions, 
+            DateTime? validFrom, DateTime? validTo);
         Guid AddSubOrganization(Guid parentOrganizationId, string businessId, string oid, string type, string municipalityCode, IEnumerable<LocalizedText> names, 
-            IEnumerable<LocalizedText> descriptions);
+            IEnumerable<LocalizedText> descriptions, DateTime? validFrom, DateTime? validTo);
         IEnumerable<IHierarchicalOrganization> GetActiveOrganizationHierarchy();
         IEnumerable<IOrganizationName> GetActiveOrganizations();
         IEnumerable<IOrganizationName> GetActiveMainOrganizations();
         IEnumerable<IOrganizationName> GetMainOrganizations();
         IOrganization GetOrganization(Guid organizationId);
-        void SetOrganizationBasicInformation(Guid organizationId, string businessId, string oid, IEnumerable<LocalizedText> names, IEnumerable<LocalizedText> descriptions,
-            string type, string municipalityCode);
+        void SetOrganizationBasicInformation(Guid organizationId, string businessId, string oid, IEnumerable<LocalizedText> names, IEnumerable<LocalizedText> descriptions, 
+            string type, string municipalityCode, DateTime? validFrom, DateTime? validTo);
         void SetOrganizationContactInformation(Guid organizationId, string phoneNumber, string phoneCallFee, string emailAddress, IEnumerable<WebPage> webSites);
         void SetOrganizationVisitingAddress(Guid organizationId, IEnumerable<LocalizedText> streetAddresses, string postalCode, IEnumerable<LocalizedText> postalDistricts, 
             IEnumerable<LocalizedText> qualifiers);

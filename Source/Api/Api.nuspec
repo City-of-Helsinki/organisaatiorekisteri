@@ -8,6 +8,7 @@
     <version>$version$</version>
     <releaseNotes>
       Maximum one postal address per organization.
+      Added organization validity period.
     </releaseNotes>
   </metadata>
 </package>

@@ -19,7 +19,8 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
         {
             TableRow municipality = municipalities.Rows.Single();
             Try(() => OrganizationService.AddOrganization(municipality["Business id"], municipality.GetOptionalValue("Oid"), OrganizationType.Municipality,
-                municipality["Municipality code"], LocalizedTextHelper.CreateNamesCollection(municipality), LocalizedTextHelper.CreateDescriptionsCollection(municipality)));
+                municipality["Municipality code"], LocalizedTextHelper.CreateNamesCollection(municipality), LocalizedTextHelper.CreateDescriptionsCollection(municipality), 
+                municipality.GetOptionalFinnishDate("Valid from"), municipality.GetOptionalFinnishDate("Valid to")));
         }
 
         [Then(@"there are following organizations:")]
@@ -55,7 +56,8 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
             Guid parentOrganizationId = organizations.Single(org => org.Names.Any(name => name.LocalizedValue.Equals(parentOrganizationFinnishName))).Id;
                 
             Try(() => OrganizationService.AddSubOrganization(parentOrganizationId, company["Business id"], company.GetOptionalValue("Oid"), company["Type"], null,
-                LocalizedTextHelper.CreateNamesCollection(company), LocalizedTextHelper.CreateDescriptionsCollection(company)));
+                LocalizedTextHelper.CreateNamesCollection(company), LocalizedTextHelper.CreateDescriptionsCollection(company), company.GetOptionalFinnishDate("Valid from"),
+                company.GetOptionalFinnishDate("Valid to")));
         }
 
         [Then(@"'(.+)' is a sub organization of '(.+)'")]
@@ -65,7 +67,6 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
             IHierarchicalOrganization hierarchicalSub = 
                 hierarchicalParent.SubOrganizations.Single(org => org.Names.Any(name => name.LocalizedValue.Equals(subOrganizationFinnishName)));
 
-            IOrganization parent = OrganizationService.GetOrganization(hierarchicalParent.Id);
             IOrganization sub = OrganizationService.GetOrganization(hierarchicalSub.Id);
             Assert.IsTrue(sub.IsSubOrganization);
         }

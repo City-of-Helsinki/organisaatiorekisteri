@@ -1,4 +1,5 @@
 using Affecto.EntityFramework.PostgreSql;
+using Affecto.EntityFramework.PostgreSql.Configuration;
 
 namespace OrganizationRegister.Store.CodeFirst.Migrations
 {

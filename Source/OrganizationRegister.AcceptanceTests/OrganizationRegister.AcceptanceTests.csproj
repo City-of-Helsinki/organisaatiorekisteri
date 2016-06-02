@@ -45,8 +45,8 @@
       <HintPath>..\packages\Affecto.Configuration.Extensions.2.0.0\lib\net40\Affecto.Configuration.Extensions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Affecto.EntityFramework.PostgreSql, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Affecto.EntityFramework.PostgreSql.2.0.0\lib\net45\Affecto.EntityFramework.PostgreSql.dll</HintPath>
+    <Reference Include="Affecto.EntityFramework.PostgreSql, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Affecto.EntityFramework.PostgreSql.3.0.0\lib\net45\Affecto.EntityFramework.PostgreSql.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Affecto.Identifiers.Finnish, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -61,8 +61,8 @@
       <HintPath>..\packages\Affecto.Patterns.Specification.1.2.0\lib\net40\Affecto.Patterns.Specification.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Affecto.Testing.SpecFlow, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Affecto.Testing.SpecFlow.1.2.0\lib\net45\Affecto.Testing.SpecFlow.dll</HintPath>
+    <Reference Include="Affecto.Testing.SpecFlow, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Affecto.Testing.SpecFlow.1.3.0\lib\net45\Affecto.Testing.SpecFlow.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">

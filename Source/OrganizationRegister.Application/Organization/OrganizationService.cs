@@ -24,24 +24,26 @@ namespace OrganizationRegister.Application.Organization
             this.settingsRepository = settingsRepository;
         }
 
-        public Guid AddOrganization(string businessId, string oid, string type, string municipalityCode, IEnumerable<LocalizedText> names, 
-            IEnumerable<LocalizedText> descriptions)
+        public Guid AddOrganization(string businessId, string oid, string type, string municipalityCode, IEnumerable<LocalizedText> names, IEnumerable<LocalizedText> descriptions, 
+            DateTime? validFrom, DateTime? validTo)
         {
             IReadOnlyCollection<string> languageCodes = settingsRepository.GetDataLanguageCodes();
             // TODO: Wrap id generation into a service
             var id = Guid.NewGuid();
             var organization = new Organization(id, businessId, oid, type, municipalityCode, names, languageCodes) { Descriptions = descriptions };
+            organization.SetValidity(validFrom, validTo);
             organizationRepository.AddOrganizationAndSave(organization);
             return id;
         }
 
         public Guid AddSubOrganization(Guid parentOrganizationId, string businessId, string oid, string type, string municipalityCode, IEnumerable<LocalizedText> names,
-            IEnumerable<LocalizedText> descriptions)
+            IEnumerable<LocalizedText> descriptions, DateTime? validFrom, DateTime? validTo)
         {
             IReadOnlyCollection<string> languageCodes = settingsRepository.GetDataLanguageCodes();
             // TODO: Wrap id generation into a service
             var id = Guid.NewGuid();
             var organization = new SubOrganization(id, businessId, oid, type, municipalityCode, names, languageCodes) { Descriptions = descriptions };
+            organization.SetValidity(validFrom, validTo);
             organizationRepository.AddSubOrganizationAndSave(parentOrganizationId, organization);
             return id;
         }
@@ -77,7 +79,7 @@ namespace OrganizationRegister.Application.Organization
         }
 
         public void SetOrganizationBasicInformation(Guid organizationId, string businessId, string oid, IEnumerable<LocalizedText> names, IEnumerable<LocalizedText> descriptions, 
-            string type, string municipalityCode)
+            string type, string municipalityCode, DateTime? validFrom, DateTime? validTo)
         {
             Organization organization = GetOrganization(organizationId) as Organization;
             organization.BusinessId = businessId;
@@ -85,6 +87,7 @@ namespace OrganizationRegister.Application.Organization
             organization.Names = names;
             organization.Descriptions = descriptions;
             organization.SetType(type, municipalityCode);
+            organization.SetValidity(validFrom, validTo);
             organizationRepository.UpdateOrganizationBasicInformation(organizationId, organization, organization is SubOrganization);
             organizationRepository.SaveChanges();
         }
@@ -110,7 +113,8 @@ namespace OrganizationRegister.Application.Organization
         }
 
         public void SetOrganizationPostalAddresses(Guid organizationId, bool useVisitingAddress, IEnumerable<LocalizedText> streetAddresses, string streetAddressPostalCode,
-            IEnumerable<LocalizedText> streetAddressPostalDistricts, string postOfficeBox, string postOfficeBoxAddressPostalCode, IEnumerable<LocalizedText> postOfficeBoxAddressPostalDistricts)
+            IEnumerable<LocalizedText> streetAddressPostalDistricts, string postOfficeBox, string postOfficeBoxAddressPostalCode, 
+            IEnumerable<LocalizedText> postOfficeBoxAddressPostalDistricts)
         {
             Organization organization = GetOrganization(organizationId) as Organization;
             organization.SetPostalAddress(useVisitingAddress, streetAddresses, streetAddressPostalCode, streetAddressPostalDistricts, postOfficeBox, 

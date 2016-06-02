@@ -26,7 +26,7 @@ namespace OrganizationRegister.Api.Tests.Organization
         }
 
         [TestMethod]
-        public void CompanyOrganizationIsAddedWithoutOptionalDescriptions()
+        public void CompanyOrganizationIsAddedWithoutOptionalDescriptionsAndValidity()
         {
             const string businessId = "1234567-8";
             const string englishName = "company";
@@ -52,11 +52,12 @@ namespace OrganizationRegister.Api.Tests.Organization
 
             organizationService.Received(1).AddOrganization(businessId, oid, type, null,
                 Arg.Is<IEnumerable<LocalizedText>>(names => names.Count() == 2 && names.Any(name => name.LanguageCode.Equals(finnishLanguageCode) && name.LocalizedValue.Equals(finnishName))
-                    && names.Any(name => name.LanguageCode.Equals(englishLanguageCode) && name.LocalizedValue.Equals(englishName))), Arg.Any<IEnumerable<LocalizedText>>());
+                    && names.Any(name => name.LanguageCode.Equals(englishLanguageCode) && name.LocalizedValue.Equals(englishName))), Arg.Any<IEnumerable<LocalizedText>>(),
+                    Arg.Any<DateTime?>(), Arg.Any<DateTime?>());
         }
 
         [TestMethod]
-        public void MunicipalityOrganizationIsAddedWithDescriptions()
+        public void MunicipalityOrganizationIsAddedWithDescriptionsAndValidity()
         {
             const string businessId = "1234567-8";
             const string finnishDescription = "Suomen vanhin kaupunki";
@@ -65,6 +66,8 @@ namespace OrganizationRegister.Api.Tests.Organization
             const string oid = "132456";
             const string type = "Kunta";
             const string finnishLanguageCode = "fi";
+            DateTime? validFrom = new DateTime(2015, 1, 1);
+            DateTime? validTo = new DateTime(2016, 1, 1);
 
             BasicInformation information = new BasicInformation
             {
@@ -79,14 +82,17 @@ namespace OrganizationRegister.Api.Tests.Organization
                 },
                 Type = type,
                 MunicipalityCode = municipalityCode,
-                Oid = oid
+                Oid = oid,
+                ValidFrom = validFrom,
+                ValidTo = validTo
             };
 
             sut.AddOrganization(information);
 
             organizationService.Received(1).AddOrganization(businessId, oid, type, municipalityCode,
                 Arg.Is<IEnumerable<LocalizedText>>(names => names.Single().Equals(new LocalizedText(finnishLanguageCode, finnishName))),
-                Arg.Is<IEnumerable<LocalizedText>>(descriptions => descriptions.Single().Equals(new LocalizedText(finnishLanguageCode, finnishDescription))));
+                Arg.Is<IEnumerable<LocalizedText>>(descriptions => descriptions.Single().Equals(new LocalizedText(finnishLanguageCode, finnishDescription))),
+                validFrom, validTo);
         }
 
         [TestMethod]
@@ -104,7 +110,7 @@ namespace OrganizationRegister.Api.Tests.Organization
                 Type = "Kolmas sektori",
             };
             organizationService.AddOrganization(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<IEnumerable<LocalizedText>>(),
-                Arg.Any<IEnumerable<LocalizedText>>()).Returns(organizationId);
+                Arg.Any<IEnumerable<LocalizedText>>(), Arg.Any<DateTime?>(), Arg.Any<DateTime?>()).Returns(organizationId);
 
             var result = sut.AddOrganization(company) as OkNegotiatedContentResult<Guid>;
 
@@ -113,7 +119,7 @@ namespace OrganizationRegister.Api.Tests.Organization
         }
 
         [TestMethod]
-        public void CompanySubOrganizationIsAddedWithoutOptionalDescriptions()
+        public void CompanySubOrganizationIsAddedWithoutOptionalDescriptionsAndValidity()
         {
             Guid parentOrganizationId = Guid.NewGuid();
             const string businessId = "1234567-8";
@@ -140,11 +146,12 @@ namespace OrganizationRegister.Api.Tests.Organization
 
             organizationService.Received(1).AddSubOrganization(parentOrganizationId, businessId, oid, type, null,
                 Arg.Is<IEnumerable<LocalizedText>>(names => names.Count() == 2 && names.Any(name => name.LanguageCode.Equals(finnishLanguageCode) && name.LocalizedValue.Equals(finnishName))
-                    && names.Any(name => name.LanguageCode.Equals(englishLanguageCode) && name.LocalizedValue.Equals(englishName))), Arg.Any<IEnumerable<LocalizedText>>());
+                    && names.Any(name => name.LanguageCode.Equals(englishLanguageCode) && name.LocalizedValue.Equals(englishName))), Arg.Any<IEnumerable<LocalizedText>>(),
+                    Arg.Any<DateTime?>(), Arg.Any<DateTime?>());
         }
 
         [TestMethod]
-        public void MunicipalitySubOrganizationIsAddedWithDescriptions()
+        public void MunicipalitySubOrganizationIsAddedWithDescriptionsAndValidity()
         {
             Guid parentOrganizationId = Guid.NewGuid();
             const string businessId = "1234567-8";
@@ -154,6 +161,8 @@ namespace OrganizationRegister.Api.Tests.Organization
             const string oid = "132456";
             const string type = "Kunta";
             const string finnishLanguageCode = "fi";
+            DateTime? validFrom = DateTime.Today;
+            DateTime? validTo = DateTime.Today.AddDays(1);
 
             BasicInformation information = new BasicInformation
             {
@@ -168,14 +177,17 @@ namespace OrganizationRegister.Api.Tests.Organization
                 },
                 Type = type,
                 MunicipalityCode = municipalityCode,
-                Oid = oid
+                Oid = oid,
+                ValidFrom = validFrom,
+                ValidTo = validTo
             };
 
             sut.AddSubOrganization(parentOrganizationId, information);
 
             organizationService.Received(1).AddSubOrganization(parentOrganizationId, businessId, oid, type, municipalityCode,
                 Arg.Is<IEnumerable<LocalizedText>>(names => names.Single().Equals(new LocalizedText(finnishLanguageCode, finnishName))),
-                Arg.Is<IEnumerable<LocalizedText>>(descriptions => descriptions.Single().Equals(new LocalizedText(finnishLanguageCode, finnishDescription))));
+                Arg.Is<IEnumerable<LocalizedText>>(descriptions => descriptions.Single().Equals(new LocalizedText(finnishLanguageCode, finnishDescription))),
+                validFrom, validTo);
         }
 
         [TestMethod]
@@ -193,7 +205,7 @@ namespace OrganizationRegister.Api.Tests.Organization
                 Type = "Kolmas sektori",
             };
             organizationService.AddSubOrganization(Arg.Any<Guid>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>(), 
-                Arg.Any<IEnumerable<LocalizedText>>(), Arg.Any<IEnumerable<LocalizedText>>()).Returns(organizationId);
+                Arg.Any<IEnumerable<LocalizedText>>(), Arg.Any<IEnumerable<LocalizedText>>(), Arg.Any<DateTime?>(), Arg.Any<DateTime?>()).Returns(organizationId);
 
             var result = sut.AddSubOrganization(Guid.NewGuid(), company) as OkNegotiatedContentResult<Guid>;
 
@@ -212,6 +224,8 @@ namespace OrganizationRegister.Api.Tests.Organization
             const string oid = "132456";
             const string finnishLanguageCode = "fi";
             const string type = "Kunta";
+            DateTime? validFrom = DateTime.Today;
+            DateTime? validTo = DateTime.Today.AddDays(1);
 
             BasicInformation information = new BasicInformation
             {
@@ -226,7 +240,9 @@ namespace OrganizationRegister.Api.Tests.Organization
                 },
                 Type = type,
                 MunicipalityCode = municipalityCode,
-                Oid = oid
+                Oid = oid,
+                ValidFrom = validFrom,
+                ValidTo = validTo
             };
 
             sut.SetOrganizationBasicInformation(organizationId, information);
@@ -235,8 +251,7 @@ namespace OrganizationRegister.Api.Tests.Organization
                 Arg.Is<IEnumerable<LocalizedText>>(texts => texts.Count() == 1 && texts.Any(text => text.LanguageCode.Equals(finnishLanguageCode) && 
                     text.LocalizedValue.Equals(finnishName))),
                 Arg.Is<IEnumerable<LocalizedText>>(texts => texts.Count() == 1 && texts.Any(text => text.LanguageCode.Equals(finnishLanguageCode) && 
-                    text.LocalizedValue.Equals(finnishDescription))),
-                type, municipalityCode);
+                    text.LocalizedValue.Equals(finnishDescription))), type, municipalityCode, validFrom, validTo);
         }
 
         [TestMethod]

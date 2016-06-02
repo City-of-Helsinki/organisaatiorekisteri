@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using OrganizationRegister.Common;
 
 namespace OrganizationRegister.Application.Organization
@@ -12,5 +13,7 @@ namespace OrganizationRegister.Application.Organization
         IEnumerable<LocalizedText> Descriptions { get; }
         string MunicipalityCode { get; }
         string GetDescription(string languageCode);
+        DateTime? ValidFrom { get; }
+        DateTime? ValidTo { get; }
     }
 }

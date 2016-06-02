@@ -37,6 +37,10 @@ namespace OrganizationRegister.AngularApplication
             bundles.Add(new ScriptBundle("~/bundles/treecontrol").Include(
                 "~/Scripts/angular-tree-control.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/angular-ui").Include(
+                "~/Scripts/angular-ui/ui-bootstrap-tpls.js",
+                "~/Scripts/angular-ui/ui-bootstrap.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/scripts")
                 .IncludeDirectory("~/Scripts/OrganizationRegister/", "*.js")
                 .IncludeDirectory("~/Scripts/affecto/", "*.js"));
@@ -63,6 +67,7 @@ namespace OrganizationRegister.AngularApplication
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                  BusyIndicationBundle.GetStyleBundleVirtualPath(),
+                 "~/Content/ui-bootstrap-csp.css",
                  "~/Content/screen.css",
                  "~/Content/temporary.css"));
 
