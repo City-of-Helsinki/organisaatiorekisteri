@@ -54,21 +54,6 @@
   color: #333;
   background-color: #fff;
   border-color: #ccc;
-  :active, .active {
-      background-image: none;
-      .focus, :focus, :hover, .hover {
-          background-color: #d4d4d4;
-          border-color: #8c8c8c;
-          }
-      }
-  :focus, .focus {
-      background-color: #e6e6e6;
-      border-color: #8c8c8c;
-  }
-  :hover {
-      background-color: #e6e6e6;
-      border-color: #adadad;
-  }
 }
 
 table .btn {
@@ -112,21 +97,6 @@ table .btn {
   color: #fff;
   background-color: #5bc0de;
   border-color: #46b8da;
-  :focus, .focus {
-      background-color: #31b0d5;
-      border-color: #1b6d85;
-  }
-  :hover, :active, .active {
-      background-color: #31b0d5;
-      border-color: #269abc;
-      }
-  :active:hover, .active:hover, :active:focus, .active:focus, :active.focus, .active.focus {
-      background-color: #269abc;
-      border-color: #1b6d85;
-  }
-  :active, .active {
-      background-image: none;
-  }
 }
 
 .h6 {
@@ -150,4 +120,25 @@ table .btn {
 }
 .glyphicon-chevron-right:before {
   content: "\e080";
+}
+
+.uib-daypicker tr > .text-center, .uib-daypicker th > .btn-sm {
+    font-weight: bold;
+}
+
+.uib-daypicker td > .btn-sm {
+    border: 1px solid rgba(0,0,0,.15);
+}
+
+.uib-daypicker td > em {
+    font-style: italic;
+}
+
+.uib-daypicker th > .btn-sm {
+    border: 1px solid transparent;
+    border-color: #ccc;
+}
+
+.uib-daypicker tr > th {
+    vertical-align: top;
 }
