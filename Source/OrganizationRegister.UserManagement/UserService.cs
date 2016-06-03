@@ -99,7 +99,8 @@ namespace OrganizationRegister.UserManagement
                 throw new ArgumentException("User's first name cannot be empty.", nameof(firstName));
             }
 
-            CheckManageUsersPermissions(roleId);
+            CheckManageUsersOfOrganization(organizationId);
+            CheckManageUsersInRole(roleId);
 
             if (IsExistingUser(emailAddress))
             {
@@ -126,15 +127,7 @@ namespace OrganizationRegister.UserManagement
 
         public IEnumerable<IUserListItem> GetInternalUsers(Guid organizationId)
         {
-            Guid userOrganizationId = userContext.GetUserOrganizationId();
-            if (organizationId == userOrganizationId)
-            {
-                userContext.CheckPermission(Permissions.Users.ViewUserOrganizationUsers);
-            }
-            else
-            {
-                userContext.CheckPermission(Permissions.Users.ViewAllUsers);
-            }
+            CheckManageUsersOfOrganization(organizationId);
 
             string organizationIdString = OrganizationId.Convert(organizationId);
             IEnumerable<IdentityManagement.Model.IUser> users = identityManagementService.GetUsers(CustomPropertyName.OrganizationId.ToString(),
@@ -144,7 +137,20 @@ namespace OrganizationRegister.UserManagement
             return mapper.Map(users).ToList();
         }
 
-        private void CheckManageUsersPermissions(Guid roleId)
+        private void CheckManageUsersOfOrganization(Guid organizationId)
+        {
+            Guid userOrganizationId = userContext.GetUserOrganizationId();
+            if (organizationId == userOrganizationId)
+            {
+                userContext.CheckPermission(Permissions.Users.MaintenanceOfOwnOrganizationUsers);
+            }
+            else
+            {
+                userContext.CheckPermission(Permissions.Users.MaintenanceOfAllUsers);
+            }
+        }
+
+        private void CheckManageUsersInRole(Guid roleId)
         {
             IEnumerable<IdentityManagement.Model.IRole> roles = identityManagementService.GetRoles();
             IdentityManagement.Model.IRole newRole = roles.SingleOrDefault(r => r.Id == roleId);
@@ -156,7 +162,11 @@ namespace OrganizationRegister.UserManagement
 
             if (newRole.Name == Roles.Administrator)
             {
-                userContext.CheckPermission(Permissions.Users.ManageAdministratorUsers);
+                userContext.CheckPermission(Permissions.Users.MaintenanceOfAllUsers);
+            }
+            else
+            {
+                userContext.CheckPermission(Permissions.Users.MaintenanceOfOwnOrganizationUsers);
             }
         }
     }

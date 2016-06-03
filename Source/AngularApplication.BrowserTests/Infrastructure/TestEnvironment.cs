@@ -133,7 +133,7 @@ namespace OrganizationRegister.AngularApplication.BrowserTests.Infrastructure
             Guid organizationId = organizationService.AddOrganization("6464032-2", null, "Valtio", null,
                 new List<LocalizedText> { new LocalizedText("fi", "Testkäyttäjän organisaatio") }, null, null, null);
 
-            userContext.Permissions = new List<string> { Permissions.Users.UserMaintenance, Permissions.Users.ManageAdministratorUsers };
+            userContext.Permissions = new List<string> { Permissions.Users.MaintenanceOfOwnOrganizationUsers, Permissions.Users.MaintenanceOfAllUsers };
             userManagementTestEnvironment.AddBasicTestUser(organizationId, BasicTestUserEmailAddress, TestUserPassword, "Basic", "User");
             userManagementTestEnvironment.AddOrganizationAdministratorTestUser(organizationId, OrganizationAdministratorTestUserEmailAddress, TestUserPassword, 
                 "OrganizationAdmin", "User");

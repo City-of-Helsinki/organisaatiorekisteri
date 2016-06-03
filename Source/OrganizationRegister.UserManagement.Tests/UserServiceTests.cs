@@ -23,26 +23,23 @@ namespace OrganizationRegister.UserManagement.Tests
         private MapperFactory mapperFactory;
         private IAuthenticatedUserContext userContext;
 
-        private static readonly Guid ExpectedRoleId = Guid.NewGuid();
+        private static readonly Guid AdminRoleId = Guid.NewGuid();
+        private static readonly Guid BasicRoleId = Guid.NewGuid();
         private static readonly Guid ExpectedOrganizationId = Guid.NewGuid();
-        private static readonly string ExpectedEmailAddress = "foo@bar.com";
-        private static readonly string ExpectedPassword = "PaSS";
-        private static readonly string ExpectedLastName = "Clarkson";
-        private static readonly string ExpectedFirstName = "Jeremy";
-        private static readonly string ExpectedPhoneNumber = "5562423422-234";
+        private const string ExpectedEmailAddress = "foo@bar.com";
+        private const string ExpectedPassword = "PaSS";
+        private const string ExpectedLastName = "Clarkson";
+        private const string ExpectedFirstName = "Jeremy";
+        private const string ExpectedPhoneNumber = "5562423422-234";
 
         [TestInitialize]
         public void Setup()
         {
             identityManagementService = Substitute.For<IdentityManagement.IIdentityManagementService>();
             mapperFactory = Substitute.For<MapperFactory>();
-            userContext = Substitute.For<IAuthenticatedUserContext>();
+            SetupUserContext();
             sut = new UserService(identityManagementService, mapperFactory, userContext);
-
-            var role = Substitute.For<IdentityManagement.Model.IRole>();
-            role.Id.Returns(ExpectedRoleId);
-            role.Name.Returns(Roles.Administrator);
-            identityManagementService.GetRoles().Returns(new List<IdentityManagement.Model.IRole> { role });
+            SetupRoles();
         }
 
         [TestMethod]
@@ -85,97 +82,97 @@ namespace OrganizationRegister.UserManagement.Tests
         [ExpectedException(typeof(ArgumentException))]
         public void OrganizationIdCannotBeEmptyWhenAddingUser()
         {
-            sut.AddUser(ExpectedRoleId, Guid.Empty, ExpectedEmailAddress, ExpectedPassword, ExpectedLastName, ExpectedFirstName, ExpectedPhoneNumber);
+            sut.AddUser(AdminRoleId, Guid.Empty, ExpectedEmailAddress, ExpectedPassword, ExpectedLastName, ExpectedFirstName, ExpectedPhoneNumber);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void EmailAddressCannotBeNullWhenAddingUser()
         {
-            sut.AddUser(ExpectedRoleId, ExpectedOrganizationId, null, ExpectedPassword, ExpectedLastName, ExpectedFirstName, ExpectedPhoneNumber);
+            sut.AddUser(AdminRoleId, ExpectedOrganizationId, null, ExpectedPassword, ExpectedLastName, ExpectedFirstName, ExpectedPhoneNumber);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void EmailAddressCannotBeEmptyWhenAddingUser()
         {
-            sut.AddUser(ExpectedRoleId, ExpectedOrganizationId, "", ExpectedPassword, ExpectedLastName, ExpectedFirstName, ExpectedPhoneNumber);
+            sut.AddUser(AdminRoleId, ExpectedOrganizationId, "", ExpectedPassword, ExpectedLastName, ExpectedFirstName, ExpectedPhoneNumber);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void EmailAddressCannotBeWhitespaceWhenAddingUser()
         {
-            sut.AddUser(ExpectedRoleId, ExpectedOrganizationId, " ", ExpectedPassword, ExpectedLastName, ExpectedFirstName, ExpectedPhoneNumber);
+            sut.AddUser(AdminRoleId, ExpectedOrganizationId, " ", ExpectedPassword, ExpectedLastName, ExpectedFirstName, ExpectedPhoneNumber);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void PasswordCannotBeNullWhenAddingUser()
         {
-            sut.AddUser(ExpectedRoleId, ExpectedOrganizationId, ExpectedEmailAddress, null, ExpectedLastName, ExpectedFirstName, ExpectedPhoneNumber);
+            sut.AddUser(AdminRoleId, ExpectedOrganizationId, ExpectedEmailAddress, null, ExpectedLastName, ExpectedFirstName, ExpectedPhoneNumber);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void PasswordCannotBeEmptyWhenAddingUser()
         {
-            sut.AddUser(ExpectedRoleId, ExpectedOrganizationId, ExpectedEmailAddress, "", ExpectedLastName, ExpectedFirstName, ExpectedPhoneNumber);
+            sut.AddUser(AdminRoleId, ExpectedOrganizationId, ExpectedEmailAddress, "", ExpectedLastName, ExpectedFirstName, ExpectedPhoneNumber);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void PasswordCannotBeWhitespaceWhenAddingUser()
         {
-            sut.AddUser(ExpectedRoleId, ExpectedOrganizationId, ExpectedEmailAddress, " ", ExpectedLastName, ExpectedFirstName, ExpectedPhoneNumber);
+            sut.AddUser(AdminRoleId, ExpectedOrganizationId, ExpectedEmailAddress, " ", ExpectedLastName, ExpectedFirstName, ExpectedPhoneNumber);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void LastNameCannotBeNullWhenAddingUser()
         {
-            sut.AddUser(ExpectedRoleId, ExpectedOrganizationId, ExpectedEmailAddress, ExpectedPassword, null, ExpectedFirstName, ExpectedPhoneNumber);
+            sut.AddUser(AdminRoleId, ExpectedOrganizationId, ExpectedEmailAddress, ExpectedPassword, null, ExpectedFirstName, ExpectedPhoneNumber);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void LastNameCannotBeEmptyWhenAddingUser()
         {
-            sut.AddUser(ExpectedRoleId, ExpectedOrganizationId, ExpectedEmailAddress, ExpectedPassword, "", ExpectedFirstName, ExpectedPhoneNumber);
+            sut.AddUser(AdminRoleId, ExpectedOrganizationId, ExpectedEmailAddress, ExpectedPassword, "", ExpectedFirstName, ExpectedPhoneNumber);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void LastNameCannotBeWhitespaceWhenAddingUser()
         {
-            sut.AddUser(ExpectedRoleId, ExpectedOrganizationId, ExpectedEmailAddress, ExpectedPassword, " ", ExpectedFirstName, ExpectedPhoneNumber);
+            sut.AddUser(AdminRoleId, ExpectedOrganizationId, ExpectedEmailAddress, ExpectedPassword, " ", ExpectedFirstName, ExpectedPhoneNumber);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void FirstNameCannotBeNullWhenAddingUser()
         {
-            sut.AddUser(ExpectedRoleId, ExpectedOrganizationId, ExpectedEmailAddress, ExpectedPassword, ExpectedLastName, null, ExpectedPhoneNumber);
+            sut.AddUser(AdminRoleId, ExpectedOrganizationId, ExpectedEmailAddress, ExpectedPassword, ExpectedLastName, null, ExpectedPhoneNumber);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void FirstNameCannotBeEmptyWhenAddingUser()
         {
-            sut.AddUser(ExpectedRoleId, ExpectedOrganizationId, ExpectedEmailAddress, ExpectedPassword, ExpectedLastName, "", ExpectedPhoneNumber);
+            sut.AddUser(AdminRoleId, ExpectedOrganizationId, ExpectedEmailAddress, ExpectedPassword, ExpectedLastName, "", ExpectedPhoneNumber);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void FirstNameCannotBeWhitespaceWhenAddingUser()
         {
-            sut.AddUser(ExpectedRoleId, ExpectedOrganizationId, ExpectedEmailAddress, ExpectedPassword, ExpectedLastName, " ", ExpectedPhoneNumber);
+            sut.AddUser(AdminRoleId, ExpectedOrganizationId, ExpectedEmailAddress, ExpectedPassword, ExpectedLastName, " ", ExpectedPhoneNumber);
         }
 
         [TestMethod]
         public void DisplayNameIsGeneratedWhenAddingUser()
         {
-            sut.AddUser(ExpectedRoleId, ExpectedOrganizationId, ExpectedEmailAddress, ExpectedPassword, ExpectedLastName, ExpectedFirstName, ExpectedPhoneNumber);
+            sut.AddUser(AdminRoleId, ExpectedOrganizationId, ExpectedEmailAddress, ExpectedPassword, ExpectedLastName, ExpectedFirstName, ExpectedPhoneNumber);
 
             identityManagementService.Received(1).CreateUser($"{ExpectedLastName} {ExpectedFirstName}",
                 Arg.Any<IEnumerable<KeyValuePair<string, string>>>());
@@ -189,7 +186,7 @@ namespace OrganizationRegister.UserManagement.Tests
                 .When(s => s.CreateUser(Arg.Any<string>(), Arg.Any<IEnumerable<KeyValuePair<string, string>>>()))
                 .Do(callInfo => customProperties = callInfo.Arg<IEnumerable<KeyValuePair<string, string>>>());
 
-            sut.AddUser(ExpectedRoleId, ExpectedOrganizationId, ExpectedEmailAddress, ExpectedPassword, ExpectedLastName, ExpectedFirstName, ExpectedPhoneNumber);
+            sut.AddUser(AdminRoleId, ExpectedOrganizationId, ExpectedEmailAddress, ExpectedPassword, ExpectedLastName, ExpectedFirstName, ExpectedPhoneNumber);
 
             identityManagementService.Received(1).CreateUser(Arg.Any<string>(),
                 Arg.Any<IEnumerable<KeyValuePair<string, string>>>());
@@ -213,9 +210,9 @@ namespace OrganizationRegister.UserManagement.Tests
                 .CreateUser(Arg.Any<string>(), Arg.Any<IEnumerable<KeyValuePair<string, string>>>())
                 .Returns(expectedUser);
 
-            sut.AddUser(ExpectedRoleId, ExpectedOrganizationId, ExpectedEmailAddress, ExpectedPassword, ExpectedLastName, ExpectedFirstName, ExpectedPhoneNumber);
+            sut.AddUser(AdminRoleId, ExpectedOrganizationId, ExpectedEmailAddress, ExpectedPassword, ExpectedLastName, ExpectedFirstName, ExpectedPhoneNumber);
 
-            identityManagementService.Received(1).AddUserRole(expectedUser.Id, ExpectedRoleId);
+            identityManagementService.Received(1).AddUserRole(expectedUser.Id, AdminRoleId);
         }
 
         [TestMethod]
@@ -228,7 +225,7 @@ namespace OrganizationRegister.UserManagement.Tests
                 .CreateUser(Arg.Any<string>(), Arg.Any<IEnumerable<KeyValuePair<string, string>>>())
                 .Returns(expectedUser);
 
-            Guid userId = sut.AddUser(ExpectedRoleId, ExpectedOrganizationId, ExpectedEmailAddress, ExpectedPassword, ExpectedLastName, ExpectedFirstName, ExpectedPhoneNumber);
+            Guid userId = sut.AddUser(AdminRoleId, ExpectedOrganizationId, ExpectedEmailAddress, ExpectedPassword, ExpectedLastName, ExpectedFirstName, ExpectedPhoneNumber);
 
             Assert.AreEqual(expectedUser.Id, userId);
         }
@@ -238,10 +235,21 @@ namespace OrganizationRegister.UserManagement.Tests
         public void AdministratorUserCannotBeAddedWithoutPermission()
         {
             userContext
-                .When(u => u.CheckPermission(Permissions.Users.ManageAdministratorUsers))
-                .Do(callInfo => { throw new InsufficientPermissionsException(Permissions.Users.ManageAdministratorUsers); });
+                .When(u => u.CheckPermission(Permissions.Users.MaintenanceOfAllUsers))
+                .Do(callInfo => { throw new InsufficientPermissionsException(Permissions.Users.MaintenanceOfAllUsers); });
 
-            sut.AddUser(ExpectedRoleId, ExpectedOrganizationId, ExpectedEmailAddress, ExpectedPassword, ExpectedLastName, ExpectedFirstName, ExpectedPhoneNumber);
+            sut.AddUser(AdminRoleId, ExpectedOrganizationId, ExpectedEmailAddress, ExpectedPassword, ExpectedLastName, ExpectedFirstName, ExpectedPhoneNumber);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InsufficientPermissionsException))]
+        public void NormalUserCannotBeAddedWithoutPermission()
+        {
+            userContext
+                .When(u => u.CheckPermission(Permissions.Users.MaintenanceOfOwnOrganizationUsers))
+                .Do(callInfo => { throw new InsufficientPermissionsException(Permissions.Users.MaintenanceOfOwnOrganizationUsers); });
+
+            sut.AddUser(BasicRoleId, ExpectedOrganizationId, ExpectedEmailAddress, ExpectedPassword, ExpectedLastName, ExpectedFirstName, ExpectedPhoneNumber);
         }
 
         [TestMethod]
@@ -252,8 +260,8 @@ namespace OrganizationRegister.UserManagement.Tests
             userContext.HasCustomProperty(CustomPropertyName.OrganizationId.ToString()).Returns(true);
             userContext.GetCustomPropertyValue(CustomPropertyName.OrganizationId.ToString()).Returns(organizationId.ToString("D"));
             userContext
-                .When(u => u.CheckPermission(Permissions.Users.ViewAllUsers))
-                .Do(callInfo => { throw new InsufficientPermissionsException(Permissions.Users.ViewAllUsers); });
+                .When(u => u.CheckPermission(Permissions.Users.MaintenanceOfAllUsers))
+                .Do(callInfo => { throw new InsufficientPermissionsException(Permissions.Users.MaintenanceOfAllUsers); });
 
             var returnedUsers = new List<IdentityManagement.Model.IUser>
             {
@@ -290,8 +298,8 @@ namespace OrganizationRegister.UserManagement.Tests
             userContext.HasCustomProperty(CustomPropertyName.OrganizationId.ToString()).Returns(true);
             userContext.GetCustomPropertyValue(CustomPropertyName.OrganizationId.ToString()).Returns(Guid.NewGuid().ToString("D"));
             userContext
-                .When(u => u.CheckPermission(Permissions.Users.ViewUserOrganizationUsers))
-                .Do(callInfo => { throw new InsufficientPermissionsException(Permissions.Users.ViewUserOrganizationUsers); });
+                .When(u => u.CheckPermission(Permissions.Users.MaintenanceOfOwnOrganizationUsers))
+                .Do(callInfo => { throw new InsufficientPermissionsException(Permissions.Users.MaintenanceOfOwnOrganizationUsers); });
 
             var returnedUsers = new List<IdentityManagement.Model.IUser>
             {
@@ -329,11 +337,11 @@ namespace OrganizationRegister.UserManagement.Tests
             userContext.HasCustomProperty(CustomPropertyName.OrganizationId.ToString()).Returns(true);
             userContext.GetCustomPropertyValue(CustomPropertyName.OrganizationId.ToString()).Returns(Guid.NewGuid().ToString("D"));
             userContext
-                .When(u => u.CheckPermission(Permissions.Users.ViewUserOrganizationUsers))
-                .Do(callInfo => { throw new InsufficientPermissionsException(Permissions.Users.ViewUserOrganizationUsers); });
+                .When(u => u.CheckPermission(Permissions.Users.MaintenanceOfOwnOrganizationUsers))
+                .Do(callInfo => { throw new InsufficientPermissionsException(Permissions.Users.MaintenanceOfOwnOrganizationUsers); });
             userContext
-                .When(u => u.CheckPermission(Permissions.Users.ViewAllUsers))
-                .Do(callInfo => { throw new InsufficientPermissionsException(Permissions.Users.ViewAllUsers); });
+                .When(u => u.CheckPermission(Permissions.Users.MaintenanceOfAllUsers))
+                .Do(callInfo => { throw new InsufficientPermissionsException(Permissions.Users.MaintenanceOfAllUsers); });
 
             sut.GetInternalUsers(organizationId);
         }
@@ -371,6 +379,29 @@ namespace OrganizationRegister.UserManagement.Tests
         {
             bool isValid = sut.ValidatePasswordStrength("aaaBBB333&#_");
             Assert.IsTrue(isValid);
+        }
+
+        private void SetupRoles()
+        {
+            var adminRole = CreateRoleMock(AdminRoleId, Roles.Administrator);
+            var basicRole = CreateRoleMock(BasicRoleId, "Basic");
+            identityManagementService.GetRoles().Returns(new List<IdentityManagement.Model.IRole> { adminRole, basicRole });
+        }
+
+        private static IdentityManagement.Model.IRole CreateRoleMock(Guid id, string name)
+        {
+            var role = Substitute.For<IdentityManagement.Model.IRole>();
+            role.Id.Returns(id);
+            role.Name.Returns(name);
+            return role;
+        }
+
+        private void SetupUserContext()
+        {
+            const string organizationIdCustomPropertyName = "OrganizationId";
+            userContext = Substitute.For<IAuthenticatedUserContext>();
+            userContext.HasCustomProperty(organizationIdCustomPropertyName).Returns(true);
+            userContext.GetCustomPropertyValue(organizationIdCustomPropertyName).Returns(ExpectedOrganizationId.ToString());
         }
     }
 }
