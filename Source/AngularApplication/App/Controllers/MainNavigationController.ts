@@ -52,6 +52,11 @@ module OrganizationRegister
             this.currentSection = CurrentNavigationSection.Users;
         }
 
+        public canCurrentUserModifyUsers(): boolean
+        {
+            return this.user != null && (this.user.hasPermission(Permission.viewAllUsers) || this.user.hasPermission(Permission.viewUserOrganizationUsers));
+        }
+
         protected onUserLoggedIn(): void
         {
             this.currentSection = CurrentNavigationSection.Organizations;

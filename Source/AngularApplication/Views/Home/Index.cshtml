@@ -32,7 +32,7 @@
                         <li data-ng-class="{ 'current': controller.areOrganizationsActive() }" data-ng-click="controller.changeToOrganizations()">
                             <a data-ng-href="#/">Organisaatiot</a>
                         </li>
-                        <li data-ng-class="{ 'current': controller.areUsersActive() }" data-ng-click="controller.changeToUsers()">
+                        <li data-ng-if="controller.canCurrentUserModifyUsers()" data-ng-class="{ 'current': controller.areUsersActive() }" data-ng-click="controller.changeToUsers()">
                             <a data-ng-href="#/Organizations/{{controller.user.organizationId}}/Users">Käyttäjät</a>
                         </li>
                     </ul>
