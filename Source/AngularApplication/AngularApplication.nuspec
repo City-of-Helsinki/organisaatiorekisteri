@@ -10,6 +10,7 @@
       Smaller page header.
       Maximum one postal address per organization.
       Added organization validity period.
+      Don't show users tab if the current user cannot maintain users.
     </releaseNotes>
   </metadata>
 </package>
