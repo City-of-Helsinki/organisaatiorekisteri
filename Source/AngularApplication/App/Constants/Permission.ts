@@ -4,24 +4,14 @@ module OrganizationRegister
 {
     export class Permission
     {
-        public static get viewAllUsers(): string
+        public static get maintenanceOfOwnOrganizationUsers(): string
         {
-            return "VIEW_ALL_USERS";
+            return "MAINTENANCE_OF_OWN_ORGANIZATION_USERS";
         }
 
-        public static get viewUserOrganizationUsers(): string
+        public static get maintenanceOfAllUsers(): string
         {
-            return "VIEW_USER_ORGANIZATION_USERS";
-        }
-
-        public static get userMaintenance(): string
-        {
-            return "USER_MAINTENANCE";
-        }
-
-        public static get manageAdministratorUsers(): string
-        {
-            return "MANAGE_ADMINISTRATOR_USERS";
+            return "MAINTENANCE_OF_ALL_USERS";
         }
     }
 } 

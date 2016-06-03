@@ -54,7 +54,7 @@ module OrganizationRegister
 
         public canCurrentUserModifyUsers(): boolean
         {
-            return this.user != null && (this.user.hasPermission(Permission.viewAllUsers) || this.user.hasPermission(Permission.viewUserOrganizationUsers));
+            return this.user != null && (this.user.hasPermission(Permission.maintenanceOfOwnOrganizationUsers) || this.user.hasPermission(Permission.maintenanceOfAllUsers));
         }
 
         protected onUserLoggedIn(): void

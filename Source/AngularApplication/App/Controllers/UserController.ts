@@ -30,7 +30,7 @@ module OrganizationRegister
         {
 
             var user: AuthenticatedUser = authenticationService.getUser<AuthenticatedUser>();
-            if (!user.hasPermission(Permission.userMaintenance))
+            if (!user.hasPermission(Permission.maintenanceOfOwnOrganizationUsers) || !user.hasPermission(Permission.maintenanceOfAllUsers))
             {
                 this.$location.path(Affecto.ExceptionHandling.Routes.error).search("code", ErrorCode.insufficientPermissions);
             }
@@ -111,7 +111,7 @@ module OrganizationRegister
                 this.setConfirmedPasswordValidity(this.model.password === this.model.passwordConfirm);
             }
             else
-        {
+            {
                 this.setConfirmedPasswordValidity(true);
             }
         }
@@ -195,7 +195,7 @@ module OrganizationRegister
                 {
                     this.organizations = result[0];
                     var userRoles: Array<UserRole> = result[1];
-                    if (this.authenticationService.getUser<AuthenticatedUser>().hasPermission(Permission.manageAdministratorUsers))
+                    if (this.authenticationService.getUser<AuthenticatedUser>().hasPermission(Permission.maintenanceOfAllUsers))
                 {
                         this.userRoles = userRoles;
                     }
