@@ -64,6 +64,8 @@ namespace OrganizationRegister.UserManagement.Tests
 
             identityManagementService.GetRoles().Returns(returnedRoles);
 
+            userContext.HasPermission(Arg.Any<string>()).Returns(true);
+
             IEnumerable<IRole> result = sut.GetRoles();
 
             Assert.AreEqual(2, result.Count());
@@ -172,6 +174,8 @@ namespace OrganizationRegister.UserManagement.Tests
         [TestMethod]
         public void DisplayNameIsGeneratedWhenAddingUser()
         {
+            userContext.HasPermission(Arg.Any<string>()).Returns(true);
+
             sut.AddUser(AdminRoleId, ExpectedOrganizationId, ExpectedEmailAddress, ExpectedPassword, ExpectedLastName, ExpectedFirstName, ExpectedPhoneNumber);
 
             identityManagementService.Received(1).CreateUser($"{ExpectedLastName} {ExpectedFirstName}",
@@ -181,6 +185,7 @@ namespace OrganizationRegister.UserManagement.Tests
         [TestMethod]
         public void CustomPropertiesAreSavedWhenAddingUser()
         {
+            userContext.HasPermission(Arg.Any<string>()).Returns(true);
             IEnumerable<KeyValuePair<string, string>> customProperties = null;
             identityManagementService
                 .When(s => s.CreateUser(Arg.Any<string>(), Arg.Any<IEnumerable<KeyValuePair<string, string>>>()))
@@ -203,6 +208,7 @@ namespace OrganizationRegister.UserManagement.Tests
         [TestMethod]
         public void UsersRoleIsSetWhenAddingUser()
         {
+            userContext.HasPermission(Arg.Any<string>()).Returns(true);
             var expectedUser = Substitute.For<IdentityManagement.Model.IUserListItem>();
             expectedUser.Id.Returns(Guid.NewGuid());
 
@@ -218,6 +224,7 @@ namespace OrganizationRegister.UserManagement.Tests
         [TestMethod]
         public void UserIdIsReturnedWhenAddingUser()
         {
+            userContext.HasPermission(Arg.Any<string>()).Returns(true);
             var expectedUser = Substitute.For<IdentityManagement.Model.IUserListItem>();
             expectedUser.Id.Returns(Guid.NewGuid());
 
@@ -349,36 +356,72 @@ namespace OrganizationRegister.UserManagement.Tests
         [TestMethod]
         public void NullPasswordIsNotValid()
         {
+            userContext.HasPermission(Arg.Any<string>()).Returns(true);
+
             bool isValid = sut.ValidatePasswordStrength(null);
+
             Assert.IsFalse(isValid);
         }
 
         [TestMethod]
         public void EmptyPasswordIsNotValid()
         {
+            userContext.HasPermission(Arg.Any<string>()).Returns(true);
+
             bool isValid = sut.ValidatePasswordStrength(string.Empty);
+
             Assert.IsFalse(isValid);
         }
 
         [TestMethod]
         public void TooShortPasswordIsNotValid()
         {
+            userContext.HasPermission(Arg.Any<string>()).Returns(true);
+
             bool isValid = sut.ValidatePasswordStrength("aB1&");
+
             Assert.IsFalse(isValid);
         }
 
         [TestMethod]
         public void PasswordWithoutEnoughCharacterClassesIsNotValid()
         {
+            userContext.HasPermission(Arg.Any<string>()).Returns(true);
+
             bool isValid = sut.ValidatePasswordStrength("aaaBBBcccDDD");
+
             Assert.IsFalse(isValid);
         }
 
         [TestMethod]
         public void PasswordIsValid()
         {
+            userContext.HasPermission(Arg.Any<string>()).Returns(true);
+
             bool isValid = sut.ValidatePasswordStrength("aaaBBB333&#_");
+
             Assert.IsTrue(isValid);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InsufficientPermissionsException))]
+        public void GetRolesRequiresPermission()
+        {
+            sut.GetRoles();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InsufficientPermissionsException))]
+        public void ValidatePasswordStrengthRequiresPermission()
+        {
+            sut.ValidatePasswordStrength("pass");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InsufficientPermissionsException))]
+        public void IsExistingUserRequiresPermission()
+        {
+            sut.IsExistingUser("me@here.com");
         }
 
         private void SetupRoles()

@@ -43,12 +43,16 @@ namespace OrganizationRegister.UserManagement
 
         public IEnumerable<IRole> GetRoles()
         {
+            CheckManageUsersPermission();
+
             var roleMapper = mapperFactory.CreateRoleMapper();
             return roleMapper.Map(identityManagementService.GetRoles());
         }
 
         public bool IsExistingUser(string emailAddress)
         {
+            CheckManageUsersPermission();
+
             if (string.IsNullOrWhiteSpace(emailAddress))
             {
                 throw new ArgumentException("Email address cannot be empty.", nameof(emailAddress));
@@ -59,6 +63,8 @@ namespace OrganizationRegister.UserManagement
 
         public bool ValidatePasswordStrength(string password)
         {
+            CheckManageUsersPermission();
+
             if (string.IsNullOrEmpty(password))
             {
                 return false;
@@ -74,6 +80,9 @@ namespace OrganizationRegister.UserManagement
 
         public Guid AddUser(Guid roleId, Guid organizationId, string emailAddress, string password, string lastName, string firstName, string phoneNumber)
         {
+            CheckManageUsersOfOrganizationPermission(organizationId);
+            CheckManageUsersInRolePermission(roleId);
+
             if (roleId == Guid.Empty)
             {
                 throw new ArgumentException("User's role id cannot be empty.", nameof(roleId));
@@ -98,9 +107,6 @@ namespace OrganizationRegister.UserManagement
             {
                 throw new ArgumentException("User's first name cannot be empty.", nameof(firstName));
             }
-
-            CheckManageUsersOfOrganization(organizationId);
-            CheckManageUsersInRole(roleId);
 
             if (IsExistingUser(emailAddress))
             {
@@ -127,7 +133,7 @@ namespace OrganizationRegister.UserManagement
 
         public IEnumerable<IUserListItem> GetInternalUsers(Guid organizationId)
         {
-            CheckManageUsersOfOrganization(organizationId);
+            CheckManageUsersOfOrganizationPermission(organizationId);
 
             string organizationIdString = OrganizationId.Convert(organizationId);
             IEnumerable<IdentityManagement.Model.IUser> users = identityManagementService.GetUsers(CustomPropertyName.OrganizationId.ToString(),
@@ -137,7 +143,7 @@ namespace OrganizationRegister.UserManagement
             return mapper.Map(users).ToList();
         }
 
-        private void CheckManageUsersOfOrganization(Guid organizationId)
+        private void CheckManageUsersOfOrganizationPermission(Guid organizationId)
         {
             Guid userOrganizationId = userContext.GetUserOrganizationId();
             if (organizationId == userOrganizationId)
@@ -150,7 +156,7 @@ namespace OrganizationRegister.UserManagement
             }
         }
 
-        private void CheckManageUsersInRole(Guid roleId)
+        private void CheckManageUsersInRolePermission(Guid roleId)
         {
             IEnumerable<IdentityManagement.Model.IRole> roles = identityManagementService.GetRoles();
             IdentityManagement.Model.IRole newRole = roles.SingleOrDefault(r => r.Id == roleId);
@@ -167,6 +173,14 @@ namespace OrganizationRegister.UserManagement
             else
             {
                 userContext.CheckPermission(Permissions.Users.MaintenanceOfOwnOrganizationUsers);
+            }
+        }
+
+        private void CheckManageUsersPermission()
+        {
+            if (!userContext.HasPermission(Permissions.Users.MaintenanceOfAllUsers) && !userContext.HasPermission(Permissions.Users.MaintenanceOfOwnOrganizationUsers))
+            {
+                throw new InsufficientPermissionsException($"{Permissions.Users.MaintenanceOfAllUsers} or {Permissions.Users.MaintenanceOfOwnOrganizationUsers}");
             }
         }
     }
