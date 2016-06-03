@@ -35,10 +35,21 @@ module OrganizationRegister
                 this.$location.path(Affecto.ExceptionHandling.Routes.error).search("code", ErrorCode.insufficientPermissions);
             }
 
-            this.retrieveUsersAndOrganizatioNams($routeParams);
+            this.retrieveUsersAndOrganizatioNames($routeParams);
         }
 
-        private retrieveUsersAndOrganizatioNams($routeParams: IUserRoute): angular.IPromise<void>
+        public retrieveUsers(): angular.IPromise<void>
+        {
+            this.busyIndicationService.showBusyIndicator("Haetaan käyttäjiä...");
+            return this.userService.getUsers(this.organizationId)
+                .then((users: Array<UserListItem>) =>
+                {
+                    this.setUsers(users);
+                    this.busyIndicationService.hideBusyIndicator();
+                });            
+        }
+
+        private retrieveUsersAndOrganizatioNames($routeParams: IUserRoute): angular.IPromise<void>
         {
             this.organizationId = $routeParams.organizationId;
             this.busyIndicationService.showBusyIndicator("Haetaan käyttäjiä...");
@@ -46,10 +57,15 @@ module OrganizationRegister
                 .then((result: Array<any>) =>
                 {
                     this.organizations = result[0];
-                    this.model = result[1];
-                    this.userCount = this.model.length;
+                    this.setUsers(result[1]);
                     this.busyIndicationService.hideBusyIndicator();
                 });
+        }
+
+        private setUsers(users: Array<UserListItem>): void
+        {
+            this.model = users;
+            this.userCount = this.model.length;            
         }
     }
 }  
