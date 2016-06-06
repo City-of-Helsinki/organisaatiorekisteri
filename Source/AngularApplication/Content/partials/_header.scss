@@ -43,7 +43,7 @@
 #ptv #page-header .loginbutton {
 	@include rem(padding, 5px 15px 8px 15px);
 	@include rem(font-size, 12px);
-	background: shade($color-bright-azure, 20%);
+	background: shade($color-dark-gray, 20%);
 	&:hover { 
 		background: shade($color-bright-azure, 30%);
 	}
@@ -261,7 +261,7 @@
 
 
 .header-top {
-	background-color: $color-dark-gray;
+	background-color: $color-blue;
 	padding-top: 10px;
 	h1 {
 		position:absolute;
@@ -269,8 +269,8 @@
 		padding: 25px 10px 10px 0;
 		color: #f25d0d!important;
 		float: left;
-		text-transform: uppercase;
-		@include rem(font-size, 17px);
+		//text-transform: uppercase;
+		@include rem(font-size, 22px);
 		a {
 			color: #f25d0d;
 		}

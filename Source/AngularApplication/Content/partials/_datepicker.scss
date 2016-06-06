@@ -122,6 +122,11 @@ table .btn {
   content: "\e080";
 }
 
+.uib-left, .uib-right {
+    width: 100%;
+    float: none !important;
+}
+
 .uib-daypicker tr > .text-center, .uib-daypicker th > .btn-sm {
     font-weight: bold;
 }
@@ -142,3 +147,32 @@ table .btn {
 .uib-daypicker tr > th {
     vertical-align: top;
 }
+
+.uib-yearpicker th > .btn-sm {
+    border: 1px solid transparent;
+    border-color: #ccc;
+}
+
+.uib-yearpicker td > .btn-default {
+    border: 1px solid rgba(0,0,0,.15);
+}
+
+.uib-yearpicker tr > th {
+    vertical-align: top;
+}
+
+.uib-monthpicker th > .btn-sm {
+    border: 1px solid transparent;
+    border-color: #ccc;
+}
+
+.uib-monthpicker td > .btn-default {
+    border: 1px solid rgba(0,0,0,.15);
+}
+
+.uib-monthpicker tr > th {
+    vertical-align: top;
+}
+
+
+
