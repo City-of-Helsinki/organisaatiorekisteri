@@ -5,6 +5,10 @@ module OrganizationRegister
     export class Organization implements Affecto.Base.IModel
     {
         public name: string;
+
+        //public namesLang: Array<LocalizedText>;
+
+        public namesLocalized: Array<LocalizedText>;
         public description: string;
         public descriptionAsHtml: string;
         public validFromText: string;
@@ -29,16 +33,35 @@ module OrganizationRegister
         public postalPostOfficeBoxAddressPostalDistrict: string;
         public postalAddressTypes: PostalAddressTypes;
 
-        constructor(public id?: string, public numericId?: number, public names?: Array<LocalizedText>, public businessId?: string, private descriptions?: Array<LocalizedText>,
-            public oid?: string, public type?: string, public municipalityCode?: number, public validFromDate?: Date, public validToDate?: Date, public phoneNumber?: string, public phoneCallFee?: string,
-            public emailAddress?: string, public webPages?: Array<WebPage>, public visitingAddress?: StreetAddress, public visitingAddressQualifiers?: Array<LocalizedText>,
-            public useVisitingAddressAsPostalAddress?: boolean, public postalStreetAddress?: StreetAddress, public postalPostOfficeBoxAddress?: PostOfficeBoxAddress,
+        constructor(public id?: string,
+            public numericId?: number,
+            public names?: Array<LocalizedText>,
+            public businessId?: string,
+            private descriptions?: Array<LocalizedText>,
+            public oid?: string,
+            public type?: string,
+            public municipalityCode?: number,
+            public validFromDate?: Date,
+            public validToDate?: Date,
+            public phoneNumber?: string,
+            public phoneCallFee?: string,
+            public emailAddress?: string,
+            public webPages?: Array<WebPage>,
+            public visitingAddress?: StreetAddress,
+            public visitingAddressQualifiers?: Array<LocalizedText>,
+            public useVisitingAddressAsPostalAddress?: boolean,
+            public postalStreetAddress?: StreetAddress,
+            public postalPostOfficeBoxAddress?: PostOfficeBoxAddress,
             public isSubOrganization?: boolean)
         {
             if (names != null && names.length > 0)
             {
                 this.name = names[0].localizedValue;
+                //this.namesLang = names;
             }
+
+            this.namesLocalized = this.initializeLocalizedTexts(names, ["fi"]);
+
             if (descriptions != null && descriptions.length > 0)
             {
                 this.description = descriptions[0].localizedValue;
@@ -53,6 +76,46 @@ module OrganizationRegister
             }
         }
 
+        private initializeLocalizedTexts(texts: Array<LocalizedText>, requiredLangs: string[]): Array<LocalizedText>
+        {
+            let langs = LocalizedData.localizedTextLanguageCodes;
+            let localizedTexts = new Array<LocalizedText>();
+
+            langs.forEach((item) =>
+            {
+                localizedTexts.push(new LocalizedText(String(item), this.getLocalizedTextValue(texts,String(item)), (requiredLangs.indexOf(String(item)) >= 0)));   
+            });
+
+            localizedTexts = localizedTexts.sort((a, b) =>
+            {
+                if (langs.indexOf(a.languageCode) > langs.indexOf(b.languageCode))
+                {
+                    return 1;
+                }
+                if (langs.indexOf(a.languageCode) < langs.indexOf(b.languageCode))
+                {
+                    return -1;
+                }
+                return 0;
+            });
+
+            return localizedTexts;
+        }
+
+
+        private getLocalizedTextValue(texts: Array<LocalizedText>, languageCode: string): string
+        {   
+            if (texts!=null && texts.some((arrVal: LocalizedText) => (languageCode === arrVal.languageCode)))
+            {
+                return (texts.filter((arrVal: LocalizedText) => (languageCode === arrVal.languageCode)))[0]
+                    .localizedValue;
+            }
+            else
+            {
+                return "";
+            }
+        }
+
         private setValidityTexts()
         {
             this.validFromText = Affecto.DateConverter.toFinnishDate(this.validFromDate);
@@ -61,9 +124,13 @@ module OrganizationRegister
             this.validTo = Affecto.DateConverter.toISO8601Date(this.validToDate);
         }
 
-        private initializeVisitingAddress(visitingAddress?: StreetAddress, visitingAddressQualifiers?: Array<LocalizedText>): void
+        private initializeVisitingAddress(visitingAddress?: StreetAddress,
+            visitingAddressQualifiers?: Array<LocalizedText>): void
         {
-            if (visitingAddress != null && visitingAddress.streetAddresses != null && visitingAddress.streetAddresses.length > 0 && visitingAddress.postalDistricts != null &&
+            if (visitingAddress != null &&
+                visitingAddress.streetAddresses != null &&
+                visitingAddress.streetAddresses.length > 0 &&
+                visitingAddress.postalDistricts != null &&
                 visitingAddress.postalDistricts.length > 0)
             {
                 this.visitingStreetAddress = visitingAddress.streetAddresses[0].localizedValue;
@@ -76,10 +143,14 @@ module OrganizationRegister
             }
         }
 
-        private initializePostalAddress(streetAddress?: StreetAddress, postOfficeBoxAddress?: PostOfficeBoxAddress): void
+        private initializePostalAddress(streetAddress?: StreetAddress, postOfficeBoxAddress?: PostOfficeBoxAddress):
+        void
         {
             this.postalAddressTypes = new PostalAddressTypes();
-            if (streetAddress != null && streetAddress.streetAddresses != null && streetAddress.streetAddresses.length > 0 && streetAddress.postalDistricts != null &&
+            if (streetAddress != null &&
+                streetAddress.streetAddresses != null &&
+                streetAddress.streetAddresses.length > 0 &&
+                streetAddress.postalDistricts != null &&
                 streetAddress.postalDistricts.length > 0)
             {
                 this.postalStreetAddressStreet = streetAddress.streetAddresses[0].localizedValue;
@@ -98,7 +169,9 @@ module OrganizationRegister
                     this.setAvailablePostalStreetAddressTypes();
                 }
             }
-            if (postOfficeBoxAddress != null && postOfficeBoxAddress.postalDistricts != null && postOfficeBoxAddress.postalDistricts.length > 0)
+            if (postOfficeBoxAddress != null &&
+                postOfficeBoxAddress.postalDistricts != null &&
+                postOfficeBoxAddress.postalDistricts.length > 0)
             {
                 this.postalPostOfficeBoxAddressPostOfficeBox = postOfficeBoxAddress.postOfficeBox;
                 this.postalPostOfficeBoxAddressPostalCode = postOfficeBoxAddress.postalCode;
@@ -159,12 +232,25 @@ module OrganizationRegister
 
         public generateBasicInformationLocalizedAndFormattedTexts(): void
         {
-            this.names = new Array<LocalizedText>(new LocalizedText("fi", this.name));
+           
+            this.names = this.getLocalizedTexts(this.namesLocalized);
+
             this.descriptions = new Array<LocalizedText>(new LocalizedText("fi", this.description));
             this.descriptionAsHtml = Affecto.HtmlContent.escapeAndReplaceNewLines(this.description);
             this.setValidityTexts();
         }
 
+        private getLocalizedTexts(texts: Array<LocalizedText>)
+        {
+            var localizedTexts = new Array<LocalizedText>();
+            texts.forEach((item) =>
+            {
+                if (item.localizedValue != null && item.localizedValue !== "")
+                    localizedTexts.push(item);
+            });
+            return localizedTexts;
+        }
+        
         public generateVisitingAddressLocalizedTexts(): void
         {
             this.visitingAddress = new StreetAddress(new Array<LocalizedText>(new LocalizedText("fi", this.visitingStreetAddress)), this.visitingAddressPostalCode,

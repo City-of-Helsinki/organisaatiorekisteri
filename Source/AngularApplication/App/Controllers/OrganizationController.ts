@@ -70,6 +70,9 @@ module OrganizationRegister
             return label + "*";
         }
 
+
+       
+
         public canSaveContactInformation(): boolean
         {
             return this.validPhoneNumber && this.validEmailAddress;

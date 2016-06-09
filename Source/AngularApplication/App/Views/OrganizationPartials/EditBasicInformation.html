@@ -20,11 +20,19 @@
     <div class="col-xs-6">
         <label>
             Nimi*
-            <affecto-help-popup paragraphs='["Kirjoita kenttään organisaation virallinen nimi. Kirjoita nimi auki, älä käytä lyhenteitä."]' />
+            <affecto-help-popup paragraphs='["Kirjoita kenttään organisaation virallinen nimi. Kirjoita nimi auki, älä käytä lyhenteitä."]'/>
         </label>
-        <input id="organizationName" type="text" class="form-control" maxlength="100" placeholder="Kirjoita organisaation tai alaorganisaation nimi"
-               data-ng-model="controller.model.name" data-ng-required="true" />
-    </div>
+
+        <!--<input id="organizationName" type="text" class="form-control" maxlength="100" placeholder="Kirjoita organisaation tai alaorganisaation nimi"
+               data-ng-model="controller.model.name" data-ng-required="true"/>-->
+
+        <div data-ng-repeat="name in controller.model.namesLocalized">
+            <p>
+                <input type="text" class="form-control" data-ng-required="name.isRequired" data-ng-model="name.localizedValue" maxlength="100" placeholder="{{name.localizedTitle}}" />
+            </p>
+        </div>
+
+        </div>
     <div class="col-xs-6">
         <label>
             {{ controller.editBusinessIdentifierLabel }}
