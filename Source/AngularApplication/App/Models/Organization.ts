@@ -8,7 +8,7 @@ module OrganizationRegister
 
         //public namesLang: Array<LocalizedText>;
 
-        public namesLocalized: Array<LocalizedText>;
+        
         public description: string;
         public descriptionAsHtml: string;
         public validFromText: string;
@@ -57,10 +57,9 @@ module OrganizationRegister
             if (names != null && names.length > 0)
             {
                 this.name = names[0].localizedValue;
-                //this.namesLang = names;
             }
 
-            this.namesLocalized = this.initializeLocalizedTexts(names, ["fi"]);
+            this.names = this.initializeLocalizedTexts(names, ["fi"]);
 
             if (descriptions != null && descriptions.length > 0)
             {
@@ -78,31 +77,19 @@ module OrganizationRegister
 
         private initializeLocalizedTexts(texts: Array<LocalizedText>, requiredLangs: string[]): Array<LocalizedText>
         {
-            let langs = LocalizedData.localizedTextLanguageCodes;
+            let langs = DataLocalization.languageCodes;
             let localizedTexts = new Array<LocalizedText>();
 
             langs.forEach((item) =>
             {
+                // init LocalizedText with existing value or create with empty value + set isrequired flag
                 localizedTexts.push(new LocalizedText(String(item), this.getLocalizedTextValue(texts,String(item)), (requiredLangs.indexOf(String(item)) >= 0)));   
-            });
-
-            localizedTexts = localizedTexts.sort((a, b) =>
-            {
-                if (langs.indexOf(a.languageCode) > langs.indexOf(b.languageCode))
-                {
-                    return 1;
-                }
-                if (langs.indexOf(a.languageCode) < langs.indexOf(b.languageCode))
-                {
-                    return -1;
-                }
-                return 0;
             });
 
             return localizedTexts;
         }
 
-
+       
         private getLocalizedTextValue(texts: Array<LocalizedText>, languageCode: string): string
         {   
             if (texts!=null && texts.some((arrVal: LocalizedText) => (languageCode === arrVal.languageCode)))
@@ -115,6 +102,18 @@ module OrganizationRegister
                 return "";
             }
         }
+
+        private getLocalizedTextsWithValues(texts: Array<LocalizedText>)
+        {
+            var localizedTexts = new Array<LocalizedText>();
+            texts.forEach((item) =>
+            {
+                if (item.localizedValue != null && item.localizedValue !== "")
+                    localizedTexts.push(item);
+            });
+            return localizedTexts;
+        }
+
 
         private setValidityTexts()
         {
@@ -233,23 +232,14 @@ module OrganizationRegister
         public generateBasicInformationLocalizedAndFormattedTexts(): void
         {
            
-            this.names = this.getLocalizedTexts(this.namesLocalized);
+            this.names = this.getLocalizedTextsWithValues(this.names);
 
             this.descriptions = new Array<LocalizedText>(new LocalizedText("fi", this.description));
             this.descriptionAsHtml = Affecto.HtmlContent.escapeAndReplaceNewLines(this.description);
             this.setValidityTexts();
         }
 
-        private getLocalizedTexts(texts: Array<LocalizedText>)
-        {
-            var localizedTexts = new Array<LocalizedText>();
-            texts.forEach((item) =>
-            {
-                if (item.localizedValue != null && item.localizedValue !== "")
-                    localizedTexts.push(item);
-            });
-            return localizedTexts;
-        }
+       
         
         public generateVisitingAddressLocalizedTexts(): void
         {

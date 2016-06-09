@@ -26,7 +26,7 @@
         <!--<input id="organizationName" type="text" class="form-control" maxlength="100" placeholder="Kirjoita organisaation tai alaorganisaation nimi"
                data-ng-model="controller.model.name" data-ng-required="true"/>-->
 
-        <div data-ng-repeat="name in controller.model.namesLocalized">
+        <div data-ng-repeat="name in controller.model.names">
             <p>
                 <input type="text" class="form-control" data-ng-required="name.isRequired" data-ng-model="name.localizedValue" maxlength="100" placeholder="{{name.localizedTitle}}" />
             </p>

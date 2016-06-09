@@ -14,7 +14,14 @@
 <div class="row">
     <div class="col-xs-6">
         <label>Nimi</label>
-        <span>{{ controller.model.name }}</span>
+        <!--<span>{{ controller.model.name }}</span>-->
+        
+        <div data-ng-repeat="name in controller.model.names">
+            <p>
+                <span>{{ name.localizedValue }}</span>
+            </p>
+        </div>
+
     </div>
     <div class="col-xs-6">
         <label>Y-tunnus</label>
