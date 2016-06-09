@@ -11,6 +11,8 @@
       Maximum one postal address per organization.
       Added organization validity period.
       Don't show users tab if the current user cannot maintain users.
+      App title, header/footer colors, logo, etc changed.
+      Datepicker style fixes.
     </releaseNotes>
   </metadata>
 </package>
