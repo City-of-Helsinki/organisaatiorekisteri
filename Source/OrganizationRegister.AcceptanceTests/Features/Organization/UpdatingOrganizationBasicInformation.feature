@@ -5,11 +5,11 @@ Background:
 
 Scenario: Changing organization basic information
 	When the following basic information is set to the organization:
-	| Business id | Oid    | Type   | Finnish name | Swedish name | Finnish description | Swedish description   |
-	| 1069622-4   | 654321 | Yritys | Affecto      | Affecto      | Ohjelmistoyritys    | Programvara företaget |
+	| Business id | Oid    | Type   | Finnish name | Swedish name | Finnish description | Swedish description   | Valid from | Valid to   |
+	| 1069622-4   | 654321 | Yritys | Affecto      | Affecto      | Ohjelmistoyritys    | Programvara företaget | 12.11.2015 | 20.10.2016 |
 	Then the organization has the following basic information:
-	| Business id | Oid    | Type   | Finnish name | Swedish name | Finnish description | Swedish description   |
-	| 1069622-4   | 654321 | Yritys | Affecto      | Affecto      | Ohjelmistoyritys    | Programvara företaget |
+	| Business id | Oid    | Type   | Finnish name | Swedish name | Finnish description | Swedish description   | Valid from | Valid to   |
+	| 1069622-4   | 654321 | Yritys | Affecto      | Affecto      | Ohjelmistoyritys    | Programvara företaget | 12.11.2015 | 20.10.2016 |
 
 Scenario: Changing organization type to municipality
 	When the following basic information is set to the organization:
@@ -40,8 +40,8 @@ Scenario: Setting only mandatory organization basic information
 
 Scenario: Claering organization optional information
 	Given the following basic information is set to the organization:
-	| Business id | Oid    | Type   | Finnish name | Swedish name | Finnish description | Swedish description   |
-	| 1069622-4   | 654321 | Yritys | Affecto      | Affecto      | Ohjelmistoyritys    | Programvara företaget |
+	| Business id | Oid    | Type   | Finnish name | Swedish name | Finnish description | Swedish description   | Valid from | Valid to   |
+	| 1069622-4   | 654321 | Yritys | Affecto      | Affecto      | Ohjelmistoyritys    | Programvara företaget | 12.11.2015 | 20.10.2016 |
 	When the following basic information is set to the organization:
 	| Business id | Type   | Finnish name |
 	| 1234567-1   | Yritys | Firma        |
@@ -96,4 +96,10 @@ Scenario: Setting invalid municipality code
 	When the following basic information is set to the organization:
 	| Business id | Type  | Finnish name | Municipality code |
 	| 1069622-4   | Kunta | Kaarina      | 2002              |
+	Then setting the basic information fails
+
+Scenario: Setting invalid validity
+	When the following basic information is set to the organization:
+	| Business id | Type   | Finnish name | Valid from | Valid to   |
+	| 1069622-4   | Yritys | Affecto      | 01.01.2012 | 01.01.2010 |
 	Then setting the basic information fails

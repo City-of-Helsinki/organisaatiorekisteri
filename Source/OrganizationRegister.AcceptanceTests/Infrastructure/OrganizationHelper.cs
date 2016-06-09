@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Affecto.Testing.SpecFlow;
 using Autofac;
@@ -24,6 +25,8 @@ namespace OrganizationRegister.AcceptanceTests.Infrastructure
             AssertOptionalValue(expectedBasicInfo.GetOptionalValue("Business id"), organization.BusinessId);
             AssertOptionalValue(expectedBasicInfo.GetOptionalValue("Oid"), organization.Oid);
             AssertOptionalValue(expectedBasicInfo.GetOptionalValue("Municipality code"), organization.MunicipalityCode);
+            AssertOptionalValue(expectedBasicInfo.GetOptionalValue("Valid from"), organization.ValidFrom);
+            AssertOptionalValue(expectedBasicInfo.GetOptionalValue("Valid to"), organization.ValidTo);
             Assert.AreEqual(expectedBasicInfo["Type"], organization.Type, expectedBasicInfo.ToTableString());
             if (expectedBasicInfo.ContainsKey("Finnish description"))
             {
@@ -53,6 +56,25 @@ namespace OrganizationRegister.AcceptanceTests.Infrastructure
             throw new ArgumentException(string.Format("Organization '{0}' not found.", organizationName));
         }
 
+        public static Guid GetOrganizationId(string organizationName)
+        {
+            IContainer container = ScenarioContext.Current.Get<IContainer>();
+            IOrganizationService organizationService = container.Resolve<IOrganizationService>();
+            return organizationService.GetActiveOrganizations().Single(o => o.Names.Any(name => name.LocalizedValue.Equals(organizationName))).Id;
+        }
+
+        private static void AssertOptionalValue(string expectedValue, DateTime? value)
+        {
+            if (string.IsNullOrWhiteSpace(expectedValue))
+            {
+                Assert.IsFalse(value.HasValue);
+            }
+            else
+            {
+                Assert.AreEqual(DateTime.ParseExact(expectedValue, "dd.MM.yyyy", CultureInfo.InvariantCulture), value.Value);
+            }
+        }
+
         private static void AssertOptionalValue(string expectedValue, string value)
         {
             if (string.IsNullOrWhiteSpace(expectedValue))
@@ -63,13 +85,6 @@ namespace OrganizationRegister.AcceptanceTests.Infrastructure
             {
                 Assert.AreEqual(expectedValue, value);                
             }
-        }
-
-        public static Guid GetOrganizationId(string organizationName)
-        {
-            IContainer container = ScenarioContext.Current.Get<IContainer>();
-            IOrganizationService organizationService = container.Resolve<IOrganizationService>();
-            return organizationService.GetActiveOrganizations().Single(o => o.Names.Any(name => name.LocalizedValue.Equals(organizationName))).Id;
         }
     }
 }

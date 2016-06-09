@@ -9,6 +9,7 @@ module OrganizationRegister
         public organizationTypes: Array<string>;
         public webPageTypes: Array<string>;
         public validBusinessId: boolean;
+        public validValidity: boolean;
         public validPhoneNumber: boolean;
         public validEmailAddress: boolean;
         public validWebPageUrl: boolean;
@@ -17,6 +18,8 @@ module OrganizationRegister
         public validPostalStreetAddressPostalCode: boolean;
         public validPostalPostOfficeBoxAddressPostalCode: boolean;
         public webPageEditModeOn: boolean;
+        public isValidFromCalendarShown: boolean;
+        public isValidToCalendarShown: boolean;
         public businessIdErrorMessage: string;
         public webPageUrlBeforeEditing: string;
         public toBeAddedPostalAddressType: string;
@@ -40,6 +43,7 @@ module OrganizationRegister
             $scope.model = this.model;
 
             this.validBusinessId = true;
+            this.validValidity = true;
             this.validPhoneNumber = true;
             this.validEmailAddress = true;
             this.validWebPageUrl = true;
@@ -47,7 +51,10 @@ module OrganizationRegister
             this.validVisitingAddressPostalCode = true;
             this.validPostalStreetAddressPostalCode = true;
             this.validPostalPostOfficeBoxAddressPostalCode = true;
+
             this.webPageEditModeOn = false;
+            this.isValidFromCalendarShown = false;
+            this.isValidToCalendarShown = false;
 
             this.fetchServerData($routeParams);
             this.initializeEditedSection($route);
@@ -56,16 +63,11 @@ module OrganizationRegister
         public get editBusinessIdentifierLabel(): string
         {
             var label: string = "Y-tunnus";
-            if (this.isSubOrganizationBeingAdded())
+            if (this.isSubOrganization())
             {
                 return label;
             }
             return label + "*";
-        }
-
-        public canSaveBasicInformation(): boolean
-        {
-            return this.validBusinessId;
         }
 
         public canSaveContactInformation(): boolean
@@ -95,6 +97,16 @@ module OrganizationRegister
                 return false;
             }
             return this.model.postalAddressTypes.contains(PostalAddressType.PostOfficeBoxAddress);
+        }
+
+        public showValidFromCalendar(): void
+        {
+            this.isValidFromCalendarShown = true;
+        }
+
+        public showValidToCalendar(): void
+        {
+            this.isValidToCalendarShown = true;
         }
 
         public showSeparateStreetPostalAddress(): boolean
@@ -150,9 +162,9 @@ module OrganizationRegister
             return this.editedSection === EditedOrganizationSection.PostalAddress;
         }
 
-        public isSubOrganizationBeingAdded(): boolean
+        public isSubOrganization(): boolean
         {
-            return this.parentOrganizationId != null;
+            return this.parentOrganizationId != null || (this.model != null && this.model.isSubOrganization);
         }
 
         public canAddingBeCancelled(): boolean
@@ -172,6 +184,7 @@ module OrganizationRegister
         public resetAllFormFieldsAsValid(): void
         {
             this.setFormFieldValidity(this.basicInformationForm, "businessId", true);
+            this.setValidityValidity(true);
             this.setEmailAddressValidity(true);
             this.setPhonenNumberValidity(true);
             this.setVisitingAddressPostalCodeValidity(true);
@@ -472,8 +485,7 @@ module OrganizationRegister
         {
             if (this.model.hasBusinessId())
             {
-                var allowDuplicates: boolean = this.isSubOrganizationBeingAdded() || this.model.isSubOrganization;
-                return this.validationService.validateBusinessId(this.model.businessId, this.model.id, allowDuplicates)
+                return this.validationService.validateBusinessId(this.model.businessId, this.model.id, this.isSubOrganization())
                     .then(this.setBusinessIdValidity);
             }
             else
@@ -493,6 +505,11 @@ module OrganizationRegister
             {
                 this.setEmailAddressValidity(true);
             }
+        }
+
+        public validateValidity(): void
+        {
+            this.setValidityValidity(this.model.isValidValidity());
         }
 
         public validatePhoneNumber(): void
@@ -774,6 +791,13 @@ module OrganizationRegister
         {
             this.validEditedWebPageUrl = isValid;
             this.setFormFieldValidity(this.contactInformationForm, "editedWebPage", isValid);
+        }
+
+        private setValidityValidity(isValid: boolean): void
+        {
+            this.validValidity = isValid;
+            this.setFormFieldValidity(this.basicInformationForm, "validFrom", isValid);
+            this.setFormFieldValidity(this.basicInformationForm, "validTo", isValid);
         }
 
         private setFormFieldValidity = (form: angular.IFormController, fieldName: string, isValid: boolean): void =>

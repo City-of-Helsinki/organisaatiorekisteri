@@ -1,28 +1,26 @@
-﻿<article>
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <h1>Organisaatiot</h1>
-                <div class="help-text">
-                    <p>
-                        Organisaatiot-osiossa organisaation ylläpitäjä voi selailla oman organisaation tietoja ja organisaation pääkäyttäjä voi ylläpitää organisaation tietoja ja organisaatiorakennetta.
-                    </p>
-                </div>
+﻿<div class="main">
+    <article>
+        <div class="container">
+            <h1>Organisaatiot</h1>
+            <div class="help-text">
+                <p>
+                    Organisaatiot-osiossa organisaation ylläpitäjä voi selailla oman organisaation tietoja ja organisaation pääkäyttäjä voi ylläpitää organisaation tietoja ja organisaatiorakennetta.
+                </p>
             </div>
-        </div>
-        <div class="organization-map closed">
-            <div class="map-left-container">
-                <div class="map-left">
-                    <div class="map-content" data-ng-include src="'App/Views/OrganizationPartials/Tree.html'">
+            <div class="organization-map closed">
+                <div class="map-left-container">
+                    <div class="map-left">
+                        <div class="map-content" data-ng-include src="'App/Views/OrganizationPartials/Tree.html'">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="map-toggle">
-                <span>Organisaatiot <span class="icon arrow"></span></span>
+                <div class="map-toggle">
+                    <span>Organisaatiot <span class="icon arrow"></span></span>
+                </div>
             </div>
         </div>
-    </div>
-</article>
+    </article>
+</div>
 
 <script type="text/javascript">
     toggleOrganizationTree();

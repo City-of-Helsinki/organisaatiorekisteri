@@ -4,10 +4,8 @@
     {
         public static class Users
         {
-            public const string UserMaintenance = "USER_MAINTENANCE";
-            public const string ViewAllUsers = "VIEW_ALL_USERS";
-            public const string ViewUserOrganizationUsers = "VIEW_USER_ORGANIZATION_USERS";
-            public const string ManageAdministratorUsers = "MANAGE_ADMINISTRATOR_USERS";
+            public const string MaintenanceOfOwnOrganizationUsers = "MAINTENANCE_OF_OWN_ORGANIZATION_USERS";
+            public const string MaintenanceOfAllUsers = "MAINTENANCE_OF_ALL_USERS";
         }
     }
 }

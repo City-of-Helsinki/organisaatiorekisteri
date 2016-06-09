@@ -1,5 +1,5 @@
 ﻿using System.Data.Entity;
-using Affecto.EntityFramework.PostgreSql;
+using Affecto.EntityFramework.PostgreSql.Configuration;
 using Autofac;
 
 namespace OrganizationRegister.Store.CodeFirst

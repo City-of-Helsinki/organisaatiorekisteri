@@ -32,7 +32,7 @@
                                 "Tarkista oman organisaatiosi Y-tunnuksen käytön käytäntö: Joillain organisaatioilla on vain yksi yhteinen Y-tunnus, toisilla myös alaorganisaatioilla on omat Y-tunnuksensa. Varmista, että annat alaorganisaatiolle oikean Y-tunnuksen."]' />
         </label>
         <input id="organizationBusinessId" type="text" class="form-control" name="businessId" maxlength="9" data-ng-model="controller.model.businessId"
-               data-ng-required="!controller.isSubOrganizationBeingAdded()" data-ng-blur="controller.validateBusinessId()" />
+               data-ng-required="!controller.isSubOrganization()" data-ng-blur="controller.validateBusinessId()" />
         <div id="organizationBusinessIdErrorMessage" aria-live="polite" class="validation-message" data-ng-show="!controller.validBusinessId">
             {{ controller.businessIdErrorMessage }}
         </div>
@@ -55,5 +55,26 @@
         <input id="organizationOid" type="text" class="form-control" maxlength="100" data-ng-model="controller.model.oid" />
     </div>
     <div class="col-xs-6">
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-6">
+        <label>
+            Voimassaolo alkaa
+        </label>
+        <input id="organizationValidFrom" type="text" class="form-control" name="validFrom" data-ng-model="controller.model.validFromDate" data-ng-blur="controller.validateValidity()"
+                data-uib-datepicker-popup="dd.MM.yyyy" data-is-open="controller.isValidFromCalendarShown" data-show-button-bar="false" 
+                data-datepicker-options="{'startingDay': 1, 'formatDayTitle': 'MM yyyy'}" data-ng-click="controller.showValidFromCalendar()"/>
+        <div id="organizationValidityErrorMessage" aria-live="polite" class="validation-message" data-ng-show="!controller.validValidity">
+            Voimassaolo ei voi alkaa sen päättymisen jälkeen
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <label>
+            Voimassaolo päättyy
+        </label>
+        <input id="organizationValidTo" type="text" class="form-control" name="validTo" data-ng-model="controller.model.validToDate" data-ng-blur="controller.validateValidity()"
+               data-uib-datepicker-popup="dd.MM.yyyy" data-is-open="controller.isValidToCalendarShown" data-show-button-bar="false"
+               data-datepicker-options="{'startingDay': 1, 'formatDayTitle': 'MM yyyy'}" data-ng-click="controller.showValidToCalendar()" />
     </div>
 </div>

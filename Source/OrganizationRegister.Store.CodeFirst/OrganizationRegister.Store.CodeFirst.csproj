@@ -40,8 +40,8 @@
       <HintPath>..\packages\Affecto.Configuration.Extensions.2.0.0\lib\net40\Affecto.Configuration.Extensions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Affecto.EntityFramework.PostgreSql, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Affecto.EntityFramework.PostgreSql.2.0.0\lib\net45\Affecto.EntityFramework.PostgreSql.dll</HintPath>
+    <Reference Include="Affecto.EntityFramework.PostgreSql, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Affecto.EntityFramework.PostgreSql.3.0.0\lib\net45\Affecto.EntityFramework.PostgreSql.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
@@ -73,6 +73,10 @@
     <Compile Include="Migrations\201604011205486_Initial.cs" />
     <Compile Include="Migrations\201604011205486_Initial.Designer.cs">
       <DependentUpon>201604011205486_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605261029595_AddOrganizationValidity.cs" />
+    <Compile Include="Migrations\201605261029595_AddOrganizationValidity.Designer.cs">
+      <DependentUpon>201605261029595_AddOrganizationValidity.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\OrganizationRegisterDbMigration.cs" />
@@ -131,6 +135,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201604011205486_Initial.resx">
       <DependentUpon>201604011205486_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605261029595_AddOrganizationValidity.resx">
+      <DependentUpon>201605261029595_AddOrganizationValidity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

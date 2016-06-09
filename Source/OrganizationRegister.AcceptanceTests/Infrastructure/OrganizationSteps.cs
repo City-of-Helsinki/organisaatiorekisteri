@@ -21,21 +21,22 @@ namespace OrganizationRegister.AcceptanceTests.Infrastructure
         {
             TableRow company = companies.Rows.Single();
             Try(() => OrganizationService.AddOrganization(company.GetOptionalValue("Business id"), company.GetOptionalValue("Oid"), company["Type"], null,
-                LocalizedTextHelper.CreateNamesCollection(company), LocalizedTextHelper.CreateDescriptionsCollection(company)));
+                LocalizedTextHelper.CreateNamesCollection(company), LocalizedTextHelper.CreateDescriptionsCollection(company), company.GetOptionalFinnishDate("Valid from"),
+                company.GetOptionalFinnishDate("Valid to")));
         }
 
         [Given(@"there is an organization")]
         public void GivenThereIsAnOrganization()
         {
             Guid organizationId = OrganizationService.AddOrganization("1234567-1", "123", "Yritys", null, 
-                new List<LocalizedText> { new LocalizedText("fi", "Firma"), new LocalizedText("sv", "Bolaget") }, Enumerable.Empty<LocalizedText>());
+                new List<LocalizedText> { new LocalizedText("fi", "Firma"), new LocalizedText("sv", "Bolaget") }, Enumerable.Empty<LocalizedText>(), null, null);
             CurrentScenarioContext.OrganizationId = organizationId;
         }
 
         [Given(@"there is an organization '(.+)' with business id '(.+)'")]
         public void GivenThereIsAnOrganizationWithBusinessId(string organizationName, string businessId)
         {
-            OrganizationService.AddOrganization(businessId, "", "Yritys", null, new List<LocalizedText> { new LocalizedText(LanguageCode, organizationName) }, null);
+            OrganizationService.AddOrganization(businessId, "", "Yritys", null, new List<LocalizedText> { new LocalizedText(LanguageCode, organizationName) }, null, null, null);
         }
 
         [Then(@"there are following organizations:")]
@@ -55,7 +56,7 @@ namespace OrganizationRegister.AcceptanceTests.Infrastructure
             Guid parentId = OrganizationHelper.GetOrganizationId(organizationFinnishName);
             IOrganization parent = OrganizationService.GetOrganization(parentId);
             OrganizationService.AddSubOrganization(parent.Id, parent.BusinessId, parent.Oid, parent.Type, parent.MunicipalityCode, 
-                new List<LocalizedText> { new LocalizedText(LanguageCode, subOrganizationFinnishName) }, null);
+                new List<LocalizedText> { new LocalizedText(LanguageCode, subOrganizationFinnishName) }, null, null, null);
         }
 
         [Then(@"there are no organizations")]

@@ -7,6 +7,10 @@ module OrganizationRegister
         public name: string;
         public description: string;
         public descriptionAsHtml: string;
+        public validFromText: string;
+        public validToText: string;
+        public validFrom: string; // Web API data
+        public validTo: string; // Web API data
         public webPageUrl: string;
         public webPageName: string;
         public webPageType: string;
@@ -26,7 +30,7 @@ module OrganizationRegister
         public postalAddressTypes: PostalAddressTypes;
 
         constructor(public id?: string, public numericId?: number, public names?: Array<LocalizedText>, public businessId?: string, private descriptions?: Array<LocalizedText>,
-            public oid?: string, public type?: string, public municipalityCode?: number, public phoneNumber?: string, public phoneCallFee?: string,
+            public oid?: string, public type?: string, public municipalityCode?: number, public validFromDate?: Date, public validToDate?: Date, public phoneNumber?: string, public phoneCallFee?: string,
             public emailAddress?: string, public webPages?: Array<WebPage>, public visitingAddress?: StreetAddress, public visitingAddressQualifiers?: Array<LocalizedText>,
             public useVisitingAddressAsPostalAddress?: boolean, public postalStreetAddress?: StreetAddress, public postalPostOfficeBoxAddress?: PostOfficeBoxAddress,
             public isSubOrganization?: boolean)
@@ -40,12 +44,21 @@ module OrganizationRegister
                 this.description = descriptions[0].localizedValue;
                 this.descriptionAsHtml = Affecto.HtmlContent.escapeAndReplaceNewLines(this.description);
             }
+            this.setValidityTexts();
             this.initializeVisitingAddress(visitingAddress, visitingAddressQualifiers);
             this.initializePostalAddress(postalStreetAddress, postalPostOfficeBoxAddress);
             if (this.webPages == null)
             {
                 this.webPages = new Array<WebPage>();
             }
+        }
+
+        private setValidityTexts()
+        {
+            this.validFromText = Affecto.DateConverter.toFinnishDate(this.validFromDate);
+            this.validToText = Affecto.DateConverter.toFinnishDate(this.validToDate);
+            this.validFrom = Affecto.DateConverter.toISO8601Date(this.validFromDate);
+            this.validTo = Affecto.DateConverter.toISO8601Date(this.validToDate);
         }
 
         private initializeVisitingAddress(visitingAddress?: StreetAddress, visitingAddressQualifiers?: Array<LocalizedText>): void
@@ -149,6 +162,7 @@ module OrganizationRegister
             this.names = new Array<LocalizedText>(new LocalizedText("fi", this.name));
             this.descriptions = new Array<LocalizedText>(new LocalizedText("fi", this.description));
             this.descriptionAsHtml = Affecto.HtmlContent.escapeAndReplaceNewLines(this.description);
+            this.setValidityTexts();
         }
 
         public generateVisitingAddressLocalizedTexts(): void
@@ -323,6 +337,11 @@ module OrganizationRegister
         public canAddPostalAddress(): boolean
         {
             return this.postalAddressTypes.canAddPostalAddress();
+        }
+
+        public isValidValidity(): boolean
+        {
+            return this.validFromDate == null || this.validToDate == null || this.validFromDate <= this.validToDate;
         }
     }
 }

@@ -658,4 +658,44 @@ describe("Organization", () =>
             expect(sut.hasVisitingAddressParts()).toBeFalsy();
         });
     });
+
+    describe("validity validation", () =>
+    {
+        it("is not valid when from date is greater than to date", () =>
+        {
+            sut.validFromDate = new Date("2016-01-01");
+            sut.validToDate = new Date("2015-01-01");
+            expect(sut.isValidValidity()).toBeFalsy();
+        });
+
+        it("is valid when from date is equal to to date", () =>
+        {
+            sut.validFromDate = new Date("2016-01-01");
+            sut.validToDate = new Date("2016-01-01");
+            expect(sut.isValidValidity()).toBeTruthy();
+        });
+
+        it("is valid when from date and to date are empty", () =>
+        {
+            sut.validFromDate = null;
+            sut.validToDate = null;
+            expect(sut.isValidValidity()).toBeTruthy();
+        });
+
+        it("is valid when only from date is set", () =>
+        {
+            sut.validFromDate = new Date("2016-01-01");
+            sut.validToDate = null;
+            expect(sut.isValidValidity()).toBeTruthy();
+        });
+
+        it("is valid when only to date is set", () =>
+        {
+            sut.validFromDate = null;
+            sut.validToDate = new Date("2016-01-01");
+            expect(sut.isValidValidity()).toBeTruthy();
+        });
+
+    });
+
 });

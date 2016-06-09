@@ -31,3 +31,13 @@
         {{ controller.model.oid }}
     </div>
 </div>
+<div class="row">
+    <div class="col-xs-6">
+        <label>Voimassaolo alkaa</label>
+        <span>{{ controller.model.validFromText }}</span>
+    </div>
+    <div class="col-xs-6">
+        <label>Voimassaolo päättyy</label>
+        {{ controller.model.validToText }}
+    </div>
+</div>

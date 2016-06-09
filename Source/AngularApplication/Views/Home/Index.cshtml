@@ -6,8 +6,8 @@
     <div class="header-top" data-ng-controller="OrganizationRegister.MainNavigationController as controller">
         <div class="container">
             <h1>
-                <a href="#/" class="logo-link">
-                    <img src="~/Content/img/logo.png" />
+                <a href="#/" class="navbar-brand">
+                    Organisaatiorekisteri
                 </a>
             </h1>
             <div class="site-options md-right">
@@ -32,7 +32,7 @@
                         <li data-ng-class="{ 'current': controller.areOrganizationsActive() }" data-ng-click="controller.changeToOrganizations()">
                             <a data-ng-href="#/">Organisaatiot</a>
                         </li>
-                        <li data-ng-class="{ 'current': controller.areUsersActive() }" data-ng-click="controller.changeToUsers()">
+                        <li data-ng-if="controller.canCurrentUserModifyUsers()" data-ng-class="{ 'current': controller.areUsersActive() }" data-ng-click="controller.changeToUsers()">
                             <a data-ng-href="#/Organizations/{{controller.user.organizationId}}/Users">Käyttäjät</a>
                         </li>
                     </ul>
@@ -51,7 +51,7 @@
     <div class="container">
         <div class="row">
             <div id="footer-logo">
-                <img src="~/Content/img/footer-logo2.svg" alt="Väestörekisterikeskus logo">
+                <img src="~/Content/img/logo.png" alt="Helsingin vaakuna">
             </div>
         </div>
     </div>
@@ -76,4 +76,5 @@
             .constant('useExternalLogin', @ConfigurationManager.AppSettings.AllKeys.Where(k => k == "useExternalLogin").Select(k => ConfigurationManager.AppSettings[k]).DefaultIfEmpty("false").FirstOrDefault())
             .constant('externalLoginPage', '@ConfigurationManager.AppSettings.AllKeys.Where(k => k == "externalLoginPage").Select(k => ConfigurationManager.AppSettings[k]).DefaultIfEmpty(null).FirstOrDefault()');
     </script>
+    <script type="text/javascript" src=@ConfigurationManager.AppSettings["angularLocale"]></script>
 }

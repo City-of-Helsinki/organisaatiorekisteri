@@ -51,8 +51,8 @@
       <HintPath>..\packages\Affecto.Configuration.Extensions.2.0.0\lib\net40\Affecto.Configuration.Extensions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Affecto.EntityFramework.PostgreSql, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Affecto.EntityFramework.PostgreSql.2.0.0\lib\net45\Affecto.EntityFramework.PostgreSql.dll</HintPath>
+    <Reference Include="Affecto.EntityFramework.PostgreSql, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Affecto.EntityFramework.PostgreSql.3.0.0\lib\net45\Affecto.EntityFramework.PostgreSql.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Affecto.IdentityManagement.ApplicationServices, Version=9.2.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -64,7 +64,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Affecto.IdentityManagement.Commanding, Version=9.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Affecto.IdentityManagement.Store.Mocking.8.0.3\lib\net451\Affecto.IdentityManagement.Commanding.dll</HintPath>
+      <HintPath>..\packages\Affecto.IdentityManagement.Store.Mocking.8.0.4\lib\net451\Affecto.IdentityManagement.Commanding.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Affecto.IdentityManagement.Interfaces, Version=9.2.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -72,23 +72,23 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Affecto.IdentityManagement.Querying, Version=9.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Affecto.IdentityManagement.Store.Mocking.8.0.3\lib\net451\Affecto.IdentityManagement.Querying.dll</HintPath>
+      <HintPath>..\packages\Affecto.IdentityManagement.Store.Mocking.8.0.4\lib\net451\Affecto.IdentityManagement.Querying.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Affecto.IdentityManagement.Store, Version=9.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Affecto.IdentityManagement.Store.Mocking.8.0.3\lib\net451\Affecto.IdentityManagement.Store.dll</HintPath>
+      <HintPath>..\packages\Affecto.IdentityManagement.Store.Mocking.8.0.4\lib\net451\Affecto.IdentityManagement.Store.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Affecto.IdentityManagement.Store.EntityFramework, Version=9.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Affecto.IdentityManagement.Store.Mocking.8.0.3\lib\net451\Affecto.IdentityManagement.Store.EntityFramework.dll</HintPath>
+      <HintPath>..\packages\Affecto.IdentityManagement.Store.Mocking.8.0.4\lib\net451\Affecto.IdentityManagement.Store.EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Affecto.IdentityManagement.Store.Mocking, Version=8.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Affecto.IdentityManagement.Store.Mocking.8.0.3\lib\net451\Affecto.IdentityManagement.Store.Mocking.dll</HintPath>
+    <Reference Include="Affecto.IdentityManagement.Store.Mocking, Version=8.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Affecto.IdentityManagement.Store.Mocking.8.0.4\lib\net451\Affecto.IdentityManagement.Store.Mocking.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Affecto.IdentityManagement.Store.PostgreSql, Version=8.2.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Affecto.IdentityManagement.Store.PostgreSql.8.2.1\lib\net451\Affecto.IdentityManagement.Store.PostgreSql.dll</HintPath>
+    <Reference Include="Affecto.IdentityManagement.Store.PostgreSql, Version=8.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Affecto.IdentityManagement.Store.PostgreSql.8.2.2\lib\net451\Affecto.IdentityManagement.Store.PostgreSql.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Affecto.Mapping, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -132,7 +132,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Effort, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6a46696d54971e6d, processorArchitecture=MSIL">
-      <HintPath>..\packages\Effort.EF6.1.1.4\lib\net45\Effort.dll</HintPath>
+      <HintPath>..\packages\Effort.EF6.1.1.5\lib\net45\Effort.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
