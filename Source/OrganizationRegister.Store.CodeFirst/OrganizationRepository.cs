@@ -157,7 +157,7 @@ namespace OrganizationRegister.Store.CodeFirst
         public bool HasActiveOrganization(string businessId, Guid? excludedOrganizationId)
         {
             return excludedOrganizationId.HasValue ?
-                context.Organizations.Any(org => org.BusinessId.Equals(businessId) && org.Active && !org.Id.Equals(excludedOrganizationId.Value)) :
+                context.Organizations.Any(org => org.BusinessId.Equals(businessId) && org.Active && !org.Id.Equals(excludedOrganizationId.Value) && org.ParentOrganizationId == null) :
                 context.Organizations.Any(org => org.BusinessId.Equals(businessId) && org.Active);
         }
 
