@@ -1,7 +1,11 @@
 ﻿<div class="row" data-ng-show="controller.model.hasPostalStreetAddressPostalCode() || !controller.model.hasPostalPostOfficeBoxAddressPostalCode()">
     <div class="col-xs-6">
         <label>Katuosoite</label>
-        {{ controller.model.effectivePostalStreetAddressStreet }}
+        <div data-ng-repeat="street in controller.model.effectivePostalStreetAddressStreets">
+            <p>
+                <span>{{ street.localizedValue }}</span>
+            </p>
+        </div>
     </div>
     <div class="col-xs-3">
         <label>Postinumero</label>
@@ -9,20 +13,31 @@
     </div>
     <div class="col-xs-3">
         <label>Postitoimipaikka</label>
-        {{ controller.model.effectivePostalStreetAddressPostalDistrict }}
+        <div data-ng-repeat="district in controller.model.effectivePostalStreetAddressPostalDistricts">
+            <p>
+                <span>{{ district.localizedValue }}</span>
+            </p>
+        </div>
     </div>
 </div>
 <div class="row" data-ng-show="controller.model.hasPostalPostOfficeBoxAddressPostalCode()">
-    <div class="col-xs-6">
+    <div class="col-xs-1">
         <label>Postilokero</label>
         <span>PL {{ controller.model.postalPostOfficeBoxAddressPostOfficeBox }}</span>
     </div>
-    <div class="col-xs-3">
+    <div class="col-xs-5">
         <label>Postinumero</label>
         {{ controller.model.postalPostOfficeBoxAddressPostalCode }}
     </div>
-    <div class="col-xs-3">
+</div>
+
+<div class="row" data-ng-show="controller.model.hasPostalPostOfficeBoxAddressPostalCode()">
+    <div class="col-xs-6">
         <label>Postitoimipaikka</label>
-        {{ controller.model.postalPostOfficeBoxAddressPostalDistrict }}
+        <div data-ng-repeat="district in controller.model.postalPostOfficeBoxAddressPostalDistricts">
+            <p>
+                <span>{{ district.localizedValue }}</span>
+            </p>
+        </div>
     </div>
 </div>

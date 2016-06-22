@@ -360,6 +360,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="App\App.ts" />
+    <TypeScriptCompile Include="App\Constants\DataLocalization.ts" />
     <TypeScriptCompile Include="App\Constants\InvalidBusinessIdentifierReason.ts" />
     <TypeScriptCompile Include="App\Constants\ErrorCode.ts" />
     <TypeScriptCompile Include="App\Constants\Permission.ts" />
