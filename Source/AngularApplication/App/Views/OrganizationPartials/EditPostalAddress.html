@@ -34,28 +34,36 @@
                 <div class="col-xs-1">
                     <label for="po-box" class="mandatory-field">Postilokero</label>
                     <input type="text" class="form-control" id="po-box" name="postalPostOfficeBoxAddressPostOfficeBox" maxlength="100"
-                            data-ng-model="controller.model.postalPostOfficeBoxAddressPostOfficeBox" data-ng-required="controller.showPostOfficeBoxPostalAddress()"
-                            data-ng-pattern="/^\d+$/" />
+                           data-ng-model="controller.model.postalPostOfficeBoxAddressPostOfficeBox" data-ng-required="controller.showPostOfficeBoxPostalAddress()"
+                           data-ng-pattern="/^\d+$/"/>
                     <div id="po-boxErrorMessage" aria-live="polite" class="validation-message no-wrap"
-                            data-ng-show="controller.postalAddressForm.postalPostOfficeBoxAddressPostOfficeBox.$error.pattern">
+                         data-ng-show="controller.postalAddressForm.postalPostOfficeBoxAddressPostOfficeBox.$error.pattern">
                         Postilokero on pelkkiä numeroita
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-6">
+                <div class="col-xs-5">
                     <label for="postcode" class="mandatory-field">Postinumero</label>
                     <input type="text" class="form-control" id="postcode" name="postalPostOfficeBoxAddressPostalCode" maxlength="5"
-                            data-ng-model="controller.model.postalPostOfficeBoxAddressPostalCode" data-ng-required="controller.showPostOfficeBoxPostalAddress()"
-                            data-ng-blur="controller.validatePostalPostOfficeBoxAddressPostalCode()" />
+                           data-ng-model="controller.model.postalPostOfficeBoxAddressPostalCode" data-ng-required="controller.showPostOfficeBoxPostalAddress()"
+                           data-ng-blur="controller.validatePostalPostOfficeBoxAddressPostalCode()" />
                     <div id="postcodeErrorMessage" aria-live="polite" class="validation-message no-wrap" data-ng-show="!controller.validPostalPostOfficeBoxAddressPostalCode">
                         Postilokeron postinumeron pitää olla viisinumeroinen ja se ei saa päättyä numeroon nolla
                     </div>
                 </div>
+            </div>
+            <div class="row">
+                
                 <div class="col-xs-6">
                     <label for="city" class="mandatory-field">Postitoimipaikka</label>
-                    <input type="text" class="form-control" id="city" maxlength="30" data-ng-model="controller.model.postalPostOfficeBoxAddressPostalDistrict"
-                            data-ng-required="controller.showPostOfficeBoxPostalAddress()" />
+
+                    <div data-ng-repeat="district in controller.model.postalPostOfficeBoxAddressPostalDistricts">
+                        <p>
+                            <input type="text" class="form-control" data-ng-required="(controller.showPostOfficeBoxPostalAddress() && district.isRequired)"
+                                   data-ng-model="district.localizedValue"
+                                   maxlength="30" ng-attr-placeholder="{{district.localizedTitle}}" />
+                        </p>
+                    </div>
+
                 </div>
             </div>
         </blockquote>
@@ -77,8 +85,15 @@
             <div class="row">
                 <div class="col-xs-6">
                     <label class="mandatory-field">Katuosoite</label>
-                    <input id="separateStreetPostalAddress" type="text" class="form-control" maxlength="50" data-ng-model="controller.model.postalStreetAddressStreet"
-                            data-ng-required="controller.showSeparateStreetPostalAddress()" />
+
+                    <div data-ng-repeat="street in controller.model.postalStreetAddressStreets">
+                        <p>
+                            <input type="text" class="form-control" data-ng-required="(controller.showSeparateStreetPostalAddress() && street.isRequired)"
+                                   data-ng-model="street.localizedValue"
+                                   maxlength="50" ng-attr-placeholder="{{street.localizedTitle}}" />
+                        </p>
+                    </div>
+
                 </div>
                 <div class="col-xs-3">
                     <label class="mandatory-field">Postinumero</label>
@@ -92,8 +107,17 @@
                 </div>
                 <div class="col-xs-3">
                     <label class="mandatory-field">Postitoimipaikka</label>
-                    <input id="postalStreetAddressPostalDistrict" type="text" class="form-control" maxlength="30" data-ng-model="controller.model.postalStreetAddressPostalDistrict"
-                            data-ng-required="controller.showSeparateStreetPostalAddress()" />
+
+                    <div data-ng-repeat="district in controller.model.postalStreetAddressPostalDistricts">
+                        <p>
+                            <input type="text" class="form-control" data-ng-required="(controller.showSeparateStreetPostalAddress() && district.isRequired)"
+                                   data-ng-model="district.localizedValue"
+                                   maxlength="30" ng-attr-placeholder="{{district.localizedTitle}}" />
+                        </p>
+                    </div>
+
+                    <!--<input id="postalStreetAddressPostalDistrict" type="text" class="form-control" maxlength="30" data-ng-model="controller.model.postalStreetAddressPostalDistrict"
+                            data-ng-required="controller.showSeparateStreetPostalAddress()" />-->
                 </div>
             </div>
         </blockquote>
@@ -115,7 +139,14 @@
             <div class="row">
                 <div class="col-xs-6">
                     <label>Katuosoite</label>
-                    <input type="text" class="form-control" data-ng-model="controller.model.visitingStreetAddress" data-ng-disabled="true" />
+                    <!--<input type="text" class="form-control" data-ng-model="controller.model.visitingStreetAddress" data-ng-disabled="true"/>-->
+                    <div data-ng-repeat="address in controller.model.visitingStreetAddresses">
+                        <p>
+                            <input type="text" class="form-control"
+                                   data-ng-model="address.localizedValue" data-ng-disabled="true"
+                                   maxlength="50" ng-attr-placeholder="{{address.localizedTitle}}" />
+                        </p>
+                    </div>
                 </div>
                 <div class="col-xs-3">
                     <label>Postinumero</label>
@@ -124,7 +155,15 @@
                 </div>
                 <div class="col-xs-3">
                     <label>Postitoimipaikka</label>
-                    <input type="text" class="form-control" data-ng-model="controller.model.visitingAddressPostalDistrict" data-ng-disabled="true" />
+                    <!--<input type="text" class="form-control" data-ng-model="controller.model.visitingAddressPostalDistrict" data-ng-disabled="true"/>-->
+
+                    <div data-ng-repeat="district in controller.model.visitingAddressPostalDistricts">
+                        <p>
+                            <input type="text" class="form-control" 
+                                   data-ng-model="district.localizedValue" data-ng-disabled="true"
+                                   maxlength="30" ng-attr-placeholder="{{district.localizedTitle}}" />
+                        </p>
+                    </div>
                 </div>
             </div>
         </blockquote>

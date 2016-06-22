@@ -4,13 +4,8 @@ module OrganizationRegister
 {
     export class Organization implements Affecto.Base.IModel
     {
-        public name: string;
-
-        //public namesLang: Array<LocalizedText>;
-
         
-        public description: string;
-        public descriptionAsHtml: string;
+        public descriptionsAsHtml: Array<LocalizedText>;
         public validFromText: string;
         public validToText: string;
         public validFrom: string; // Web API data
@@ -21,16 +16,15 @@ module OrganizationRegister
         public editedWebPageUrl: string;
         public editedWebPageName: string;
         public editedWebPageType: string;
-        public visitingStreetAddress: string;
+        public visitingStreetAddresses: Array<LocalizedText>;
+        public visitingAddressPostalDistricts: Array<LocalizedText>;
         public visitingAddressPostalCode: string;
-        public visitingAddressPostalDistrict: string;
-        public visitingAddressQualifier: string;
-        public postalStreetAddressStreet: string;
+        public postalStreetAddressStreets: Array<LocalizedText>;
+        public postalStreetAddressPostalDistricts: Array<LocalizedText>;
         public postalStreetAddressPostalCode: string;
-        public postalStreetAddressPostalDistrict: string;
         public postalPostOfficeBoxAddressPostOfficeBox: string;
         public postalPostOfficeBoxAddressPostalCode: string;
-        public postalPostOfficeBoxAddressPostalDistrict: string;
+        public postalPostOfficeBoxAddressPostalDistricts: Array<LocalizedText>;
         public postalAddressTypes: PostalAddressTypes;
 
         constructor(public id?: string,
@@ -54,18 +48,9 @@ module OrganizationRegister
             public postalPostOfficeBoxAddress?: PostOfficeBoxAddress,
             public isSubOrganization?: boolean)
         {
-            if (names != null && names.length > 0)
-            {
-                this.name = names[0].localizedValue;
-            }
+            this.initializeLocalizedNames(names);
+            this.initializeLocalizedDescriptions(descriptions);
 
-            this.names = this.initializeLocalizedTexts(names, ["fi"]);
-
-            if (descriptions != null && descriptions.length > 0)
-            {
-                this.description = descriptions[0].localizedValue;
-                this.descriptionAsHtml = Affecto.HtmlContent.escapeAndReplaceNewLines(this.description);
-            }
             this.setValidityTexts();
             this.initializeVisitingAddress(visitingAddress, visitingAddressQualifiers);
             this.initializePostalAddress(postalStreetAddress, postalPostOfficeBoxAddress);
@@ -75,7 +60,26 @@ module OrganizationRegister
             }
         }
 
-        private initializeLocalizedTexts(texts: Array<LocalizedText>, requiredLangs: string[]): Array<LocalizedText>
+        private initializeLocalizedNames(names?: Array<LocalizedText>): void
+        {
+            this.names = this.setLocalizedTexts(names, ["fi"]);
+        }
+
+        private initializeLocalizedDescriptions(descs?: Array<LocalizedText>): void
+        {
+            this.descriptions = this.setLocalizedTexts(descs, [""]);
+            this.descriptionsAsHtml = new Array<LocalizedText>();
+            this.descriptions.forEach((desc) =>
+            {
+                this.descriptionsAsHtml
+                    .push(new LocalizedText(desc.languageCode,
+                        desc.localizedValue != null
+                        ? Affecto.HtmlContent.escapeAndReplaceNewLines(desc.localizedValue)
+                        : ""));
+            });
+        }
+
+        private setLocalizedTexts(texts: Array<LocalizedText>, requiredLangs: string[]): Array<LocalizedText>
         {
             let langs = DataLocalization.languageCodes;
             let localizedTexts = new Array<LocalizedText>();
@@ -83,16 +87,17 @@ module OrganizationRegister
             langs.forEach((item) =>
             {
                 // init LocalizedText with existing value or create with empty value + set isrequired flag
-                localizedTexts.push(new LocalizedText(String(item), this.getLocalizedTextValue(texts,String(item)), (requiredLangs.indexOf(String(item)) >= 0)));   
+                localizedTexts.push(new LocalizedText(String(item),
+                    this.getLocalizedTextValue(texts, String(item)),
+                    (requiredLangs.indexOf(String(item)) >= 0)));
             });
 
             return localizedTexts;
         }
 
-       
         private getLocalizedTextValue(texts: Array<LocalizedText>, languageCode: string): string
-        {   
-            if (texts!=null && texts.some((arrVal: LocalizedText) => (languageCode === arrVal.languageCode)))
+        {
+            if (texts != null && texts.some((arrVal: LocalizedText) => (languageCode === arrVal.languageCode)))
             {
                 return (texts.filter((arrVal: LocalizedText) => (languageCode === arrVal.languageCode)))[0]
                     .localizedValue;
@@ -114,7 +119,6 @@ module OrganizationRegister
             return localizedTexts;
         }
 
-
         private setValidityTexts()
         {
             this.validFromText = Affecto.DateConverter.toFinnishDate(this.validFromDate);
@@ -126,19 +130,20 @@ module OrganizationRegister
         private initializeVisitingAddress(visitingAddress?: StreetAddress,
             visitingAddressQualifiers?: Array<LocalizedText>): void
         {
-            if (visitingAddress != null &&
-                visitingAddress.streetAddresses != null &&
-                visitingAddress.streetAddresses.length > 0 &&
-                visitingAddress.postalDistricts != null &&
-                visitingAddress.postalDistricts.length > 0)
+            let streetAddresses = new Array<LocalizedText>();
+            let postalDistricts = new Array<LocalizedText>();
+            if (visitingAddress != null)
             {
-                this.visitingStreetAddress = visitingAddress.streetAddresses[0].localizedValue;
                 this.visitingAddressPostalCode = visitingAddress.postalCode;
-                this.visitingAddressPostalDistrict = visitingAddress.postalDistricts[0].localizedValue;
+                streetAddresses = visitingAddress.streetAddresses;
+                postalDistricts = visitingAddress.postalDistricts;
             }
+            this.visitingStreetAddresses = this.setLocalizedTexts(streetAddresses, ["fi"]);
+            this.visitingAddressPostalDistricts = this.setLocalizedTexts(postalDistricts, ["fi"]);
+
             if (visitingAddressQualifiers != null && visitingAddressQualifiers.length > 0)
             {
-                this.visitingAddressQualifier = visitingAddressQualifiers[0].localizedValue;
+                this.visitingAddressQualifiers = this.setLocalizedTexts(visitingAddressQualifiers, [""]);;
             }
         }
 
@@ -146,16 +151,20 @@ module OrganizationRegister
         void
         {
             this.postalAddressTypes = new PostalAddressTypes();
+
+            // postal street address
+            let streetAddresses = new Array<LocalizedText>();
+            let postalDistricts = new Array<LocalizedText>();
             if (streetAddress != null &&
                 streetAddress.streetAddresses != null &&
                 streetAddress.streetAddresses.length > 0 &&
                 streetAddress.postalDistricts != null &&
                 streetAddress.postalDistricts.length > 0)
             {
-                this.postalStreetAddressStreet = streetAddress.streetAddresses[0].localizedValue;
                 this.postalStreetAddressPostalCode = streetAddress.postalCode;
-                this.postalStreetAddressPostalDistrict = streetAddress.postalDistricts[0].localizedValue;
                 this.addPostalAddressType(PostalAddressType[PostalAddressType.SeparateStreetAddress]);
+                streetAddresses = streetAddress.streetAddresses;
+                postalDistricts = streetAddress.postalDistricts;
             }
             else
             {
@@ -168,28 +177,35 @@ module OrganizationRegister
                     this.setAvailablePostalStreetAddressTypes();
                 }
             }
+            this.postalStreetAddressStreets = this.setLocalizedTexts(streetAddresses, ["fi"]);
+            this.postalStreetAddressPostalDistricts = this.setLocalizedTexts(postalDistricts, ["fi"]);
+
+            // po-box address
+            let postOfficeBoxPostalDistricts = new Array<LocalizedText>();
             if (postOfficeBoxAddress != null &&
                 postOfficeBoxAddress.postalDistricts != null &&
                 postOfficeBoxAddress.postalDistricts.length > 0)
             {
                 this.postalPostOfficeBoxAddressPostOfficeBox = postOfficeBoxAddress.postOfficeBox;
                 this.postalPostOfficeBoxAddressPostalCode = postOfficeBoxAddress.postalCode;
-                this.postalPostOfficeBoxAddressPostalDistrict = postOfficeBoxAddress.postalDistricts[0].localizedValue;
+                postOfficeBoxPostalDistricts = postOfficeBoxAddress.postalDistricts;
                 this.addPostalAddressType(PostalAddressType[PostalAddressType.PostOfficeBoxAddress]);
             }
             else
             {
                 this.postalAddressTypes.available.setAvailable(PostalAddressType.PostOfficeBoxAddress);
             }
+
+            this.postalPostOfficeBoxAddressPostalDistricts = this.setLocalizedTexts(postOfficeBoxPostalDistricts, ["fi"]);
         }
 
-        public get effectivePostalStreetAddressStreet(): string
+        public get effectivePostalStreetAddressStreets(): Array<LocalizedText>
         {
             if (this.useVisitingAddressAsPostalAddress)
             {
-                return this.visitingStreetAddress;
+                return this.visitingStreetAddresses;
             }
-            return this.postalStreetAddressStreet;
+            return this.postalStreetAddressStreets;
         }
 
         public get effectivePostalStreetAddressPostalCode(): string
@@ -201,13 +217,13 @@ module OrganizationRegister
             return this.postalStreetAddressPostalCode;
         }
 
-        public get effectivePostalStreetAddressPostalDistrict(): string
+        public get effectivePostalStreetAddressPostalDistricts(): Array<LocalizedText>
         {
             if (this.useVisitingAddressAsPostalAddress)
             {
-                return this.visitingAddressPostalDistrict;
+                return this.visitingAddressPostalDistricts;
             }
-            return this.postalStreetAddressPostalDistrict;
+            return this.postalStreetAddressPostalDistricts;
         }
 
         public isMunicipality(): boolean
@@ -231,29 +247,46 @@ module OrganizationRegister
 
         public generateBasicInformationLocalizedAndFormattedTexts(): void
         {
-           
             this.names = this.getLocalizedTextsWithValues(this.names);
+            this.descriptions = this.getLocalizedTextsWithValues(this.descriptions);
+            this.descriptions.forEach((desc) =>
+            {
+                this.descriptionsAsHtml = new Array<LocalizedText>();
+                this.descriptionsAsHtml
+                    .push(new LocalizedText(desc.languageCode,
+                        desc.localizedValue != null
+                        ? Affecto.HtmlContent.escapeAndReplaceNewLines(desc.localizedValue)
+                        : ""));
+            });
 
-            this.descriptions = new Array<LocalizedText>(new LocalizedText("fi", this.description));
-            this.descriptionAsHtml = Affecto.HtmlContent.escapeAndReplaceNewLines(this.description);
             this.setValidityTexts();
         }
 
-       
-        
+        public initializeLocalizedTexts(): void
+        {
+            this.initializeLocalizedNames(this.names);
+            this.initializeLocalizedDescriptions(this.descriptions);
+        }
+
         public generateVisitingAddressLocalizedTexts(): void
         {
-            this.visitingAddress = new StreetAddress(new Array<LocalizedText>(new LocalizedText("fi", this.visitingStreetAddress)), this.visitingAddressPostalCode,
-                new Array<LocalizedText>(new LocalizedText("fi", this.visitingAddressPostalDistrict)));
-            this.visitingAddressQualifiers = new Array<LocalizedText>(new LocalizedText("fi", this.visitingAddressQualifier));
+            this.visitingAddress = new StreetAddress(this.getLocalizedTextsWithValues(this.visitingStreetAddresses),
+                this.visitingAddressPostalCode,
+                this.getLocalizedTextsWithValues(this.visitingAddressPostalDistricts));
+
+            this.visitingAddressQualifiers = this.getLocalizedTextsWithValues(this.visitingAddressQualifiers);
         }
 
         public generatePostalAddressLocalizedTexts(): void
         {
-            this.postalStreetAddress = new StreetAddress(new Array<LocalizedText>(new LocalizedText("fi", this.postalStreetAddressStreet)),
-                this.postalStreetAddressPostalCode, new Array<LocalizedText>(new LocalizedText("fi", this.postalStreetAddressPostalDistrict)));
-            this.postalPostOfficeBoxAddress = new PostOfficeBoxAddress(this.postalPostOfficeBoxAddressPostOfficeBox, this.postalPostOfficeBoxAddressPostalCode,
-                new Array<LocalizedText>(new LocalizedText("fi", this.postalPostOfficeBoxAddressPostalDistrict)));
+            this.postalStreetAddress = new StreetAddress(this
+                .getLocalizedTextsWithValues(this.postalStreetAddressStreets),
+                this.postalStreetAddressPostalCode,
+                this.getLocalizedTextsWithValues(this.postalStreetAddressPostalDistricts));
+
+            this.postalPostOfficeBoxAddress = new PostOfficeBoxAddress(this.postalPostOfficeBoxAddressPostOfficeBox,
+                this.postalPostOfficeBoxAddressPostalCode, this.getLocalizedTextsWithValues(this.postalPostOfficeBoxAddressPostalDistricts));
+              
         }
 
         public hasMunicipalityCode(): boolean
@@ -283,7 +316,11 @@ module OrganizationRegister
 
         public hasWebPage(): boolean
         {
-            return this.hasWebPageUrl() && this.webPageName != null && this.webPageName !== "" && this.webPageType != null && this.webPageType !== "";
+            return this.hasWebPageUrl() &&
+                this.webPageName != null &&
+                this.webPageName !== "" &&
+                this.webPageType != null &&
+                this.webPageType !== "";
         }
 
         public hasWebPageUrl(): boolean
@@ -293,7 +330,11 @@ module OrganizationRegister
 
         public hasEditedWebPage(): boolean
         {
-            return this.hasEditedWebPageUrl() && this.editedWebPageName != null && this.editedWebPageName !== "" && this.editedWebPageType != null && this.editedWebPageType !== "";
+            return this.hasEditedWebPageUrl() &&
+                this.editedWebPageName != null &&
+                this.editedWebPageName !== "" &&
+                this.editedWebPageType != null &&
+                this.editedWebPageType !== "";
         }
 
         public hasEditedWebPageUrl(): boolean
@@ -303,7 +344,11 @@ module OrganizationRegister
 
         public hasContactInformation(): boolean
         {
-            return this.hasPhoneNumber() || this.hasEmailAddress() || this.webPages.length > 0 || this.hasPhoneCallFee();
+            return this
+                .hasPhoneNumber() ||
+                this.hasEmailAddress() ||
+                this.webPages.length > 0 ||
+                this.hasPhoneCallFee();
         }
 
         public hasVisitingAddressPostalCode(): boolean
@@ -318,13 +363,19 @@ module OrganizationRegister
 
         public hasPostalPostOfficeBoxAddressPostalCode(): boolean
         {
-            return this.postalPostOfficeBoxAddressPostalCode != null && this.postalPostOfficeBoxAddressPostalCode !== "";
+            return this
+                .postalPostOfficeBoxAddressPostalCode !=
+                null &&
+                this.postalPostOfficeBoxAddressPostalCode !== "";
         }
 
+        
         public hasVisitingAddressParts(): boolean
         {
-            return (this.visitingStreetAddress != null && this.visitingStreetAddress !== "") || (this.visitingAddressPostalCode != null && this.visitingAddressPostalCode !== "")
-                || (this.visitingAddressPostalDistrict != null && this.visitingAddressPostalDistrict !== "");
+            return (this.visitingAddressPostalCode != null && this.visitingAddressPostalCode !== "" ||
+                (this.visitingStreetAddresses != null  && this.visitingStreetAddresses.some((arrVal: LocalizedText) => arrVal.localizedValue != null && arrVal.localizedValue !== ""))||
+                (this.visitingAddressPostalDistricts != null && this.visitingAddressPostalDistricts.some((arrVal: LocalizedText) => arrVal.localizedValue !== null && arrVal.localizedValue !== "")));
+
         }
 
         public addWebPage(name: string, url: string, pageType: string): void
@@ -356,14 +407,14 @@ module OrganizationRegister
         {
             this.postalPostOfficeBoxAddressPostOfficeBox = null;
             this.postalPostOfficeBoxAddressPostalCode = null;
-            this.postalPostOfficeBoxAddressPostalDistrict = null;
+            this.postalPostOfficeBoxAddressPostalDistricts = this.setLocalizedTexts(new Array<LocalizedText>(), ["fi"]);
         }
 
         public clearPostalStreetAddress(): void
         {
-            this.postalStreetAddressStreet = null;
+            this.postalStreetAddressStreets = this.setLocalizedTexts(new Array<LocalizedText>(), ["fi"]);
             this.postalStreetAddressPostalCode = null;
-            this.postalStreetAddressPostalDistrict = null;
+            this.postalStreetAddressPostalDistricts = this.setLocalizedTexts(new Array<LocalizedText>(), ["fi"]);
         }
 
         private containsWebPageUrl(url: string): boolean

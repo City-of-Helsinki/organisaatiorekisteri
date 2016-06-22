@@ -25,7 +25,9 @@ module OrganizationRegister
         public toBeAddedPostalAddressType: string;
         public editedSection: EditedOrganizationSection;
         public parentOrganizationId: string;
-        public parentOrganizationName: string;
+        //public parentOrganizationName: string;
+
+        public parentOrganizationNames: Array<LocalizedText>;
 
         public model: Organization;
         public originalModel: Organization;
@@ -679,11 +681,19 @@ module OrganizationRegister
         {
             this.busyIndicationService.showBusyIndicator("Tallennetaan organisaation perustietoja...");
             this.model.generateBasicInformationLocalizedAndFormattedTexts();
-            this.model.descriptionAsHtml = this.$sce.trustAsHtml(this.model.descriptionAsHtml);
+            //this.model.descriptionAsHtml = this.$sce.trustAsHtml(this.model.descriptionAsHtml);
+
+            this.model.descriptionsAsHtml.forEach((desc, index) =>
+            {
+                this.model.descriptionsAsHtml[index] = this.$sce.trustAsHtml(desc.localizedValue);
+            });
+
+
             this.originalModel = angular.copy(this.model);
             return this.organizationService.setOrganizationBasicInformation(this.model)
                 .then(() =>
                 {
+                    this.model.initializeLocalizedTexts();
                     this.busyIndicationService.hideBusyIndicator();
                     if (goToHomePage)
                     {
@@ -696,7 +706,11 @@ module OrganizationRegister
         {
             this.busyIndicationService.showBusyIndicator("Tallennetaan organisaation perustietoja...");
             this.model.generateBasicInformationLocalizedAndFormattedTexts();
-            this.model.descriptionAsHtml = this.$sce.trustAsHtml(this.model.descriptionAsHtml);
+            //this.model.descriptionAsHtml = this.$sce.trustAsHtml(this.model.descriptionAsHtml);
+            this.model.descriptionsAsHtml.forEach((desc,index) =>
+            {
+                this.model.descriptionsAsHtml[index] = this.$sce.trustAsHtml(desc.localizedValue);
+            });
             return this.organizationService.addOrganization(this.model, this.parentOrganizationId)
                 .then((organizationId: string) =>
                 {
@@ -706,6 +720,7 @@ module OrganizationRegister
                         this.model.isSubOrganization = true;
                     }
                     this.originalModel = angular.copy(this.model);
+                    this.model.initializeLocalizedTexts();
                     this.busyIndicationService.hideBusyIndicator();
                     if (this.model.hasContactInformation())
                     {
@@ -830,7 +845,14 @@ module OrganizationRegister
                 .then((result: Array<any>) =>
                 {
                     var organization: Organization = result[0];
-                    organization.descriptionAsHtml = this.$sce.trustAsHtml(organization.descriptionAsHtml);
+
+                    //organization.descriptionAsHtml = this.$sce.trustAsHtml(organization.descriptionAsHtml);
+
+                    organization.descriptionsAsHtml.forEach((desc, index) =>
+                    {
+                        organization.descriptionsAsHtml[index].localizedValue = this.$sce.trustAsHtml(desc.localizedValue);
+                    });
+
                     this.model = organization;
                     this.toBeAddedPostalAddressType = this.model.postalAddressTypes.available.firstOrDefault();
                     this.organizationTypes = result[1];
@@ -848,7 +870,13 @@ module OrganizationRegister
                 .then((result: Array<any>) =>
                 {
                     var organization: Organization = result[0];
-                    organization.descriptionAsHtml = this.$sce.trustAsHtml(organization.descriptionAsHtml);
+                    //organization.descriptionAsHtml = this.$sce.trustAsHtml(organization.descriptionAsHtml);
+
+                    organization.descriptionsAsHtml.forEach((desc, index) =>
+                    {
+                        organization.descriptionsAsHtml[index].localizedValue = this.$sce.trustAsHtml(desc.localizedValue);
+                    });
+
                     this.createSubOrganization(organization);
                     this.toBeAddedPostalAddressType = this.model.postalAddressTypes.available.firstOrDefault();
                     this.organizationTypes = result[1];
@@ -876,7 +904,10 @@ module OrganizationRegister
 
         private createSubOrganization(parent: Organization): void
         {
-            this.parentOrganizationName = parent.name;
+            //this.parentOrganizationName = parent.name;
+
+            this.parentOrganizationNames = parent.names;
+
             this.model = new Organization();
             this.model.type = parent.type;
             if (parent.isMunicipality())

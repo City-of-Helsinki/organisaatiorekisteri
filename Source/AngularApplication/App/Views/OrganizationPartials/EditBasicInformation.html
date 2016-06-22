@@ -23,12 +23,9 @@
             <affecto-help-popup paragraphs='["Kirjoita kenttään organisaation virallinen nimi. Kirjoita nimi auki, älä käytä lyhenteitä."]'/>
         </label>
 
-        <!--<input id="organizationName" type="text" class="form-control" maxlength="100" placeholder="Kirjoita organisaation tai alaorganisaation nimi"
-               data-ng-model="controller.model.name" data-ng-required="true"/>-->
-
         <div data-ng-repeat="name in controller.model.names">
             <p>
-                <input type="text" class="form-control" data-ng-required="name.isRequired" data-ng-model="name.localizedValue" maxlength="100" placeholder="{{name.localizedTitle}}" />
+                <input type="text" class="form-control" data-ng-required="name.isRequired" data-ng-model="name.localizedValue" maxlength="100" ng-attr-placeholder="{{name.localizedTitle}}" />
             </p>
         </div>
 
@@ -49,10 +46,16 @@
 <div class="row">
     <label>
         Kuvaus
-        <affecto-help-popup paragraphs='["Kirjoita organisaatiolle lyhyt, käyttäjäystävällinen kuvaus. Mikä tämä (ala)organisaatio on ja mitä se tekee organisaation palveluita käyttävän asiakkaan näkökulmasta? Alä mainosta vaan kuvaa neutraalisti organisaation ydintehtävä. Kuvaus saa olla korkeintaan 4000 merkkiä pitkä."]' />
+        <affecto-help-popup paragraphs='["Kirjoita organisaatiolle lyhyt, käyttäjäystävällinen kuvaus. Mikä tämä (ala)organisaatio on ja mitä se tekee organisaation palveluita käyttävän asiakkaan näkökulmasta? Alä mainosta vaan kuvaa neutraalisti organisaation ydintehtävä. Kuvaus saa olla korkeintaan 4000 merkkiä pitkä."]'/>
     </label>
-    <textarea id="organizationDescription" name="organizationDescription" data-ng-maxlength="4000" class="form-control" data-ng-model="controller.model.description"></textarea>
-    <p aria-live="polite" class="validation-message" data-ng-show="controller.basicInformationForm.organizationDescription.$error.maxlength">Kuvauksen maksimipituus on 4000 merkkiä</p>
+
+    <div data-ng-repeat="desc in controller.model.descriptions">
+
+        <p><textarea id="organizationDescription" name="organizationDescription" data-ng-maxlength="4000" class="form-control" data-ng-model="desc.localizedValue" data-ng-required="desc.isRequired" ng-attr-placeholder="{{desc.localizedTitle}}"></textarea></p>
+                <p aria-live="polite" class="validation-message" data-ng-show="controller.basicInformationForm.organizationDescription.$error.maxlength">Kuvauksen maksimipituus on 4000 merkkiä</p>
+           
+     
+    </div>
 </div>
 <div class="row">
     <div class="col-xs-6">
