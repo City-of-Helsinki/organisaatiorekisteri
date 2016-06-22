@@ -1,31 +1,53 @@
 ﻿<div class="row">
     <div class="col-xs-6">
         <label>Katuosoite</label>
-        <input id="visitingStreetAddress" type="text" class="form-control" maxlength="50" data-ng-model="controller.model.visitingStreetAddress" 
-               data-ng-required="controller.model.hasVisitingAddressParts()" />
+        <div data-ng-repeat="address in controller.model.visitingStreetAddresses">
+            <p>
+                <input type="text" class="form-control" data-ng-required="address.isRequired"
+                       data-ng-model="address.localizedValue"
+                       maxlength="50" ng-attr-placeholder="{{address.localizedTitle}}"/>
+            </p>
+        </div>
+
     </div>
     <div class="col-xs-3">
         <label>Postinumero</label>
         <input id="visitingAddressPostalCode" type="text" class="form-control" name="postalCode" maxlength="5" data-ng-model="controller.model.visitingAddressPostalCode"
-               data-ng-required="controller.model.hasVisitingAddressParts()" data-ng-blur="controller.validateVisitingAddressPostalCode()" />
+               data-ng-required="controller.model.hasVisitingAddressParts()" data-ng-blur="controller.validateVisitingAddressPostalCode()"/>
         <span aria-live="polite" class="validation-message" data-ng-show="!controller.validVisitingAddressPostalCode">
             Postinumero on viisi numeroa
         </span>
     </div>
     <div class="col-xs-3">
         <label>Postitoimipaikka</label>
-        <input id="visitingAddressPostalDistrict" type="text" class="form-control" maxlength="30" data-ng-model="controller.model.visitingAddressPostalDistrict" 
-               data-ng-required="controller.model.hasVisitingAddressParts()" />
+        <div data-ng-repeat="district in controller.model.visitingAddressPostalDistricts">
+            <p>
+                <input type="text" class="form-control" data-ng-required="district.isRequired"
+                       data-ng-model="district.localizedValue"
+                       maxlength="30" ng-attr-placeholder="{{district.localizedTitle}}"/>
+            </p>
+        </div>
+
     </div>
 </div>
+
 <div class="row">
+    
     <div class="col-xs-6">
         <label>
             Osoitetarkenne
-            <affecto-help-popup paragraphs='["Osoitetarkenne-kenttään voi tarvittaessa kirjottaa tekstimuodossa osoitetta täsmentävän tiedon esim. \"Oikeus- ja poliisitalo\"."]'/>
+            <affecto-help-popup paragraphs='["Osoitetarkenne-kenttään voi tarvittaessa kirjottaa tekstimuodossa osoitetta täsmentävän tiedon esim. \"Oikeus- ja poliisitalo\"."]' />
         </label>
-        <input id="visitingAddressQualifier" type="text" class="form-control" maxlength="500" data-ng-model="controller.model.visitingAddressQualifier" />
+        <div data-ng-repeat="qualifier in controller.model.visitingAddressQualifiers">
+            <p>
+                <input type="text" class="form-control" data-ng-required="qualifier.isRequired"
+                       data-ng-model="qualifier.localizedValue"
+                       maxlength="500" ng-attr-placeholder="{{qualifier.localizedTitle}}"/>
+            </p>
+        </div>
     </div>
+
     <div class="col-xs-3"></div>
     <div class="col-xs-3"></div>
+
 </div>

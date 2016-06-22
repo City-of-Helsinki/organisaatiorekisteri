@@ -3,12 +3,11 @@
         <div class="overlay"></div>
 
         <div class="container">
-            <h1 id="mainOrganizationHeader" class="adding-wizard-header" data-ng-show="!controller.isSubOrganizationBeingAdded()">Uuden pääorganisaation lisääminen</h1>
-            <h1 id="subOrganizationHeader" class="adding-wizard-header" data-ng-show="controller.isSubOrganizationBeingAdded()">Uuden alaorganisaation lisääminen yläorganisaatioon "{{ controller.parentOrganizationName }}"</h1>
+            <h1 id="mainOrganizationHeader" class="adding-wizard-header" data-ng-show="!controller.isSubOrganization()">Uuden pääorganisaation lisääminen</h1>
+            <h1 id="subOrganizationHeader" class="adding-wizard-header" data-ng-show="controller.isSubOrganization()">Uuden alaorganisaation lisääminen yläorganisaatioon "{{ controller.parentOrganizationNames[0].localizedValue }}"</h1>
             <div class="help-text">
                 <p>
                     Uuden organisaation luominen -sivulla voit luoda oman organisaatiosi organisaatiohierarkian (pääorganisaatio ja alaorganisaatiot) tai lisätä organisaatiollesi uusia alaorganisaatioita.
-                    Organisaatiolle voidaan palvelutietovarannossa luoda vain päätaso (pääorganisaatio), mutta myös koko organisaatiohierarkian voi kuvata PTV:hen (alaorganisaatiot).
                     Alaorganisaatiolla tarkoitetaan mitä tahansa organisaatiotasoa, joka on pääorganisaation (ylimmän tason) alla.
                 </p>
                 <p>
@@ -38,8 +37,8 @@
         <div id="step1" data-ng-class="{'edit-mode-active': controller.isBasicInformationBeingEdited(), 'edit-area': controller.isBasicInformationBeingEdited()}">
             <div class="container">
                 <div class="phase-title">
-                    <span data-ng-show="!controller.isSubOrganizationBeingAdded()" class="section-title">Uusi pääorganisaatio</span>
-                    <span data-ng-show="controller.isSubOrganizationBeingAdded()" class="section-title">Uusi alaorganisaatio</span>
+                    <span data-ng-show="!controller.isSubOrganization" class="section-title">Uusi pääorganisaatio</span>
+                    <span data-ng-show="controller.isSubOrganization" class="section-title">Uusi alaorganisaatio</span>
                     <h3>Vaihe 1/4: Täytä perustiedot</h3>
                 </div>
                 <form class="form-horizontal" name="controller.basicInformationForm" unsaved-warning-form>
@@ -68,8 +67,8 @@
         <div id="step2" data-ng-class="{'edit-mode-active': controller.isContactInformationBeingEdited(), 'edit-area': controller.isContactInformationBeingEdited()}">
             <div class="container">
                 <div class="phase-title">
-                    <span data-ng-show="!controller.isSubOrganizationBeingAdded()" class="section-title">Uusi pääorganisaatio</span>
-                    <span data-ng-show="controller.isSubOrganizationBeingAdded()" class="section-title">Uusi alaorganisaatio</span>
+                    <span data-ng-show="!controller.isSubOrganization" class="section-title">Uusi pääorganisaatio</span>
+                    <span data-ng-show="controller.isSubOrganization" class="section-title">Uusi alaorganisaatio</span>
                     <h3>Vaihe 2/4: Täytä yhteystiedot</h3>
                 </div>
                 <form class="form-horizontal" name="controller.contactInformationForm" unsaved-warning-form>
@@ -105,8 +104,8 @@
         <div id="step3" data-ng-class="{'edit-mode-active': controller.isVisitingAddressBeingEdited(), 'edit-area': controller.isVisitingAddressBeingEdited()}">
             <div class="container">
                 <div class="phase-title">
-                    <span data-ng-show="!controller.isSubOrganizationBeingAdded()" class="section-title">Uusi pääorganisaatio</span>
-                    <span data-ng-show="controller.isSubOrganizationBeingAdded()" class="section-title">Uusi alaorganisaatio</span>
+                    <span data-ng-show="!controller.isSubOrganization" class="section-title">Uusi pääorganisaatio</span>
+                    <span data-ng-show="controller.isSubOrganization" class="section-title">Uusi alaorganisaatio</span>
                     <h3>Vaihe 3/4: Täytä käyntiosoite</h3>
                 </div>
                 <form class="form-horizontal" name="controller.visitingAddressForm" unsaved-warning-form>
@@ -142,8 +141,8 @@
         <div id="step4" data-ng-class="{'edit-mode-active': controller.isPostalAddressBeingEdited(), 'edit-area': controller.isPostalAddressBeingEdited()}">
             <div class="container">
                 <div class="phase-title">
-                    <span data-ng-show="!controller.isSubOrganizationBeingAdded()" class="section-title">Uusi pääorganisaatio</span>
-                    <span data-ng-show="controller.isSubOrganizationBeingAdded()" class="section-title">Uusi alaorganisaatio</span>
+                    <span data-ng-show="!controller.isSubOrganization" class="section-title">Uusi pääorganisaatio</span>
+                    <span data-ng-show="controller.isSubOrganization" class="section-title">Uusi alaorganisaatio</span>
                     <h3>Vaihe 4/4: Täytä postiosoitteet</h3>
                 </div>
                 <form class="form-horizontal" name="controller.postalAddressForm" unsaved-warning-form>

@@ -173,21 +173,23 @@ describe("Organization", () =>
 
     describe("effective postal street address street", () =>
     {
+        
+        let streets = new Array<OrganizationRegister.LocalizedText>(new OrganizationRegister.LocalizedText("fi", "Katu 1 A", false));
+        
         it("visiting street address is effective postal street address when visiting address is used as the postal address", () =>
         {
-            var street: string = "Street 1 A";
             sut.useVisitingAddressAsPostalAddress = true;
-            sut.visitingStreetAddress = street;
-            expect(sut.effectivePostalStreetAddressStreet).toEqual(street);
+            sut.visitingStreetAddresses = streets;
+            expect(sut.effectivePostalStreetAddressStreets).toEqual(streets);
         });
         it("separate postal street address is effective postal street address when visiting address is not used as the postal address", () =>
         {
-            var visitingStreetAddress: string = "Street 1 A";
-            var postalStreetAddress: string = "Street 2 B";
+            let postalAddressStreets = new Array<OrganizationRegister.LocalizedText>(new OrganizationRegister.LocalizedText("fi", "Katu 2 B", false));
+
             sut.useVisitingAddressAsPostalAddress = false;
-            sut.visitingStreetAddress = visitingStreetAddress;
-            sut.postalStreetAddressStreet = postalStreetAddress;
-            expect(sut.effectivePostalStreetAddressStreet).toEqual(postalStreetAddress);
+            sut.visitingStreetAddresses = streets;
+            sut.postalStreetAddressStreets = postalAddressStreets;
+            expect(sut.effectivePostalStreetAddressStreets).toEqual(postalAddressStreets);
         });
     });
 
@@ -213,21 +215,26 @@ describe("Organization", () =>
 
     describe("effective postal street address postal district", () =>
     {
+        let districts = new Array<OrganizationRegister.LocalizedText>(new OrganizationRegister.LocalizedText("fi", "Helsinki", false));
+
         it("visiting street address postal district is effective postal street address postal district when visiting address is used as the postal address", () =>
         {
-            var postalDistrict: string = "Town";
+            
             sut.useVisitingAddressAsPostalAddress = true;
-            sut.visitingAddressPostalDistrict = postalDistrict;
-            expect(sut.effectivePostalStreetAddressPostalDistrict).toEqual(postalDistrict);
+            sut.visitingAddressPostalDistricts = districts;
+            expect(sut.effectivePostalStreetAddressPostalDistricts).toEqual(districts);
         });
         it("separate postal street address postal district is effective postal street address postal district when visiting address is not used as the postal address", () =>
         {
+
+            let postalAddressDistricts = new Array<OrganizationRegister.LocalizedText>(new OrganizationRegister.LocalizedText("fi", "Helsinki", false));
+
             var visitingAddressPostalDistrict: string = "Town";
             var postalAddressPostalDistrict: string = "City";
             sut.useVisitingAddressAsPostalAddress = false;
-            sut.visitingAddressPostalDistrict = visitingAddressPostalDistrict;
-            sut.postalStreetAddressPostalDistrict = postalAddressPostalDistrict;
-            expect(sut.effectivePostalStreetAddressPostalDistrict).toEqual(postalAddressPostalDistrict);
+            sut.visitingAddressPostalDistricts = districts;
+            sut.postalStreetAddressPostalDistricts = postalAddressDistricts;
+            expect(sut.effectivePostalStreetAddressPostalDistricts).toEqual(postalAddressDistricts);
         });
     });
 
@@ -580,81 +587,89 @@ describe("Organization", () =>
 
     describe("visiting address parts", () =>
     {
+        let streets = new Array<OrganizationRegister.LocalizedText>(new OrganizationRegister.LocalizedText("fi", "Katu 1 A", false));
+        let districts = new Array<OrganizationRegister.LocalizedText>(new OrganizationRegister.LocalizedText("fi", "Helsinki", false));
+
         it("initially has no visiting address parts", () =>
         {
-            sut.visitingStreetAddress = null;
+            sut.visitingStreetAddresses = null;
             sut.visitingAddressPostalCode = null;
-            sut.visitingAddressPostalDistrict = null;
+            sut.visitingAddressPostalDistricts = null;
             expect(sut.hasVisitingAddressParts()).toBeFalsy();
         });
         it("has visiting address parts when street address is set", () =>
         {
-            sut.visitingStreetAddress = "katu 1";
+            
+            sut.visitingStreetAddresses = streets;
             sut.visitingAddressPostalCode = null;
-            sut.visitingAddressPostalDistrict = null;
+            sut.visitingAddressPostalDistricts = null;
             expect(sut.hasVisitingAddressParts()).toBeTruthy();
         });
         it("has visiting address parts when postal code is set", () =>
         {
-            sut.visitingStreetAddress = null;
+          
+            sut.visitingStreetAddresses = null;
             sut.visitingAddressPostalCode = "20500";
-            sut.visitingAddressPostalDistrict = null;
+            sut.visitingAddressPostalDistricts = null;
             expect(sut.hasVisitingAddressParts()).toBeTruthy();
         });
         it("has visiting address parts when postal district is set", () =>
         {
-            sut.visitingStreetAddress = null;
+           
+            sut.visitingStreetAddresses = null;
             sut.visitingAddressPostalCode = null;
-            sut.visitingAddressPostalDistrict = "Hesa";
+            sut.visitingAddressPostalDistricts = districts;
             expect(sut.hasVisitingAddressParts()).toBeTruthy();
         });
         it("has visiting address parts when street address and postal code are set", () =>
         {
-            sut.visitingStreetAddress = "katu 1";
+            sut.visitingStreetAddresses = streets;
             sut.visitingAddressPostalCode = "12345";
-            sut.visitingAddressPostalDistrict = null;
+            sut.visitingAddressPostalDistricts = null;
             expect(sut.hasVisitingAddressParts()).toBeTruthy();
         });
         it("has visiting address parts when street address and postal district are set", () =>
         {
-            sut.visitingStreetAddress = "katu 1";
+            sut.visitingStreetAddresses = streets;
             sut.visitingAddressPostalCode = null;
-            sut.visitingAddressPostalDistrict = "Hesa";
+            sut.visitingAddressPostalDistricts = districts;
             expect(sut.hasVisitingAddressParts()).toBeTruthy();
         });
         it("has visiting address parts when postal code and postal district are set", () =>
         {
-            sut.visitingStreetAddress = null;
+            sut.visitingStreetAddresses = null;
             sut.visitingAddressPostalCode = "12345";
-            sut.visitingAddressPostalDistrict = "Hesa";
+            sut.visitingAddressPostalDistricts = districts;
             expect(sut.hasVisitingAddressParts()).toBeTruthy();
         });
         it("has visiting address parts when street address, postal code and postal district are set", () =>
         {
-            sut.visitingStreetAddress = "katu 1";
+            sut.visitingStreetAddresses = streets;
             sut.visitingAddressPostalCode = "12345";
-            sut.visitingAddressPostalDistrict = "Hesa";
+            sut.visitingAddressPostalDistricts = districts;
             expect(sut.hasVisitingAddressParts()).toBeTruthy();
         });
         it("has no visiting address parts when street address is empty", () =>
         {
-            sut.visitingStreetAddress = "";
+            let emptyStreets = new Array<OrganizationRegister.LocalizedText>(new OrganizationRegister.LocalizedText("fi", "", false));
+            sut.visitingStreetAddresses = emptyStreets;
             sut.visitingAddressPostalCode = null;
-            sut.visitingAddressPostalDistrict = null;
+            sut.visitingAddressPostalDistricts = null;
             expect(sut.hasVisitingAddressParts()).toBeFalsy();
         });
         it("has no visiting address parts when postal code is empty", () =>
         {
-            sut.visitingStreetAddress = null;
+            sut.visitingStreetAddresses = null;
             sut.visitingAddressPostalCode = "";
-            sut.visitingAddressPostalDistrict = null;
+            sut.visitingAddressPostalDistricts = null;
             expect(sut.hasVisitingAddressParts()).toBeFalsy();
         });
         it("has no visiting address parts when postal district is empty", () =>
         {
-            sut.visitingStreetAddress = null;
+            let emptyDistricts = new Array<OrganizationRegister.LocalizedText>(new OrganizationRegister.LocalizedText("fi", "", false));
+            sut.visitingStreetAddresses = null;
             sut.visitingAddressPostalCode = null;
-            sut.visitingAddressPostalDistrict = "";
+            sut.visitingAddressPostalDistricts = emptyDistricts;
             expect(sut.hasVisitingAddressParts()).toBeFalsy();
         });
     });
@@ -697,5 +712,228 @@ describe("Organization", () =>
         });
 
     });
+
+    describe("localized data in basic information", () =>
+    {
+        let langs = OrganizationRegister.DataLocalization.languageCodes;
+        let existingValue = new OrganizationRegister.LocalizedText("fi", "localized value", true);
+        let existingValues = new Array<OrganizationRegister.LocalizedText>(existingValue);
+        let sut = new OrganizationRegister.Organization(null, null, existingValues, null, existingValues);
+
+        it("should initially exists for each data to be localized", () =>
+        {
+            expect(sut.names.length).toEqual(langs.length);
+            expect(sut.descriptionsAsHtml.length).toEqual(langs.length); 
+        });
+
+        it("should have localized values for existing localized data", () =>
+        {
+            expect(sut.names
+                    .some((arrVal: OrganizationRegister.LocalizedText) => (
+                        existingValue.localizedValue === arrVal.localizedValue &&
+                        existingValue.languageCode === arrVal.languageCode )))
+                .toBeTruthy();
+
+            expect(sut.descriptionsAsHtml
+                .some((arrVal: OrganizationRegister.LocalizedText) => (
+                    existingValue.localizedValue === arrVal.localizedValue &&
+                    existingValue.languageCode === arrVal.languageCode)))
+                .toBeTruthy();
+        });
+
+        it("should not have localized values for non existing localized data",
+        () =>
+        {
+            expect(sut.names
+                    .some((arrVal: OrganizationRegister.LocalizedText) => (
+                       arrVal.localizedValue !== "" &&
+                    arrVal.languageCode !== existingValue.languageCode)))
+                .toBeFalsy();
+
+            expect(sut.descriptionsAsHtml
+                .some((arrVal: OrganizationRegister.LocalizedText) => (
+                    arrVal.localizedValue !== "" &&
+                    arrVal.languageCode !== existingValue.languageCode)))
+                .toBeFalsy();
+        });
+
+        it("should exists only for data with localized values set", () =>
+        {
+            sut.generateBasicInformationLocalizedAndFormattedTexts();
+
+            expect(sut.names.length).toEqual(existingValues.length);
+            expect(sut.names[0].localizedValue).toEqual(existingValue.localizedValue);
+            expect(sut.names[0].languageCode).toEqual(existingValue.languageCode);
+            expect(sut.descriptionsAsHtml.length).toEqual(existingValues.length);
+            expect(sut.descriptionsAsHtml[0].localizedValue).toEqual(existingValue.localizedValue);
+            expect(sut.descriptionsAsHtml[0].languageCode).toEqual(existingValue.languageCode);
+        });
+
+    });
+
+
+    describe("localized data in addresses", () =>
+    {
+        let langs = OrganizationRegister.DataLocalization.languageCodes;
+        let existingValue = new OrganizationRegister.LocalizedText("fi", "localized value");
+        let existingValues = new Array<OrganizationRegister.LocalizedText>(existingValue);
+        let streetAddress = new OrganizationRegister.StreetAddress(existingValues, "00100", existingValues);
+        let poBoxAdress = new OrganizationRegister.PostOfficeBoxAddress("Helsinki","00100", existingValues);
+
+        let sutStreetAdr = new OrganizationRegister
+            .Organization(null,
+                null,
+                existingValues,
+                null,
+                existingValues,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                streetAddress,
+                existingValues,
+                false,
+                streetAddress);
+        let sutPoBox = new OrganizationRegister
+            .Organization(null,
+                null,
+                existingValues,
+                null,
+                existingValues,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                streetAddress,
+                existingValues,
+                false,
+                null,
+                poBoxAdress);
+
+       
+        it("should initially exists for each address data to be localized", () =>
+        {
+            expect(sutStreetAdr.visitingStreetAddresses.length).toEqual(langs.length);
+            expect(sutStreetAdr.visitingAddressPostalDistricts.length).toEqual(langs.length);
+            expect(sutStreetAdr.visitingAddressQualifiers.length).toEqual(langs.length);
+            expect(sutStreetAdr.postalStreetAddressStreets.length).toEqual(langs.length);
+            expect(sutStreetAdr.postalStreetAddressPostalDistricts.length).toEqual(langs.length);
+            expect(sutPoBox.postalPostOfficeBoxAddressPostalDistricts.length).toEqual(langs.length);
+        });
+
+        it("should have localized values for existing localized address data", () =>
+        {
+            expect(sutStreetAdr.visitingStreetAddresses
+                .some((arrVal: OrganizationRegister.LocalizedText) => (
+                    existingValue.localizedValue === arrVal.localizedValue &&
+                    existingValue.languageCode === arrVal.languageCode)))
+                .toBeTruthy();
+
+            expect(sutStreetAdr.visitingAddressPostalDistricts
+                .some((arrVal: OrganizationRegister.LocalizedText) => (
+                    existingValue.localizedValue === arrVal.localizedValue &&
+                    existingValue.languageCode === arrVal.languageCode)))
+                .toBeTruthy();
+
+            expect(sutStreetAdr.visitingAddressQualifiers
+                .some((arrVal: OrganizationRegister.LocalizedText) => (
+                    existingValue.localizedValue === arrVal.localizedValue &&
+                    existingValue.languageCode === arrVal.languageCode)))
+                .toBeTruthy();
+
+            expect(sutStreetAdr.postalStreetAddressStreets
+                .some((arrVal: OrganizationRegister.LocalizedText) => (
+                    existingValue.localizedValue === arrVal.localizedValue &&
+                    existingValue.languageCode === arrVal.languageCode)))
+                .toBeTruthy();
+
+            expect(sutStreetAdr.postalStreetAddressPostalDistricts
+                .some((arrVal: OrganizationRegister.LocalizedText) => (
+                    existingValue.localizedValue === arrVal.localizedValue &&
+                    existingValue.languageCode === arrVal.languageCode)))
+                .toBeTruthy();
+
+            expect(sutPoBox.postalPostOfficeBoxAddressPostalDistricts
+                .some((arrVal: OrganizationRegister.LocalizedText) => (
+                    existingValue.localizedValue === arrVal.localizedValue &&
+                    existingValue.languageCode === arrVal.languageCode)))
+                .toBeTruthy();
+        });
+
+        it("should not have localized values for non existing localized address data",
+            () =>
+            {
+                expect(sutStreetAdr.visitingStreetAddresses
+                    .some((arrVal: OrganizationRegister.LocalizedText) => (
+                        arrVal.localizedValue !== "" &&
+                        arrVal.languageCode !== existingValue.languageCode)))
+                    .toBeFalsy();
+
+                expect(sutStreetAdr.visitingAddressPostalDistricts
+                    .some((arrVal: OrganizationRegister.LocalizedText) => (
+                        arrVal.localizedValue !== "" &&
+                        arrVal.languageCode !== existingValue.languageCode)))
+                    .toBeFalsy();
+
+                expect(sutStreetAdr.visitingAddressQualifiers
+                    .some((arrVal: OrganizationRegister.LocalizedText) => (
+                        arrVal.localizedValue !== "" &&
+                        arrVal.languageCode !== existingValue.languageCode)))
+                    .toBeFalsy();
+
+                expect(sutStreetAdr.postalStreetAddressStreets
+                    .some((arrVal: OrganizationRegister.LocalizedText) => (
+                        arrVal.localizedValue !== "" &&
+                        arrVal.languageCode !== existingValue.languageCode)))
+                    .toBeFalsy();
+
+                expect(sutStreetAdr.postalStreetAddressPostalDistricts
+                    .some((arrVal: OrganizationRegister.LocalizedText) => (
+                        arrVal.localizedValue !== "" &&
+                        arrVal.languageCode !== existingValue.languageCode)))
+                    .toBeFalsy();
+
+                expect(sutPoBox.postalPostOfficeBoxAddressPostalDistricts
+                    .some((arrVal: OrganizationRegister.LocalizedText) => (
+                        arrVal.localizedValue !== "" &&
+                        arrVal.languageCode !== existingValue.languageCode)))
+                    .toBeFalsy();
+
+            });
+
+        it("should exists only for address data with localized values set ", () =>
+        {
+            sutStreetAdr.generateVisitingAddressLocalizedTexts();
+            expect(sutStreetAdr.visitingAddress.streetAddresses.length).toEqual(existingValues.length);
+            expect(sutStreetAdr.visitingAddress.streetAddresses[0].localizedValue).toEqual(existingValue.localizedValue);
+            expect(sutStreetAdr.visitingAddress.postalDistricts.length).toEqual(existingValues.length);
+            expect(sutStreetAdr.visitingAddress.postalDistricts[0].localizedValue).toEqual(existingValue.localizedValue);
+            expect(sutStreetAdr.visitingAddressQualifiers.length).toEqual(existingValues.length);
+            expect(sutStreetAdr.visitingAddressQualifiers[0].localizedValue).toEqual(existingValue.localizedValue);
+
+            sutStreetAdr.generatePostalAddressLocalizedTexts();
+            expect(sutStreetAdr.postalStreetAddress.streetAddresses.length).toEqual(existingValues.length);
+            expect(sutStreetAdr.postalStreetAddress.streetAddresses[0].localizedValue).toEqual(existingValue.localizedValue);
+            expect(sutStreetAdr.postalStreetAddress.postalDistricts.length).toEqual(existingValues.length);
+            expect(sutStreetAdr.postalStreetAddress.postalDistricts[0].localizedValue).toEqual(existingValue.localizedValue);
+
+            sutPoBox.generatePostalAddressLocalizedTexts();
+            expect(sutPoBox.postalPostOfficeBoxAddress.postalDistricts.length).toEqual(existingValues.length);
+            expect(sutPoBox.postalPostOfficeBoxAddress.postalDistricts[0].languageCode).toEqual(existingValue.languageCode);
+
+        });
+
+    });
+
 
 });
