@@ -6,7 +6,9 @@ module OrganizationRegister
     {
         constructor(public streetAddresses: Array<LocalizedText>, public postalCode: string, public postalDistricts: Array<LocalizedText>)
         {
+           
         }
+
     }
 }
  

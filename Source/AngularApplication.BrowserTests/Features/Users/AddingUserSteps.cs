@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OrganizationRegister.AngularApplication.BrowserTests.Infrastructure;
 using OrganizationRegister.Tests.Infrastructure;
 using TechTalk.SpecFlow;
+using OrganizationRegister.Common.User;
 
 namespace OrganizationRegister.AngularApplication.BrowserTests.Features.Users
 {
@@ -107,7 +108,7 @@ namespace OrganizationRegister.AngularApplication.BrowserTests.Features.Users
         [Then(@"administrator role is not available")]
         public void AdministratorRoleIsNotAvailable()
         {
-            Assert.IsFalse(TestEnvironment.Driver.GetDropDownListContent("userRoleInput").Contains("PTV-pääkäyttäjä"));
+            Assert.IsFalse(TestEnvironment.Driver.GetDropDownListContent("userRoleInput").Contains(Roles.Administrator));
         }
        
         [Then(@"the user '(.+)' / '(.+)' is logged in")]

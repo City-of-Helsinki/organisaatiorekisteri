@@ -2,6 +2,6 @@
 {
     public static class Roles
     {
-        public const string Administrator = "PTV-pääkäyttäjä";
+        public const string Administrator = "Pääkäyttäjä";
     }
 }

@@ -17,6 +17,8 @@
         { "Path": "../AngularApplication/App/Packages/Login/Models", "Include": "*.js" },
         { "Path": "../AngularApplication/App/Models/OrganizationName.js" },
         { "Path": "../AngularApplication/App/Models/OrganizationName.ts" },
+        { "Path": "../AngularApplication/App/Constants", "Include": "*.ts" },
+        { "Path": "../AngularApplication/App/Constants", "Include": "*.js" },
         { "Path": "../AngularApplication/App/Models", "Include": "*.ts" },
         { "Path": "../AngularApplication/App/Models", "Include": "*.js" },
         { "Path": "../AngularApplication/App/Exceptions", "Include": "*.ts" },

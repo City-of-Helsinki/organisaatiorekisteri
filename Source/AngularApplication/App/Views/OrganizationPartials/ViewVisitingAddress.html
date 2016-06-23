@@ -1,20 +1,38 @@
 ﻿<div class="row">
     <div class="col-xs-6">
         <label>Katuosoite</label>
-        {{ controller.model.visitingStreetAddress }}
+       
+        <div data-ng-repeat="address in controller.model.visitingStreetAddresses">
+            <p>
+                <span>{{ address.localizedValue }}</span>
+            </p>
+        </div>
+
     </div>
     <div class="col-xs-3">
         <label>Postinumero</label>
         {{ controller.model.visitingAddressPostalCode }}
     </div>
-    <div class="col-xs-3">
-        <label>Postitoimipaikka</label>
-        {{ controller.model.visitingAddressPostalDistrict }}
+<div class="col-xs-3">
+    <label>Postitoimipaikka</label>
+   
+    <div data-ng-repeat="district in controller.model.visitingAddressPostalDistricts">
+        <p>
+            <span>{{ district.localizedValue }}</span>
+        </p>
     </div>
 </div>
+
+    </div>
+
 <div class="row">
     <div class="col-xs-6">
         <label>Osoitetarkenne</label>
-        <span>{{ controller.model.visitingAddressQualifier }}</span>
+        <div data-ng-repeat="qualifier in controller.model.visitingAddressQualifiers">
+            <p>
+                <span>{{ qualifier.localizedValue }}</span>
+            </p>
+        </div>
+
     </div>
 </div>

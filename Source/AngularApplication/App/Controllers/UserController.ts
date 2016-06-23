@@ -21,7 +21,7 @@ module OrganizationRegister
 
         public userInformationForm: angular.IFormController;
        
-        private administratorUser: string = "PTV-pääkäyttäjä" ;
+        private administratorUser: string =  "Pääkäyttäjä";
        
         constructor(private $scope: Affecto.Base.IViewScope, private $location: angular.ILocationService, $routeParams: IUserRoute, private $sce: angular.ISCEService,
             private $q: angular.IQService, private userService: UserService, private settingsService: SettingsService, private validationService: ValidationService,
