@@ -11,7 +11,7 @@ namespace OrganizationRegister.Application.Organization
             IEnumerable<WebPage> webPages, IEnumerable<LocalizedText> visitingStreetAddresses, string visitingAddressPostalCode, IEnumerable<LocalizedText> visitingAddressLocalities,
             IEnumerable<LocalizedText> visitingAddressQualifier, IEnumerable<LocalizedText> postalStreetAddresses, string postalStreetAddressPostalCode, 
             IEnumerable<LocalizedText> postalStreetAddressLocalities, string postalAddressPostOfficeBox, string postalPostOfficeBoxAddressPostalCode,
-            IEnumerable<LocalizedText> postalPostOfficeBoxAddressLocalities, bool useVisitingAddressAsPostalAddress, bool isSubOrganization, IEnumerable<string> languageCodes)
+            IEnumerable<LocalizedText> postalPostOfficeBoxAddressLocalities, bool useVisitingAddressAsPostalAddress, bool isSubOrganization, IEnumerable<string> languageCodes, IEnumerable<LocalizedText> homepageUrls)
         {
             Organization organization = isSubOrganization ? new SubOrganization(id, numericId, businessId, oid, type, municipalityCode, names, languageCodes) :
                 new Organization(id, numericId, businessId, oid, type, municipalityCode, names, languageCodes);
@@ -24,6 +24,7 @@ namespace OrganizationRegister.Application.Organization
             organization.SetVisitingAddress(visitingStreetAddresses, visitingAddressPostalCode, visitingAddressLocalities);
             organization.SetPostalAddress(useVisitingAddressAsPostalAddress, postalStreetAddresses, postalStreetAddressPostalCode, postalStreetAddressLocalities,
                 postalAddressPostOfficeBox, postalPostOfficeBoxAddressPostalCode, postalPostOfficeBoxAddressLocalities);
+            organization.HomepageUrls = homepageUrls;
             return organization;
         }
 

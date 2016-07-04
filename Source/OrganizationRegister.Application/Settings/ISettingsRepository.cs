@@ -7,5 +7,6 @@ namespace OrganizationRegister.Application.Settings
         IReadOnlyCollection<string> GetOrganizationTypeNames();
         IReadOnlyCollection<string> GetDataLanguageCodes();
         IReadOnlyCollection<string> GetWebPageTypes();
+
     }
 }

@@ -46,10 +46,12 @@ module OrganizationRegister
             public useVisitingAddressAsPostalAddress?: boolean,
             public postalStreetAddress?: StreetAddress,
             public postalPostOfficeBoxAddress?: PostOfficeBoxAddress,
+            public homepageUrls?: Array<LocalizedText>,
             public isSubOrganization?: boolean)
         {
             this.initializeLocalizedNames(names);
             this.initializeLocalizedDescriptions(descriptions);
+            this.initializeLocalizedHomepageUrls(homepageUrls);
 
             this.setValidityTexts();
             this.initializeVisitingAddress(visitingAddress, visitingAddressQualifiers);
@@ -65,6 +67,11 @@ module OrganizationRegister
             this.names = this.setLocalizedTexts(names, ["fi"]);
         }
 
+        private initializeLocalizedHomepageUrls(urls?: Array<LocalizedText>): void
+        {
+            this.homepageUrls = this.setLocalizedTexts(urls,[""]);
+        }
+
         private initializeLocalizedDescriptions(descs?: Array<LocalizedText>): void
         {
             this.descriptions = this.setLocalizedTexts(descs, [""]);
@@ -78,6 +85,32 @@ module OrganizationRegister
                         : ""));
             });
         }
+
+       // private setLocalizedTexts(texts: Array<LocalizedText>, requiredLangs: string[]): Array<LocalizedText>
+       //{
+       //     let localizedTexts = new Array<LocalizedText>();
+
+       //     texts.forEach((item) =>
+       //     {
+       //         // init LocalizedText: set isRequired & localizedTitle
+       //         localizedTexts.push(new LocalizedText(item.languageCode,
+       //             item.localizedValue,
+       //             (requiredLangs.indexOf(item.languageCode) >= 0)));
+       //     });
+       //    return localizedTexts.sort((a, b) =>
+       //    {
+       //        if (DataLocalization.languageCodes.indexOf(a.languageCode) > DataLocalization.languageCodes.indexOf(b.languageCode))
+       //        {
+       //            return 1;
+       //        }
+       //        if (DataLocalization.languageCodes.indexOf(a.languageCode) < DataLocalization.languageCodes.indexOf(b.languageCode))
+       //        {
+       //            return -1;
+       //        }
+       //        return 0;
+       //    });;
+       // }
+
 
         private setLocalizedTexts(texts: Array<LocalizedText>, requiredLangs: string[]): Array<LocalizedText>
         {
@@ -95,6 +128,8 @@ module OrganizationRegister
             return localizedTexts;
         }
 
+
+    
         private getLocalizedTextValue(texts: Array<LocalizedText>, languageCode: string): string
         {
             if (texts != null && texts.some((arrVal: LocalizedText) => (languageCode === arrVal.languageCode)))
@@ -132,6 +167,7 @@ module OrganizationRegister
         {
             let streetAddresses = new Array<LocalizedText>();
             let postalDistricts = new Array<LocalizedText>();
+
             if (visitingAddress != null)
             {
                 this.visitingAddressPostalCode = visitingAddress.postalCode;
@@ -140,11 +176,8 @@ module OrganizationRegister
             }
             this.visitingStreetAddresses = this.setLocalizedTexts(streetAddresses, ["fi"]);
             this.visitingAddressPostalDistricts = this.setLocalizedTexts(postalDistricts, ["fi"]);
-
-            if (visitingAddressQualifiers != null && visitingAddressQualifiers.length > 0)
-            {
-                this.visitingAddressQualifiers = this.setLocalizedTexts(visitingAddressQualifiers, [""]);;
-            }
+            this.visitingAddressQualifiers = this.setLocalizedTexts(visitingAddressQualifiers, [""]);;
+            
         }
 
         private initializePostalAddress(streetAddress?: StreetAddress, postOfficeBoxAddress?: PostOfficeBoxAddress):
@@ -245,6 +278,15 @@ module OrganizationRegister
             }
         }
 
+        public initializeLocalizedTexts(): void
+        {
+            this.initializeLocalizedNames(this.names);
+            this.initializeLocalizedDescriptions(this.descriptions);
+            this.initializeLocalizedHomepageUrls(this.homepageUrls);
+
+            this.initializeVisitingAddress(this.visitingAddress,this.visitingAddressQualifiers);
+        }
+
         public generateBasicInformationLocalizedAndFormattedTexts(): void
         {
             this.names = this.getLocalizedTextsWithValues(this.names);
@@ -262,12 +304,13 @@ module OrganizationRegister
             this.setValidityTexts();
         }
 
-        public initializeLocalizedTexts(): void
+        public generateContactinformationLocalizedTexts(): void
         {
-            this.initializeLocalizedNames(this.names);
-            this.initializeLocalizedDescriptions(this.descriptions);
+           
+            this.homepageUrls = this.getLocalizedTextsWithValues(this.homepageUrls);
         }
 
+       
         public generateVisitingAddressLocalizedTexts(): void
         {
             this.visitingAddress = new StreetAddress(this.getLocalizedTextsWithValues(this.visitingStreetAddresses),
@@ -328,6 +371,12 @@ module OrganizationRegister
             return this.webPageUrl != null && this.webPageUrl !== "";
         }
 
+        public hasHomepageUrls(): boolean
+        {
+            return this.homepageUrls
+                .some((arrVal: LocalizedText) => (arrVal.localizedValue != null && arrVal.localizedValue !== ""));
+        }
+
         public hasEditedWebPage(): boolean
         {
             return this.hasEditedWebPageUrl() &&
@@ -348,7 +397,8 @@ module OrganizationRegister
                 .hasPhoneNumber() ||
                 this.hasEmailAddress() ||
                 this.webPages.length > 0 ||
-                this.hasPhoneCallFee();
+                this.hasPhoneCallFee() ||
+                this.hasHomepageUrls();
         }
 
         public hasVisitingAddressPostalCode(): boolean

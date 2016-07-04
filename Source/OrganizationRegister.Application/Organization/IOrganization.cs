@@ -8,5 +8,8 @@ namespace OrganizationRegister.Application.Organization
         Guid Id { get; }
         long NumericId { get; }
         bool IsSubOrganization { get; }
+
+
+
     }
 }

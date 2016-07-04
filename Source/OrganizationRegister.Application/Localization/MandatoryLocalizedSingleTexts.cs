@@ -7,22 +7,23 @@ namespace OrganizationRegister.Application.Localization
 {
     internal class MandatoryLocalizedSingleTexts : LocalizedSingleTexts
     {
+        // TODO: Get mandatory languages from DB
         public MandatoryLocalizedSingleTexts(IEnumerable<LocalizedText> texts)
             : base(texts)
         {
-            if (!this.texts.Any())
+            if (this.texts.All(name => name.LanguageCode != "fi"))
             {
-                throw new ArgumentException("At least one localized name must be given.");
+                throw new ArgumentException("At least one localized finnish name must be given.");
             }
             if (HasUndefinedLocalizedValues())
             {
-                throw new ArgumentException("One or more localized names had undefined localized value.");
+                throw new ArgumentException("One or more localized finnish names had undefined localized value.");
             }
         }
 
         private bool HasUndefinedLocalizedValues()
         {
-            return this.Any(name => string.IsNullOrWhiteSpace(name.LocalizedValue));
+            return this.Any(name => string.IsNullOrWhiteSpace(name.LocalizedValue) && name.LanguageCode == "fi");
         }
     }
 }

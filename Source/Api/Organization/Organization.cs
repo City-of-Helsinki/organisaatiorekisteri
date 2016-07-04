@@ -27,5 +27,6 @@ namespace OrganizationRegister.Api.Organization
         public PostOfficeBoxAddress PostalPostOfficeBoxAddress { get; set; }
         public bool UseVisitingAddressAsPostalAddress { get; set; }
         public bool IsSubOrganization { get; set; }
+        public IEnumerable<LocalizedText> HomepageUrls { get; set; }
     }
 }

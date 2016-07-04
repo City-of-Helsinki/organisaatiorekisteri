@@ -66,6 +66,14 @@ namespace OrganizationRegister.AcceptanceTests.Infrastructure
             return CreateTextCollection(texts, "Finnish keywords", "Swedish keywords");
         }
 
+        public static IEnumerable<LocalizedText> CreateHomepageUrlsCollection(TableRow texts)
+        {
+            return CreateTextCollection(texts, "homepage in finnish", "homepage in swedish");
+        }
+
+
+        
+
         private static IEnumerable<LocalizedText> CreateTextCollection(TableRow texts, string tableHeaderForFinnish, string tableHeaderForSwedish)
         {
             List<LocalizedText> textCollection = new List<LocalizedText>();

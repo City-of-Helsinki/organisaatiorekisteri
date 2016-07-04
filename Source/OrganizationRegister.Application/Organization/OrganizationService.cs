@@ -30,9 +30,11 @@ namespace OrganizationRegister.Application.Organization
             IReadOnlyCollection<string> languageCodes = settingsRepository.GetDataLanguageCodes();
             // TODO: Wrap id generation into a service
             var id = Guid.NewGuid();
-            var organization = new Organization(id, businessId, oid, type, municipalityCode, names, languageCodes) { Descriptions = descriptions };
+            var organization = new Organization(id, businessId, oid, type, municipalityCode, names, languageCodes) { Descriptions = descriptions, HomepageUrls = null};
             organization.SetValidity(validFrom, validTo);
             organizationRepository.AddOrganizationAndSave(organization);
+
+           
             return id;
         }
 
@@ -42,7 +44,7 @@ namespace OrganizationRegister.Application.Organization
             IReadOnlyCollection<string> languageCodes = settingsRepository.GetDataLanguageCodes();
             // TODO: Wrap id generation into a service
             var id = Guid.NewGuid();
-            var organization = new SubOrganization(id, businessId, oid, type, municipalityCode, names, languageCodes) { Descriptions = descriptions };
+            var organization = new SubOrganization(id, businessId, oid, type, municipalityCode, names, languageCodes) { Descriptions = descriptions, HomepageUrls = null };
             organization.SetValidity(validFrom, validTo);
             organizationRepository.AddSubOrganizationAndSave(parentOrganizationId, organization);
             return id;
@@ -92,12 +94,13 @@ namespace OrganizationRegister.Application.Organization
             organizationRepository.SaveChanges();
         }
 
-        public void SetOrganizationContactInformation(Guid organizationId, string phoneNumber, string phoneCallFee, string emailAddress, IEnumerable<WebPage> webSites)
+        public void SetOrganizationContactInformation(Guid organizationId, string phoneNumber, string phoneCallFee, string emailAddress, IEnumerable<WebPage> webSites, IEnumerable<LocalizedText> homepageUrls)
         {
             Organization organization = GetOrganization(organizationId) as Organization;
             organization.SetCallInformation(phoneNumber, phoneCallFee);
             organization.EmailAddress = emailAddress;
             organization.WebPages = webSites;
+            organization.HomepageUrls = homepageUrls;
             organizationRepository.UpdateOrganizationContactInformation(organizationId, organization);
             organizationRepository.SaveChanges();
         }

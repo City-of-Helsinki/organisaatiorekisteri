@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
@@ -71,6 +72,11 @@ namespace OrganizationRegister.Store.CodeFirst
         {
             var languageQuery = new LanguageQuery(DataLanguages);
             return languageQuery.Execute(languageCode) as AvailableDataLanguage;
+        }
+
+        public List<AvailableDataLanguage> GetDataLanguages()
+        {
+            return DataLanguages as List<AvailableDataLanguage>;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

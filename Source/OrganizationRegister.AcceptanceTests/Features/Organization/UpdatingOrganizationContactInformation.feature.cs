@@ -96,7 +96,9 @@ this.FeatureBackground();
                         "web page type",
                         "second web site name",
                         "second web address",
-                        "second web page type"});
+                        "second web page type",
+                        "homepage in finnish",
+                        "homepage in swedish"});
             table1.AddRow(new string[] {
                         "0205 777 450",
                         "Local call cost",
@@ -106,7 +108,9 @@ this.FeatureBackground();
                         "Kotisivu",
                         "Global site",
                         "www.affecto.com",
-                        "Kotisivu"});
+                        "Kotisivu",
+                        "http://wwww.url.fi",
+                        "http://wwww.url.sv"});
 #line 7
  testRunner.When("the following contact information is set to the organization:", ((string)(null)), table1, "When ");
 #line hidden
@@ -119,7 +123,9 @@ this.FeatureBackground();
                         "web page type",
                         "second web site name",
                         "second web address",
-                        "second web page type"});
+                        "second web page type",
+                        "homepage in finnish",
+                        "homepage in swedish"});
             table2.AddRow(new string[] {
                         "0205 777 450",
                         "Local call cost",
@@ -129,7 +135,9 @@ this.FeatureBackground();
                         "Kotisivu",
                         "Global site",
                         "www.affecto.com",
-                        "Kotisivu"});
+                        "Kotisivu",
+                        "http://wwww.url.fi",
+                        "http://wwww.url.sv"});
 #line 10
  testRunner.Then("the organization has the following contact information:", ((string)(null)), table2, "Then ");
 #line hidden
@@ -156,7 +164,9 @@ this.FeatureBackground();
                         "web page type",
                         "second web site name",
                         "second web address",
-                        "second web page type"});
+                        "second web page type",
+                        "homepage in finnish",
+                        "homepage in swedish"});
             table3.AddRow(new string[] {
                         "0100100",
                         "Local call",
@@ -166,7 +176,9 @@ this.FeatureBackground();
                         "Kotisivu",
                         "Everyone",
                         "www.affecto.com",
-                        "Kotisivu"});
+                        "Kotisivu",
+                        "http://wwww.url.fi",
+                        "http://wwww.url.sv"});
 #line 15
  testRunner.Given("the following contact information is set to the organization:", ((string)(null)), table3, "Given ");
 #line hidden
@@ -179,7 +191,9 @@ this.FeatureBackground();
                         "web page type",
                         "second web site name",
                         "second web address",
-                        "second web page type"});
+                        "second web page type",
+                        "homepage in finnish",
+                        "homepage in swedish"});
             table4.AddRow(new string[] {
                         "0205 777 450",
                         "Local call cost",
@@ -189,7 +203,9 @@ this.FeatureBackground();
                         "Kotisivu",
                         "Global site",
                         "www.affecto.com",
-                        "Kotisivu"});
+                        "Kotisivu",
+                        "http://wwww.url.fi",
+                        "http://wwww.url.sv"});
 #line 18
  testRunner.When("the following contact information is set to the organization:", ((string)(null)), table4, "When ");
 #line hidden
@@ -202,7 +218,9 @@ this.FeatureBackground();
                         "web page type",
                         "second web site name",
                         "second web address",
-                        "second web page type"});
+                        "second web page type",
+                        "homepage in finnish",
+                        "homepage in swedish"});
             table5.AddRow(new string[] {
                         "0205 777 450",
                         "Local call cost",
@@ -212,7 +230,9 @@ this.FeatureBackground();
                         "Kotisivu",
                         "Global site",
                         "www.affecto.com",
-                        "Kotisivu"});
+                        "Kotisivu",
+                        "http://wwww.url.fi",
+                        "http://wwww.url.sv"});
 #line 21
  testRunner.Then("the organization has the following contact information:", ((string)(null)), table5, "Then ");
 #line hidden
@@ -225,7 +245,7 @@ this.FeatureBackground();
         public virtual void OrganizationCanHaveNoContactInformation()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Organization can have no contact information", ((string[])(null)));
-#line 25
+#line 26
 this.ScenarioSetup(scenarioInfo);
 #line 3
 this.FeatureBackground();
@@ -239,7 +259,9 @@ this.FeatureBackground();
                         "web page type",
                         "second web site name",
                         "second web address",
-                        "second web page type"});
+                        "second web page type",
+                        "homepage in finnish",
+                        "homepage in swedish"});
             table6.AddRow(new string[] {
                         "0100100",
                         "Local call",
@@ -249,12 +271,14 @@ this.FeatureBackground();
                         "Kotisivu",
                         "Everyone",
                         "www.affecto.com",
-                        "Kotisivu"});
-#line 26
+                        "Kotisivu",
+                        "http://wwww.url.fi",
+                        "http://wwww.url.sv"});
+#line 27
  testRunner.Given("the following contact information is set to the organization:", ((string)(null)), table6, "Given ");
-#line 29
- testRunner.When("contact information of the organization is set as empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 30
+ testRunner.When("contact information of the organization is set as empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 31
  testRunner.Then("the organization has no contact information", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -266,7 +290,7 @@ this.FeatureBackground();
         public virtual void SettingInvalidEmailAddress()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Setting invalid email address", ((string[])(null)));
-#line 32
+#line 33
 this.ScenarioSetup(scenarioInfo);
 #line 3
 this.FeatureBackground();
@@ -280,7 +304,9 @@ this.FeatureBackground();
                         "web page type",
                         "second web site name",
                         "second web address",
-                        "second web page type"});
+                        "second web page type",
+                        "homepage in finnish",
+                        "homepage in swedish"});
             table7.AddRow(new string[] {
                         "0205 777 450",
                         "Local call cost",
@@ -290,10 +316,14 @@ this.FeatureBackground();
                         "Kotisivu",
                         "Global site",
                         "www.affecto.com",
-                        "Kotisivu"});
-#line 33
+                        "Kotisivu",
+                        "http://wwww.url.fi",
+                        "http://wwww.url.sv"});
+#line 34
  testRunner.When("the following contact information is set to the organization:", ((string)(null)), table7, "When ");
-#line 36
+#line 37
+ testRunner.When("contact information of the organization is set as empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 38
  testRunner.Then("setting the contact information fails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -305,7 +335,7 @@ this.FeatureBackground();
         public virtual void SettingInvalidPhoneNumber()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Setting invalid phone number", ((string[])(null)));
-#line 38
+#line 40
 this.ScenarioSetup(scenarioInfo);
 #line 3
 this.FeatureBackground();
@@ -319,7 +349,9 @@ this.FeatureBackground();
                         "web page type",
                         "second web site name",
                         "second web address",
-                        "second web page type"});
+                        "second web page type",
+                        "homepage in finnish",
+                        "homepage in swedish"});
             table8.AddRow(new string[] {
                         "Local call cost",
                         "Local call cost",
@@ -329,10 +361,14 @@ this.FeatureBackground();
                         "Kotisivu",
                         "Global site",
                         "www.affecto.com",
-                        "Kotisivu"});
-#line 39
+                        "Kotisivu",
+                        "http://wwww.url.fi",
+                        "http://wwww.url.sv"});
+#line 41
  testRunner.When("the following contact information is set to the organization:", ((string)(null)), table8, "When ");
-#line 42
+#line 44
+ testRunner.When("contact information of the organization is set as empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 45
  testRunner.Then("setting the contact information fails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -344,7 +380,7 @@ this.FeatureBackground();
         public virtual void SettingInvalidWebAddress()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Setting invalid web address", ((string[])(null)));
-#line 44
+#line 47
 this.ScenarioSetup(scenarioInfo);
 #line 3
 this.FeatureBackground();
@@ -358,7 +394,9 @@ this.FeatureBackground();
                         "web page type",
                         "second web site name",
                         "second web address",
-                        "second web page type"});
+                        "second web page type",
+                        "homepage in finnish",
+                        "homepage in swedish"});
             table9.AddRow(new string[] {
                         "0205 777 450",
                         "Local call cost",
@@ -368,10 +406,57 @@ this.FeatureBackground();
                         "Kotisivu",
                         "Global site",
                         "www,affecto,com",
-                        "Kotisivu"});
-#line 45
- testRunner.When("the following contact information is set to the organization:", ((string)(null)), table9, "When ");
+                        "Kotisivu",
+                        "http://wwww.url.fi",
+                        "http://wwww.url.sv"});
 #line 48
+ testRunner.When("the following contact information is set to the organization:", ((string)(null)), table9, "When ");
+#line 51
+ testRunner.When("contact information of the organization is set as empty", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 52
+ testRunner.Then("setting the contact information fails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Setting invalid homepage url")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "UpdatingOrganizationContactInformation")]
+        public virtual void SettingInvalidHomepageUrl()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Setting invalid homepage url", ((string[])(null)));
+#line 54
+ this.ScenarioSetup(scenarioInfo);
+#line 3
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Phone number",
+                        "Phone call fee",
+                        "Email address",
+                        "web site name",
+                        "web address",
+                        "web page type",
+                        "second web site name",
+                        "second web address",
+                        "second web page type",
+                        "homepage in finnish",
+                        "homepage in swedish"});
+            table10.AddRow(new string[] {
+                        "0205 777 450",
+                        "Local call cost",
+                        "info.fi@affecto.com",
+                        "Finnish site",
+                        "www.affecto.fi",
+                        "Kotisivu",
+                        "Global site",
+                        "www.affecto.com",
+                        "Kotisivu",
+                        "http://wwww.url.fi",
+                        "http://wwww.url"});
+#line 55
+ testRunner.When("the following contact information is set to the organization:", ((string)(null)), table10, "When ");
+#line 58
  testRunner.Then("setting the contact information fails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
