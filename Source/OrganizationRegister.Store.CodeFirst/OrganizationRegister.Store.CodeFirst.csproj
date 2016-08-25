@@ -78,6 +78,10 @@
     <Compile Include="Migrations\201605261029595_AddOrganizationValidity.Designer.cs">
       <DependentUpon>201605261029595_AddOrganizationValidity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606270753118_AddOrganizationHomepageUrl.cs" />
+    <Compile Include="Migrations\201606270753118_AddOrganizationHomepageUrl.Designer.cs">
+      <DependentUpon>201606270753118_AddOrganizationHomepageUrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\OrganizationRegisterDbMigration.cs" />
     <Compile Include="Model\Address.cs" />
@@ -119,7 +123,9 @@
     <Compile Include="StoreContext.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +144,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605261029595_AddOrganizationValidity.resx">
       <DependentUpon>201605261029595_AddOrganizationValidity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606270753118_AddOrganizationHomepageUrl.resx">
+      <DependentUpon>201606270753118_AddOrganizationHomepageUrl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

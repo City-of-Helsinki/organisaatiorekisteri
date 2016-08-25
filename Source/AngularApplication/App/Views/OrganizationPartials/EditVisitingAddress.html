@@ -3,7 +3,7 @@
         <label>Katuosoite</label>
         <div data-ng-repeat="address in controller.model.visitingStreetAddresses">
             <p>
-                <input type="text" class="form-control" data-ng-required="address.isRequired"
+                <input type="text" class="form-control" data-ng-required="address.isRequired && controller.model.hasVisitingAddressParts()"
                        data-ng-model="address.localizedValue"
                        maxlength="50" ng-attr-placeholder="{{address.localizedTitle}}"/>
             </p>
@@ -22,7 +22,7 @@
         <label>Postitoimipaikka</label>
         <div data-ng-repeat="district in controller.model.visitingAddressPostalDistricts">
             <p>
-                <input type="text" class="form-control" data-ng-required="district.isRequired"
+                <input type="text" class="form-control" data-ng-required="district.isRequired && controller.model.hasVisitingAddressParts()"
                        data-ng-model="district.localizedValue"
                        maxlength="30" ng-attr-placeholder="{{district.localizedTitle}}"/>
             </p>

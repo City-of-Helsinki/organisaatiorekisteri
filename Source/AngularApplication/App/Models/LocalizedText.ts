@@ -10,6 +10,8 @@ module OrganizationRegister
 
         public get localizedTitle(): string
         {
+
+            // TODO: Get these from Api
             let title: string = "";
             switch (this.languageCode)
             {

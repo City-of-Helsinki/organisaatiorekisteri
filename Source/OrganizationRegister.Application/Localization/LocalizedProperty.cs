@@ -9,6 +9,7 @@
         VisitingAddressQualifier,
         UserInstruction,
         Requirement,
-        Keyword
+        Keyword,
+        HomepageUrl
     }
 }

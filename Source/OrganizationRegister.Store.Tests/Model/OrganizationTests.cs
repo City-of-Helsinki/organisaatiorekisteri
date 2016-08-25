@@ -109,17 +109,17 @@ namespace OrganizationRegister.Store.Tests.Model
             addresses.Received(2).Remove(Arg.Any<Address>());
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void SettingBasicInformationDataForLanguageNotInDataLanguages()
-        {
-            const string languageCode = "sv";
-            IBasicInformation info = Substitute.For<IBasicInformation>();
-            info.Names.Returns(new List<LocalizedText> { new LocalizedText(languageCode, "namn") });
-            context.GetDataLanguage(languageCode).Returns(x => { throw new ArgumentException(); });
+        //[TestMethod]
+        //[ExpectedException(typeof(ArgumentException))]
+        //public void SettingBasicInformationDataForLanguageNotInDataLanguages()
+        //{
+        //    const string languageCode = "sv";
+        //    IBasicInformation info = Substitute.For<IBasicInformation>();
+        //    info.Names.Returns(new List<LocalizedText> { new LocalizedText(languageCode, "namn") });
+        //    context.GetDataLanguage(languageCode).Returns(x => { throw new ArgumentException(); });
 
-            sut.SetBasicInformation(info, context);
-        }
+        //    sut.SetBasicInformation(info, context);
+        //}
 
         private IPostalAddress CreatePostalAddressesWithTwoLanguages()
         {

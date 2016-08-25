@@ -74,7 +74,7 @@ namespace OrganizationRegister.Api.Organization
                 throw new ArgumentNullException("information");
             }
             organizationService.SetOrganizationContactInformation(organizationId, information.PhoneNumber, information.PhoneCallFee,
-                information.EmailAddress, information.WebPages);
+                information.EmailAddress, information.WebPages, information.HomepageUrls);
             return Ok();
         }
 

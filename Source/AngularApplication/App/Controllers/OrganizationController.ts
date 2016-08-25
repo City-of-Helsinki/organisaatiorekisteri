@@ -25,13 +25,10 @@ module OrganizationRegister
         public toBeAddedPostalAddressType: string;
         public editedSection: EditedOrganizationSection;
         public parentOrganizationId: string;
-        //public parentOrganizationName: string;
-
+        public validHomepageUrls: boolean;
         public parentOrganizationNames: Array<LocalizedText>;
-
         public model: Organization;
         public originalModel: Organization;
-
         public basicInformationForm: angular.IFormController;
         public contactInformationForm: angular.IFormController;
         public visitingAddressForm: angular.IFormController;
@@ -53,7 +50,7 @@ module OrganizationRegister
             this.validVisitingAddressPostalCode = true;
             this.validPostalStreetAddressPostalCode = true;
             this.validPostalPostOfficeBoxAddressPostalCode = true;
-
+            this.validHomepageUrls = true;
             this.webPageEditModeOn = false;
             this.isValidFromCalendarShown = false;
             this.isValidToCalendarShown = false;
@@ -74,10 +71,9 @@ module OrganizationRegister
 
 
        
-
         public canSaveContactInformation(): boolean
         {
-            return this.validPhoneNumber && this.validEmailAddress;
+            return this.validPhoneNumber && this.validEmailAddress && this.validHomepageUrls;
         }
 
         public canAddNewWebPage(): boolean
@@ -197,6 +193,7 @@ module OrganizationRegister
             this.setPostalPostOfficeBoxAddressPostalCodeValidity(true);
             this.setWebPageUrlValidity(true);
             this.setEditedWebPageUrlValidity(true);
+            this.setHomepageUrlsValidity(true);
         }
 
         public cancelEditing(): void
@@ -235,6 +232,7 @@ module OrganizationRegister
                 {
                     return this.saveOrganizationBasicInformation(false);
                 }
+                
                 return this.addOrganizationWithBasicAndContactInformation(false);
             }
         }
@@ -543,6 +541,25 @@ module OrganizationRegister
             }
         }
 
+
+        public validateHomepageUrls(): void
+        {
+            if (this.model.hasHomepageUrls())
+            {
+                this.model.homepageUrls.forEach((url) =>
+                {
+                    if (url.localizedValue != null && url.localizedValue !== "" ) {
+                        this.validationService.validateWebAddress(url.localizedValue)
+                            .then(this.setHomepageUrlsValidity);
+                    }
+                });
+            }
+            else
+            {
+                this.setHomepageUrlsValidity(true);
+            }
+        }
+
         public validateEditedWebPageUrl(): void
         {
             if (this.model.hasEditedWebPageUrl())
@@ -633,6 +650,7 @@ module OrganizationRegister
             return this.organizationService.setOrganizationPostalAddress(this.model)
                 .then(() =>
                 {
+                    this.model.initializeLocalizedTexts();
                     this.busyIndicationService.hideBusyIndicator();
                     if (goToHomePageAfterSaving)
                     {
@@ -654,6 +672,7 @@ module OrganizationRegister
             return this.organizationService.setOrganizationVisitingAddress(this.model)
                 .then(() =>
                 {
+                    this.model.initializeLocalizedTexts();
                     this.busyIndicationService.hideBusyIndicator();
                     if (goToHomePage)
                     {
@@ -665,10 +684,13 @@ module OrganizationRegister
         private saveOrganizationContactInformation(goToHomePage: boolean): angular.IPromise<void>
         {
             this.busyIndicationService.showBusyIndicator("Tallennetaan organisaation yhteystietoja...");
+
+            this.model.generateContactinformationLocalizedTexts();
             this.originalModel = angular.copy(this.model);
             return this.organizationService.setOrganizationContactInformation(this.model)
                 .then(() =>
                 {
+                    this.model.initializeLocalizedTexts();
                     this.busyIndicationService.hideBusyIndicator();
                     if (goToHomePage)
                     {
@@ -681,8 +703,6 @@ module OrganizationRegister
         {
             this.busyIndicationService.showBusyIndicator("Tallennetaan organisaation perustietoja...");
             this.model.generateBasicInformationLocalizedAndFormattedTexts();
-            //this.model.descriptionAsHtml = this.$sce.trustAsHtml(this.model.descriptionAsHtml);
-
             this.model.descriptionsAsHtml.forEach((desc, index) =>
             {
                 this.model.descriptionsAsHtml[index] = this.$sce.trustAsHtml(desc.localizedValue);
@@ -706,7 +726,7 @@ module OrganizationRegister
         {
             this.busyIndicationService.showBusyIndicator("Tallennetaan organisaation perustietoja...");
             this.model.generateBasicInformationLocalizedAndFormattedTexts();
-            //this.model.descriptionAsHtml = this.$sce.trustAsHtml(this.model.descriptionAsHtml);
+           
             this.model.descriptionsAsHtml.forEach((desc,index) =>
             {
                 this.model.descriptionsAsHtml[index] = this.$sce.trustAsHtml(desc.localizedValue);
@@ -714,19 +734,21 @@ module OrganizationRegister
             return this.organizationService.addOrganization(this.model, this.parentOrganizationId)
                 .then((organizationId: string) =>
                 {
+
+                    this.model.initializeLocalizedTexts();
                     this.model.id = organizationId;
                     if (this.parentOrganizationId != null)
                     {
                         this.model.isSubOrganization = true;
                     }
                     this.originalModel = angular.copy(this.model);
-                    this.model.initializeLocalizedTexts();
                     this.busyIndicationService.hideBusyIndicator();
                     if (this.model.hasContactInformation())
                     {
                         this.saveOrganizationContactInformation(false)
                             .then(() =>
                             {
+                                
                                 if (goToHomePage)
                                 {
                                     this.goToHomePage();
@@ -811,6 +833,12 @@ module OrganizationRegister
             this.setFormFieldValidity(this.contactInformationForm, "editedWebPage", isValid);
         }
 
+        private setHomepageUrlsValidity = (isValid: boolean): void =>
+        {
+            this.validHomepageUrls = isValid;
+            this.setFormFieldValidity(this.contactInformationForm, "homePageUrls", isValid);
+        }
+
         private setValidityValidity(isValid: boolean): void
         {
             this.validValidity = isValid;
@@ -845,9 +873,6 @@ module OrganizationRegister
                 .then((result: Array<any>) =>
                 {
                     var organization: Organization = result[0];
-
-                    //organization.descriptionAsHtml = this.$sce.trustAsHtml(organization.descriptionAsHtml);
-
                     organization.descriptionsAsHtml.forEach((desc, index) =>
                     {
                         organization.descriptionsAsHtml[index].localizedValue = this.$sce.trustAsHtml(desc.localizedValue);
@@ -870,8 +895,6 @@ module OrganizationRegister
                 .then((result: Array<any>) =>
                 {
                     var organization: Organization = result[0];
-                    //organization.descriptionAsHtml = this.$sce.trustAsHtml(organization.descriptionAsHtml);
-
                     organization.descriptionsAsHtml.forEach((desc, index) =>
                     {
                         organization.descriptionsAsHtml[index].localizedValue = this.$sce.trustAsHtml(desc.localizedValue);
@@ -904,8 +927,7 @@ module OrganizationRegister
 
         private createSubOrganization(parent: Organization): void
         {
-            //this.parentOrganizationName = parent.name;
-
+           
             this.parentOrganizationNames = parent.names;
 
             this.model = new Organization();
@@ -917,6 +939,7 @@ module OrganizationRegister
             this.model.businessId = parent.businessId;
             this.model.phoneNumber = parent.phoneNumber;
             this.model.phoneCallFee = parent.phoneCallFee;
+            
         }
 
         private initializeEditedSection($route: any): void

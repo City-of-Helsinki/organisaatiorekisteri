@@ -16,6 +16,17 @@
         <span>{{ controller.model.phoneCallFee }}</span>
     </div>
 </div>
+
+<div class="row">
+    <label>Kotisivut</label>
+
+    <div data-ng-repeat="url in controller.model.homepageUrls">
+        <p>
+            {{ url.localizedValue }}
+        </p>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-xs-4">
         <label>Verkkosivun tyyppi</label>

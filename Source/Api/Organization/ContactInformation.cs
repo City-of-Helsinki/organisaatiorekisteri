@@ -9,5 +9,6 @@ namespace OrganizationRegister.Api.Organization
         public string PhoneCallFee { get; set; }
         public string EmailAddress { get; set; }
         public IEnumerable<WebPage> WebPages { get; set; }
+        public IEnumerable<LocalizedText> HomepageUrls { get; set; }
     }
 }

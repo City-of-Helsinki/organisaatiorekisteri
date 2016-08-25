@@ -41,11 +41,11 @@ namespace OrganizationRegister.Application.Tests.Organization
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void NullNameValueIsNotAllowed()
+        public void NullFinnishNameValueIsNotAllowed()
         {
             sut = new Application.Organization.Organization(Guid.NewGuid(), 1, ValidBusinessId, Oid, Type, null, 
-                new LocalizedSingleTexts(new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "Nimi"), new LocalizedText("SE", null) }),
-                new List<string> { ValidLanguageCode, "SE" });
+                new LocalizedSingleTexts(new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "Nimi"), new LocalizedText("fi", null) }),
+                new List<string> { ValidLanguageCode, "fi" });
         }
 
         [TestMethod]
@@ -71,6 +71,15 @@ namespace OrganizationRegister.Application.Tests.Organization
             sut = CreateSut();
 
             sut.Descriptions = new LocalizedSingleTexts (new List<LocalizedText> { new LocalizedText("en", "SW company") });
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void HomepageUrlCannotHaveUnsupportedLanguage()
+        {
+            sut = CreateSut();
+
+            sut.HomepageUrls = new LocalizedSingleTexts(new List<LocalizedText> { new LocalizedText("fr", "url.com") });
         }
 
         [TestMethod]
@@ -133,6 +142,20 @@ namespace OrganizationRegister.Application.Tests.Organization
             sut.Descriptions = new LocalizedSingleTexts(new List<LocalizedText> { new LocalizedText(ValidLanguageCode, finalDescription) });
 
             Assert.AreEqual(finalDescription, sut.GetDescription(ValidLanguageCode));
+        }
+
+
+        [TestMethod]
+        public void SettingHomepageUrlAgainWitSamLanguageReplacesHomepageUrl()
+        {
+            const string finalUrl = "http://firma.com";
+            sut = new Application.Organization.Organization(Guid.NewGuid(), 1, ValidBusinessId, Oid, Type, null,
+                CreateLocalizedTextsWithOneText(ValidLanguageCode, "firma"), new List<string> { ValidLanguageCode });
+
+            sut.HomepageUrls = new LocalizedSingleTexts(new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "http://firma.fi") });
+            sut.HomepageUrls = new LocalizedSingleTexts(new List<LocalizedText> { new LocalizedText(ValidLanguageCode, finalUrl) });
+
+            Assert.AreEqual(finalUrl, sut.GetHomepageUrl(ValidLanguageCode));
         }
 
         [TestMethod]
@@ -266,12 +289,14 @@ namespace OrganizationRegister.Application.Tests.Organization
             sut.SetType("Company", "133");
         }
 
+      
+
+
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void SettingEmptyNamesCollection()
         {
             sut = CreateSut();
-            
             sut.Names = new List<LocalizedText>();
         }
 
@@ -280,8 +305,7 @@ namespace OrganizationRegister.Application.Tests.Organization
         public void SettingNameWithEmptyLocalizedValue()
         {
             sut = CreateSut();
-
-            sut.Names = new List<LocalizedText> { new LocalizedText(ValidLanguageCode, string.Empty )};
+            sut.Names = new List<LocalizedText> { new LocalizedText(ValidLanguageCode, string.Empty) };
         }
 
         [TestMethod]
@@ -289,8 +313,24 @@ namespace OrganizationRegister.Application.Tests.Organization
         public void SettingNameWithNullLocalizedValue()
         {
             sut = CreateSut();
-
             sut.Names = new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "arvo"), new LocalizedText("en", null) };
+        }
+
+       
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void SettingHomepageUrlWithNullLocalizedValue()
+        {
+            sut = CreateSut();
+            sut.HomepageUrls = new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "url.com"), new LocalizedText("en", null) };
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void SettingHomepageUrlWithIncorrectUrl()
+        {
+            sut = CreateSut();
+            sut.HomepageUrls = new List<LocalizedText> { new LocalizedText(ValidLanguageCode,"noturl"), new LocalizedText("en", "url.com") };
         }
 
         [TestMethod]

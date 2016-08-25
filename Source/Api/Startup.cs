@@ -56,9 +56,9 @@ namespace OrganizationRegister.Api
 
             ConfigureWebApi(config);
             app.UseAutofacWebApi(config);
-#if(DEBUG)
+//#if(DEBUG)
             app.UseCors(CorsOptions.AllowAll);
-#endif
+//#endif
 
             AntiForgeryConfig.UniqueClaimTypeIdentifier = "sub";
             JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();

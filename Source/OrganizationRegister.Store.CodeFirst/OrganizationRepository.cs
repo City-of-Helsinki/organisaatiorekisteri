@@ -117,7 +117,7 @@ namespace OrganizationRegister.Store.CodeFirst
                 dbOrganization.GetPostalPostOfficeBoxAddressPostOfficeBox(), dbOrganization.GetPostalPostOfficeBoxAddressPostalCode(),
                 CreatePostalPostOfficeBoxAddressLocalities(postalAddresses), dbOrganization.UseStreetAddressAsPostalAddress,
                 dbOrganization.ParentOrganizationId.HasValue,
-                settingsRepository.GetDataLanguageCodes());
+                settingsRepository.GetDataLanguageCodes(), dbOrganization.GetHomepageUrls());
         }
 
         public IOrganizationName GetOrganizationName(Guid id)

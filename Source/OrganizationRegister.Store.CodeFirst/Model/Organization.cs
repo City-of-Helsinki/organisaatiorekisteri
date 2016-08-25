@@ -207,7 +207,40 @@ namespace OrganizationRegister.Store.CodeFirst.Model
             SetCallInformation(information.PhoneNumber, information.PhoneCallFee, context);
             SetEmailAddress(information.EmailAddress, context);
             SetWebPages(information.WebPages, context);
+            SetHomepageUrls(information, context);
         }
+
+        internal void SetHomepageUrls(ILocalizedText information, IStoreContext context)
+        {
+            SetLocalizedTexts(information, context);
+        }
+
+        private void SetLocalizedTexts (ILocalizedText information, IStoreContext context)
+        {
+
+            RemoveAllLanguageSpecificData();
+
+            foreach (var lang in context.DataLanguages.ToList())
+            {
+                var name = information.GetName(lang.Language.Code);
+                var description = information.GetDescription(lang.Language.Code);
+                var homepageUrl = information.GetHomepageUrl(lang.Language.Code);
+
+                if (!string.IsNullOrEmpty(name) || !string.IsNullOrEmpty(description) || !string.IsNullOrEmpty(homepageUrl))
+                {
+                    LanguageSpecifications.Add(new OrganizationLanguageSpecification
+                    {
+                        Language = lang,
+                        Name = name,
+                        Description = description,
+                        HomepageUrl = homepageUrl
+                    });
+                }
+              
+            }
+        }
+
+
 
         internal IReadOnlyCollection<LocalizedText> GetDescriptions()
         {
@@ -219,6 +252,12 @@ namespace OrganizationRegister.Store.CodeFirst.Model
             return LanguageSpecifications.Select(data => new LocalizedText(data.Language.Language.Code, data.Name)).ToList();
         }
 
+
+        internal IReadOnlyCollection<LocalizedText> GetHomepageUrls()
+        {
+            return LanguageSpecifications.Select(data => new LocalizedText(data.Language.Language.Code, data.HomepageUrl)).ToList();
+        }
+
         internal void SetBasicInformation(IBasicInformation information, IStoreContext context)
         {
             BusinessId = information.BusinessId;
@@ -228,17 +267,23 @@ namespace OrganizationRegister.Store.CodeFirst.Model
             ValidFrom = information.ValidFrom;
             ValidTo = information.ValidTo;
 
-            RemoveAllLanguageSpecificData();
+            SetLocalizedTexts(information, context);
 
-            foreach (LocalizedText localizedName in information.Names)
-            {
-                LanguageSpecifications.Add(new OrganizationLanguageSpecification
-                {
-                    Language = context.GetDataLanguage(localizedName.LanguageCode),
-                    Name = localizedName.LocalizedValue,
-                    Description = information.GetDescription(localizedName.LanguageCode)
-                });
-            }
+            //RemoveAllLanguageSpecificData();
+
+            //foreach (LocalizedText localizedName in information.Names)
+            //{
+            //    LanguageSpecifications.Add(new OrganizationLanguageSpecification
+            //    {
+            //        Language = context.GetDataLanguage(localizedName.LanguageCode),
+            //        Name = localizedName.LocalizedValue,
+            //        Description = information.GetDescription(localizedName.LanguageCode),
+            //        HomepageUrl = information.GetHomepageUrl(localizedName.LanguageCode)
+            //    });
+            //}
         }
+
+
+        
     }
 }
