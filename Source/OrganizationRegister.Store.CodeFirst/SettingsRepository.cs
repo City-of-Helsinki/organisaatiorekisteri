@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using OrganizationRegister.Application.Settings;
+using OrganizationRegister.Store.CodeFirst.Model;
 
 namespace OrganizationRegister.Store.CodeFirst
 {
@@ -32,5 +33,11 @@ namespace OrganizationRegister.Store.CodeFirst
         {
             return context.WebPageTypes.Select(t => t.Type).ToList();
         }
+
+        public IReadOnlyCollection<AvailableDataLanguage> GetDataLanguages()
+        {
+            return context.DataLanguages.ToList();
+        }
+
     }
 }

@@ -267,13 +267,15 @@ namespace OrganizationRegister.Api.Tests.Organization
             const string webPageName2 = "Gmail";
             const string webPageType1 = "type1";
             const string webPageType2 = "type2";
+            List<LocalizedText> homepageUrls = new List<LocalizedText> { new LocalizedText("fi", "url.fi") };
 
             var information = new ContactInformation
             {
                 EmailAddress = emailAddress,
                 PhoneNumber = phoneNumber,
                 PhoneCallFee = phoneCallFee,
-                WebPages = new List<WebPage> { new WebPage(webPageName1, webPageUrl1, webPageType1), new WebPage(webPageName2, webPageUrl2, webPageType2) }
+                WebPages = new List<WebPage> { new WebPage(webPageName1, webPageUrl1, webPageType1), new WebPage(webPageName2, webPageUrl2, webPageType2) },
+                HomepageUrls = homepageUrls
             };
 
             sut.SetOrganizationContactInformation(organizationId, information);
@@ -281,7 +283,7 @@ namespace OrganizationRegister.Api.Tests.Organization
             organizationService.Received(1).SetOrganizationContactInformation(organizationId, phoneNumber, phoneCallFee, emailAddress,
                 Arg.Is<IEnumerable<WebPage>>(
                     sites => sites.Count() == 2 && sites.Any(site => site.Name.Equals(webPageName1) && site.Address.Equals(webPageUrl1) && site.Type.Equals(webPageType1)) &&
-                        sites.Any(site => site.Name.Equals(webPageName2) && site.Address.Equals(webPageUrl2) && site.Type.Equals(webPageType2))));
+                        sites.Any(site => site.Name.Equals(webPageName2) && site.Address.Equals(webPageUrl2) && site.Type.Equals(webPageType2))), homepageUrls);
         }
 
         [TestMethod]

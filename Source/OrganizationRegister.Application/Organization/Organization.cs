@@ -44,7 +44,7 @@ namespace OrganizationRegister.Application.Organization
             
             localizedTextsContainer = new LocalizedTextsContainer(this.languageCodes);
             Names = names;
-
+          
             Type = type;
             SetMunicipalityCode(municipalityCode);
             ValidateType();
@@ -81,10 +81,34 @@ namespace OrganizationRegister.Application.Organization
             }
         }
 
+
+        public IEnumerable<LocalizedText> HomepageUrls
+        {
+            get { return localizedTextsContainer.GetTexts(LocalizedProperty.HomepageUrl); }
+
+            set
+            {
+                WebAddressSpecification specification = new WebAddressSpecification();
+
+                if (value != null)
+                {
+                    foreach (LocalizedText txt in value)
+                    {
+                        if (!string.IsNullOrEmpty(txt.LocalizedValue) && !specification.IsSatisfiedBy(txt.LocalizedValue))
+                        {
+                            throw new ArgumentException(string.Format("Invalid url ({0}).", txt.LocalizedValue), nameof(value));
+                        }
+                    }
+                }
+                localizedTextsContainer.Set(LocalizedProperty.HomepageUrl, new LocalizedSingleTexts(value));
+            }
+        }
+
         public IEnumerable<LocalizedText> Names
         {
             get { return localizedTextsContainer.GetTexts(LocalizedProperty.Name); }
             set { localizedTextsContainer.Set(LocalizedProperty.Name, new MandatoryLocalizedSingleTexts(value)); }
+            
         }
 
         public IEnumerable<LocalizedText> Descriptions
@@ -149,10 +173,23 @@ namespace OrganizationRegister.Application.Organization
             return qualifiers.GetValue(languageCode);
         }
 
+        
+        public string GetName(string languageCode)
+        {
+            LocalizedSingleTexts names = (LocalizedSingleTexts)localizedTextsContainer.GetTexts(LocalizedProperty.Name);
+            return names.GetValue(languageCode);
+        }
+
         public string GetDescription(string languageCode)
         {
             LocalizedSingleTexts descriptions = (LocalizedSingleTexts) localizedTextsContainer.GetTexts(LocalizedProperty.Description);
             return descriptions.GetValue(languageCode);
+        }
+
+        public string GetHomepageUrl(string languageCode)
+        {
+            LocalizedSingleTexts homepageUrls = (LocalizedSingleTexts)localizedTextsContainer.GetTexts(LocalizedProperty.HomepageUrl);
+            return homepageUrls.GetValue(languageCode);
         }
 
         public DateTime? ValidFrom { get; private set; }

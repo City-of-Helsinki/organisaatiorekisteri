@@ -4,7 +4,7 @@ using OrganizationRegister.Common;
 
 namespace OrganizationRegister.Application.Organization
 {
-    public interface IBasicInformation
+    public interface IBasicInformation: ILocalizedText
     {
         string BusinessId { get; }
         string Oid { get; }
@@ -12,7 +12,7 @@ namespace OrganizationRegister.Application.Organization
         IEnumerable<LocalizedText> Names { get; }
         IEnumerable<LocalizedText> Descriptions { get; }
         string MunicipalityCode { get; }
-        string GetDescription(string languageCode);
+     
         DateTime? ValidFrom { get; }
         DateTime? ValidTo { get; }
     }

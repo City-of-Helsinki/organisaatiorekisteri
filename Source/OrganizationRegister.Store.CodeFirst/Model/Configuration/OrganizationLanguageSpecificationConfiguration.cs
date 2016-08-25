@@ -10,7 +10,8 @@ namespace OrganizationRegister.Store.CodeFirst.Model.Configuration
             
             Property(specification => specification.Name);
             Property(specification => specification.Description);
-            
+            Property(specification => specification.HomepageUrl);
+
             HasRequired(specification => specification.Language);
         }
     }

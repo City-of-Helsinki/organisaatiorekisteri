@@ -19,9 +19,14 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
         public void WhenTheFollowingContactInformationIsSetToOrganization(Table contactInformation)
         {
             TableRow contactInfo = contactInformation.Rows.Single();
-            Try(() => OrganizationService.SetOrganizationContactInformation(CurrentScenarioContext.OrganizationId, contactInfo["Phone number"], contactInfo["Phone call fee"],
-                contactInfo["Email address"], CreateWebSiteCollection(contactInfo)));
+            Try(
+                () =>
+                    OrganizationService.SetOrganizationContactInformation(CurrentScenarioContext.OrganizationId, contactInfo["Phone number"],
+                        contactInfo["Phone call fee"],
+                        contactInfo["Email address"], CreateWebSiteCollection(contactInfo), LocalizedTextHelper.CreateHomepageUrlsCollection(contactInfo)));
         }
+
+
 
         [Then(@"the organization has the following contact information:")]
         public void ThenOrganizationHasTheFollowingContactInformation(Table expectedContactInformation)
@@ -34,9 +39,24 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
             Assert.AreEqual(expectedContactInfo["Email address"], result.EmailAddress);
 
             Assert.AreEqual(2, result.WebPages.Count());
-            Assert.IsTrue(result.WebPages.Any(site => site.Name.Equals(expectedContactInfo["web site name"]) && site.Address.Equals(expectedContactInfo["web address"]) && site.Type.Equals(expectedContactInfo["web page type"])));
+            Assert.IsTrue(
+                result.WebPages.Any(
+                    site =>
+                        site.Name.Equals(expectedContactInfo["web site name"]) && site.Address.Equals(expectedContactInfo["web address"])
+                            && site.Type.Equals(expectedContactInfo["web page type"])));
+
             Assert.IsTrue(result.WebPages.Any(site => site.Name.Equals(expectedContactInfo["second web site name"]) &&
                 site.Address.Equals(expectedContactInfo["second web address"]) && site.Type.Equals(expectedContactInfo["second web page type"])));
+
+
+            Assert.AreEqual(2, result.HomepageUrls.Count());
+
+            Assert.IsTrue(result.HomepageUrls.Any(url => url.LocalizedValue.Equals(expectedContactInfo["homepage in finnish"]) &&
+                url.LanguageCode.Equals("fi")));
+
+            Assert.IsTrue(result.HomepageUrls.Any(url => url.LocalizedValue.Equals(expectedContactInfo["homepage in swedish"]) &&
+               url.LanguageCode.Equals("sv")));
+
         }
 
         [Then(@"setting the contact information fails")]
@@ -48,7 +68,7 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
         [When(@"contact information of the organization is set as empty")]
         public void WhenOrganizationContactInformationIsSetAsEmpty()
         {
-            OrganizationService.SetOrganizationContactInformation(CurrentScenarioContext.OrganizationId, null, null, null, null);
+            OrganizationService.SetOrganizationContactInformation(CurrentScenarioContext.OrganizationId, null, null, null, null, null);
         }
 
         [Then(@"the organization has no contact information")]
@@ -60,6 +80,7 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
             Assert.IsNull(result.PhoneCallFee);
             Assert.IsNull(result.EmailAddress);
             Assert.IsFalse(result.WebPages.Any());
+            
         }
 
         private IEnumerable<WebPage> CreateWebSiteCollection(TableRow contactInfo)
@@ -71,4 +92,5 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
             };
         }
     }
+
 }

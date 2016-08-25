@@ -66,6 +66,7 @@
     <Compile Include="HierarchicalCollection.cs" />
     <Compile Include="Organization\IBasicInformation.cs" />
     <Compile Include="Organization\IContactInformation.cs" />
+    <Compile Include="Organization\ILocalizedText.cs" />
     <Compile Include="Organization\IOrganizationName.cs" />
     <Compile Include="Organization\IOrganizationRepository.cs" />
     <Compile Include="Organization\IOrganizationService.cs" />

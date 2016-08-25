@@ -21,11 +21,30 @@
     <div class="col-xs-6">
         <label for="phoneCallFee">
             Puhelun hintatiedot
-            <affecto-help-popup paragraphs='["Kerro sanallisesti, mitä puhelinnumeroon soittaminen maksaa, esimerkiksi paikallisverkkomaksu / paikallispuhelumaksu tai \"Virasto x ei peri puhelusta maksua. Operaattorisi perii paikallisverkkomaksun hinnastonsa mukaan\". Kuvaus saa olla maksimissaan 150 merkkiä pitkä."]' />
+            <affecto-help-popup paragraphs='["Kerro sanallisesti, mitä puhelinnumeroon soittaminen maksaa, esimerkiksi paikallisverkkomaksu / paikallispuhelumaksu tai \"Virasto x ei peri puhelusta maksua. Operaattorisi perii paikallisverkkomaksun hinnastonsa mukaan\". Kuvaus saa olla maksimissaan 150 merkkiä pitkä."]'/>
         </label>
         <input type="text" id="phoneCallFee" class="form-control" maxlength="150" data-ng-model="controller.model.phoneCallFee">
     </div>
 </div>
+
+<div class="row">
+    <label>
+        Kotisivut (sivujen osoiteet)
+        <affecto-help-popup paragraphs='["Anna verkkosivun osoite muodossa http(s)://www.hel.fi."]' />
+    </label>
+
+    <div data-ng-repeat="url in controller.model.homepageUrls">
+        <p>
+            <input type="text" class="form-control" data-ng-required="url.isRequired" data-ng-model="url.localizedValue"
+                   maxlength="1000" ng-attr-placeholder="{{url.localizedTitle}}" data-ng-blur="controller.validateHomepageUrls()"/>
+        </p>
+
+    </div>
+    <div id="homepageUrlErrorMessage" aria-live="polite" class="validation-message" data-ng-show="!controller.validHomepageUrls">
+       Virheellinen kotisivun osoite
+    </div>
+</div>
+
 <div class="row">
     <div class="col-xs-3">
         <label for="webPageType">
