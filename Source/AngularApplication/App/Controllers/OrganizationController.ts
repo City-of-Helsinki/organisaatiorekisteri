@@ -25,14 +25,10 @@ module OrganizationRegister
         public toBeAddedPostalAddressType: string;
         public editedSection: EditedOrganizationSection;
         public parentOrganizationId: string;
-        //public parentOrganizationName: string;
         public validHomepageUrls: boolean;
-
         public parentOrganizationNames: Array<LocalizedText>;
-
         public model: Organization;
         public originalModel: Organization;
-
         public basicInformationForm: angular.IFormController;
         public contactInformationForm: angular.IFormController;
         public visitingAddressForm: angular.IFormController;
@@ -54,9 +50,7 @@ module OrganizationRegister
             this.validVisitingAddressPostalCode = true;
             this.validPostalStreetAddressPostalCode = true;
             this.validPostalPostOfficeBoxAddressPostalCode = true;
-
             this.validHomepageUrls = true;
-
             this.webPageEditModeOn = false;
             this.isValidFromCalendarShown = false;
             this.isValidToCalendarShown = false;

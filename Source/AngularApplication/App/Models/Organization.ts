@@ -86,32 +86,6 @@ module OrganizationRegister
             });
         }
 
-       // private setLocalizedTexts(texts: Array<LocalizedText>, requiredLangs: string[]): Array<LocalizedText>
-       //{
-       //     let localizedTexts = new Array<LocalizedText>();
-
-       //     texts.forEach((item) =>
-       //     {
-       //         // init LocalizedText: set isRequired & localizedTitle
-       //         localizedTexts.push(new LocalizedText(item.languageCode,
-       //             item.localizedValue,
-       //             (requiredLangs.indexOf(item.languageCode) >= 0)));
-       //     });
-       //    return localizedTexts.sort((a, b) =>
-       //    {
-       //        if (DataLocalization.languageCodes.indexOf(a.languageCode) > DataLocalization.languageCodes.indexOf(b.languageCode))
-       //        {
-       //            return 1;
-       //        }
-       //        if (DataLocalization.languageCodes.indexOf(a.languageCode) < DataLocalization.languageCodes.indexOf(b.languageCode))
-       //        {
-       //            return -1;
-       //        }
-       //        return 0;
-       //    });;
-       // }
-
-
         private setLocalizedTexts(texts: Array<LocalizedText>, requiredLangs: string[]): Array<LocalizedText>
         {
             let langs = DataLocalization.languageCodes;
@@ -127,8 +101,6 @@ module OrganizationRegister
 
             return localizedTexts;
         }
-
-
     
         private getLocalizedTextValue(texts: Array<LocalizedText>, languageCode: string): string
         {
@@ -232,6 +204,8 @@ module OrganizationRegister
             this.postalPostOfficeBoxAddressPostalDistricts = this.setLocalizedTexts(postOfficeBoxPostalDistricts, ["fi"]);
         }
 
+        
+
         public get effectivePostalStreetAddressStreets(): Array<LocalizedText>
         {
             if (this.useVisitingAddressAsPostalAddress)
@@ -306,8 +280,14 @@ module OrganizationRegister
 
         public generateContactinformationLocalizedTexts(): void
         {
-           
-            this.homepageUrls = this.getLocalizedTextsWithValues(this.homepageUrls);
+            var urls = this.getLocalizedTextsWithValues(this.homepageUrls);
+
+            urls.forEach((url,i) =>
+            {
+                urls[i].localizedValue = url.localizedValue.indexOf("http") === 0 ? url.localizedValue : "http://" + url.localizedValue;   
+            });
+
+            this.homepageUrls = urls;
         }
 
        
