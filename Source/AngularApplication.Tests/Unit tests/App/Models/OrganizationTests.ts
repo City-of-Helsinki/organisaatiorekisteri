@@ -83,21 +83,21 @@ describe("Organization", () =>
         });
     });
 
-    describe("phone call fee", () =>
+    describe("phone call charge type", () =>
     {
-        it("has no phone call fee when information is null", () =>
+        it("has no phone call charge type when information is null", () =>
         {
-            expect(sut.hasPhoneCallFee()).toBeFalsy();
+            expect(sut.hasPhoneCallChargeType()).toBeFalsy();
         });
-        it("has no phone call fee when information is empty", () =>
+        it("has no phone call charge type when information is empty", () =>
         {
-            sut.phoneCallFee = "";
-            expect(sut.hasPhoneCallFee()).toBeFalsy();
+            sut.phoneCallChargeType = "";
+            expect(sut.hasPhoneCallChargeType()).toBeFalsy();
         });
-        it("has phone call fee when information is defined", () =>
+        it("has phone call charge type when information is defined", () =>
         {
-            sut.phoneCallFee = "ppm";
-            expect(sut.hasPhoneCallFee()).toBeTruthy();
+            sut.phoneCallChargeType = "Muu";
+            expect(sut.hasPhoneCallChargeType()).toBeTruthy();
         });
     });
 
@@ -106,7 +106,7 @@ describe("Organization", () =>
         it("has no contact information when no phone number, call fee, email address or web pages are set", () =>
         {
             sut.phoneNumber = null;
-            sut.phoneCallFee = null;
+            sut.phoneCallChargeType = null;
             sut.emailAddress = null;
             sut.webPages = new Array<OrganizationRegister.WebPage>();
             expect(sut.hasContactInformation()).toBeFalsy();
@@ -114,7 +114,7 @@ describe("Organization", () =>
         it("has no contact information when phone number, call fee, email address or web pages are empty", () =>
         {
             sut.phoneNumber = "";
-            sut.phoneCallFee = "";
+            sut.phoneCallChargeType = "";
             sut.emailAddress = "";
             sut.webPages = new Array<OrganizationRegister.WebPage>();
             expect(sut.hasContactInformation()).toBeFalsy();
@@ -122,14 +122,14 @@ describe("Organization", () =>
         it("has contact information when phone number is set", () =>
         {
             sut.phoneNumber = "112";
-            sut.phoneCallFee = null;
+            sut.phoneCallChargeType = null;
             sut.emailAddress = null;
             sut.webPages = new Array<OrganizationRegister.WebPage>();
             expect(sut.hasContactInformation()).toBeTruthy();
         });
         it("has contact information when phone call cost is set", () =>
         {
-            sut.phoneCallFee = "ppm";
+            sut.phoneCallChargeType = "Muu";
             sut.phoneNumber = null;
             sut.emailAddress = null;
             sut.webPages = new Array<OrganizationRegister.WebPage>();
@@ -138,7 +138,7 @@ describe("Organization", () =>
         it("has contact information when email address is set", () =>
         {
             sut.emailAddress = "me@here.fi";
-            sut.phoneCallFee = null;
+            sut.phoneCallChargeType = null;
             sut.phoneNumber = null;
             sut.webPages = new Array<OrganizationRegister.WebPage>();
             expect(sut.hasContactInformation()).toBeTruthy();
@@ -146,7 +146,7 @@ describe("Organization", () =>
         it("has contact information when there are web pages", () =>
         {
             sut.webPages.push(new OrganizationRegister.WebPage("home", "www.home.fi", "type"));
-            sut.phoneCallFee = null;
+            sut.phoneCallChargeType = null;
             sut.emailAddress = null;
             sut.phoneNumber = null;
             expect(sut.hasContactInformation()).toBeTruthy();
@@ -724,6 +724,7 @@ describe("Organization", () =>
         {
             expect(sut.names.length).toEqual(langs.length);
             expect(sut.descriptionsAsHtml.length).toEqual(langs.length); 
+            expect(sut.phoneCallChargeInfos.length).toEqual(langs.length); 
         });
 
         it("should have localized values for existing localized data", () =>
@@ -767,6 +768,52 @@ describe("Organization", () =>
             expect(sut.descriptionsAsHtml.length).toEqual(existingValues.length);
             expect(sut.descriptionsAsHtml[0].localizedValue).toEqual(existingValue.localizedValue);
             expect(sut.descriptionsAsHtml[0].languageCode).toEqual(existingValue.languageCode);
+
+        });
+
+    });
+
+    describe("localized data in contact information", () =>
+    {
+        let langs = OrganizationRegister.DataLocalization.languageCodes;
+        let existingValue = new OrganizationRegister.LocalizedText("fi", "localized value", true);
+        let existingValues = new Array<OrganizationRegister.LocalizedText>(existingValue);
+        let sut = new OrganizationRegister.Organization(null, null, null,null, null, null,null,null,null,null,null,null,existingValues);
+
+        it("should initially exists for each data to be localized", () =>
+        {
+           
+            expect(sut.phoneCallChargeInfos.length).toEqual(langs.length);
+        });
+
+        it("should have localized values for existing localized data", () =>
+        {
+           
+            expect(sut.phoneCallChargeInfos
+                .some((arrVal: OrganizationRegister.LocalizedText) => (
+                    existingValue.localizedValue === arrVal.localizedValue &&
+                    existingValue.languageCode === arrVal.languageCode)))
+                .toBeTruthy();
+        });
+
+        it("should not have localized values for non existing localized data",
+            () =>
+            {
+              
+                expect(sut.phoneCallChargeInfos
+                    .some((arrVal: OrganizationRegister.LocalizedText) => (
+                        existingValue.localizedValue === arrVal.localizedValue &&
+                        existingValue.languageCode === arrVal.languageCode)))
+                    .toBeTruthy();
+            });
+
+        it("should exists only for data with localized values set", () =>
+        {
+            sut.generateContactinformationLocalizedTexts();
+
+            expect(sut.phoneCallChargeInfos.length).toEqual(existingValues.length);
+            expect(sut.phoneCallChargeInfos[0].localizedValue).toEqual(existingValue.localizedValue);
+            expect(sut.phoneCallChargeInfos[0].languageCode).toEqual(existingValue.languageCode);
         });
 
     });
@@ -795,6 +842,7 @@ describe("Organization", () =>
                 null,
                 null,
                 null,
+                null,
                 streetAddress,
                 existingValues,
                 false,
@@ -813,6 +861,7 @@ describe("Organization", () =>
                 null,
                 null,
                 null,
+            null,
                 null,
                 streetAddress,
                 existingValues,

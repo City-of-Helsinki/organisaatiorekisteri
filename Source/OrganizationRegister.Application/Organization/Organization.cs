@@ -129,6 +129,20 @@ namespace OrganizationRegister.Application.Organization
             get { return phoneNumber == null ? null : phoneNumber.ToString(); }
         }
 
+        public string PhoneCallChargeType { get; private set; }
+
+        public IEnumerable<LocalizedText> PhoneCallChargeInfos
+        {
+            get { return localizedTextsContainer.GetTexts(LocalizedProperty.CallChargeInfo); }
+            set { localizedTextsContainer.Set(LocalizedProperty.CallChargeInfo, new LocalizedSingleTexts(value)); }
+        }
+
+        public string GetPhoneCallChargeInfo(string languageCode)
+        {
+            LocalizedSingleTexts infos = (LocalizedSingleTexts)localizedTextsContainer.GetTexts(LocalizedProperty.CallChargeInfo);
+            return infos.GetValue(languageCode);
+        }
+
         public string EmailAddress
         {
             get { return emailAddress == null ? null : emailAddress.ToString(); }
@@ -142,7 +156,8 @@ namespace OrganizationRegister.Application.Organization
             }
         }
 
-        public string PhoneCallFee { get; private set; }
+        //public string PhoneCallFee { get; private set; }
+
 
         public StreetAddress VisitingAddress { get; private set; }
 
@@ -202,14 +217,22 @@ namespace OrganizationRegister.Application.Organization
             ValidateType();
         }
 
-        public void SetCallInformation(string newPhoneNumber, string newPhoneCallFee)
+        public void SetCallInformation(string newPhoneNumber, string newCallChargeType, IEnumerable<LocalizedText> newCallChargeinfos)
         {
             phoneNumber = null;
-            PhoneCallFee = null;
+            //PhoneCallFee = null;
+
+            PhoneCallChargeType = null;
+
             if (!string.IsNullOrWhiteSpace(newPhoneNumber))
             {
+
+               
                 phoneNumber = Affecto.Identifiers.Finnish.PhoneNumber.Create(newPhoneNumber);
-                PhoneCallFee = newPhoneCallFee;
+                PhoneCallChargeType = newCallChargeType;
+                PhoneCallChargeInfos = newCallChargeinfos;
+
+                //PhoneCallFee = newPhoneCallFee;
             }
         }
 

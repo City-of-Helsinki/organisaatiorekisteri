@@ -11,10 +11,25 @@
         <label>Vaihteen puhelinnumero</label>
         {{ controller.model.phoneNumber }}
     </div>
-    <div class="col-xs-8">
-        <label>Puhelun hintatiedot</label>
-        <span>{{ controller.model.phoneCallFee }}</span>
+    
+</div>
+
+<div class="row">
+
+    <div class="col-xs-6">
+        <label>Puhelun hintatieto</label>
+        <span>{{ controller.model.phoneCallChargeType }}</span>
     </div>
+
+    <div class="col-xs-6">
+        <label>Puhelun hintatietodon selite</label>
+        <div data-ng-repeat="info in controller.model.phoneCallChargeInfos">
+            <p>
+                {{info.localizedValue}}
+            </p>
+        </div>
+    </div>
+
 </div>
 
 <div class="row">

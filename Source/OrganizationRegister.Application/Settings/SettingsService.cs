@@ -25,5 +25,10 @@ namespace OrganizationRegister.Application.Settings
         {
             return repository.GetWebPageTypes();
         }
+
+        public IEnumerable<string> GetCallChargeTypes()
+        {
+            return repository.GetCallChargeTypes();
+        }
     }
 }

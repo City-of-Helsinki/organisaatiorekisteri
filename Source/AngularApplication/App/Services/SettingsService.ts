@@ -36,6 +36,16 @@ module OrganizationRegister
                     return response.data;
                 });
         }
+
+
+        public getCallChargeTypes(): angular.IPromise<Array<string>>
+        {
+            return this.$http.get(this.apiBaseUrl + "organizationregister/callchargetypes", { cache: true })
+                .then((response: angular.IHttpPromiseCallbackArg<any>): Array<string> =>
+                {
+                    return response.data;
+                });
+        }
     }
 }
  

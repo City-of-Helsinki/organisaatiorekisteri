@@ -73,7 +73,7 @@ namespace OrganizationRegister.Api.Organization
             {
                 throw new ArgumentNullException("information");
             }
-            organizationService.SetOrganizationContactInformation(organizationId, information.PhoneNumber, information.PhoneCallFee,
+            organizationService.SetOrganizationContactInformation(organizationId, information.PhoneNumber, information.PhoneCallChargeType, information.PhoneCallChargeInfos,
                 information.EmailAddress, information.WebPages, information.HomepageUrls);
             return Ok();
         }

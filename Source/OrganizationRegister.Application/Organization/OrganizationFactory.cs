@@ -7,7 +7,7 @@ namespace OrganizationRegister.Application.Organization
     public class OrganizationFactory
     {
         public static IOrganization CreateOrganization(Guid id, long numericId, string businessId, string oid, string type, IEnumerable<LocalizedText> names, 
-            IEnumerable<LocalizedText> descriptions, int? municipalityCode, DateTime? validFrom, DateTime? validTo, string phoneNumber, string phoneCallFee, string emailAddress, 
+            IEnumerable<LocalizedText> descriptions, int? municipalityCode, DateTime? validFrom, DateTime? validTo, string phoneNumber, string callChargeType, IEnumerable<LocalizedText> phoneCallChargeInfos, string emailAddress, 
             IEnumerable<WebPage> webPages, IEnumerable<LocalizedText> visitingStreetAddresses, string visitingAddressPostalCode, IEnumerable<LocalizedText> visitingAddressLocalities,
             IEnumerable<LocalizedText> visitingAddressQualifier, IEnumerable<LocalizedText> postalStreetAddresses, string postalStreetAddressPostalCode, 
             IEnumerable<LocalizedText> postalStreetAddressLocalities, string postalAddressPostOfficeBox, string postalPostOfficeBoxAddressPostalCode,
@@ -20,7 +20,7 @@ namespace OrganizationRegister.Application.Organization
             organization.EmailAddress = emailAddress;
             organization.WebPages = webPages;
             organization.VisitingAddressQualifiers = visitingAddressQualifier;
-            organization.SetCallInformation(phoneNumber, phoneCallFee);
+            organization.SetCallInformation(phoneNumber, callChargeType, phoneCallChargeInfos);
             organization.SetVisitingAddress(visitingStreetAddresses, visitingAddressPostalCode, visitingAddressLocalities);
             organization.SetPostalAddress(useVisitingAddressAsPostalAddress, postalStreetAddresses, postalStreetAddressPostalCode, postalStreetAddressLocalities,
                 postalAddressPostOfficeBox, postalPostOfficeBoxAddressPostalCode, postalPostOfficeBoxAddressLocalities);

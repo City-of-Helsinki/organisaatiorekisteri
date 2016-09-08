@@ -82,12 +82,17 @@
     <Compile Include="Migrations\201606270753118_AddOrganizationHomepageUrl.Designer.cs">
       <DependentUpon>201606270753118_AddOrganizationHomepageUrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608260816179_AddCallChargeType.cs" />
+    <Compile Include="Migrations\201608260816179_AddCallChargeType.Designer.cs">
+      <DependentUpon>201608260816179_AddCallChargeType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\OrganizationRegisterDbMigration.cs" />
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\AddressLanguageSpecification.cs" />
     <Compile Include="Model\AvailableDataLanguage.cs" />
     <Compile Include="Model\Configuration\AddressConfiguration.cs" />
+    <Compile Include="Model\Configuration\PhoneNumberLanguageSpecificationConfiguration.cs" />
     <Compile Include="Model\Configuration\AddressLanguageSpecificationConfiguration.cs" />
     <Compile Include="Model\Configuration\AvailableDataLanguageConfiguration.cs" />
     <Compile Include="Model\Configuration\EmailAddressConfiguration.cs" />
@@ -96,28 +101,33 @@
     <Compile Include="Model\Configuration\PhoneNumberConfiguration.cs" />
     <Compile Include="Model\Configuration\OrganizationTypeConfiguration.cs" />
     <Compile Include="Model\Configuration\WebPageConfiguration.cs" />
+    <Compile Include="Model\Configuration\CallChargeTypeConfiguration.cs" />
     <Compile Include="Model\Configuration\WebPageTypeConfiguration.cs" />
     <Compile Include="Model\EmailAddress.cs" />
     <Compile Include="Model\ILanguageReference.cs" />
     <Compile Include="Model\Language.cs" />
     <Compile Include="Model\Organization.cs" />
+    <Compile Include="Model\PhoneNumberLanguageSpecification.cs" />
     <Compile Include="Model\OrganizationLanguageSpecification.cs" />
     <Compile Include="Model\PhoneNumber.cs" />
     <Compile Include="Model\OrganizationType.cs" />
     <Compile Include="Model\WebPage.cs" />
     <Compile Include="Model\Configuration\OrganizationConfiguration.cs" />
+    <Compile Include="Model\CallChargeType.cs" />
     <Compile Include="Model\WebPageType.cs" />
     <Compile Include="OrganizationRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Querying\ActiveMainOrganizationsQuery.cs" />
     <Compile Include="Querying\ActiveOrganizationsQuery.cs" />
     <Compile Include="Querying\LanguageQuery.cs" />
+    <Compile Include="Querying\LanguageSpecificPhoneNumberDataQuery.cs" />
     <Compile Include="Querying\LanguageSpecificAddressDataQuery.cs" />
     <Compile Include="Querying\OrganizationTypeQuery.cs" />
     <Compile Include="Querying\PostalPostOfficeBoxAddressQuery.cs" />
     <Compile Include="Querying\PostalStreetAddressQuery.cs" />
     <Compile Include="Querying\OrganizationQuery.cs" />
     <Compile Include="Querying\SubOrganizationQuery.cs" />
+    <Compile Include="Querying\CallChargeTypeQuery.cs" />
     <Compile Include="Querying\WebPageTypeQuery.cs" />
     <Compile Include="SettingsRepository.cs" />
     <Compile Include="StoreContext.cs" />
@@ -147,6 +157,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606270753118_AddOrganizationHomepageUrl.resx">
       <DependentUpon>201606270753118_AddOrganizationHomepageUrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608260816179_AddCallChargeType.resx">
+      <DependentUpon>201608260816179_AddCallChargeType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

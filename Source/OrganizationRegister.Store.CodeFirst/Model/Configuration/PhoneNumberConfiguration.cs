@@ -9,7 +9,9 @@ namespace OrganizationRegister.Store.CodeFirst.Model.Configuration
             HasKey(phoneNumber => phoneNumber.Id);
 
             Property(phoneNumber => phoneNumber.Number).IsRequired();
-            Property(phoneNumber => phoneNumber.PhoneCallFee);
+            //Property(phoneNumber => phoneNumber.PhoneCallFee);
+
+            HasMany(phoneNumber => phoneNumber.LanguageSpecifications);
         }
     }
 }

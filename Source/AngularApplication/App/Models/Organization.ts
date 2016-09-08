@@ -38,7 +38,8 @@ module OrganizationRegister
             public validFromDate?: Date,
             public validToDate?: Date,
             public phoneNumber?: string,
-            public phoneCallFee?: string,
+            public phoneCallChargeType?: string,
+            public phoneCallChargeInfos?: Array<LocalizedText>,
             public emailAddress?: string,
             public webPages?: Array<WebPage>,
             public visitingAddress?: StreetAddress,
@@ -52,7 +53,7 @@ module OrganizationRegister
             this.initializeLocalizedNames(names);
             this.initializeLocalizedDescriptions(descriptions);
             this.initializeLocalizedHomepageUrls(homepageUrls);
-
+            this.initializeLocalizedCallChargeInfos(phoneCallChargeInfos);
             this.setValidityTexts();
             this.initializeVisitingAddress(visitingAddress, visitingAddressQualifiers);
             this.initializePostalAddress(postalStreetAddress, postalPostOfficeBoxAddress);
@@ -60,6 +61,39 @@ module OrganizationRegister
             {
                 this.webPages = new Array<WebPage>();
             }
+        }
+
+
+        private initializeLocalizedCallChargeInfos(infos?: Array<LocalizedText>): void
+        {
+            this.phoneCallChargeInfos = this.setLocalizedTexts(infos, [""]);
+
+            this.phoneCallChargeInfos.forEach((info) =>
+            {
+               
+                info.localizedTitle = this.getPhoneCallChargeInfoLocalizedTitle(info.languageCode, info.localizedTitle);
+            });
+        }
+
+        private getPhoneCallChargeInfoLocalizedTitle(languageCode: string, curTitle: string): string
+        {
+
+            // TODO: get these from api
+            let title: string = "";
+            switch (languageCode)
+            {
+                case "fi":
+                    title = "esim. 1 €/puhelu + 0,90€/min + pvm/mpm";
+                    break;
+                case "sv":
+                    title = "esim. 1 €/telefonsamtal + 0,90€/min + msa/lna";
+                    break;
+                case "en":
+                    title = "esim. 1 €/call + 0,90€/min + mobile call charge / local network charge";
+                    break;
+            }
+
+            return (curTitle + ": " + title);
         }
 
         private initializeLocalizedNames(names?: Array<LocalizedText>): void
@@ -257,7 +291,7 @@ module OrganizationRegister
             this.initializeLocalizedNames(this.names);
             this.initializeLocalizedDescriptions(this.descriptions);
             this.initializeLocalizedHomepageUrls(this.homepageUrls);
-
+            this.initializeLocalizedCallChargeInfos(this.phoneCallChargeInfos);
             this.initializeVisitingAddress(this.visitingAddress,this.visitingAddressQualifiers);
         }
 
@@ -275,19 +309,21 @@ module OrganizationRegister
                         : ""));
             });
 
+          
+
             this.setValidityTexts();
         }
 
         public generateContactinformationLocalizedTexts(): void
         {
             var urls = this.getLocalizedTextsWithValues(this.homepageUrls);
-
             urls.forEach((url,i) =>
             {
                 urls[i].localizedValue = url.localizedValue.indexOf("http") === 0 ? url.localizedValue : "http://" + url.localizedValue;   
             });
-
             this.homepageUrls = urls;
+
+            this.phoneCallChargeInfos = this.getLocalizedTextsWithValues(this.phoneCallChargeInfos);
         }
 
        
@@ -327,9 +363,15 @@ module OrganizationRegister
             return this.phoneNumber != null && this.phoneNumber !== "";
         }
 
-        public hasPhoneCallFee(): boolean
+        public hasPhoneCallChargeType(): boolean
         {
-            return this.phoneCallFee != null && this.phoneCallFee !== "";
+            return this.phoneCallChargeType != null && this.phoneCallChargeType !== "";
+        }
+
+        public hasPhoneCallChargeInfos(): boolean
+        {
+            return this.phoneCallChargeInfos
+                .some((arrVal: LocalizedText) => (arrVal.localizedValue != null && arrVal.localizedValue !== ""));
         }
 
         public hasEmailAddress(): boolean
@@ -377,7 +419,8 @@ module OrganizationRegister
                 .hasPhoneNumber() ||
                 this.hasEmailAddress() ||
                 this.webPages.length > 0 ||
-                this.hasPhoneCallFee() ||
+                this.hasPhoneCallChargeType() ||
+                this.hasPhoneCallChargeInfos() ||
                 this.hasHomepageUrls();
         }
 
@@ -500,5 +543,7 @@ module OrganizationRegister
         {
             return this.validFromDate == null || this.validToDate == null || this.validFromDate <= this.validToDate;
         }
+
+       
     }
 }
