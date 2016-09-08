@@ -34,6 +34,12 @@ namespace OrganizationRegister.Store.CodeFirst
             return context.WebPageTypes.Select(t => t.Type).ToList();
         }
 
+        public IReadOnlyCollection<string> GetCallChargeTypes()
+        {
+            return context.CallChargeTypes.OrderBy(t => t.OrderNumber).Select(t => t.Type).ToList();
+
+        }
+
         public IReadOnlyCollection<AvailableDataLanguage> GetDataLanguages()
         {
             return context.DataLanguages.ToList();

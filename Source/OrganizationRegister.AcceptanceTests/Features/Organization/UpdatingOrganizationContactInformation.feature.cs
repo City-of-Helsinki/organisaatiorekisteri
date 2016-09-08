@@ -89,7 +89,8 @@ this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Phone number",
-                        "Phone call fee",
+                        "Phone call charge type",
+                        "Phone call charge info",
                         "Email address",
                         "web site name",
                         "web address",
@@ -101,7 +102,8 @@ this.FeatureBackground();
                         "homepage in swedish"});
             table1.AddRow(new string[] {
                         "0205 777 450",
-                        "Local call cost",
+                        "Muu",
+                        "Charge Info",
                         "info.fi@affecto.com",
                         "Finnish site",
                         "www.affecto.fi",
@@ -116,7 +118,8 @@ this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "Phone number",
-                        "Phone call fee",
+                        "Phone call charge type",
+                        "Phone call charge info",
                         "Email address",
                         "web site name",
                         "web address",
@@ -128,7 +131,8 @@ this.FeatureBackground();
                         "homepage in swedish"});
             table2.AddRow(new string[] {
                         "0205 777 450",
-                        "Local call cost",
+                        "Muu",
+                        "Charge Info",
                         "info.fi@affecto.com",
                         "Finnish site",
                         "www.affecto.fi",
@@ -157,7 +161,8 @@ this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "Phone number",
-                        "Phone call fee",
+                        "Phone call charge type",
+                        "Phone call charge info",
                         "Email address",
                         "web site name",
                         "web address",
@@ -169,7 +174,8 @@ this.FeatureBackground();
                         "homepage in swedish"});
             table3.AddRow(new string[] {
                         "0100100",
-                        "Local call",
+                        "Muu",
+                        "Charge Info",
                         "info@affecto.com",
                         "Finland",
                         "www.affecto.fi",
@@ -184,7 +190,8 @@ this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Phone number",
-                        "Phone call fee",
+                        "Phone call charge type",
+                        "Phone call charge info",
                         "Email address",
                         "web site name",
                         "web address",
@@ -196,7 +203,8 @@ this.FeatureBackground();
                         "homepage in swedish"});
             table4.AddRow(new string[] {
                         "0205 777 450",
-                        "Local call cost",
+                        "Muu",
+                        "Charge Info",
                         "info.fi@affecto.com",
                         "Finnish site",
                         "www.affecto.fi",
@@ -211,7 +219,8 @@ this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "Phone number",
-                        "Phone call fee",
+                        "Phone call charge type",
+                        "Phone call charge info",
                         "Email address",
                         "web site name",
                         "web address",
@@ -223,7 +232,8 @@ this.FeatureBackground();
                         "homepage in swedish"});
             table5.AddRow(new string[] {
                         "0205 777 450",
-                        "Local call cost",
+                        "Muu",
+                        "Charge Info",
                         "info.fi@affecto.com",
                         "Finnish site",
                         "www.affecto.fi",
@@ -252,7 +262,8 @@ this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                         "Phone number",
-                        "Phone call fee",
+                        "Phone call charge type",
+                        "Phone call charge info",
                         "Email address",
                         "web site name",
                         "web address",
@@ -264,7 +275,8 @@ this.FeatureBackground();
                         "homepage in swedish"});
             table6.AddRow(new string[] {
                         "0100100",
-                        "Local call",
+                        "Muu",
+                        "Charge Info",
                         "info@affecto.com",
                         "Finland",
                         "www.affecto.fi",
@@ -297,7 +309,8 @@ this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                         "Phone number",
-                        "Phone call fee",
+                        "Phone call charge type",
+                        "Phone call charge info",
                         "Email address",
                         "web site name",
                         "web address",
@@ -309,7 +322,8 @@ this.FeatureBackground();
                         "homepage in swedish"});
             table7.AddRow(new string[] {
                         "0205 777 450",
-                        "Local call cost",
+                        "Muu",
+                        "Charge Info",
                         "info.fi2affecto.com",
                         "Finnish site",
                         "www.affecto.fi",
@@ -342,7 +356,8 @@ this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                         "Phone number",
-                        "Phone call fee",
+                        "Phone call charge type",
+                        "Phone call charge info",
                         "Email address",
                         "web site name",
                         "web address",
@@ -353,8 +368,9 @@ this.FeatureBackground();
                         "homepage in finnish",
                         "homepage in swedish"});
             table8.AddRow(new string[] {
-                        "Local call cost",
-                        "Local call cost",
+                        "Muu",
+                        "Muu",
+                        "Charge Info",
                         "info.fi@affecto.com",
                         "Finnish site",
                         "www.affecto.fi",
@@ -387,7 +403,8 @@ this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                         "Phone number",
-                        "Phone call fee",
+                        "Phone call charge type",
+                        "Phone call charge info",
                         "Email address",
                         "web site name",
                         "web address",
@@ -399,7 +416,8 @@ this.FeatureBackground();
                         "homepage in swedish"});
             table9.AddRow(new string[] {
                         "0205 777 450",
-                        "Local call cost",
+                        "Muu",
+                        "Charge Info",
                         "info.fi@affecto.com",
                         "Finnish site",
                         "www.affecto.fi",
@@ -432,7 +450,8 @@ this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                         "Phone number",
-                        "Phone call fee",
+                        "Phone call charge type",
+                        "Phone call charge info",
                         "Email address",
                         "web site name",
                         "web address",
@@ -444,7 +463,8 @@ this.FeatureBackground();
                         "homepage in swedish"});
             table10.AddRow(new string[] {
                         "0205 777 450",
-                        "Local call cost",
+                        "Muu",
+                        "Charge Info",
                         "info.fi@affecto.com",
                         "Finnish site",
                         "www.affecto.fi",

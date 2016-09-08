@@ -8,6 +8,8 @@ module OrganizationRegister
 
         public organizationTypes: Array<string>;
         public webPageTypes: Array<string>;
+        public callChargeTypes: Array<string>;
+
         public validBusinessId: boolean;
         public validValidity: boolean;
         public validPhoneNumber: boolean;
@@ -187,7 +189,7 @@ module OrganizationRegister
             this.setFormFieldValidity(this.basicInformationForm, "businessId", true);
             this.setValidityValidity(true);
             this.setEmailAddressValidity(true);
-            this.setPhonenNumberValidity(true);
+            this.setPhoneNumberValidity(true);
             this.setVisitingAddressPostalCodeValidity(true);
             this.setPostalStreetAddressPostalCodeValidity(true);
             this.setPostalPostOfficeBoxAddressPostalCodeValidity(true);
@@ -520,11 +522,11 @@ module OrganizationRegister
             if (this.model.hasPhoneNumber())
             {
                 this.validationService.validatePhoneNumber(this.model.phoneNumber)
-                    .then(this.setPhonenNumberValidity);
+                    .then(this.setPhoneNumberValidity);
             }
             else
             {
-                this.setPhonenNumberValidity(true);
+                this.setPhoneNumberValidity(true);
             }
         }
 
@@ -791,7 +793,7 @@ module OrganizationRegister
             this.setFormFieldValidity(this.basicInformationForm, "businessId", validationResult.isValid);
         }
 
-        private setPhonenNumberValidity = (isValid: boolean): void =>
+        private setPhoneNumberValidity = (isValid: boolean): void =>
         {
             this.validPhoneNumber = isValid;
             this.setFormFieldValidity(this.contactInformationForm, "phoneNumber", isValid);
@@ -857,10 +859,10 @@ module OrganizationRegister
         private fetchTypeLists(): angular.IPromise<void>
         {
             this.busyIndicationService.showBusyIndicator("Haetaan valintalistojen sisältöä...");
-            return this.$q.all([this.settingsService.getOrganizationTypes(), this.settingsService.getWebPageTypes()])
+            return this.$q.all([this.settingsService.getOrganizationTypes(), this.settingsService.getWebPageTypes(), this.settingsService.getCallChargeTypes()])
                 .then((result: Array<any>) =>
                 {
-                    [this.organizationTypes, this.webPageTypes] = result;
+                    [this.organizationTypes, this.webPageTypes, this.callChargeTypes] = result;
                     this.busyIndicationService.hideBusyIndicator();
                 });
         }
@@ -869,7 +871,7 @@ module OrganizationRegister
         {
             this.busyIndicationService.showBusyIndicator("Haetaan organisaation tietoja...");
             return this.$q.all([this.organizationService.getOrganization($routeParams.organizationId), this.settingsService.getOrganizationTypes(),
-                this.settingsService.getWebPageTypes()])
+                this.settingsService.getWebPageTypes(), this.settingsService.getCallChargeTypes()])
                 .then((result: Array<any>) =>
                 {
                     var organization: Organization = result[0];
@@ -882,6 +884,7 @@ module OrganizationRegister
                     this.toBeAddedPostalAddressType = this.model.postalAddressTypes.available.firstOrDefault();
                     this.organizationTypes = result[1];
                     this.webPageTypes = result[2];
+                    this.callChargeTypes = result[3];
                     this.busyIndicationService.hideBusyIndicator();
                 });            
         }
@@ -891,7 +894,7 @@ module OrganizationRegister
             this.busyIndicationService.showBusyIndicator("Haetaan organisaation esitietoja...");
             this.parentOrganizationId = $routeParams.parentOrganizationId;
             return this.$q.all([this.organizationService.getOrganization(this.parentOrganizationId), this.settingsService.getOrganizationTypes(),
-                this.settingsService.getWebPageTypes()])
+                this.settingsService.getWebPageTypes(), this.settingsService.getCallChargeTypes()])
                 .then((result: Array<any>) =>
                 {
                     var organization: Organization = result[0];
@@ -904,6 +907,7 @@ module OrganizationRegister
                     this.toBeAddedPostalAddressType = this.model.postalAddressTypes.available.firstOrDefault();
                     this.organizationTypes = result[1];
                     this.webPageTypes = result[2];
+                    this.callChargeTypes = result[3];
                     this.busyIndicationService.hideBusyIndicator();
                 });            
         }
@@ -938,7 +942,8 @@ module OrganizationRegister
             }
             this.model.businessId = parent.businessId;
             this.model.phoneNumber = parent.phoneNumber;
-            this.model.phoneCallFee = parent.phoneCallFee;
+            this.model.phoneCallChargeType = parent.phoneCallChargeType;
+            this.model.phoneCallChargeInfos = parent.phoneCallChargeInfos;
             
         }
 

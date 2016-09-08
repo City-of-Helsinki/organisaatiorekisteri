@@ -6,5 +6,6 @@ namespace OrganizationRegister.Application.Settings
     {
         IEnumerable<string> GetOrganizationTypes();
         IEnumerable<string> GetWebPageTypes();
+        IEnumerable<string> GetCallChargeTypes();
     }
 }

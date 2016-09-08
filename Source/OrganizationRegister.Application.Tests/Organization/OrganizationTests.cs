@@ -180,11 +180,11 @@ namespace OrganizationRegister.Application.Tests.Organization
         }
 
         [TestMethod]
-        public void PhoneCallFeeIsNullAfterInitialization()
+        public void PhoneCallCahrgegTypeIsNullAfterInitialization()
         {
             sut = CreateSut();
 
-            Assert.IsNull(sut.PhoneCallFee);
+            Assert.IsNull(sut.PhoneCallChargeType);
         }
 
         [TestMethod]
@@ -224,10 +224,12 @@ namespace OrganizationRegister.Application.Tests.Organization
         {
             sut = CreateSut();
 
-            sut.SetCallInformation(null, "local cost");
+            var callChargeInfos = new LocalizedSingleTexts(new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "info") });
+
+            sut.SetCallInformation(null, "Muu", callChargeInfos);
 
             Assert.IsNull(sut.PhoneNumber);
-            Assert.IsNull(sut.PhoneCallFee);
+            Assert.IsNull(sut.PhoneCallChargeType);
         }
 
         [TestMethod]
@@ -235,10 +237,12 @@ namespace OrganizationRegister.Application.Tests.Organization
         {
             sut = CreateSut();
 
-            sut.SetCallInformation(string.Empty, "local cost");
+            var callChargeInfos = new LocalizedSingleTexts(new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "info") });
+
+            sut.SetCallInformation(string.Empty, "Muu", callChargeInfos);
 
             Assert.IsNull(sut.PhoneNumber);
-            Assert.IsNull(sut.PhoneCallFee);
+            Assert.IsNull(sut.PhoneCallChargeType);
         }
 
         [TestMethod]

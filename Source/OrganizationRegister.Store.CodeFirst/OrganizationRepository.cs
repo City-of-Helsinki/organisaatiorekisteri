@@ -97,19 +97,24 @@ namespace OrganizationRegister.Store.CodeFirst
             Guid? visitingAddressId = (dbOrganization.VisitingAddress != null) ? dbOrganization.VisitingAddress.Id : (Guid?) null;
 
             string phoneNumber = null;
-            string callChargeInfo = null;
+            string callChargeInfoType = null;
+            Guid? phoneNumberId = null;
+
+            ICollection<PhoneNumberLanguageSpecification> languageSpecifiPhoneNumberData = null;
 
             if (dbOrganization.PhoneNumber != null)
             {
+                phoneNumberId = dbOrganization.PhoneNumber.Id;
                 phoneNumber = dbOrganization.PhoneNumber.Number;
-                callChargeInfo = dbOrganization.PhoneNumber.PhoneCallFee;
+                callChargeInfoType = dbOrganization.PhoneNumber.ChargeType.Type;
+                languageSpecifiPhoneNumberData = dbOrganization.PhoneNumber.LanguageSpecifications;
             }
 
             string emailAddress = (dbOrganization.EmailAddress != null) ? dbOrganization.EmailAddress.Email : null;
 
             return OrganizationFactory.CreateOrganization(id, dbOrganization.NumericId, dbOrganization.BusinessId, dbOrganization.Oid, dbOrganization.Type.Name,
                 dbOrganization.GetNames(), dbOrganization.GetDescriptions(), dbOrganization.MunicipalityCode, dbOrganization.ValidFrom, dbOrganization.ValidTo,
-                phoneNumber, callChargeInfo, emailAddress, CreateWebPages(webPages),
+                phoneNumber, callChargeInfoType, CreatePhoneCallChargeInfos(phoneNumberId, languageSpecifiPhoneNumberData), emailAddress, CreateWebPages(webPages),
                 CreateStreetAddresses(visitingAddressId, languageSpecificAddressData), dbOrganization.GetStreetAddressPostalCode(),
                 CreateLocalities(visitingAddressId, languageSpecificAddressData), CreateAddressQualifiers(visitingAddressId, languageSpecificAddressData),
                 CreatePostalStreetAddresses(postalAddresses), dbOrganization.GetPostalStreetAddressPostalCode(),
@@ -212,6 +217,18 @@ namespace OrganizationRegister.Store.CodeFirst
         {
             return webPages == null
                 ? Enumerable.Empty<WebPage>() : webPages.Select(address => new WebPage(address.Name, address.Url, context.GetWebPageType(address.TypeId).Type));
+        }
+
+        private IEnumerable<LocalizedText> CreatePhoneCallChargeInfos(Guid? phoneNumberId, ICollection<PhoneNumberLanguageSpecification> callChargeInfos)
+        {
+
+            if (phoneNumberId.HasValue)
+            {
+                var query = new LanguageSpecificPhoneNumberDataQuery(callChargeInfos);
+                return query.Execute(phoneNumberId.Value).Select(info => new LocalizedText(info.Language.Language.Code, info.CallChargeInfo));
+            }
+            return Enumerable.Empty<LocalizedText>();
+        
         }
 
         private static IEnumerable<LocalizedText> CreateStreetAddresses(Guid? addressId, ICollection<AddressLanguageSpecification> languageSpecificAddressData)
