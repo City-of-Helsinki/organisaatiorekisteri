@@ -5,19 +5,19 @@ using OrganizationRegister.Store.CodeFirst.Model;
 
 namespace OrganizationRegister.Store.CodeFirst.Querying
 {
-    internal class LanguageSpecificAddressDataQuery
+    internal class LanguageSpecificPhoneNumberDataQuery
     {
-        private readonly ICollection<AddressLanguageSpecification> languageSpecifications;
+        private readonly ICollection<PhoneNumberLanguageSpecification> languageSpecifications;
 
-        public LanguageSpecificAddressDataQuery(ICollection<AddressLanguageSpecification> languageSpecifications)
+        public LanguageSpecificPhoneNumberDataQuery(ICollection<PhoneNumberLanguageSpecification> languageSpecifications)
         {
             this.languageSpecifications = languageSpecifications;
         }
 
-        public IEnumerable<AddressLanguageSpecification> Execute(Guid addressId)
+        public IEnumerable<PhoneNumberLanguageSpecification> Execute(Guid phoneNumberId)
         {
-            return languageSpecifications == null ? Enumerable.Empty<AddressLanguageSpecification>() :
-                languageSpecifications.Where(address => address.AddressId.Equals(addressId));
+            return languageSpecifications == null ? Enumerable.Empty<PhoneNumberLanguageSpecification>() :
+                languageSpecifications.Where(number => number.PhoneNumberId.Equals(phoneNumberId));
         }
     }
 }

@@ -44,6 +44,8 @@ namespace OrganizationRegister.Store.CodeFirst
         public IDbSet<EmailAddress> EmailAddresses { get; set; }
         public IDbSet<WebPage> WebPages { get; set; }
         public IDbSet<AvailableDataLanguage> DataLanguages { get; set; }
+        public IDbSet<CallChargeType> CallChargeTypes { get; set; }
+
 
         public OrganizationType GetOrganizationType(string type)
         {
@@ -61,6 +63,19 @@ namespace OrganizationRegister.Store.CodeFirst
         {
             var query = new WebPageTypeQuery(WebPageTypes);
             return query.Execute(guid);
+        }
+
+
+        public CallChargeType GetCallChargeType(Guid guid)
+        {
+            var query = new CallChargeTypeQuery(CallChargeTypes);
+            return query.Execute(guid);
+        }
+
+        public CallChargeType GetCallChargeType(string type)
+        {
+            var query = new CallChargeTypeQuery(CallChargeTypes);
+            return query.Execute(type);
         }
 
         public new void SaveChanges()
@@ -92,10 +107,12 @@ namespace OrganizationRegister.Store.CodeFirst
             modelBuilder.Configurations.Add(new OrganizationConfiguration());
             modelBuilder.Configurations.Add(new OrganizationLanguageSpecificationConfiguration());
             modelBuilder.Configurations.Add(new PhoneNumberConfiguration());
+            modelBuilder.Configurations.Add(new PhoneNumberLanguageSpecificationConfiguration());
             modelBuilder.Configurations.Add(new OrganizationTypeConfiguration());
             modelBuilder.Configurations.Add(new WebPageTypeConfiguration());
             modelBuilder.Configurations.Add(new WebPageConfiguration());
             modelBuilder.Configurations.Add(new AvailableDataLanguageConfiguration());
+            modelBuilder.Configurations.Add(new CallChargeTypeConfiguration());
         }
 
         private void Configure()

@@ -60,5 +60,13 @@ namespace OrganizationRegister.Api.Settings
 
             return Ok(mapper.Map(roles));
         }
+
+        [HttpGet]
+        [GetRoute("callchargetypes")]
+        public IHttpActionResult GetPhoneCallCharggeTypes()
+        {
+            IEnumerable<string> types = settingsService.Value.GetCallChargeTypes();
+            return Ok(types);
+        }
     }
 }

@@ -29,7 +29,7 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
 
         private void SetAllOrganizationData(Guid organizationId)
         {
-            OrganizationService.SetOrganizationContactInformation(organizationId, "0100100", "ppm", "me@kaupunki.fi",
+            OrganizationService.SetOrganizationContactInformation(organizationId, "0100100", "Muu", new List<LocalizedText> { new LocalizedText(LanguageCode, "maksu info") }, "me@kaupunki.fi",
                 new List<WebPage> { new WebPage("Index", "http://www.home.fi", "Kotisivu"), new WebPage("About", "http://www.home.fi/about", "Kotisivu")},
                 new List<LocalizedText> { new LocalizedText(LanguageCode, "url.fi") });
             OrganizationService.SetOrganizationVisitingAddress(organizationId, new List<LocalizedText> { new LocalizedText(LanguageCode, "Katu 1 A 12") }, "13245",

@@ -161,12 +161,11 @@ namespace OrganizationRegister.Api.Tests.Organization
         [TestMethod]
         public void PhoneCallFeeIsMapped()
         {
-            const string phoneCallFee = "ppm";
-            source.PhoneCallFee.Returns(phoneCallFee);
+            const string phoneCallChargeType = "Muu";
+            source.PhoneCallChargeType.Returns(phoneCallChargeType);
 
             destination = sut.Map(source);
-
-            Assert.AreEqual(phoneCallFee, destination.PhoneCallFee);
+            Assert.AreEqual(phoneCallChargeType, destination.PhoneCallChargeType);
         }
 
         [TestMethod]

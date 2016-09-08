@@ -260,7 +260,7 @@ namespace OrganizationRegister.Api.Tests.Organization
             Guid organizationId = Guid.NewGuid();
             const string emailAddress = "me@gmail.com";
             const string phoneNumber = "112";
-            const string phoneCallFee = "local call";
+            const string phoneCallChargeType = "Muu";
             const string webPageUrl1 = "www.google.com";
             const string webPageUrl2 = "www.gmail.com";
             const string webPageName1 = "Google";
@@ -268,19 +268,21 @@ namespace OrganizationRegister.Api.Tests.Organization
             const string webPageType1 = "type1";
             const string webPageType2 = "type2";
             List<LocalizedText> homepageUrls = new List<LocalizedText> { new LocalizedText("fi", "url.fi") };
+            List<LocalizedText> callChargeInfos = new List<LocalizedText> { new LocalizedText("fi", "info") };
 
             var information = new ContactInformation
             {
                 EmailAddress = emailAddress,
                 PhoneNumber = phoneNumber,
-                PhoneCallFee = phoneCallFee,
+                PhoneCallChargeType = phoneCallChargeType,
+                PhoneCallChargeInfos = callChargeInfos,
                 WebPages = new List<WebPage> { new WebPage(webPageName1, webPageUrl1, webPageType1), new WebPage(webPageName2, webPageUrl2, webPageType2) },
                 HomepageUrls = homepageUrls
             };
 
             sut.SetOrganizationContactInformation(organizationId, information);
 
-            organizationService.Received(1).SetOrganizationContactInformation(organizationId, phoneNumber, phoneCallFee, emailAddress,
+            organizationService.Received(1).SetOrganizationContactInformation(organizationId, phoneNumber, phoneCallChargeType, callChargeInfos, emailAddress,
                 Arg.Is<IEnumerable<WebPage>>(
                     sites => sites.Count() == 2 && sites.Any(site => site.Name.Equals(webPageName1) && site.Address.Equals(webPageUrl1) && site.Type.Equals(webPageType1)) &&
                         sites.Any(site => site.Name.Equals(webPageName2) && site.Address.Equals(webPageUrl2) && site.Type.Equals(webPageType2))), homepageUrls);

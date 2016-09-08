@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using OrganizationRegister.Store.CodeFirst.Migrations;
 using OrganizationRegister.Store.CodeFirst.Model;
 
 namespace OrganizationRegister.Store.CodeFirst.Mocking
@@ -13,11 +14,26 @@ namespace OrganizationRegister.Store.CodeFirst.Mocking
             AddInitialLanguages();
             AddOrganizationTypes(new List<string> { "Kunta", "Yritys", "Valtio" });
             AddWebPageTypes(new List<string> { "Kotisivu", "Sosiaalisen median palvelu" });
+            AddCallChargeTypes(new List<string> { "Maksuton", "Paikallisverkko-, paikallispuhelu- tai matkapuhelinmaksu", "Muu" });
 
             if (initializeClassificationsAndOrganizations)
             {
                 AddOrganization(Guid.Parse("7B45E3BC-EDA9-4F6B-97BB-E9354DB660B5"), "Valtio", "Väestörekisterikeskus", "0245437-2");
             }
+        }
+
+        private void AddCallChargeTypes(List<string> callChargeTypes)
+        {
+            foreach (string type in callChargeTypes)
+            {
+                CallChargeTypes.Add(CreateCallChargeTypee(type));
+            }
+            SaveChanges();
+        }
+
+        private static CallChargeType CreateCallChargeTypee(string type)
+        {
+            return new CallChargeType { Id = Guid.NewGuid(), Type = type };
         }
 
         private void AddOrganization(Guid id, string type, string finnishName, string businessId)

@@ -71,8 +71,13 @@ namespace OrganizationRegister.AcceptanceTests.Infrastructure
             return CreateTextCollection(texts, "homepage in finnish", "homepage in swedish");
         }
 
+        public static IEnumerable<LocalizedText> CreateCallChargeInfosCollection(TableRow texts)
+        {
+            return CreateTextCollection(texts, "call charge info in finnish", "call charge info  in swedish");
+        }
 
-        
+
+
 
         private static IEnumerable<LocalizedText> CreateTextCollection(TableRow texts, string tableHeaderForFinnish, string tableHeaderForSwedish)
         {

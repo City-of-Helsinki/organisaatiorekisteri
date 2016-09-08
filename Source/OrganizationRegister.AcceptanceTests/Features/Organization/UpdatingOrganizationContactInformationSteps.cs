@@ -22,7 +22,7 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
             Try(
                 () =>
                     OrganizationService.SetOrganizationContactInformation(CurrentScenarioContext.OrganizationId, contactInfo["Phone number"],
-                        contactInfo["Phone call fee"],
+                        contactInfo["Phone call charge type"], LocalizedTextHelper.CreateCallChargeInfosCollection(contactInfo),
                         contactInfo["Email address"], CreateWebSiteCollection(contactInfo), LocalizedTextHelper.CreateHomepageUrlsCollection(contactInfo)));
         }
 
@@ -35,7 +35,7 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
             IOrganization result = OrganizationService.GetOrganization(CurrentScenarioContext.OrganizationId);
 
             Assert.AreEqual(expectedContactInfo["Phone number"], result.PhoneNumber);
-            Assert.AreEqual(expectedContactInfo["Phone call fee"], result.PhoneCallFee);
+            Assert.AreEqual(expectedContactInfo["Phone call charge type"], result.PhoneCallChargeType);
             Assert.AreEqual(expectedContactInfo["Email address"], result.EmailAddress);
 
             Assert.AreEqual(2, result.WebPages.Count());
@@ -68,7 +68,7 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
         [When(@"contact information of the organization is set as empty")]
         public void WhenOrganizationContactInformationIsSetAsEmpty()
         {
-            OrganizationService.SetOrganizationContactInformation(CurrentScenarioContext.OrganizationId, null, null, null, null, null);
+            OrganizationService.SetOrganizationContactInformation(CurrentScenarioContext.OrganizationId, null, null, null, null, null, null);
         }
 
         [Then(@"the organization has no contact information")]
@@ -77,7 +77,7 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
             IOrganization result = OrganizationService.GetOrganization(CurrentScenarioContext.OrganizationId);
 
             Assert.IsNull(result.PhoneNumber);
-            Assert.IsNull(result.PhoneCallFee);
+            Assert.IsNull(result.PhoneCallChargeType);
             Assert.IsNull(result.EmailAddress);
             Assert.IsFalse(result.WebPages.Any());
             

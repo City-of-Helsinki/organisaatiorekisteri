@@ -34,6 +34,7 @@ namespace OrganizationRegister.Store.CodeFirst.Model
         public bool Active { get; set; }
         public bool? StreetAddressAsPostalAddress { get; set; }
         public virtual ICollection<OrganizationLanguageSpecification> LanguageSpecifications { get; set; }
+      
         public virtual Organization ParentOrganization { get; set; }
         public virtual OrganizationType Type { get; set; }
         public virtual EmailAddress EmailAddress { get; set; }
@@ -47,7 +48,7 @@ namespace OrganizationRegister.Store.CodeFirst.Model
             get { return StreetAddressAsPostalAddress.HasValue && StreetAddressAsPostalAddress.Value; }
         }
 
-        internal void SetCallInformation(string phoneNumber, string phoneCallFee, IStoreContext context)
+        internal void SetCallInformation(string phoneNumber, string callChargeType, IEnumerable<LocalizedText> callChargeInfos, IStoreContext context)
         {
             if (PhoneNumber != null)
             {
@@ -57,12 +58,28 @@ namespace OrganizationRegister.Store.CodeFirst.Model
 
             if (phoneNumber != null)
             {
+                var phoneNumberLanguageSpecifications = new  Collection<PhoneNumberLanguageSpecification>();
+                
+                foreach (LocalizedText info in callChargeInfos)
+                {
+                    phoneNumberLanguageSpecifications.Add(new PhoneNumberLanguageSpecification()
+                    {
+                        Language = context.GetDataLanguage(info.LanguageCode),
+                        CallChargeInfo = info.LocalizedValue
+                    });
+                }
+
                 PhoneNumber = new PhoneNumber
                 {
                     Id = Guid.NewGuid(),
-                    PhoneCallFee = phoneCallFee,
-                    Number = phoneNumber
+                    //PhoneCallFee = phoneCallFee,
+                    Number = phoneNumber,
+                    ChargeType = context.GetCallChargeType(callChargeType),
+                    LanguageSpecifications = phoneNumberLanguageSpecifications
                 };
+
+
+                
             }
         }
 
@@ -204,7 +221,7 @@ namespace OrganizationRegister.Store.CodeFirst.Model
 
         internal void SetContactInformation(IContactInformation information, IStoreContext context)
         {
-            SetCallInformation(information.PhoneNumber, information.PhoneCallFee, context);
+            SetCallInformation(information.PhoneNumber, information.PhoneCallChargeType, information.PhoneCallChargeInfos, context);
             SetEmailAddress(information.EmailAddress, context);
             SetWebPages(information.WebPages, context);
             SetHomepageUrls(information, context);

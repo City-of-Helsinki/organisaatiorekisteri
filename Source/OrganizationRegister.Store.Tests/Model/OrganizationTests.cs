@@ -71,12 +71,13 @@ namespace OrganizationRegister.Store.Tests.Model
         [TestMethod]
         public void SettingPhoneNumberRemovesOldNumber()
         {
+            const string languageCode = "fi";
             const string previousPhoneNumber = "112";
             IDbSet<PhoneNumber> phoneNumbers = Substitute.For<IDbSet<PhoneNumber>>();
             context.PhoneNumbers.Returns(phoneNumbers);
-            sut.SetCallInformation(previousPhoneNumber, "ppm", context);
+            sut.SetCallInformation(previousPhoneNumber, "Muu", new List<LocalizedText> { new LocalizedText(languageCode, "maksu infoa") }, context);
 
-            sut.SetCallInformation("0100100", "ppm", context);
+            sut.SetCallInformation("0100100", "Muu", new List<LocalizedText> { new LocalizedText(languageCode, "maksu infoa") }, context);
 
             phoneNumbers.Received(1).Remove(Arg.Is<PhoneNumber>(phoneNumber => phoneNumber.Number.Equals(previousPhoneNumber)));
         }

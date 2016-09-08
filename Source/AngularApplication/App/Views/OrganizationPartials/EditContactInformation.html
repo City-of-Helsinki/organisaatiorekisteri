@@ -18,14 +18,38 @@
             Virheellinen puhelinnumero
         </div>
     </div>
+    <div class="col-xs-6"></div>
+  </div>
+
+<div class="row">
+   
     <div class="col-xs-6">
-        <label for="phoneCallFee">
-            Puhelun hintatiedot
-            <affecto-help-popup paragraphs='["Kerro sanallisesti, mitä puhelinnumeroon soittaminen maksaa, esimerkiksi paikallisverkkomaksu / paikallispuhelumaksu tai \"Virasto x ei peri puhelusta maksua. Operaattorisi perii paikallisverkkomaksun hinnastonsa mukaan\". Kuvaus saa olla maksimissaan 150 merkkiä pitkä."]'/>
-        </label>
-        <input type="text" id="phoneCallFee" class="form-control" maxlength="150" data-ng-model="controller.model.phoneCallFee">
+        <label for="phoneCallChargeType">Puhelun hintatiedot </label>
+        <ul>
+            <li data-ng-repeat="type in controller.callChargeTypes track by $index">
+                <label>
+                    <input type="radio" class="form-control"
+                           data-ng-model="controller.model.phoneCallChargeType"
+                           data-ng-required ="controller.model.phoneNumber"
+                           name="callChargeType" id="callChargeType"
+                           value="{{type}}"  />
+                    {{type}}
+                </label>
+            </li>
+        </ul>
     </div>
-</div>
+
+    <div class="col-xs-6">
+        <label for="phoneCallChargeInfos"> Puhelun hintatietojen selite <affecto-help-popup paragraphs='["Kerro sanallisesti, mitä puhelinnumeroon soittaminen maksaa. Kuvaus saa olla maksimissaan 150 merkkiä pitkä."]'/></label>
+        <div data-ng-repeat="info in controller.model.phoneCallChargeInfos">
+            <p>
+                <input type="text" class="form-control" data-ng-required="info.isRequired" data-ng-model="info.localizedValue"
+                       maxlength="150" ng-attr-placeholder="{{info.localizedTitle}}"/>
+            </p>
+        </div>
+    </div>
+
+ </div>
 
 <div class="row">
     <label>

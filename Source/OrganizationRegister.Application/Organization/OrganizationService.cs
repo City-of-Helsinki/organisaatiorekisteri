@@ -94,10 +94,10 @@ namespace OrganizationRegister.Application.Organization
             organizationRepository.SaveChanges();
         }
 
-        public void SetOrganizationContactInformation(Guid organizationId, string phoneNumber, string phoneCallFee, string emailAddress, IEnumerable<WebPage> webSites, IEnumerable<LocalizedText> homepageUrls)
-        {
+        public void SetOrganizationContactInformation(Guid organizationId, string phoneNumber, string callChargeType, IEnumerable<LocalizedText> callChargeInfos, string emailAddress, IEnumerable<WebPage> webSites, IEnumerable<LocalizedText> homepageUrls)
+         {
             Organization organization = GetOrganization(organizationId) as Organization;
-            organization.SetCallInformation(phoneNumber, phoneCallFee);
+            organization.SetCallInformation(phoneNumber, callChargeType, callChargeInfos);
             organization.EmailAddress = emailAddress;
             organization.WebPages = webSites;
             organization.HomepageUrls = homepageUrls;

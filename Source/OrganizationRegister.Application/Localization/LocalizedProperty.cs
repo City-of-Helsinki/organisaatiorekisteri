@@ -10,6 +10,7 @@
         UserInstruction,
         Requirement,
         Keyword,
-        HomepageUrl
+        HomepageUrl,
+        CallChargeInfo
     }
 }

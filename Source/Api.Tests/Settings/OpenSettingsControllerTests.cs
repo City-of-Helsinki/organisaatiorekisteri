@@ -76,5 +76,21 @@ namespace OrganizationRegister.Api.Tests.Settings
             Assert.AreSame(expectedRole1, result.Content.First());
             Assert.AreSame(expectedRole2, result.Content.Last());
         }
+
+
+        [TestMethod]
+        public void GetPhoneCallChargeTypes()
+        {
+            const string chargeType = "Muu";
+            settingsService.Value.GetCallChargeTypes().Returns(new List<string> { chargeType });
+
+            var result = sut.GetPhoneCallCharggeTypes() as OkNegotiatedContentResult<IEnumerable<string>>;
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Content);
+            Assert.AreEqual(chargeType, result.Content.Single());
+        }
+
     }
+
 }
