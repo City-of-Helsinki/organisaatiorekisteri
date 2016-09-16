@@ -7,10 +7,8 @@
     <authors>Affecto</authors>
     <version>$version$</version>
     <releaseNotes>
-      Organization language specific data (name, description, street addresses etc)
-      Fixed check for existing businessid
-      Renamed adminrole
-      Minor UI fixes
+      Added phone call charge type and call charge infos. 
+      Removed phone call fee.
     </releaseNotes>
   </metadata>
 </package>
