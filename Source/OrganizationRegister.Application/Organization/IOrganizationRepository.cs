@@ -9,6 +9,7 @@ namespace OrganizationRegister.Application.Organization
         void AddOrganizationAndSave(IOrganization organization);
         void AddSubOrganizationAndSave(Guid parentOrganizationId, IOrganization organization);
         IReadOnlyCollection<IHierarchicalOrganization> GetActiveOrganizationHierarchy();
+        IReadOnlyCollection<IHierarchicalOrganization> GetActiveOrganizationHierarchyForRootOrganization(Guid rootOrganizationId);
         IReadOnlyCollection<IOrganizationName> GetActiveOrganizations();
         IReadOnlyCollection<IOrganizationName> GetActiveMainOrganizations();
         IReadOnlyCollection<IOrganizationName> GetMainOrganizations();
