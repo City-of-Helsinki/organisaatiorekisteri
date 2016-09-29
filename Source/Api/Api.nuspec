@@ -7,8 +7,7 @@
     <authors>Affecto</authors>
     <version>$version$</version>
     <releaseNotes>
-      Maximum one postal address per organization.
-      Added organization validity period.
+      Added new Api method to get only the organisations under specified root organistaionId.
     </releaseNotes>
   </metadata>
 </package>
