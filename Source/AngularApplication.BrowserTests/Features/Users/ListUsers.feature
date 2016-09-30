@@ -11,7 +11,7 @@ Background:
 	And password 'Password1!' is typed
 	And password 'Password1!' is typed again
 	And organization 'Organisaatio A' is selected
-	And role 'Ylläpitäjä' is selected
+	And role 'Peruskäyttäjä' is selected
 	And the user is saved
 	
 Scenario: New user is listed when its own organization is selected

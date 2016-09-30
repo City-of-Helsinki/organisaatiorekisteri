@@ -91,7 +91,7 @@ namespace OrganizationRegister.AngularApplication.BrowserTests.Features.Users
 #line 13
  testRunner.And("organization \'Organisaatio A\' is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 14
- testRunner.And("role \'Ylläpitäjä\' is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("role \'Peruskäyttäjä\' is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 15
  testRunner.And("the user is saved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
