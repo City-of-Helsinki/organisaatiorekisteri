@@ -20,7 +20,7 @@ Scenario: Mandatory information must be filled before user can be saved
 	Then the user cannot be saved
 	When organization 'Daycare Inc.' is selected
 	Then the user cannot be saved
-	When role 'Ylläpitäjä' is selected
+	When role 'Peruskäyttäjä' is selected
 	Then the user can be saved
 
 Scenario: Email address is validated
@@ -31,7 +31,7 @@ Scenario: Email address is validated
 	And password 'LeoTheKing!' is typed
 	And password 'LeoTheKing!' is typed again
 	And organization 'Daycare Inc.' is selected
-	And role 'Ylläpitäjä' is selected
+	And role 'Peruskäyttäjä' is selected
 
 	When email address 'leo2hotmail.com' is typed
 	And focus is moved out of the email address field
@@ -51,7 +51,7 @@ Scenario: Phone number is validated
 	And password 'LeoTheKing!' is typed
 	And password 'LeoTheKing!' is typed again
 	And organization 'Daycare Inc.' is selected
-	And role 'Ylläpitäjä' is selected
+	And role 'Peruskäyttäjä' is selected
 	And email address 'leo@hotmail.com' is typed
 
 	When phone number 'I have no phone' is typed
@@ -70,7 +70,7 @@ Scenario: Password must be typed twice
 	And last name 'Johnson' is typed
 	And first name 'Leo' is typed
 	And organization 'Daycare Inc.' is selected
-	And role 'Ylläpitäjä' is selected
+	And role 'Peruskäyttäjä' is selected
 	And email address 'leo@hotmail.com' is typed
 
 	When password 'LeoTheKing!' is typed
@@ -88,7 +88,7 @@ Scenario: Password strength is validated
 	And last name 'Johnson' is typed
 	And first name 'Leo' is typed
 	And organization 'Daycare Inc.' is selected
-	And role 'Ylläpitäjä' is selected
+	And role 'Peruskäyttäjä' is selected
 	And email address 'leo@hotmail.com' is typed
 
 	When password 'leo' is typed
@@ -115,7 +115,7 @@ Scenario: Administrator User can add users
 	And password 'Password123' is typed
 	And password 'Password123' is typed again
 	And organization 'Daycare Inc.' is selected
-	And role 'Ylläpitäjä' is selected
+	And role 'Peruskäyttäjä' is selected
 	And the user is saved
 	And current user logs out 
 	And the user 'ylermi@yllapitaja.com' / 'Password123' is logged in
