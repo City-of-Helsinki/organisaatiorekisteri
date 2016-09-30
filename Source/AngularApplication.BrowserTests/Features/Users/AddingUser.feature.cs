@@ -119,7 +119,7 @@ this.FeatureBackground();
 #line 22
  testRunner.Then("the user cannot be saved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 23
- testRunner.When("role \'Ylläpitäjä\' is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("role \'Peruskäyttäjä\' is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 24
  testRunner.Then("the user can be saved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -152,7 +152,7 @@ this.FeatureBackground();
 #line 33
  testRunner.And("organization \'Daycare Inc.\' is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 34
- testRunner.And("role \'Ylläpitäjä\' is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("role \'Peruskäyttäjä\' is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 36
  testRunner.When("email address \'leo2hotmail.com\' is typed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 37
@@ -199,7 +199,7 @@ this.FeatureBackground();
 #line 53
  testRunner.And("organization \'Daycare Inc.\' is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 54
- testRunner.And("role \'Ylläpitäjä\' is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("role \'Peruskäyttäjä\' is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 55
  testRunner.And("email address \'leo@hotmail.com\' is typed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 57
@@ -244,7 +244,7 @@ this.FeatureBackground();
 #line 72
  testRunner.And("organization \'Daycare Inc.\' is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 73
- testRunner.And("role \'Ylläpitäjä\' is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("role \'Peruskäyttäjä\' is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 74
  testRunner.And("email address \'leo@hotmail.com\' is typed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 76
@@ -287,7 +287,7 @@ this.FeatureBackground();
 #line 90
  testRunner.And("organization \'Daycare Inc.\' is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 91
- testRunner.And("role \'Ylläpitäjä\' is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("role \'Peruskäyttäjä\' is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 92
  testRunner.And("email address \'leo@hotmail.com\' is typed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 94
@@ -359,7 +359,7 @@ this.FeatureBackground();
 #line 117
  testRunner.And("organization \'Daycare Inc.\' is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 118
- testRunner.And("role \'Ylläpitäjä\' is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("role \'Peruskäyttäjä\' is selected", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 119
  testRunner.And("the user is saved", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 120
