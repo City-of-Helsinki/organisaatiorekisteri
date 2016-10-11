@@ -71,7 +71,7 @@ namespace OrganizationRegister.Store.CodeFirst
             var filteredOrganizations = dbOrganizations.Where(org => org.Id == rootOrganizationId || org.ParentOrganizationId.HasValue).ToList();
             filteredOrganizations = RemoveOrphans(filteredOrganizations);
 
-            return CreateHierarchicalOrganizationsForOrganisation(filteredOrganizations);
+            return CreateHierarchicalOrganizations(filteredOrganizations);
         }
 
         public IReadOnlyCollection<IOrganizationName> GetActiveOrganizations()
@@ -328,17 +328,17 @@ namespace OrganizationRegister.Store.CodeFirst
             return filteredOrganizations;
         }
 
-        private static IReadOnlyCollection<IHierarchicalOrganization> CreateHierarchicalOrganizationsForOrganisation(IReadOnlyCollection<Organization> dbOrganizations)
-        {
-            List<IHierarchicalOrganization> organizations = new List<IHierarchicalOrganization>();
-            foreach (Organization dbOrganization in dbOrganizations)
-            {
-                organizations.Add(OrganizationFactory.CreateHierarchicalOrganization(dbOrganization.Id, dbOrganization.GetNames(),
-                    (dbOrganization.ParentOrganizationId != null) ? dbOrganization.ParentOrganization.Id : (Guid?)null));
-            }
-            return HierarchicalCollection<IHierarchicalOrganization>.CreateHierarchy(organizations).ToList();
+        //private static IReadOnlyCollection<IHierarchicalOrganization> CreateHierarchicalOrganizationsForOrganisation(IReadOnlyCollection<Organization> dbOrganizations)
+        //{
+        //    List<IHierarchicalOrganization> organizations = new List<IHierarchicalOrganization>();
+        //    foreach (Organization dbOrganization in dbOrganizations)
+        //    {
+        //        organizations.Add(OrganizationFactory.CreateHierarchicalOrganization(dbOrganization.Id, dbOrganization.GetNames(),
+        //            (dbOrganization.ParentOrganizationId != null) ? dbOrganization.ParentOrganization.Id : (Guid?)null));
+        //    }
+        //    return HierarchicalCollection<IHierarchicalOrganization>.CreateHierarchy(organizations).ToList();
 
-        }
+        //}
 
     }
 }
