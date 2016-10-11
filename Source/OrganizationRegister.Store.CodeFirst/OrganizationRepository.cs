@@ -76,7 +76,7 @@ namespace OrganizationRegister.Store.CodeFirst
                 dbOrganizations = query.Execute();
             }
 
-            //Filter out other root organisations so that those organization branches are filtered out
+            //Filter out other root organizations so that those organization branches are filtered out
             var filteredOrganizations = dbOrganizations.Where(org => org.Id == rootOrganizationId || org.ParentOrganizationId.HasValue).ToList();
             filteredOrganizations = RemoveOrphans(filteredOrganizations);
 
@@ -107,7 +107,7 @@ namespace OrganizationRegister.Store.CodeFirst
         {
             Organization dbOrganization = GetDbOrganization(id);
             return OrganizationFactory.CreateHierarchicalOrganization(id, dbOrganization.GetNames(),
-                (dbOrganization.ParentOrganizationId != null) ? dbOrganization.ParentOrganization.Id : (Guid?) null);
+                (dbOrganization.ParentOrganizationId != null) ? dbOrganization.ParentOrganization.Id : (Guid?) null, dbOrganization.ValidFrom, dbOrganization.ValidTo);
         }
 
         public IOrganization GetOrganization(Guid id)
@@ -311,7 +311,7 @@ namespace OrganizationRegister.Store.CodeFirst
             foreach (Organization dbOrganization in dbOrganizations)
             {
                 organizations.Add(OrganizationFactory.CreateHierarchicalOrganization(dbOrganization.Id, dbOrganization.GetNames(),
-                    (dbOrganization.ParentOrganizationId != null) ? dbOrganization.ParentOrganization.Id : (Guid?) null));
+                    (dbOrganization.ParentOrganizationId != null) ? dbOrganization.ParentOrganization.Id : (Guid?) null, dbOrganization.ValidFrom, dbOrganization.ValidTo));
             }
             return HierarchicalCollection<IHierarchicalOrganization>.CreateHierarchy(organizations).ToList();
         }
