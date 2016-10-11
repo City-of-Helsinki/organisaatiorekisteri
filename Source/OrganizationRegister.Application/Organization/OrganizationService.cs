@@ -55,9 +55,9 @@ namespace OrganizationRegister.Application.Organization
             return organizationRepository.GetActiveOrganizationHierarchy();
         }
 
-        public IEnumerable<IHierarchicalOrganization> GetActiveOrganizationHierarchyForRootOrganization(Guid rootOrganizationId)
+        public IEnumerable<IHierarchicalOrganization> GetActiveOrganizationHierarchyForRootOrganization(Guid rootOrganizationId, bool includeFutureOrganizations)
         {
-            return organizationRepository.GetActiveOrganizationHierarchyForRootOrganization(rootOrganizationId);
+            return organizationRepository.GetActiveOrganizationHierarchyForRootOrganization(rootOrganizationId, includeFutureOrganizations);
         }
 
         public IEnumerable<IOrganizationName> GetActiveOrganizations()
