@@ -28,9 +28,9 @@ namespace OrganizationRegister.Application.Organization
             return organization;
         }
 
-        public static IHierarchicalOrganization CreateHierarchicalOrganization(Guid id, IEnumerable<LocalizedText> names, Guid? parentId)
+        public static IHierarchicalOrganization CreateHierarchicalOrganization(Guid id, IEnumerable<LocalizedText> names, Guid? parentId, DateTime? validFrom, DateTime? validTo)
         {
-            return new HierarchicalOrganization(id, names, parentId);
+            return new HierarchicalOrganization(id, names, parentId, validFrom, validTo);
         }
 
         public static IOrganizationName CreateOrganizationName(Guid id, IEnumerable<LocalizedText> names)

@@ -9,14 +9,21 @@ namespace OrganizationRegister.Application.Organization
     {
         private readonly List<IHierarchicalOrganization> children;
 
-        public HierarchicalOrganization(Guid id, IEnumerable<LocalizedText> names, Guid? parentId)
+        public HierarchicalOrganization(Guid id, IEnumerable<LocalizedText> names, Guid? parentId, DateTime? validFrom, DateTime? validTo)
             : base(id, names)
         {
+            ValidFrom = validFrom;
+            ValidTo = validTo;
             ParentId = parentId;
             children = new List<IHierarchicalOrganization>();
         }
 
+
         public Guid? ParentId { get; private set; }
+
+        public DateTime? ValidFrom { get; set; }
+
+        public DateTime? ValidTo { get; set; }
 
         public IEnumerable<IHierarchicalOrganization> SubOrganizations
         {

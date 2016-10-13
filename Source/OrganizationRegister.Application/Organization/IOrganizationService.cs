@@ -12,7 +12,7 @@ namespace OrganizationRegister.Application.Organization
             IEnumerable<LocalizedText> descriptions, DateTime? validFrom, DateTime? validTo);
         IEnumerable<IHierarchicalOrganization> GetActiveOrganizationHierarchy();
         IEnumerable<IOrganizationName> GetActiveOrganizations();
-        IEnumerable<IHierarchicalOrganization> GetActiveOrganizationHierarchyForRootOrganization(Guid rootOrganizationId);
+        IEnumerable<IHierarchicalOrganization> GetActiveOrganizationHierarchyForRootOrganization(Guid? rootOrganizationId, bool includeFutureOrganizations);
         IEnumerable<IOrganizationName> GetActiveMainOrganizations();
         IEnumerable<IOrganizationName> GetMainOrganizations();
         IOrganization GetOrganization(Guid organizationId);
