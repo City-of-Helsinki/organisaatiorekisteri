@@ -62,7 +62,7 @@ namespace OrganizationRegister.Store.CodeFirst
             return CreateHierarchicalOrganizations(dbOrganizations.ToList());
         }
 
-        public IReadOnlyCollection<IHierarchicalOrganization> GetActiveOrganizationHierarchyForRootOrganization(Guid rootOrganizationId, bool includeFutureOrganizations)
+        public IReadOnlyCollection<IHierarchicalOrganization> GetActiveOrganizationHierarchyForRootOrganization(Guid? rootOrganizationId, bool includeFutureOrganizations)
         {
             IEnumerable<Organization> dbOrganizations;
             if (includeFutureOrganizations)
@@ -76,11 +76,17 @@ namespace OrganizationRegister.Store.CodeFirst
                 dbOrganizations = query.Execute();
             }
 
-            //Filter out other root organizations so that those organization branches are filtered out
-            var filteredOrganizations = dbOrganizations.Where(org => org.Id == rootOrganizationId || org.ParentOrganizationId.HasValue).ToList();
-            filteredOrganizations = RemoveOrphans(filteredOrganizations);
+            List<Organization> organizations;
+            if (rootOrganizationId.HasValue)
+            {
+                //Filter out other root organizations so that their descendants are filtered out as orphans
+                var filteredOrganizations = dbOrganizations.Where(org => org.Id == rootOrganizationId || org.ParentOrganizationId.HasValue).ToList();
+                organizations = RemoveOrphans(filteredOrganizations);
+            }
+            else
+                organizations = dbOrganizations.ToList();
 
-            return CreateHierarchicalOrganizations(filteredOrganizations);
+            return CreateHierarchicalOrganizations(organizations);
         }
 
 

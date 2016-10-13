@@ -38,6 +38,27 @@ namespace OrganizationRegister.Api.Organization
         }
 
         [HttpGet]
+        [GetRoute("currentorganizationhierarchy")]
+        public IHttpActionResult GetCurrentOrganizationHierarchy()
+        {
+            IEnumerable<IHierarchicalOrganization> organizations = organizationService.GetActiveOrganizationHierarchyForRootOrganization(null, includeFutureOrganizations: false);
+            var mapper = mapperFactory.CreateHierarchicalOrganizationMapper();
+            IEnumerable<HierarchicalOrganization> mappedOrganizations = mapper.Map(organizations);
+            return Ok(mappedOrganizations);
+        }
+
+
+        [HttpGet]
+        [GetRoute("currentandfutureorganizationhierarchy")]
+        public IHttpActionResult GetCurrentAndFutureOrganizationHierarchy()
+        {
+            IEnumerable<IHierarchicalOrganization> organizations = organizationService.GetActiveOrganizationHierarchyForRootOrganization(null, includeFutureOrganizations: true);
+            var mapper = mapperFactory.CreateHierarchicalOrganizationMapper();
+            IEnumerable<HierarchicalOrganization> mappedOrganizations = mapper.Map(organizations);
+            return Ok(mappedOrganizations);
+        }
+
+        [HttpGet]
         [GetRoute("currentorganizationhierarchyfororganization/{organizationId}")]
         public IHttpActionResult GetCurrentOrganizationHierarchyForOrganization(Guid organizationId)
         {

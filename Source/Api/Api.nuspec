@@ -7,7 +7,7 @@
     <authors>Affecto</authors>
     <version>$version$</version>
     <releaseNotes>
-      Added new Api method to get only the organisations under specified root organistaionId.
+      Added new Api methods to get current and/or future organisations.
     </releaseNotes>
   </metadata>
 </package>
