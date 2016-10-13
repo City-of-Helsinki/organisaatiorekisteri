@@ -8,7 +8,9 @@ namespace OrganizationRegister.Api.Organization
     {
         protected override void ConfigureMaps()
         {
-            Mapper.CreateMap<IHierarchicalOrganization, HierarchicalOrganization>();
+            Mapper.CreateMap<IHierarchicalOrganization, HierarchicalOrganization>()
+                .ForMember(target => target.ValidFrom, source => source.MapFrom(org => org.ValidFrom.HasValue ? org.ValidFrom.Value.ToString("yyyy-MM-dd") : null))
+                .ForMember(target => target.ValidTo, source => source.MapFrom(org => org.ValidTo.HasValue ? org.ValidTo.Value.ToString("yyyy-MM-dd") : null));
         }
     }
 }

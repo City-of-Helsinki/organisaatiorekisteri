@@ -14,7 +14,7 @@ namespace OrganizationRegister.Application.Tests.Organization
         [TestInitialize]
         public void Setup()
         {
-            sut = new HierarchicalOrganization(Guid.NewGuid(), new List<LocalizedText> { new LocalizedText("fi", "org")}, null);
+            sut = new HierarchicalOrganization(Guid.NewGuid(), new List<LocalizedText> { new LocalizedText("fi", "org")}, null, DateTime.Now, DateTime.Now.AddDays(1));
         }
 
         [TestMethod]
@@ -38,7 +38,7 @@ namespace OrganizationRegister.Application.Tests.Organization
 
         private static HierarchicalOrganization CreateHierarchicalOrganization()
         {
-            return new HierarchicalOrganization(Guid.NewGuid(), new List<LocalizedText> { new LocalizedText("fi", "org2") }, null);
+            return new HierarchicalOrganization(Guid.NewGuid(), new List<LocalizedText> { new LocalizedText("fi", "org2") }, null, DateTime.Now.AddDays(30), DateTime.Now.AddDays(60));
         }
     }
 }

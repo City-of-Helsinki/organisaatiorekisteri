@@ -62,17 +62,33 @@ namespace OrganizationRegister.Store.CodeFirst
             return CreateHierarchicalOrganizations(dbOrganizations.ToList());
         }
 
-        public IReadOnlyCollection<IHierarchicalOrganization> GetActiveOrganizationHierarchyForRootOrganization(Guid rootOrganizationId)
+        public IReadOnlyCollection<IHierarchicalOrganization> GetActiveOrganizationHierarchyForRootOrganization(Guid? rootOrganizationId, bool includeFutureOrganizations)
         {
-            var query = new ActiveOrganizationsQuery(context.Organizations);
-            IEnumerable<Organization> dbOrganizations = query.Execute();
+            IEnumerable<Organization> dbOrganizations;
+            if (includeFutureOrganizations)
+            {
+                var query = new ActiveCurrentAndFutureOrganizationsQuery(context.Organizations);
+                dbOrganizations = query.Execute();
+            }
+            else
+            {
+                var query = new ActiveCurrentOrganizationsQuery(context.Organizations);
+                dbOrganizations = query.Execute();
+            }
 
-            //Filter out other root organisations so that those organization branches are filtered out
-            var filteredOrganizations = dbOrganizations.Where(org => org.Id == rootOrganizationId || org.ParentOrganizationId.HasValue).ToList();
-            filteredOrganizations = RemoveOrphans(filteredOrganizations);
+            List<Organization> organizations;
+            if (rootOrganizationId.HasValue)
+            {
+                //Filter out other root organizations so that their descendants are filtered out as orphans
+                var filteredOrganizations = dbOrganizations.Where(org => org.Id == rootOrganizationId || org.ParentOrganizationId.HasValue).ToList();
+                organizations = RemoveOrphans(filteredOrganizations);
+            }
+            else
+                organizations = dbOrganizations.ToList();
 
-            return CreateHierarchicalOrganizationsForOrganisation(filteredOrganizations);
+            return CreateHierarchicalOrganizations(organizations);
         }
+
 
         public IReadOnlyCollection<IOrganizationName> GetActiveOrganizations()
         {
@@ -97,7 +113,7 @@ namespace OrganizationRegister.Store.CodeFirst
         {
             Organization dbOrganization = GetDbOrganization(id);
             return OrganizationFactory.CreateHierarchicalOrganization(id, dbOrganization.GetNames(),
-                (dbOrganization.ParentOrganizationId != null) ? dbOrganization.ParentOrganization.Id : (Guid?) null);
+                (dbOrganization.ParentOrganizationId != null) ? dbOrganization.ParentOrganization.Id : (Guid?) null, dbOrganization.ValidFrom, dbOrganization.ValidTo);
         }
 
         public IOrganization GetOrganization(Guid id)
@@ -301,7 +317,7 @@ namespace OrganizationRegister.Store.CodeFirst
             foreach (Organization dbOrganization in dbOrganizations)
             {
                 organizations.Add(OrganizationFactory.CreateHierarchicalOrganization(dbOrganization.Id, dbOrganization.GetNames(),
-                    (dbOrganization.ParentOrganizationId != null) ? dbOrganization.ParentOrganization.Id : (Guid?) null));
+                    (dbOrganization.ParentOrganizationId != null) ? dbOrganization.ParentOrganization.Id : (Guid?) null, dbOrganization.ValidFrom, dbOrganization.ValidTo));
             }
             return HierarchicalCollection<IHierarchicalOrganization>.CreateHierarchy(organizations).ToList();
         }
@@ -328,17 +344,6 @@ namespace OrganizationRegister.Store.CodeFirst
             return filteredOrganizations;
         }
 
-        private static IReadOnlyCollection<IHierarchicalOrganization> CreateHierarchicalOrganizationsForOrganisation(IReadOnlyCollection<Organization> dbOrganizations)
-        {
-            List<IHierarchicalOrganization> organizations = new List<IHierarchicalOrganization>();
-            foreach (Organization dbOrganization in dbOrganizations)
-            {
-                organizations.Add(OrganizationFactory.CreateHierarchicalOrganization(dbOrganization.Id, dbOrganization.GetNames(),
-                    (dbOrganization.ParentOrganizationId != null) ? dbOrganization.ParentOrganization.Id : (Guid?)null));
-            }
-            return HierarchicalCollection<IHierarchicalOrganization>.CreateHierarchy(organizations).ToList();
-
-        }
 
     }
 }
