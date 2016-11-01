@@ -242,7 +242,8 @@ namespace OrganizationRegister.Store.CodeFirst.Model
                 var name = information.GetName(lang.Language.Code);
                 var description = information.GetDescription(lang.Language.Code);
                 var homepageUrl = information.GetHomepageUrl(lang.Language.Code);
-
+                var nameAbbreviation = information.GetNameAbbreviation(lang.Language.Code);
+ 
                 if (!string.IsNullOrEmpty(name) || !string.IsNullOrEmpty(description) || !string.IsNullOrEmpty(homepageUrl))
                 {
                     LanguageSpecifications.Add(new OrganizationLanguageSpecification
@@ -250,7 +251,8 @@ namespace OrganizationRegister.Store.CodeFirst.Model
                         Language = lang,
                         Name = name,
                         Description = description,
-                        HomepageUrl = homepageUrl
+                        HomepageUrl = homepageUrl,
+                        NameAbbreviation = nameAbbreviation
                     });
                 }
               
@@ -269,11 +271,17 @@ namespace OrganizationRegister.Store.CodeFirst.Model
             return LanguageSpecifications.Select(data => new LocalizedText(data.Language.Language.Code, data.Name)).ToList();
         }
 
-
         internal IReadOnlyCollection<LocalizedText> GetHomepageUrls()
         {
             return LanguageSpecifications.Select(data => new LocalizedText(data.Language.Language.Code, data.HomepageUrl)).ToList();
         }
+
+
+        internal IReadOnlyCollection<LocalizedText> GetNameAbbreviations()
+        {
+            return LanguageSpecifications.Select(data => new LocalizedText(data.Language.Language.Code, data.NameAbbreviation)).ToList();
+        }
+
 
         internal void SetBasicInformation(IBasicInformation information, IStoreContext context)
         {

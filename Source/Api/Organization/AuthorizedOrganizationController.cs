@@ -34,7 +34,7 @@ namespace OrganizationRegister.Api.Organization
             }
 
             Guid organizationId = organizationService.AddOrganization(organization.BusinessId, organization.Oid, organization.Type, organization.MunicipalityCode,
-                organization.Names, organization.Descriptions, organization.ValidFrom, organization.ValidTo);
+                organization.Names, organization.Descriptions, organization.ValidFrom, organization.ValidTo, organization.NameAbbreviations);
             return Ok(organizationId);
         }
 
@@ -48,7 +48,7 @@ namespace OrganizationRegister.Api.Organization
             }
 
             Guid subOrganizationId = organizationService.AddSubOrganization(parentOrganizationId, organization.BusinessId, organization.Oid, organization.Type, 
-                organization.MunicipalityCode, organization.Names, organization.Descriptions, organization.ValidFrom, organization.ValidTo);
+                organization.MunicipalityCode, organization.Names, organization.Descriptions, organization.ValidFrom, organization.ValidTo, organization.NameAbbreviations);
             return Ok(subOrganizationId);
         }
 
@@ -61,7 +61,7 @@ namespace OrganizationRegister.Api.Organization
                 throw new ArgumentNullException("information");
             }
             organizationService.SetOrganizationBasicInformation(organizationId, information.BusinessId, information.Oid, information.Names, information.Descriptions, 
-                information.Type, information.MunicipalityCode, information.ValidFrom, information.ValidTo);
+                information.Type, information.MunicipalityCode, information.ValidFrom, information.ValidTo, information.NameAbbreviations);
             return Ok();
         }
 

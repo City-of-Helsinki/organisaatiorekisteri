@@ -11,6 +11,7 @@ namespace OrganizationRegister.Application.Organization
         string Type { get; }
         IEnumerable<LocalizedText> Names { get; }
         IEnumerable<LocalizedText> Descriptions { get; }
+        IEnumerable<LocalizedText> NameAbbreviations { get; }
         string MunicipalityCode { get; }
      
         DateTime? ValidFrom { get; }

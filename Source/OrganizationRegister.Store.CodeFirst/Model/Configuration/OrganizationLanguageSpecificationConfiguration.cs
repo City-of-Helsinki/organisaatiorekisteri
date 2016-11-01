@@ -11,7 +11,7 @@ namespace OrganizationRegister.Store.CodeFirst.Model.Configuration
             Property(specification => specification.Name);
             Property(specification => specification.Description);
             Property(specification => specification.HomepageUrl);
-
+            Property(specification => specification.NameAbbreviation);
             HasRequired(specification => specification.Language);
         }
     }

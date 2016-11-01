@@ -25,12 +25,12 @@ namespace OrganizationRegister.Application.Organization
         }
 
         public Guid AddOrganization(string businessId, string oid, string type, string municipalityCode, IEnumerable<LocalizedText> names, IEnumerable<LocalizedText> descriptions, 
-            DateTime? validFrom, DateTime? validTo)
+            DateTime? validFrom, DateTime? validTo, IEnumerable<LocalizedText> nameAbbreviations)
         {
             IReadOnlyCollection<string> languageCodes = settingsRepository.GetDataLanguageCodes();
             // TODO: Wrap id generation into a service
             var id = Guid.NewGuid();
-            var organization = new Organization(id, businessId, oid, type, municipalityCode, names, languageCodes) { Descriptions = descriptions, HomepageUrls = null};
+            var organization = new Organization(id, businessId, oid, type, municipalityCode, names, languageCodes) { Descriptions = descriptions, NameAbbreviations = nameAbbreviations, HomepageUrls = null};
             organization.SetValidity(validFrom, validTo);
             organizationRepository.AddOrganizationAndSave(organization);
 
@@ -39,12 +39,12 @@ namespace OrganizationRegister.Application.Organization
         }
 
         public Guid AddSubOrganization(Guid parentOrganizationId, string businessId, string oid, string type, string municipalityCode, IEnumerable<LocalizedText> names,
-            IEnumerable<LocalizedText> descriptions, DateTime? validFrom, DateTime? validTo)
+            IEnumerable<LocalizedText> descriptions, DateTime? validFrom, DateTime? validTo, IEnumerable<LocalizedText> nameAbbreviations)
         {
             IReadOnlyCollection<string> languageCodes = settingsRepository.GetDataLanguageCodes();
             // TODO: Wrap id generation into a service
             var id = Guid.NewGuid();
-            var organization = new SubOrganization(id, businessId, oid, type, municipalityCode, names, languageCodes) { Descriptions = descriptions, HomepageUrls = null };
+            var organization = new SubOrganization(id, businessId, oid, type, municipalityCode, names, languageCodes) { Descriptions = descriptions, NameAbbreviations = nameAbbreviations, HomepageUrls = null };
             organization.SetValidity(validFrom, validTo);
             organizationRepository.AddSubOrganizationAndSave(parentOrganizationId, organization);
             return id;
@@ -86,13 +86,14 @@ namespace OrganizationRegister.Application.Organization
         }
 
         public void SetOrganizationBasicInformation(Guid organizationId, string businessId, string oid, IEnumerable<LocalizedText> names, IEnumerable<LocalizedText> descriptions, 
-            string type, string municipalityCode, DateTime? validFrom, DateTime? validTo)
+            string type, string municipalityCode, DateTime? validFrom, DateTime? validTo, IEnumerable<LocalizedText> nameAbbreviations)
         {
             Organization organization = GetOrganization(organizationId) as Organization;
             organization.BusinessId = businessId;
             organization.Oid = oid;
             organization.Names = names;
             organization.Descriptions = descriptions;
+            organization.NameAbbreviations = nameAbbreviations;
             organization.SetType(type, municipalityCode);
             organization.SetValidity(validFrom, validTo);
             organizationRepository.UpdateOrganizationBasicInformation(organizationId, organization, organization is SubOrganization);

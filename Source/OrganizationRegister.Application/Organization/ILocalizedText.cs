@@ -12,5 +12,6 @@ namespace OrganizationRegister.Application.Organization
         string GetDescription(string languageCode);
         string GetHomepageUrl(string languageCode);
         string GetName(string languageCode);
+        string GetNameAbbreviation(string languageCode);
     }
 }
