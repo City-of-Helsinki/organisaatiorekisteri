@@ -9,6 +9,7 @@ namespace OrganizationRegister.Api.Organization
         public string BusinessId { get; set; }
         public IEnumerable<LocalizedText> Names { get; set; }
         public IEnumerable<LocalizedText> Descriptions { get; set; }
+        public IEnumerable<LocalizedText> NameAbbreviations { get; set; }
         public string Type { get; set; }
         public string MunicipalityCode { get; set; }
         public string Oid { get; set; }

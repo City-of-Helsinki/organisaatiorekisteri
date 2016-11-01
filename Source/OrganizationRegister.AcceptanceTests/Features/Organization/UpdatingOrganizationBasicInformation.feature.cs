@@ -96,7 +96,9 @@ this.FeatureBackground();
                         "Finnish description",
                         "Swedish description",
                         "Valid from",
-                        "Valid to"});
+                        "Valid to",
+                        "Finnish name abbreviation",
+                        "Swedish name abbreviation"});
             table1.AddRow(new string[] {
                         "1069622-4",
                         "654321",
@@ -106,7 +108,9 @@ this.FeatureBackground();
                         "Ohjelmistoyritys",
                         "Programvara företaget",
                         "12.11.2015",
-                        "20.10.2016"});
+                        "20.10.2016",
+                        "AFE",
+                        "AFEsv"});
 #line 7
  testRunner.When("the following basic information is set to the organization:", ((string)(null)), table1, "When ");
 #line hidden
@@ -119,7 +123,9 @@ this.FeatureBackground();
                         "Finnish description",
                         "Swedish description",
                         "Valid from",
-                        "Valid to"});
+                        "Valid to",
+                        "Finnish name abbreviation",
+                        "Swedish name abbreviation"});
             table2.AddRow(new string[] {
                         "1069622-4",
                         "654321",
@@ -129,7 +135,9 @@ this.FeatureBackground();
                         "Ohjelmistoyritys",
                         "Programvara företaget",
                         "12.11.2015",
-                        "20.10.2016"});
+                        "20.10.2016",
+                        "AFE",
+                        "AFEsv"});
 #line 10
  testRunner.Then("the organization has the following basic information:", ((string)(null)), table2, "Then ");
 #line hidden
@@ -297,7 +305,9 @@ this.FeatureBackground();
                         "Finnish description",
                         "Swedish description",
                         "Valid from",
-                        "Valid to"});
+                        "Valid to",
+                        "Finnish name abbreviation",
+                        "Swedish name abbreviation"});
             table10.AddRow(new string[] {
                         "1069622-4",
                         "654321",
@@ -307,29 +317,35 @@ this.FeatureBackground();
                         "Ohjelmistoyritys",
                         "Programvara företaget",
                         "12.11.2015",
-                        "20.10.2016"});
+                        "20.10.2016",
+                        "AFE",
+                        "AFEsv"});
 #line 42
  testRunner.Given("the following basic information is set to the organization:", ((string)(null)), table10, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                         "Business id",
                         "Type",
-                        "Finnish name"});
+                        "Finnish name",
+                        "Finnish name abbreviation"});
             table11.AddRow(new string[] {
                         "1234567-1",
                         "Yritys",
-                        "Firma"});
+                        "Firma",
+                        "AFEfi"});
 #line 45
  testRunner.When("the following basic information is set to the organization:", ((string)(null)), table11, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                         "Business id",
                         "Type",
-                        "Finnish name"});
+                        "Finnish name",
+                        "Finnish name abbreviation"});
             table12.AddRow(new string[] {
                         "1234567-1",
                         "Yritys",
-                        "Firma"});
+                        "Firma",
+                        "AFEfi"});
 #line 48
  testRunner.Then("the organization has the following basic information:", ((string)(null)), table12, "Then ");
 #line hidden

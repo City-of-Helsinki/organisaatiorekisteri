@@ -11,6 +11,7 @@
         Requirement,
         Keyword,
         HomepageUrl,
-        CallChargeInfo
+        CallChargeInfo,
+        NameAbbreviation
     }
 }

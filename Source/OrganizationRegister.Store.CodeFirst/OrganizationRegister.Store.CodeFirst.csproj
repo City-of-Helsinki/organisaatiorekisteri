@@ -86,6 +86,10 @@
     <Compile Include="Migrations\201608260816179_AddCallChargeType.Designer.cs">
       <DependentUpon>201608260816179_AddCallChargeType.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610310700055_AddOrganizationNameAbbreviation.cs" />
+    <Compile Include="Migrations\201610310700055_AddOrganizationNameAbbreviation.Designer.cs">
+      <DependentUpon>201610310700055_AddOrganizationNameAbbreviation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\OrganizationRegisterDbMigration.cs" />
     <Compile Include="Model\Address.cs" />
@@ -162,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608260816179_AddCallChargeType.resx">
       <DependentUpon>201608260816179_AddCallChargeType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610310700055_AddOrganizationNameAbbreviation.resx">
+      <DependentUpon>201610310700055_AddOrganizationNameAbbreviation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

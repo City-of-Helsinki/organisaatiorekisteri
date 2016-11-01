@@ -137,6 +137,41 @@ namespace OrganizationRegister.Api.Tests.Organization
         }
 
         [TestMethod]
+        public void NameAbbreviationsAreMapped()
+        {
+            IEnumerable<LocalizedText> nameAbbreviations = new List<LocalizedText>
+            {
+                new LocalizedText("fi", "yrit"),
+                new LocalizedText("en", "comp")
+            };
+            source.NameAbbreviations.Returns(nameAbbreviations);
+
+            destination = sut.Map(source);
+
+            Assert.AreEqual(nameAbbreviations.Count(), destination.NameAbbreviations.Count());
+            Assert.AreSame(nameAbbreviations.First(), destination.NameAbbreviations.First());
+            Assert.AreSame(nameAbbreviations.Last(), destination.NameAbbreviations.Last());
+        }
+
+
+        [TestMethod]
+        public void HomePageUrlsAreMapped()
+        {
+            IEnumerable<LocalizedText> urls = new List<LocalizedText>
+            {
+                new LocalizedText("fi", "http://www.yritys.fi"),
+                new LocalizedText("en", "http://www.yritys.fi/en")
+            };
+            source.HomepageUrls.Returns(urls);
+
+            destination = sut.Map(source);
+
+            Assert.AreEqual(urls.Count(), destination.HomepageUrls.Count());
+            Assert.AreSame(urls.First(), destination.HomepageUrls.First());
+            Assert.AreSame(urls.Last(), destination.HomepageUrls.Last());
+        }
+
+        [TestMethod]
         public void MunicipalityCodeIsMapped()
         {
             const string municipalityCode = "12";

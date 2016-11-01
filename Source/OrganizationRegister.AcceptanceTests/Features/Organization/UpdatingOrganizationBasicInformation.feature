@@ -5,11 +5,11 @@ Background:
 
 Scenario: Changing organization basic information
 	When the following basic information is set to the organization:
-	| Business id | Oid    | Type   | Finnish name | Swedish name | Finnish description | Swedish description   | Valid from | Valid to   |
-	| 1069622-4   | 654321 | Yritys | Affecto      | Affecto      | Ohjelmistoyritys    | Programvara företaget | 12.11.2015 | 20.10.2016 |
+	| Business id | Oid    | Type   | Finnish name | Swedish name | Finnish description | Swedish description   | Valid from | Valid to   | Finnish name abbreviation | Swedish name abbreviation |
+	| 1069622-4   | 654321 | Yritys | Affecto      | Affecto      | Ohjelmistoyritys    | Programvara företaget | 12.11.2015 | 20.10.2016 | AFE                       | AFEsv                     |
 	Then the organization has the following basic information:
-	| Business id | Oid    | Type   | Finnish name | Swedish name | Finnish description | Swedish description   | Valid from | Valid to   |
-	| 1069622-4   | 654321 | Yritys | Affecto      | Affecto      | Ohjelmistoyritys    | Programvara företaget | 12.11.2015 | 20.10.2016 |
+	| Business id | Oid    | Type   | Finnish name | Swedish name | Finnish description | Swedish description   | Valid from | Valid to   | Finnish name abbreviation | Swedish name abbreviation |
+	| 1069622-4   | 654321 | Yritys | Affecto      | Affecto      | Ohjelmistoyritys    | Programvara företaget | 12.11.2015 | 20.10.2016 | AFE                       | AFEsv                     |
 
 Scenario: Changing organization type to municipality
 	When the following basic information is set to the organization:
@@ -32,7 +32,7 @@ Scenario: Changing organization type from municipality
 
 Scenario: Setting only mandatory organization basic information
 	When the following basic information is set to the organization:
-	| Business id | Type   | Finnish name |
+	| Business id | Type   | Finnish name | 
 	| 1234567-1   | Yritys | Firma        |
 	Then the organization has the following basic information:
 	| Business id | Type   | Finnish name |
@@ -40,14 +40,14 @@ Scenario: Setting only mandatory organization basic information
 
 Scenario: Claering organization optional information
 	Given the following basic information is set to the organization:
-	| Business id | Oid    | Type   | Finnish name | Swedish name | Finnish description | Swedish description   | Valid from | Valid to   |
-	| 1069622-4   | 654321 | Yritys | Affecto      | Affecto      | Ohjelmistoyritys    | Programvara företaget | 12.11.2015 | 20.10.2016 |
+	| Business id | Oid    | Type   | Finnish name | Swedish name | Finnish description | Swedish description   | Valid from | Valid to   | Finnish name abbreviation | Swedish name abbreviation |
+	| 1069622-4   | 654321 | Yritys | Affecto      | Affecto      | Ohjelmistoyritys    | Programvara företaget | 12.11.2015 | 20.10.2016 | AFE                       | AFEsv                     |
 	When the following basic information is set to the organization:
-	| Business id | Type   | Finnish name |
-	| 1234567-1   | Yritys | Firma        |
+	| Business id | Type   | Finnish name | Finnish name abbreviation |
+	| 1234567-1   | Yritys | Firma        | AFEfi                     |
 	Then the organization has the following basic information:
-	| Business id | Type   | Finnish name |
-	| 1234567-1   | Yritys | Firma        |
+	| Business id | Type   | Finnish name | Finnish name abbreviation |
+	| 1234567-1   | Yritys | Firma        | AFEfi                     |
 
 Scenario: Setting invalid business identifier
 	When the following basic information is set to the organization:

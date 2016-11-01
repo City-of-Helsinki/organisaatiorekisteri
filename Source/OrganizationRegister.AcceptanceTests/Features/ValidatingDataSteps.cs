@@ -117,13 +117,13 @@ namespace OrganizationRegister.AcceptanceTests.Features
         [Given(@"there is an active organization with business identifier '(.+)'")]
         public void GivenThereIsAnActiveOrganizationWithBusinessIdentifier(string businessId)
         {
-            OrganizationService.AddOrganization(businessId, null, "Yritys", null, new List<LocalizedText> { new LocalizedText("fi", "organisaatio") }, null, null, null);
+            OrganizationService.AddOrganization(businessId, null, "Yritys", null, new List<LocalizedText> { new LocalizedText("fi", "organisaatio") }, null, null, null, null);
         }
 
         [Given(@"there is an inactive organization with business identifier '(.+)'")]
         public void GivenThereIsAnInactiveOrganizationWithBusinessIdentifier(string businessId)
         {
-            Guid guid = OrganizationService.AddOrganization(businessId, null, "Yritys", null, new List<LocalizedText> { new LocalizedText("fi", "organisaatio") }, null, null, null);
+            Guid guid = OrganizationService.AddOrganization(businessId, null, "Yritys", null, new List<LocalizedText> { new LocalizedText("fi", "organisaatio") }, null, null, null, null);
             OrganizationService.DeactivateOrganization(guid);
         }
 

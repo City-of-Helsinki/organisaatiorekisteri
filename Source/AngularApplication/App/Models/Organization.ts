@@ -48,9 +48,11 @@ module OrganizationRegister
             public postalStreetAddress?: StreetAddress,
             public postalPostOfficeBoxAddress?: PostOfficeBoxAddress,
             public homepageUrls?: Array<LocalizedText>,
+            public nameAbbreviations?: Array<LocalizedText>,
             public isSubOrganization?: boolean)
         {
             this.initializeLocalizedNames(names);
+            this.initializeLocalizedNameAbbreviations(nameAbbreviations);
             this.initializeLocalizedDescriptions(descriptions);
             this.initializeLocalizedHomepageUrls(homepageUrls);
             this.initializeLocalizedCallChargeInfos(phoneCallChargeInfos);
@@ -101,9 +103,14 @@ module OrganizationRegister
             this.names = this.setLocalizedTexts(names, ["fi"]);
         }
 
+        private initializeLocalizedNameAbbreviations(nameAbbreviations?: Array<LocalizedText>): void
+        {
+            this.nameAbbreviations = this.setLocalizedTexts(nameAbbreviations,[""]);
+        }
+
         private initializeLocalizedHomepageUrls(urls?: Array<LocalizedText>): void
         {
-            this.homepageUrls = this.setLocalizedTexts(urls,[""]);
+            this.homepageUrls = this.setLocalizedTexts(urls, [""]);
         }
 
         private initializeLocalizedDescriptions(descs?: Array<LocalizedText>): void
@@ -289,6 +296,7 @@ module OrganizationRegister
         public initializeLocalizedTexts(): void
         {
             this.initializeLocalizedNames(this.names);
+            this.initializeLocalizedNameAbbreviations(this.nameAbbreviations);
             this.initializeLocalizedDescriptions(this.descriptions);
             this.initializeLocalizedHomepageUrls(this.homepageUrls);
             this.initializeLocalizedCallChargeInfos(this.phoneCallChargeInfos);
@@ -298,6 +306,7 @@ module OrganizationRegister
         public generateBasicInformationLocalizedAndFormattedTexts(): void
         {
             this.names = this.getLocalizedTextsWithValues(this.names);
+            this.nameAbbreviations = this.getLocalizedTextsWithValues(this.nameAbbreviations);
             this.descriptions = this.getLocalizedTextsWithValues(this.descriptions);
             this.descriptions.forEach((desc) =>
             {
