@@ -76,6 +76,11 @@ namespace OrganizationRegister.AcceptanceTests.Infrastructure
             return CreateTextCollection(texts, "call charge info in finnish", "call charge info  in swedish");
         }
 
+        public static IEnumerable<LocalizedText> CreateNameAbbreviationsCollection(TableRow texts)
+        {
+            return CreateTextCollection(texts, "Finnish name abbreviation", "Swedish name abbreviation");
+        }
+
 
 
 

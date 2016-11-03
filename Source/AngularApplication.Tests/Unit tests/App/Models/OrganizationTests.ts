@@ -718,11 +718,12 @@ describe("Organization", () =>
         let langs = OrganizationRegister.DataLocalization.languageCodes;
         let existingValue = new OrganizationRegister.LocalizedText("fi", "localized value", true);
         let existingValues = new Array<OrganizationRegister.LocalizedText>(existingValue);
-        let sut = new OrganizationRegister.Organization(null, null, existingValues, null, existingValues);
+        let sut = new OrganizationRegister.Organization(null, null, existingValues, null, existingValues, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, existingValues);
 
         it("should initially exists for each data to be localized", () =>
         {
             expect(sut.names.length).toEqual(langs.length);
+            expect(sut.nameAbbreviations.length).toEqual(langs.length);
             expect(sut.descriptionsAsHtml.length).toEqual(langs.length); 
             expect(sut.phoneCallChargeInfos.length).toEqual(langs.length); 
         });
@@ -733,6 +734,12 @@ describe("Organization", () =>
                     .some((arrVal: OrganizationRegister.LocalizedText) => (
                         existingValue.localizedValue === arrVal.localizedValue &&
                         existingValue.languageCode === arrVal.languageCode )))
+                .toBeTruthy();
+
+            expect(sut.nameAbbreviations
+                .some((arrVal: OrganizationRegister.LocalizedText) => (
+                    existingValue.localizedValue === arrVal.localizedValue &&
+                    existingValue.languageCode === arrVal.languageCode)))
                 .toBeTruthy();
 
             expect(sut.descriptionsAsHtml
@@ -751,6 +758,12 @@ describe("Organization", () =>
                     arrVal.languageCode !== existingValue.languageCode)))
                 .toBeFalsy();
 
+            expect(sut.nameAbbreviations
+                .some((arrVal: OrganizationRegister.LocalizedText) => (
+                    arrVal.localizedValue !== "" &&
+                    arrVal.languageCode !== existingValue.languageCode)))
+                .toBeFalsy();
+
             expect(sut.descriptionsAsHtml
                 .some((arrVal: OrganizationRegister.LocalizedText) => (
                     arrVal.localizedValue !== "" &&
@@ -765,6 +778,11 @@ describe("Organization", () =>
             expect(sut.names.length).toEqual(existingValues.length);
             expect(sut.names[0].localizedValue).toEqual(existingValue.localizedValue);
             expect(sut.names[0].languageCode).toEqual(existingValue.languageCode);
+
+            expect(sut.nameAbbreviations.length).toEqual(existingValues.length);
+            expect(sut.nameAbbreviations[0].localizedValue).toEqual(existingValue.localizedValue);
+            expect(sut.nameAbbreviations[0].languageCode).toEqual(existingValue.languageCode);
+
             expect(sut.descriptionsAsHtml.length).toEqual(existingValues.length);
             expect(sut.descriptionsAsHtml[0].localizedValue).toEqual(existingValue.localizedValue);
             expect(sut.descriptionsAsHtml[0].languageCode).toEqual(existingValue.languageCode);

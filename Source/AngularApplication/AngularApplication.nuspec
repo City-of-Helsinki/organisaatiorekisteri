@@ -7,8 +7,7 @@
     <authors>Affecto</authors>
     <version>$version$</version>
     <releaseNotes>
-      Added phone call charge type and call charge infos. 
-      Removed phone call fee.
+      Added language specific organization name abbreviations
     </releaseNotes>
   </metadata>
 </package>

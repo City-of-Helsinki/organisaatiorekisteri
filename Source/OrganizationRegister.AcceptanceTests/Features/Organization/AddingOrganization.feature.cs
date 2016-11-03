@@ -86,7 +86,9 @@ this.ScenarioSetup(scenarioInfo);
                         "Finnish description",
                         "Swedish description",
                         "Valid from",
-                        "Valid to"});
+                        "Valid to",
+                        "Finnish name abbreviation",
+                        "Swedish name abbreviation"});
             table1.AddRow(new string[] {
                         "1234567-1",
                         "123456",
@@ -96,7 +98,9 @@ this.ScenarioSetup(scenarioInfo);
                         "Ohjelmistoyritys",
                         "Programvara företaget",
                         "01.01.2015",
-                        "01.01.2016"});
+                        "01.01.2016",
+                        "AFE",
+                        "AFEsv"});
 #line 4
  testRunner.When("the following company is added:", ((string)(null)), table1, "When ");
 #line hidden
@@ -109,7 +113,9 @@ this.ScenarioSetup(scenarioInfo);
                         "Finnish description",
                         "Swedish description",
                         "Valid from",
-                        "Valid to"});
+                        "Valid to",
+                        "Finnish name abbreviation",
+                        "Swedish name abbreviation"});
             table2.AddRow(new string[] {
                         "1234567-1",
                         "123456",
@@ -119,7 +125,9 @@ this.ScenarioSetup(scenarioInfo);
                         "Ohjelmistoyritys",
                         "Programvara företaget",
                         "01.01.2015",
-                        "01.01.2016"});
+                        "01.01.2016",
+                        "AFE",
+                        "AFEsv"});
 #line 7
  testRunner.Then("there are following organizations:", ((string)(null)), table2, "Then ");
 #line hidden
@@ -132,7 +140,7 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void AddingAMunicipality()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Adding a municipality", ((string[])(null)));
-#line 11
+#line 12
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -151,7 +159,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Åbo",
                         "853",
                         "01.02.2014"});
-#line 12
+#line 13
  testRunner.When("the following municipality is added:", ((string)(null)), table3, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
@@ -170,7 +178,7 @@ this.ScenarioSetup(scenarioInfo);
                         "St. Karins",
                         "202",
                         "01.03.2014"});
-#line 15
+#line 16
  testRunner.And("the following municipality is added:", ((string)(null)), table4, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
@@ -197,7 +205,7 @@ this.ScenarioSetup(scenarioInfo);
                         "St. Karins",
                         "202",
                         "01.03.2014"});
-#line 18
+#line 19
  testRunner.Then("there are following organizations:", ((string)(null)), table5, "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -209,7 +217,7 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void AddingAnOrganizationWithInvalidBusinessId()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Adding an organization with invalid business id", ((string[])(null)));
-#line 23
+#line 24
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
@@ -226,9 +234,9 @@ this.ScenarioSetup(scenarioInfo);
                         "Turku",
                         "Åbo",
                         "853"});
-#line 24
+#line 25
  testRunner.When("the following municipality is added:", ((string)(null)), table6, "When ");
-#line 27
+#line 28
  testRunner.Then("Adding the organization fails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -240,7 +248,7 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void AddingAnOrganizationWithValidityStartingAfterItHasEnded()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Adding an organization with validity starting after it has ended", ((string[])(null)));
-#line 29
+#line 30
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
@@ -263,9 +271,9 @@ this.ScenarioSetup(scenarioInfo);
                         "Programvara företaget",
                         "01.01.2017",
                         "01.01.2016"});
-#line 30
+#line 31
  testRunner.When("the following company is added:", ((string)(null)), table7, "When ");
-#line 33
+#line 34
  testRunner.Then("Adding the organization fails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -277,7 +285,7 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void AddingTwoOrganizationsWithTheSameBusinessId()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Adding two organizations with the same business id", ((string[])(null)));
-#line 35
+#line 36
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
@@ -296,7 +304,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Affecto",
                         "Ohjelmistoyritys",
                         "Programvara företaget"});
-#line 36
+#line 37
  testRunner.Given("the following company is added:", ((string)(null)), table8, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
@@ -313,9 +321,9 @@ this.ScenarioSetup(scenarioInfo);
                         "Turku",
                         "Åbo",
                         "853"});
-#line 39
+#line 40
  testRunner.When("the following municipality is added:", ((string)(null)), table9, "When ");
-#line 42
+#line 43
  testRunner.Then("Adding the organization fails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -327,7 +335,7 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void AddingAMunicipalityWithInvalidId()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Adding a municipality with invalid id", ((string[])(null)));
-#line 44
+#line 45
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
@@ -344,9 +352,9 @@ this.ScenarioSetup(scenarioInfo);
                         "Turku",
                         "Åbo",
                         "8533"});
-#line 45
+#line 46
  testRunner.When("the following municipality is added:", ((string)(null)), table10, "When ");
-#line 48
+#line 49
  testRunner.Then("Adding the organization fails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -358,7 +366,7 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void AddingSubOrganizations()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Adding sub organizations", ((string[])(null)));
-#line 50
+#line 51
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
@@ -377,7 +385,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Affecto",
                         "Ohjelmistoyritys",
                         "Programvara företaget"});
-#line 51
+#line 52
  testRunner.Given("the following company is added:", ((string)(null)), table11, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
@@ -398,7 +406,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Ohjelmistoyritys",
                         "Programvara företaget",
                         "01.01.2074"});
-#line 54
+#line 55
  testRunner.When("the following company is added as a sub organization of \'Affecto\'", ((string)(null)), table12, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
@@ -417,7 +425,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Affecto Finland",
                         "Ohjelmistoyritys",
                         "Programvara företaget"});
-#line 57
+#line 58
  testRunner.And("the following company is added as a sub organization of \'Affecto\'", ((string)(null)), table13, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
@@ -436,7 +444,7 @@ this.ScenarioSetup(scenarioInfo);
                         "karta centrum Helsingfors",
                         "",
                         ""});
-#line 60
+#line 61
  testRunner.And("the following company is added as a sub organization of \'Karttakeskus\'", ((string)(null)), table14, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
@@ -484,7 +492,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Ohjelmistoyritys",
                         "Programvara företaget",
                         ""});
-#line 63
+#line 64
  testRunner.Then("there are following organizations:", ((string)(null)), table15, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
@@ -493,13 +501,13 @@ this.ScenarioSetup(scenarioInfo);
             table16.AddRow(new string[] {
                         "Affecto",
                         "Affecto"});
-#line 69
+#line 70
  testRunner.And("there are following main organizations:", ((string)(null)), table16, "And ");
-#line 72
- testRunner.And("\'Karttakeskus\' is a sub organization of \'Affecto\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 73
- testRunner.And("\'Affecto Finland\' is a sub organization of \'Affecto\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("\'Karttakeskus\' is a sub organization of \'Affecto\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 74
+ testRunner.And("\'Affecto Finland\' is a sub organization of \'Affecto\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 75
  testRunner.And("\'Karttakeskus Helsinki\' is a sub organization of \'Karttakeskus\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -511,7 +519,7 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SubOrganizationDoesnTNeedABusinessId()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sub organization doesn\'t need a business id", ((string[])(null)));
-#line 76
+#line 77
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
@@ -530,7 +538,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Affecto",
                         "Ohjelmistoyritys",
                         "Programvara företaget"});
-#line 77
+#line 78
  testRunner.Given("the following company is added:", ((string)(null)), table17, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
@@ -551,7 +559,7 @@ this.ScenarioSetup(scenarioInfo);
                         "karta centrum",
                         "Ohjelmistoyritys",
                         "Programvara företaget"});
-#line 80
+#line 81
  testRunner.When("the following company is added as a sub organization of \'Affecto\'", ((string)(null)), table18, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
@@ -578,9 +586,9 @@ this.ScenarioSetup(scenarioInfo);
                         "karta centrum",
                         "Ohjelmistoyritys",
                         "Programvara företaget"});
-#line 83
+#line 84
  testRunner.Then("there are following organizations:", ((string)(null)), table19, "Then ");
-#line 87
+#line 88
  testRunner.And("\'Karttakeskus\' is a sub organization of \'Affecto\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

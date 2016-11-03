@@ -40,6 +40,19 @@ namespace OrganizationRegister.AcceptanceTests.Infrastructure
                     organization.Descriptions.Single(desc => desc.LanguageCode.Equals("sv", StringComparison.OrdinalIgnoreCase)).LocalizedValue,
                     expectedBasicInfo.ToTableString());
             }
+
+            if (expectedBasicInfo.ContainsKey("Finnish name abbreviation"))
+            {
+                Assert.AreEqual(expectedBasicInfo["Finnish name abbreviation"],
+                    organization.NameAbbreviations.Single(desc => desc.LanguageCode.Equals("fi", StringComparison.OrdinalIgnoreCase)).LocalizedValue,
+                    expectedBasicInfo.ToTableString());
+            }
+            if (expectedBasicInfo.ContainsKey("Swedish name abbreviation"))
+            {
+                Assert.AreEqual(expectedBasicInfo["Swedish name abbreviation"],
+                    organization.NameAbbreviations.Single(desc => desc.LanguageCode.Equals("sv", StringComparison.OrdinalIgnoreCase)).LocalizedValue,
+                    expectedBasicInfo.ToTableString());
+            }
         }
 
         public static IHierarchicalOrganization GetOrganization(IReadOnlyCollection<IHierarchicalOrganization> organizations, string organizationName)

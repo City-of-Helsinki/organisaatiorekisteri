@@ -111,6 +111,13 @@ namespace OrganizationRegister.Application.Organization
             
         }
 
+        public IEnumerable<LocalizedText> NameAbbreviations
+        {
+            get { return localizedTextsContainer.GetTexts(LocalizedProperty.NameAbbreviation); }
+            set { localizedTextsContainer.Set(LocalizedProperty.NameAbbreviation, new LocalizedSingleTexts(value)); }
+
+        }
+
         public IEnumerable<LocalizedText> Descriptions
         {
             get { return localizedTextsContainer.GetTexts(LocalizedProperty.Description); }
@@ -205,6 +212,12 @@ namespace OrganizationRegister.Application.Organization
         {
             LocalizedSingleTexts homepageUrls = (LocalizedSingleTexts)localizedTextsContainer.GetTexts(LocalizedProperty.HomepageUrl);
             return homepageUrls.GetValue(languageCode);
+        }
+
+        public string GetNameAbbreviation(string languageCode)
+        {
+            LocalizedSingleTexts nameAbbreviations = (LocalizedSingleTexts)localizedTextsContainer.GetTexts(LocalizedProperty.NameAbbreviation);
+            return nameAbbreviations.GetValue(languageCode);
         }
 
         public DateTime? ValidFrom { get; private set; }

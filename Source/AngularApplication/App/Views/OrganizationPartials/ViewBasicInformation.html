@@ -2,11 +2,15 @@
     <strong>ID:</strong> {{ controller.model.numericId }}
 </div>
 <div class="row">
-    <div class="col-xs-6">
+    <div class="col-xs-3">
         <label>Organisaatiotyyppi</label>
         {{ controller.model.type }}
     </div>
-    <div class="col-xs-6">
+    <div class="col-xs-3">
+        <label>Y-tunnus</label>
+        {{ controller.model.businessId }}
+    </div>
+    <div class="col-xs-3">
         <label>Kunnan numero</label>
         {{ controller.model.municipalityCode }}
     </div>
@@ -20,12 +24,19 @@
                 <span>{{ name.localizedValue }}</span>
             </p>
         </div>
+    </div>
+
+    <div class="col-xs-6">
+        <label>Nimen lyhenne</label>
+
+        <div data-ng-repeat="abbreviation in controller.model.nameAbbreviations">
+            <p>
+                <span>{{ abbreviation.localizedValue }}</span>
+            </p>
+        </div>
 
     </div>
-    <div class="col-xs-6">
-        <label>Y-tunnus</label>
-        {{ controller.model.businessId }}
-    </div>
+   
 </div>
 <div class="row">
     <label>Kuvaus</label>

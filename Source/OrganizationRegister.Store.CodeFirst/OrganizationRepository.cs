@@ -150,7 +150,7 @@ namespace OrganizationRegister.Store.CodeFirst
                 dbOrganization.GetPostalPostOfficeBoxAddressPostOfficeBox(), dbOrganization.GetPostalPostOfficeBoxAddressPostalCode(),
                 CreatePostalPostOfficeBoxAddressLocalities(postalAddresses), dbOrganization.UseStreetAddressAsPostalAddress,
                 dbOrganization.ParentOrganizationId.HasValue,
-                settingsRepository.GetDataLanguageCodes(), dbOrganization.GetHomepageUrls());
+                settingsRepository.GetDataLanguageCodes(), dbOrganization.GetHomepageUrls(), dbOrganization.GetNameAbbreviations());
         }
 
         public IOrganizationName GetOrganizationName(Guid id)

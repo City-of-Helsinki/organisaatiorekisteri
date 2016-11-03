@@ -7,7 +7,7 @@
     <authors>Affecto</authors>
     <version>$version$</version>
     <releaseNotes>
-      Added new Api methods to get current and/or future organisations.
+      Added language specific organization name abbreviations
     </releaseNotes>
   </metadata>
 </package>

@@ -2,11 +2,12 @@
 
 Scenario: Adding a company
 	When the following company is added:
-	| Business id | Oid    | Type   | Finnish name | Swedish name | Finnish description | Swedish description   | Valid from | Valid to   |
-	| 1234567-1   | 123456 | Yritys | Affecto      | Affecto      | Ohjelmistoyritys    | Programvara företaget | 01.01.2015 | 01.01.2016 |
+	| Business id | Oid    | Type   | Finnish name | Swedish name | Finnish description | Swedish description   | Valid from | Valid to   | Finnish name abbreviation | Swedish name abbreviation |
+	| 1234567-1   | 123456 | Yritys | Affecto      | Affecto      | Ohjelmistoyritys    | Programvara företaget | 01.01.2015 | 01.01.2016 | AFE                       | AFEsv                     |
 	Then there are following organizations:
-	| Business id | Oid    | Type   | Finnish name | Swedish name | Finnish description | Swedish description   | Valid from | Valid to   |
-	| 1234567-1   | 123456 | Yritys | Affecto      | Affecto      | Ohjelmistoyritys    | Programvara företaget | 01.01.2015 | 01.01.2016 |
+	| Business id | Oid    | Type   | Finnish name | Swedish name | Finnish description | Swedish description   | Valid from | Valid to   | Finnish name abbreviation | Swedish name abbreviation |
+	| 1234567-1   | 123456 | Yritys | Affecto      | Affecto      | Ohjelmistoyritys    | Programvara företaget | 01.01.2015 | 01.01.2016 | AFE                       | AFEsv                     |
+
 
 Scenario: Adding a municipality
 	When the following municipality is added:
@@ -49,7 +50,7 @@ Scenario: Adding a municipality with invalid id
 
 Scenario: Adding sub organizations
 	Given the following company is added:
-	| Business id | Oid    | Type   | Finnish name | Swedish name | Finnish description | Swedish description   |
+	| Business id | Oid    | Type   | Finnish name | Swedish name | Finnish description | Swedish description   | 
 	| 1234567-1   | 123456 | Yritys | Affecto      | Affecto      | Ohjelmistoyritys    | Programvara företaget |
 	When the following company is added as a sub organization of 'Affecto'
 	| Business id | Oid    | Type   | Finnish name | Swedish name  | Finnish description | Swedish description   | Valid to   |

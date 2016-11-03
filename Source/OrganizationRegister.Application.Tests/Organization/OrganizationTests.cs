@@ -144,6 +144,19 @@ namespace OrganizationRegister.Application.Tests.Organization
             Assert.AreEqual(finalDescription, sut.GetDescription(ValidLanguageCode));
         }
 
+        [TestMethod]
+        public void SettingNameAbbreviationAgainWithSameLanguageReplacesNameAbbreviation()
+        {
+            const string finalAbbreviation = "finalVal";
+            sut = new Application.Organization.Organization(Guid.NewGuid(), 1, ValidBusinessId, Oid, Type, null,
+                CreateLocalizedTextsWithOneText(ValidLanguageCode, "Affecto"), new List<string> { ValidLanguageCode });
+
+            sut.NameAbbreviations = new LocalizedSingleTexts(new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "Val") });
+            sut.NameAbbreviations = new LocalizedSingleTexts(new List<LocalizedText> { new LocalizedText(ValidLanguageCode, finalAbbreviation) });
+
+            Assert.AreEqual(finalAbbreviation, sut.GetNameAbbreviation(ValidLanguageCode));
+        }
+
 
         [TestMethod]
         public void SettingHomepageUrlAgainWitSamLanguageReplacesHomepageUrl()
@@ -209,6 +222,15 @@ namespace OrganizationRegister.Application.Tests.Organization
             sut = CreateSut();
 
             Assert.IsFalse(sut.Descriptions.Any());
+        }
+
+
+        [TestMethod]
+        public void NameAbbreviationsAreEmptyAfterInitialization()
+        {
+            sut = CreateSut();
+
+            Assert.IsFalse(sut.NameAbbreviations.Any());
         }
 
         [TestMethod]
@@ -292,9 +314,6 @@ namespace OrganizationRegister.Application.Tests.Organization
 
             sut.SetType("Company", "133");
         }
-
-      
-
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -443,6 +462,26 @@ namespace OrganizationRegister.Application.Tests.Organization
             sut.SetPostalAddress(false, new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "katu 1") }, "12345", 
                 new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "Turku") }, "10", "12345", new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "Turku") });
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void NameAbbreviationsCannotHaveUnsupportedLanguage()
+        {
+            sut = CreateSut();
+
+            sut.NameAbbreviations = new LocalizedSingleTexts(new List<LocalizedText> { new LocalizedText("fr", "comp") });
+        }
+
+      
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void SettingNameAbbreviationWithNullLocalizedValue()
+        {
+            sut = CreateSut();
+            sut.NameAbbreviations = new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "val"), new LocalizedText("en", null) };
+        }
+
 
         [TestMethod]
         public void SettingValidityDoesNotSetTime()
