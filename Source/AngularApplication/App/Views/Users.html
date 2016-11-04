@@ -17,41 +17,60 @@
                 </div>
 
                 <div class="organization-landing">
-                    <div class="search-area" data-ng-show="controller.canViewAllUsers">
-                        <h2>Hae käyttäjiä</h2>
+                    
+                    <div  data-ng-show="controller.canViewAllUsers">
+
+                       
+
                         <div class="row">
-                            <div class="col-xs-12">
-                                <label>Organisaatio</label>
-                                <select id="userOrganizationInput" class="form-control"
-                                        data-ng-model="controller.organizationId"
-                                        data-ng-options="org.id as org.name for org in controller.organizations"
-                                        data-ng-change="controller.retrieveUsers()"></select>
+                            <div class="col-xs-6">
+
+                                <p class="services-sum">
+                                    Valittu organisaatio: <strong>{{ controller.selectedOrganizationName }}</strong>
+                                </p>
+
+                                <div class="ui-tree-container2">
+                                    <treecontrol id="organizationTree" class="tree-light"
+                                                 data-tree-model="controller.organizationHiearchy.value"
+                                                 data-on-selection="controller.toggleOrganisationSelection(node.id, selected)"
+                                                 order-by="name" filter-comparator="false">
+                                        {{node.name}}
+                                    </treecontrol>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6">
+
+                                <p>
+                                    Organisaation käyttäjät <strong>{{ controller.userCount }}</strong> kpl
+                                </p>
+
+                                <table id="userList" class="content-table common-descriptions">
+                                    <tbody>
+                                    <tr>
+                                        <th>Nimi</th>
+                                        <th>Sähköposti</th>
+                                        <th>Rooli</th>
+                                        <!--<th>Organisaatio</th>-->
+                                    </tr>
+                                    <tr data-ng-repeat="user in controller.model | orderBy: 'fullName'">
+                                        <td id="userName">
+
+                                            <a href="#/Organizations/{{ controller.organizationId }}/Users/{{ user.id }}">{{ user.lastName }} {{ user.firstName }}</a>
+                                        </td>
+
+                                        <td id="userEmail">{{ user.emailAddress }}</td>
+                                        <td id="userRole">{{ user.role.name }}</td>
+                                        <!--<td id="userOrganization">{{ user.organization.name }}</td>-->
+                                    </tr>
+                                    </tbody>
+                                </table>
+
                             </div>
                         </div>
+
                     </div>
 
-                    <p class="services-sum">
-                        Hakutuloksia <strong>{{ controller.userCount }}</strong> kpl
-                    </p>
-
-                    <div class="row">
-                        <table id="userList" class="content-table common-descriptions">
-                            <tbody>
-                                <tr>
-                                    <th>Nimi</th>
-                                    <th>Sähköposti</th>
-                                    <th>Rooli</th>
-                                    <th>Organisaatio</th>
-                                </tr>
-                                <tr data-ng-repeat="user in controller.model | orderBy: 'fullName'">
-                                    <td id="userName">{{ user.lastName }} {{ user.firstName }}</td>
-                                    <td id="userEmail">{{ user.emailAddress }}</td>
-                                    <td id="userRole">{{ user.role.name }}</td>
-                                    <td id="userOrganization">{{ user.organization.name }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
             </div>
         </div>

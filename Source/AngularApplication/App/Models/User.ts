@@ -29,6 +29,11 @@ module OrganizationRegister
             this.organizationId = value;
         }
 
+        public hasOrganizationId(): boolean
+        {
+            return this.organizationId != null && this.organizationId !== "";
+        }
+
         public hasPhoneNumber(): boolean
         {
             return this.phoneNumber != null && this.phoneNumber !== "";
