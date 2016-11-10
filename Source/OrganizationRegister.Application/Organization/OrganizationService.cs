@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using OrganizationRegister.Application.Settings;
 using OrganizationRegister.Common;
 
@@ -55,9 +56,9 @@ namespace OrganizationRegister.Application.Organization
             return organizationRepository.GetActiveOrganizationHierarchy();
         }
 
-        public IEnumerable<IHierarchicalOrganization> GetActiveOrganizationHierarchyForRootOrganization(Guid? rootOrganizationId, bool includeFutureOrganizations)
+        public IEnumerable<IHierarchicalOrganization> GetActiveOrganizationHierarchyForOrganization(Guid? organizationId, bool includeFutureOrganizations)
         {
-            return organizationRepository.GetActiveOrganizationHierarchyForRootOrganization(rootOrganizationId, includeFutureOrganizations);
+            return organizationRepository.GetActiveOrganizationHierarchyForOrganization(organizationId, includeFutureOrganizations);
         }
 
         public IEnumerable<IOrganizationName> GetActiveOrganizations()
