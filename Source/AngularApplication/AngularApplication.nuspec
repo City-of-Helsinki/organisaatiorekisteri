@@ -7,7 +7,7 @@
     <authors>Affecto</authors>
     <version>$version$</version>
     <releaseNotes>
-      Added language specific organization name abbreviations
+      Add user to suborganization
     </releaseNotes>
   </metadata>
 </package>

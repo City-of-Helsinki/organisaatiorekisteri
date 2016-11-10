@@ -56,11 +56,32 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-6">
+                                <!--<div class="col-xs-6">
                                     <label class="mandatory-field">Organisaatio</label>
                                     <select id="userOrganizationInput" class="form-control" data-ng-model="model.organizationIdProperty"
                                             data-ng-options="org.id as org.name for org in controller.organizations" data-ng-required="true"></select>
+                                </div>-->
+                                
+                                
+                                <div class="col-xs-6">
+                                    <label>
+                                        Käyttäjän organisaatio*
+                                    </label>
+                                    <div class="ui-tree-container2">
+                                        <treecontrol id="organizationTree" class="tree-light"
+                                                     data-tree-model="controller.organizationHiearchy.value"
+                                                     data-on-selection="controller.toggleOrganisationSelection(node.id, selected)"
+                                                     order-by="name" filter-comparator="false">
+                                            {{node.name}}
+                                        </treecontrol>
+                                    </div>
+
+                                    <p class="services-sum">
+                                        Valittu organisaatio: <strong>{{ controller.selectedOrganizationName }}</strong>
+                                    </p>
                                 </div>
+
+
                                 <div class="col-xs-6">
                                     <label class="mandatory-field">Rooli</label>
                                     <select id="userRoleInput" class="form-control" data-ng-model="model.roleIdProperty"
@@ -89,8 +110,11 @@
                                     </div>
                                 </div>
                             </div>
+                            
+                          
                         </div>
                     </div>
+                   
                 </form>
             </div>
         </div>

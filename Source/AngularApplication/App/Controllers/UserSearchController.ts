@@ -12,6 +12,8 @@ module OrganizationRegister
 
         public organizationId: string;
         public userCount: number;
+        public organizationHiearchy: Tree;
+        public selectedOrganizationName: string;
 
         constructor(private $scope: Affecto.Base.IViewScope, private $location: angular.ILocationService, $routeParams: IUserRoute,  private userService: UserService,
             private busyIndicationService: Affecto.BusyIndication.IBusyIndicationService, private organizationService: OrganizationService,
@@ -35,7 +37,7 @@ module OrganizationRegister
                 this.$location.path(Affecto.ExceptionHandling.Routes.error).search("code", ErrorCode.insufficientPermissions);
             }
 
-            this.retrieveUsersAndOrganizatioNames($routeParams);
+            this.retrieveUsersAndOrganizations($routeParams);
         }
 
         public retrieveUsers(): angular.IPromise<void>
@@ -49,14 +51,35 @@ module OrganizationRegister
                 });            
         }
 
-        private retrieveUsersAndOrganizatioNames($routeParams: IUserRoute): angular.IPromise<void>
+
+        public toggleOrganisationSelection(classId: string, selected: boolean): void
+        {
+            if (selected)
+            {
+                this.organizationId = classId;
+                this.selectedOrganizationName = this.organizationHiearchy.get(this.organizationId).name;
+                this.retrieveUsers();
+            }
+            else
+            {
+                //this.organizationId = null;
+                //this.selectedOrganizationName = "";
+            }
+
+          
+        }
+
+        private retrieveUsersAndOrganizations($routeParams: IUserRoute): angular.IPromise<void>
         {
             this.organizationId = $routeParams.organizationId;
             this.busyIndicationService.showBusyIndicator("Haetaan käyttäjiä...");
-            return this.$q.all([this.organizationService.getMainOrganizations(), this.userService.getUsers(this.organizationId)])
+            return this.$q.all([this.organizationService.getOrganizationHierarchy(), this.userService.getUsers(this.organizationId)])
                 .then((result: Array<any>) =>
                 {
-                    this.organizations = result[0];
+                    this.organizationHiearchy = result[0];
+
+                    this.toggleOrganisationSelection(this.organizationId, true);
+
                     this.setUsers(result[1]);
                     this.busyIndicationService.hideBusyIndicator();
                 });
