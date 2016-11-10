@@ -62,7 +62,7 @@ namespace OrganizationRegister.Store.CodeFirst
             return CreateHierarchicalOrganizations(dbOrganizations.ToList());
         }
 
-        public IReadOnlyCollection<IHierarchicalOrganization> GetActiveOrganizationHierarchyForRootOrganization(Guid? rootOrganizationId, bool includeFutureOrganizations)
+        public IReadOnlyCollection<IHierarchicalOrganization> GetActiveOrganizationHierarchyForOrganization(Guid? organizationId, bool includeFutureOrganizations)
         {
             IEnumerable<Organization> dbOrganizations;
             if (includeFutureOrganizations)
@@ -76,17 +76,7 @@ namespace OrganizationRegister.Store.CodeFirst
                 dbOrganizations = query.Execute();
             }
 
-            List<Organization> organizations;
-            if (rootOrganizationId.HasValue)
-            {
-                //Filter out other root organizations so that their descendants are filtered out as orphans
-                var filteredOrganizations = dbOrganizations.Where(org => org.Id == rootOrganizationId || org.ParentOrganizationId.HasValue).ToList();
-                organizations = RemoveOrphans(filteredOrganizations);
-            }
-            else
-                organizations = dbOrganizations.ToList();
-
-            return CreateHierarchicalOrganizations(organizations);
+            return CreateHierarchicalOrganizations(FilterByParentOrganization(dbOrganizations.ToList(), organizationId));
         }
 
 
@@ -332,15 +322,31 @@ namespace OrganizationRegister.Store.CodeFirst
             return organizations;
         }
 
-        private List<Organization> RemoveOrphans(List<Organization> filteredOrganizations)
+        private static List<Organization> FilterByParentOrganization(IReadOnlyCollection<Organization> organizations, Guid? parentOrganizationId)
         {
-            var orphanOrganizations = filteredOrganizations.Where(org => org.ParentOrganizationId.HasValue && filteredOrganizations.All(o => o.Id != org.ParentOrganizationId.Value)).ToList();
-            //var orphanOrganizations = filteredOrganizations.Where(org => !org.ParentOrganizationId.HasValue).ToList();
-            if (orphanOrganizations.Count > 0)
+            List<Organization> filteredOrganizations = new List<Organization>();
+
+            if (!parentOrganizationId.HasValue || !organizations.Any())
             {
-                filteredOrganizations.RemoveAll(org => orphanOrganizations.Contains(org));
-                RemoveOrphans(filteredOrganizations);
+                return filteredOrganizations;
             }
+
+            // filter out root organizations
+            var nonRootOrganizations = organizations.Where(org => org.Id == parentOrganizationId || org.ParentOrganizationId.HasValue).ToList();
+            // get parent organization 
+            var parentOrganization = nonRootOrganizations.Single(x => x.Id == parentOrganizationId);
+            // ParentOrganizationId must be set null for parent organization to create HerarchicalOrganizations 
+            parentOrganization.ParentOrganizationId = null;
+            // traverse organization hierarchy to get child organizations
+            Action<Organization> traverse = null;
+            traverse = (n) =>
+            {
+                filteredOrganizations.Add(n);
+                nonRootOrganizations.Where(child => child.ParentOrganizationId == n.Id).ToList().ForEach(traverse);
+            };
+            // traverse from parent organization
+            traverse(parentOrganization);
+
             return filteredOrganizations;
         }
 
