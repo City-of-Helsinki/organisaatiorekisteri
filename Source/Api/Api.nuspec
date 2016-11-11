@@ -7,7 +7,7 @@
     <authors>Affecto</authors>
     <version>$version$</version>
     <releaseNotes>
-      add user to suborganization
+      Refactored/fixed organizationhierarchy methods to be able to get the whole organisation without any parent org guid.
     </releaseNotes>
   </metadata>
 </package>
