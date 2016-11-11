@@ -62,6 +62,23 @@ namespace OrganizationRegister.Store.CodeFirst
             return CreateHierarchicalOrganizations(dbOrganizations.ToList());
         }
 
+        public IReadOnlyCollection<IHierarchicalOrganization> GetActiveOrganizationHierarchy(bool includeFutureOrganizations)
+        {
+            IEnumerable<Organization> dbOrganizations;
+            if (includeFutureOrganizations)
+            {
+                var query = new ActiveCurrentAndFutureOrganizationsQuery(context.Organizations);
+                dbOrganizations = query.Execute();
+            }
+            else
+            {
+                var query = new ActiveCurrentOrganizationsQuery(context.Organizations);
+                dbOrganizations = query.Execute();
+            }
+
+            return CreateHierarchicalOrganizations(dbOrganizations.ToList());
+        }
+
         public IReadOnlyCollection<IHierarchicalOrganization> GetActiveOrganizationHierarchyForOrganization(Guid? organizationId, bool includeFutureOrganizations)
         {
             IEnumerable<Organization> dbOrganizations;

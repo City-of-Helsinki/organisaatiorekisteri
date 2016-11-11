@@ -11,6 +11,7 @@ namespace OrganizationRegister.Application.Organization
         Guid AddSubOrganization(Guid parentOrganizationId, string businessId, string oid, string type, string municipalityCode, IEnumerable<LocalizedText> names, 
             IEnumerable<LocalizedText> descriptions, DateTime? validFrom, DateTime? validTo, IEnumerable<LocalizedText> nameAbbreviations);
         IEnumerable<IHierarchicalOrganization> GetActiveOrganizationHierarchy();
+        IEnumerable<IHierarchicalOrganization> GetActiveOrganizationHierarchy(bool includeFutureOrganizations);
         IEnumerable<IOrganizationName> GetActiveOrganizations();
         IEnumerable<IHierarchicalOrganization> GetActiveOrganizationHierarchyForOrganization(Guid? rootOrganizationId, bool includeFutureOrganizations);
         IEnumerable<IOrganizationName> GetActiveMainOrganizations();

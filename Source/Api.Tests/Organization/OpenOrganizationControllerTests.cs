@@ -39,6 +39,68 @@ namespace OrganizationRegister.Api.Tests.Organization
         }
 
         [TestMethod]
+        public void GetCurrentOrganizationHierarchy()
+        {
+            HierarchicalOrganization returnValue = new HierarchicalOrganization();
+            IHierarchicalOrganization appReturnValue = Substitute.For<IHierarchicalOrganization>();
+            hierarchicalOrganizationMapper.Map(appReturnValue).Returns(returnValue);
+            organizationService.GetActiveOrganizationHierarchy(false).Returns(new List<IHierarchicalOrganization> { appReturnValue, appReturnValue });
+
+            var result = sut.GetCurrentOrganizationHierarchy() as OkNegotiatedContentResult<IEnumerable<HierarchicalOrganization>>;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Content.Count());
+            Assert.IsTrue(result.Content.All(org => org.Equals(returnValue)));
+        }
+
+        [TestMethod]
+        public void GetCurrentAndFutureOrganizationHierarchy()
+        {
+            HierarchicalOrganization returnValue = new HierarchicalOrganization();
+            IHierarchicalOrganization appReturnValue = Substitute.For<IHierarchicalOrganization>();
+            hierarchicalOrganizationMapper.Map(appReturnValue).Returns(returnValue);
+            organizationService.GetActiveOrganizationHierarchy(true).Returns(new List<IHierarchicalOrganization> { appReturnValue, appReturnValue });
+
+            var result = sut.GetCurrentAndFutureOrganizationHierarchy() as OkNegotiatedContentResult<IEnumerable<HierarchicalOrganization>>;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Content.Count());
+            Assert.IsTrue(result.Content.All(org => org.Equals(returnValue)));
+        }
+
+        [TestMethod]
+        public void GetCurrentOrganizationHierarchyForOrganization()
+        {
+            Guid organizationId = Guid.NewGuid();
+            HierarchicalOrganization returnValue = new HierarchicalOrganization();
+            IHierarchicalOrganization appReturnValue = Substitute.For<IHierarchicalOrganization>();
+            hierarchicalOrganizationMapper.Map(appReturnValue).Returns(returnValue);
+            organizationService.GetActiveOrganizationHierarchyForOrganization(organizationId, false).Returns(new List<IHierarchicalOrganization> { appReturnValue, appReturnValue });
+
+            var result = sut.GetCurrentOrganizationHierarchyForOrganization(organizationId) as OkNegotiatedContentResult<IEnumerable<HierarchicalOrganization>>;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Content.Count());
+            Assert.IsTrue(result.Content.All(org => org.Equals(returnValue)));
+        }
+
+        [TestMethod]
+        public void GetCurrentAndFutureOrganizationHierarchyForOrganization()
+        {
+            Guid organizationId = Guid.NewGuid();
+            HierarchicalOrganization returnValue = new HierarchicalOrganization();
+            IHierarchicalOrganization appReturnValue = Substitute.For<IHierarchicalOrganization>();
+            hierarchicalOrganizationMapper.Map(appReturnValue).Returns(returnValue);
+            organizationService.GetActiveOrganizationHierarchyForOrganization(organizationId, true).Returns(new List<IHierarchicalOrganization> { appReturnValue, appReturnValue });
+
+            var result = sut.GetCurrentAndFutureOrganizationHierarchyForOrganization(organizationId) as OkNegotiatedContentResult<IEnumerable<HierarchicalOrganization>>;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Content.Count());
+            Assert.IsTrue(result.Content.All(org => org.Equals(returnValue)));
+        }
+
+        [TestMethod]
         public void GetMainOrganizations()
         {
             OrganizationName returnValue = new OrganizationName();
