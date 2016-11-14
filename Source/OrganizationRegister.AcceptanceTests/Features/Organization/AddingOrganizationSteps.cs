@@ -27,7 +27,7 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
         [Then(@"there are following organizations:")]
         public void ThenThereAreFollowingOrganizations(Table expectedOrganizations)
         {
-            IReadOnlyCollection<IOrganizationName> organizations = OrganizationService.GetActiveOrganizations().ToList();
+            IReadOnlyCollection<IOrganizationName> organizations = OrganizationService.GetOrganizations().ToList();
             Assert.AreEqual(expectedOrganizations.RowCount, organizations.Count, "Organization count mismatch.");
 
             foreach (TableRow expectedOrganization in expectedOrganizations.Rows)
@@ -56,7 +56,7 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
         {
             TableRow company = companies.Rows.Single();
 
-            IEnumerable<IOrganizationName> organizations = OrganizationService.GetActiveOrganizations();
+            IEnumerable<IOrganizationName> organizations = OrganizationService.GetOrganizations();
             Guid parentOrganizationId = organizations.Single(org => org.Names.Any(name => name.LocalizedValue.Equals(parentOrganizationFinnishName))).Id;
                 
             Try(() => OrganizationService.AddSubOrganization(parentOrganizationId, company["Business id"], company.GetOptionalValue("Oid"), company["Type"], null,
@@ -67,7 +67,7 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
         [Then(@"'(.+)' is a sub organization of '(.+)'")]
         public void ThenIsASubOrganizationOf(string subOrganizationFinnishName, string parentOrganizationFinnishName)
         {
-            IHierarchicalOrganization hierarchicalParent = OrganizationHelper.GetOrganization(OrganizationService.GetActiveOrganizationHierarchy().ToList(), parentOrganizationFinnishName);
+            IHierarchicalOrganization hierarchicalParent = OrganizationHelper.GetOrganization(OrganizationService.GetOrganizationHierarchy().ToList(), parentOrganizationFinnishName);
             IHierarchicalOrganization hierarchicalSub = 
                 hierarchicalParent.SubOrganizations.Single(org => org.Names.Any(name => name.LocalizedValue.Equals(subOrganizationFinnishName)));
 
@@ -78,7 +78,7 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
         [Then(@"there are following main organizations:")]
         public void ThenThereAreFollowingMainOrganizations(Table expectedOrganizations)
         {
-            IReadOnlyCollection<IOrganizationName> organizations = OrganizationService.GetActiveMainOrganizations().ToList();
+            IReadOnlyCollection<IOrganizationName> organizations = OrganizationService.GetMainOrganizations().ToList();
             Assert.AreEqual(expectedOrganizations.RowCount, organizations.Count, "Organization count mismatch.");
             foreach (TableRow expectedOrganization in expectedOrganizations.Rows)
             {

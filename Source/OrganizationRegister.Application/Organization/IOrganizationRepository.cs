@@ -8,12 +8,12 @@ namespace OrganizationRegister.Application.Organization
     {
         void AddOrganizationAndSave(IOrganization organization);
         void AddSubOrganizationAndSave(Guid parentOrganizationId, IOrganization organization);
-        IReadOnlyCollection<IHierarchicalOrganization> GetActiveOrganizationHierarchy();
-        IReadOnlyCollection<IHierarchicalOrganization> GetActiveOrganizationHierarchy(bool includeFutureOrganizations);
-        IReadOnlyCollection<IHierarchicalOrganization> GetActiveOrganizationHierarchyForOrganization(Guid? rootOrganizationId, bool includeFutureOrganizations = false);
-        IReadOnlyCollection<IOrganizationName> GetActiveOrganizations();
-        IReadOnlyCollection<IOrganizationName> GetActiveMainOrganizations();
+        IReadOnlyCollection<IHierarchicalOrganization> GetOrganizationHierarchy();
+        IReadOnlyCollection<IHierarchicalOrganization> GetOrganizationHierarchy(bool includeFutureOrganizations);
+        IReadOnlyCollection<IHierarchicalOrganization> GetOrganizationHierarchyForOrganization(Guid? rootOrganizationId, bool includeFutureOrganizations = false);
+        IReadOnlyCollection<IOrganizationName> GetOrganizations();
         IReadOnlyCollection<IOrganizationName> GetMainOrganizations();
+        IReadOnlyCollection<IOrganizationName> GetMainOrganizationsNames();
         IHierarchicalOrganization GetHierarchicalOrganization(Guid id);
         void SaveChanges();
         IOrganization GetOrganization(Guid id);
