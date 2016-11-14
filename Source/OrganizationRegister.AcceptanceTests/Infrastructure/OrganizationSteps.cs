@@ -42,7 +42,7 @@ namespace OrganizationRegister.AcceptanceTests.Infrastructure
         [Then(@"there are following organizations:")]
         public void ThenThereAreFollowingOrganizations(Table expectedOrganizations)
         {
-            IReadOnlyCollection<IHierarchicalOrganization> organizations = OrganizationService.GetActiveOrganizationHierarchy().ToList();
+            IReadOnlyCollection<IHierarchicalOrganization> organizations = OrganizationService.GetOrganizationHierarchy().ToList();
             Assert.AreEqual(expectedOrganizations.RowCount, organizations.Count);
             foreach (TableRow expectedOrganization in expectedOrganizations.Rows)
             {
@@ -62,7 +62,7 @@ namespace OrganizationRegister.AcceptanceTests.Infrastructure
         [Then(@"there are no organizations")]
         public void ThenThereAreNoOrganizations()
         {
-            Assert.IsFalse(OrganizationService.GetActiveOrganizationHierarchy().Any());
+            Assert.IsFalse(OrganizationService.GetOrganizationHierarchy().Any());
         }
     }
 }

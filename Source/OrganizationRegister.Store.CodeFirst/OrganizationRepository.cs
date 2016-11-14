@@ -56,14 +56,14 @@ namespace OrganizationRegister.Store.CodeFirst
             context.SaveChanges();
         }
 
-        public IReadOnlyCollection<IHierarchicalOrganization> GetActiveOrganizationHierarchy()
+        public IReadOnlyCollection<IHierarchicalOrganization> GetOrganizationHierarchy()
         {
             var query = new ActiveOrganizationsQuery(context.Organizations);
             IEnumerable<Organization> dbOrganizations = query.Execute();
             return CreateHierarchicalOrganizations(dbOrganizations.ToList());
         }
 
-        public IReadOnlyCollection<IHierarchicalOrganization> GetActiveOrganizationHierarchy(bool includeFutureOrganizations)
+        public IReadOnlyCollection<IHierarchicalOrganization> GetOrganizationHierarchy(bool includeFutureOrganizations)
         {
             IEnumerable<Organization> dbOrganizations;
             if (includeFutureOrganizations)
@@ -93,7 +93,7 @@ namespace OrganizationRegister.Store.CodeFirst
             
         }
 
-        public IReadOnlyCollection<IHierarchicalOrganization> GetActiveOrganizationHierarchyForOrganization(Guid? organizationId, bool includeFutureOrganizations)
+        public IReadOnlyCollection<IHierarchicalOrganization> GetOrganizationHierarchyForOrganization(Guid? organizationId, bool includeFutureOrganizations)
         {
             IEnumerable<Organization> dbOrganizations;
             if (includeFutureOrganizations)
@@ -111,21 +111,21 @@ namespace OrganizationRegister.Store.CodeFirst
         }
 
 
-        public IReadOnlyCollection<IOrganizationName> GetActiveOrganizations()
+        public IReadOnlyCollection<IOrganizationName> GetOrganizations()
         {
             var query = new ActiveOrganizationsQuery(context.Organizations);
             IEnumerable<Organization> dbOrganizations = query.Execute();
             return CreateOrganizationNames(dbOrganizations.ToList());
         }
 
-        public IReadOnlyCollection<IOrganizationName> GetActiveMainOrganizations()
+        public IReadOnlyCollection<IOrganizationName> GetMainOrganizations()
         {
             var query = new ActiveMainOrganizationsQuery(context.Organizations);
             IEnumerable<Organization> dbOrganizations = query.Execute();
             return CreateOrganizationNames(dbOrganizations.ToList());
         }
 
-        public IReadOnlyCollection<IOrganizationName> GetMainOrganizations()
+        public IReadOnlyCollection<IOrganizationName> GetMainOrganizationsNames()
         {
             return CreateOrganizationNames(context.Organizations.ToList());
         }

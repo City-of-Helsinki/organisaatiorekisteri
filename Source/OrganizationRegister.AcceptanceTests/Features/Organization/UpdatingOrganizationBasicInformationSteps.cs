@@ -48,7 +48,7 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
         public void GivenTheFollowingCompanyIsAddedAsASubOrganizationOf(string parentOrganizationName, Table basicInformation)
         {
             TableRow info = basicInformation.Rows.Single();
-            IHierarchicalOrganization parent = OrganizationHelper.GetOrganization(OrganizationService.GetActiveOrganizationHierarchy().ToList(), parentOrganizationName);
+            IHierarchicalOrganization parent = OrganizationHelper.GetOrganization(OrganizationService.GetOrganizationHierarchy().ToList(), parentOrganizationName);
             OrganizationService.AddSubOrganization(parent.Id, info["Business id"], info.GetOptionalValue("Oid"), "Yritys", null,
                 LocalizedTextHelper.CreateNamesCollection(info), LocalizedTextHelper.CreateDescriptionsCollection(info), info.GetOptionalFinnishDate("Valid from"),
                 info.GetOptionalFinnishDate("Valid to"), null);
@@ -58,7 +58,7 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
         public void WhenTheFollowingBasicInformationIsSetToOrganization(string organizationName, Table basicInformation)
         {
             TableRow info = basicInformation.Rows.Single();
-            IOrganizationName organization = OrganizationService.GetActiveOrganizations().Single(o => o.Names.Any(name => name.LocalizedValue.Equals(organizationName)));
+            IOrganizationName organization = OrganizationService.GetOrganizations().Single(o => o.Names.Any(name => name.LocalizedValue.Equals(organizationName)));
             Try(() => OrganizationService.SetOrganizationBasicInformation(organization.Id, info["Business id"], info.GetOptionalValue("Oid"),
                 LocalizedTextHelper.CreateNamesCollection(info), LocalizedTextHelper.CreateDescriptionsCollection(info), info["Type"],
                 info.GetOptionalValue("Municipality code"), info.GetOptionalFinnishDate("Valid from"), info.GetOptionalFinnishDate("Valid to"),null));
@@ -67,7 +67,7 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
         [Then(@"the organization '(.+)' has the following basic information:")]
         public void ThenTheOrganizationHasTheFollowingBasicInformation(string organizationName, Table basicInformation)
         {
-            IOrganizationName organization = OrganizationService.GetActiveOrganizations().Single(o => o.Names.Any(name => name.LocalizedValue.Equals(organizationName)));
+            IOrganizationName organization = OrganizationService.GetOrganizations().Single(o => o.Names.Any(name => name.LocalizedValue.Equals(organizationName)));
             OrganizationHelper.AssertOrganizationBasicInformation(basicInformation.Rows.Single(), OrganizationService.GetOrganization(organization.Id));
         }
     }

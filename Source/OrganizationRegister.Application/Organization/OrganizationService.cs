@@ -51,34 +51,34 @@ namespace OrganizationRegister.Application.Organization
             return id;
         }
 
-        public IEnumerable<IHierarchicalOrganization> GetActiveOrganizationHierarchy()
+        public IEnumerable<IHierarchicalOrganization> GetOrganizationHierarchy()
         {
-            return organizationRepository.GetActiveOrganizationHierarchy();
+            return organizationRepository.GetOrganizationHierarchy();
         }
 
-        public IEnumerable<IHierarchicalOrganization> GetActiveOrganizationHierarchy(bool includeFutureOrganizations)
+        public IEnumerable<IHierarchicalOrganization> GetOrganizationHierarchy(bool includeFutureOrganizations)
         {
-            return organizationRepository.GetActiveOrganizationHierarchy(includeFutureOrganizations);
+            return organizationRepository.GetOrganizationHierarchy(includeFutureOrganizations);
         }
 
-        public IEnumerable<IHierarchicalOrganization> GetActiveOrganizationHierarchyForOrganization(Guid? organizationId, bool includeFutureOrganizations)
+        public IEnumerable<IHierarchicalOrganization> GetOrganizationHierarchyForOrganization(Guid? organizationId, bool includeFutureOrganizations)
         {
-            return organizationRepository.GetActiveOrganizationHierarchyForOrganization(organizationId, includeFutureOrganizations);
+            return organizationRepository.GetOrganizationHierarchyForOrganization(organizationId, includeFutureOrganizations);
         }
 
-        public IEnumerable<IOrganizationName> GetActiveOrganizations()
+        public IEnumerable<IOrganizationName> GetOrganizations()
         {
-            return organizationRepository.GetActiveOrganizations();
-        }
-
-        public IEnumerable<IOrganizationName> GetActiveMainOrganizations()
-        {
-            return organizationRepository.GetActiveMainOrganizations();
+            return organizationRepository.GetOrganizations();
         }
 
         public IEnumerable<IOrganizationName> GetMainOrganizations()
         {
             return organizationRepository.GetMainOrganizations();
+        }
+
+        public IEnumerable<IOrganizationName> GetMainOrganizationsNames()
+        {
+            return organizationRepository.GetMainOrganizationsNames();
         }
 
         public IOrganization GetOrganization(Guid organizationId)

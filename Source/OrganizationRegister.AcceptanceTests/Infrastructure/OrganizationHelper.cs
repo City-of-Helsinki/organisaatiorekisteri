@@ -73,7 +73,7 @@ namespace OrganizationRegister.AcceptanceTests.Infrastructure
         {
             IContainer container = ScenarioContext.Current.Get<IContainer>();
             IOrganizationService organizationService = container.Resolve<IOrganizationService>();
-            return organizationService.GetActiveOrganizations().Single(o => o.Names.Any(name => name.LocalizedValue.Equals(organizationName))).Id;
+            return organizationService.GetOrganizations().Single(o => o.Names.Any(name => name.LocalizedValue.Equals(organizationName))).Id;
         }
 
         private static void AssertOptionalValue(string expectedValue, DateTime? value)
