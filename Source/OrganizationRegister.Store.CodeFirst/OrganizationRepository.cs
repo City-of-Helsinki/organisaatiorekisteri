@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using System.Linq;
 using OrganizationRegister.Application;
 using OrganizationRegister.Application.Location;
@@ -69,14 +70,27 @@ namespace OrganizationRegister.Store.CodeFirst
             {
                 var query = new ActiveCurrentAndFutureOrganizationsQuery(context.Organizations);
                 dbOrganizations = query.Execute();
+                return CreateHierarchicalOrganizations(dbOrganizations.ToList());
             }
             else
             {
                 var query = new ActiveCurrentOrganizationsQuery(context.Organizations);
                 dbOrganizations = query.Execute();
+
+                var dbOrgs = dbOrganizations.ToList();
+                // Filter out orphan suborganizations whose parent (future org) is not present.
+                // Filtering is made by first finding all root orgs and then calling FilterByParentOrganization for each of them
+                var rootOrgs = dbOrgs.Where(org => org.ParentOrganization == null);
+                var orgs = new List<Organization>();
+                foreach (var rootOrg in rootOrgs)
+                {
+                    orgs.AddRange(FilterByParentOrganization(dbOrgs, rootOrg.Id));
+                }
+
+                return CreateHierarchicalOrganizations(orgs);
             }
 
-            return CreateHierarchicalOrganizations(dbOrganizations.ToList());
+            
         }
 
         public IReadOnlyCollection<IHierarchicalOrganization> GetActiveOrganizationHierarchyForOrganization(Guid? organizationId, bool includeFutureOrganizations)
@@ -343,7 +357,7 @@ namespace OrganizationRegister.Store.CodeFirst
         {
             List<Organization> filteredOrganizations = new List<Organization>();
 
-            if (!parentOrganizationId.HasValue || !organizations.Any())
+            if (!parentOrganizationId.HasValue || !organizations.Any() || organizations.All(o => o.Id != parentOrganizationId.Value))
             {
                 return filteredOrganizations;
             }
