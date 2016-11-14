@@ -7,7 +7,8 @@
     <authors>Affecto</authors>
     <version>$version$</version>
     <releaseNotes>
-      Refactored/fixed organizationhierarchy methods to be able to get the whole organisation without any parent org guid.
+      Fixed organizationhierarchy methods by removing possible orphans when getting current organizations.
+      Renamed organisation service/repositry methods.
     </releaseNotes>
   </metadata>
 </package>

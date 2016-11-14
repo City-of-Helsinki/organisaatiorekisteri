@@ -31,7 +31,7 @@ namespace OrganizationRegister.Api.Organization
         [GetRoute("organizationhierarchy")]
         public IHttpActionResult GetOrganizationHierarchy()
         {
-            IEnumerable<IHierarchicalOrganization> organizations = organizationService.GetActiveOrganizationHierarchy();
+            IEnumerable<IHierarchicalOrganization> organizations = organizationService.GetOrganizationHierarchy();
             var mapper = mapperFactory.CreateHierarchicalOrganizationMapper();
             IEnumerable<HierarchicalOrganization> mappedOrganizations = mapper.Map(organizations);
             return Ok(mappedOrganizations);
@@ -41,7 +41,7 @@ namespace OrganizationRegister.Api.Organization
         [GetRoute("currentorganizationhierarchy")]
         public IHttpActionResult GetCurrentOrganizationHierarchy()
         {
-            IEnumerable<IHierarchicalOrganization> organizations = organizationService.GetActiveOrganizationHierarchy(false);
+            IEnumerable<IHierarchicalOrganization> organizations = organizationService.GetOrganizationHierarchy(false);
             var mapper = mapperFactory.CreateHierarchicalOrganizationMapper();
             IEnumerable<HierarchicalOrganization> mappedOrganizations = mapper.Map(organizations);
             return Ok(mappedOrganizations);
@@ -52,7 +52,7 @@ namespace OrganizationRegister.Api.Organization
         [GetRoute("currentandfutureorganizationhierarchy")]
         public IHttpActionResult GetCurrentAndFutureOrganizationHierarchy()
         {
-            IEnumerable<IHierarchicalOrganization> organizations = organizationService.GetActiveOrganizationHierarchy(true);
+            IEnumerable<IHierarchicalOrganization> organizations = organizationService.GetOrganizationHierarchy(true);
             var mapper = mapperFactory.CreateHierarchicalOrganizationMapper();
             IEnumerable<HierarchicalOrganization> mappedOrganizations = mapper.Map(organizations);
             return Ok(mappedOrganizations);
@@ -62,7 +62,7 @@ namespace OrganizationRegister.Api.Organization
         [GetRoute("currentorganizationhierarchyfororganization/{organizationId}")]
         public IHttpActionResult GetCurrentOrganizationHierarchyForOrganization(Guid organizationId)
         {
-            IEnumerable<IHierarchicalOrganization> organizations = organizationService.GetActiveOrganizationHierarchyForOrganization(organizationId, includeFutureOrganizations: false);
+            IEnumerable<IHierarchicalOrganization> organizations = organizationService.GetOrganizationHierarchyForOrganization(organizationId, includeFutureOrganizations: false);
             var mapper = mapperFactory.CreateHierarchicalOrganizationMapper();
             IEnumerable<HierarchicalOrganization> mappedOrganizations = mapper.Map(organizations);
             return Ok(mappedOrganizations);
@@ -72,7 +72,7 @@ namespace OrganizationRegister.Api.Organization
         [GetRoute("currentandfutureorganizationhierarchyfororganization/{organizationId}")]
         public IHttpActionResult GetCurrentAndFutureOrganizationHierarchyForOrganization(Guid organizationId)
         {
-            IEnumerable<IHierarchicalOrganization> organizations = organizationService.GetActiveOrganizationHierarchyForOrganization(organizationId, includeFutureOrganizations:true);
+            IEnumerable<IHierarchicalOrganization> organizations = organizationService.GetOrganizationHierarchyForOrganization(organizationId, includeFutureOrganizations:true);
             var mapper = mapperFactory.CreateHierarchicalOrganizationMapper();
             IEnumerable<HierarchicalOrganization> mappedOrganizations = mapper.Map(organizations);
             return Ok(mappedOrganizations);
@@ -83,7 +83,7 @@ namespace OrganizationRegister.Api.Organization
         [GetRoute("mainorganizations")]
         public IHttpActionResult GetMainOrganizations()
         {
-            IEnumerable<IOrganizationName> organizations = organizationService.GetActiveMainOrganizations();
+            IEnumerable<IOrganizationName> organizations = organizationService.GetMainOrganizations();
             var mapper = mapperFactory.CreateOrganizationNameMapper();
             IEnumerable<OrganizationName> mappedOrganizations = mapper.Map(organizations);
             return Ok(mappedOrganizations);
@@ -93,7 +93,7 @@ namespace OrganizationRegister.Api.Organization
         [GetRoute("organizations")]
         public IHttpActionResult GetOrganizations()
         {
-            IEnumerable<IOrganizationName> organizations = organizationService.GetActiveOrganizations();
+            IEnumerable<IOrganizationName> organizations = organizationService.GetOrganizations();
             var mapper = mapperFactory.CreateOrganizationNameMapper();
             IEnumerable<OrganizationName> mappedOrganizations = mapper.Map(organizations);
             return Ok(mappedOrganizations);

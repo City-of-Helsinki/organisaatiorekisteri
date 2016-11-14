@@ -120,7 +120,7 @@ namespace OrganizationRegister.AngularApplication.BrowserTests.Infrastructure
 
         private static void ClearDatabase()
         {
-            foreach (IOrganizationName organization in organizationService.GetMainOrganizations())
+            foreach (IOrganizationName organization in organizationService.GetMainOrganizationsNames())
             {
                 organizationService.RemoveOrganization(organization.Id);
             }

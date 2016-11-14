@@ -29,7 +29,7 @@ namespace OrganizationRegister.Api.Tests.Organization
             HierarchicalOrganization returnValue = new HierarchicalOrganization();
             IHierarchicalOrganization appReturnValue = Substitute.For<IHierarchicalOrganization>();
             hierarchicalOrganizationMapper.Map(appReturnValue).Returns(returnValue);
-            organizationService.GetActiveOrganizationHierarchy().Returns(new List<IHierarchicalOrganization> { appReturnValue, appReturnValue });
+            organizationService.GetOrganizationHierarchy().Returns(new List<IHierarchicalOrganization> { appReturnValue, appReturnValue });
 
             var result = sut.GetOrganizationHierarchy() as OkNegotiatedContentResult<IEnumerable<HierarchicalOrganization>>;
 
@@ -44,7 +44,7 @@ namespace OrganizationRegister.Api.Tests.Organization
             HierarchicalOrganization returnValue = new HierarchicalOrganization();
             IHierarchicalOrganization appReturnValue = Substitute.For<IHierarchicalOrganization>();
             hierarchicalOrganizationMapper.Map(appReturnValue).Returns(returnValue);
-            organizationService.GetActiveOrganizationHierarchy(false).Returns(new List<IHierarchicalOrganization> { appReturnValue, appReturnValue });
+            organizationService.GetOrganizationHierarchy(false).Returns(new List<IHierarchicalOrganization> { appReturnValue, appReturnValue });
 
             var result = sut.GetCurrentOrganizationHierarchy() as OkNegotiatedContentResult<IEnumerable<HierarchicalOrganization>>;
 
@@ -59,7 +59,7 @@ namespace OrganizationRegister.Api.Tests.Organization
             HierarchicalOrganization returnValue = new HierarchicalOrganization();
             IHierarchicalOrganization appReturnValue = Substitute.For<IHierarchicalOrganization>();
             hierarchicalOrganizationMapper.Map(appReturnValue).Returns(returnValue);
-            organizationService.GetActiveOrganizationHierarchy(true).Returns(new List<IHierarchicalOrganization> { appReturnValue, appReturnValue });
+            organizationService.GetOrganizationHierarchy(true).Returns(new List<IHierarchicalOrganization> { appReturnValue, appReturnValue });
 
             var result = sut.GetCurrentAndFutureOrganizationHierarchy() as OkNegotiatedContentResult<IEnumerable<HierarchicalOrganization>>;
 
@@ -75,7 +75,7 @@ namespace OrganizationRegister.Api.Tests.Organization
             HierarchicalOrganization returnValue = new HierarchicalOrganization();
             IHierarchicalOrganization appReturnValue = Substitute.For<IHierarchicalOrganization>();
             hierarchicalOrganizationMapper.Map(appReturnValue).Returns(returnValue);
-            organizationService.GetActiveOrganizationHierarchyForOrganization(organizationId, false).Returns(new List<IHierarchicalOrganization> { appReturnValue, appReturnValue });
+            organizationService.GetOrganizationHierarchyForOrganization(organizationId, false).Returns(new List<IHierarchicalOrganization> { appReturnValue, appReturnValue });
 
             var result = sut.GetCurrentOrganizationHierarchyForOrganization(organizationId) as OkNegotiatedContentResult<IEnumerable<HierarchicalOrganization>>;
 
@@ -91,7 +91,7 @@ namespace OrganizationRegister.Api.Tests.Organization
             HierarchicalOrganization returnValue = new HierarchicalOrganization();
             IHierarchicalOrganization appReturnValue = Substitute.For<IHierarchicalOrganization>();
             hierarchicalOrganizationMapper.Map(appReturnValue).Returns(returnValue);
-            organizationService.GetActiveOrganizationHierarchyForOrganization(organizationId, true).Returns(new List<IHierarchicalOrganization> { appReturnValue, appReturnValue });
+            organizationService.GetOrganizationHierarchyForOrganization(organizationId, true).Returns(new List<IHierarchicalOrganization> { appReturnValue, appReturnValue });
 
             var result = sut.GetCurrentAndFutureOrganizationHierarchyForOrganization(organizationId) as OkNegotiatedContentResult<IEnumerable<HierarchicalOrganization>>;
 
@@ -106,7 +106,7 @@ namespace OrganizationRegister.Api.Tests.Organization
             OrganizationName returnValue = new OrganizationName();
             IOrganizationName appReturnValue = Substitute.For<IOrganizationName>();
             organizationNameMapper.Map(appReturnValue).Returns(returnValue);
-            organizationService.GetActiveMainOrganizations().Returns(new List<IOrganizationName> { appReturnValue });
+            organizationService.GetMainOrganizations().Returns(new List<IOrganizationName> { appReturnValue });
 
             var result = sut.GetMainOrganizations() as OkNegotiatedContentResult<IEnumerable<OrganizationName>>;
 
@@ -119,7 +119,7 @@ namespace OrganizationRegister.Api.Tests.Organization
             OrganizationName returnValue = new OrganizationName();
             IOrganizationName appReturnValue = Substitute.For<IOrganizationName>();
             organizationNameMapper.Map(appReturnValue).Returns(returnValue);
-            organizationService.GetActiveOrganizations().Returns(new List<IOrganizationName> { appReturnValue });
+            organizationService.GetOrganizations().Returns(new List<IOrganizationName> { appReturnValue });
 
             var result = sut.GetOrganizations() as OkNegotiatedContentResult<IEnumerable<OrganizationName>>;
 

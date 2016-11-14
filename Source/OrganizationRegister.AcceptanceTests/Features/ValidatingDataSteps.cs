@@ -30,7 +30,7 @@ namespace OrganizationRegister.AcceptanceTests.Features
         [When(@"unique business identifier '(.+)' is validated for the same organization")]
         public void WhenUniqueBusinessIdentifierIsValidatedForTheSameOrganization(string businessId)
         {
-            Guid? organizationId = OrganizationService.GetActiveMainOrganizations().Single().Id;
+            Guid? organizationId = OrganizationService.GetMainOrganizations().Single().Id;
             businessIdentifierValidationResult = ValidationService.ValidateUniqueBusinessIdentifier(businessId, organizationId);
         }
 

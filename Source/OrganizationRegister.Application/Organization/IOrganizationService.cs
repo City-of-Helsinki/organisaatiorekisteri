@@ -10,12 +10,12 @@ namespace OrganizationRegister.Application.Organization
             DateTime? validFrom, DateTime? validTo, IEnumerable<LocalizedText> nameAbbreviations);
         Guid AddSubOrganization(Guid parentOrganizationId, string businessId, string oid, string type, string municipalityCode, IEnumerable<LocalizedText> names, 
             IEnumerable<LocalizedText> descriptions, DateTime? validFrom, DateTime? validTo, IEnumerable<LocalizedText> nameAbbreviations);
-        IEnumerable<IHierarchicalOrganization> GetActiveOrganizationHierarchy();
-        IEnumerable<IHierarchicalOrganization> GetActiveOrganizationHierarchy(bool includeFutureOrganizations);
-        IEnumerable<IOrganizationName> GetActiveOrganizations();
-        IEnumerable<IHierarchicalOrganization> GetActiveOrganizationHierarchyForOrganization(Guid? rootOrganizationId, bool includeFutureOrganizations);
-        IEnumerable<IOrganizationName> GetActiveMainOrganizations();
+        IEnumerable<IHierarchicalOrganization> GetOrganizationHierarchy();
+        IEnumerable<IHierarchicalOrganization> GetOrganizationHierarchy(bool includeFutureOrganizations);
+        IEnumerable<IOrganizationName> GetOrganizations();
+        IEnumerable<IHierarchicalOrganization> GetOrganizationHierarchyForOrganization(Guid? rootOrganizationId, bool includeFutureOrganizations);
         IEnumerable<IOrganizationName> GetMainOrganizations();
+        IEnumerable<IOrganizationName> GetMainOrganizationsNames();
         IOrganization GetOrganization(Guid organizationId);
         void SetOrganizationBasicInformation(Guid organizationId, string businessId, string oid, IEnumerable<LocalizedText> names, IEnumerable<LocalizedText> descriptions, 
             string type, string municipalityCode, DateTime? validFrom, DateTime? validTo, IEnumerable<LocalizedText> nameAbbreviations);
