@@ -7,6 +7,7 @@ namespace OrganizationRegister.Application.Organization
     {
         DateTime? ValidFrom { get; }
         DateTime? ValidTo { get; }
+        Guid? ParentId { get; }
 
         IEnumerable<IHierarchicalOrganization> SubOrganizations { get; }
     }
