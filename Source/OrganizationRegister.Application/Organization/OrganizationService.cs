@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using OrganizationRegister.Application.Settings;
 using OrganizationRegister.Common;
+using Affecto.Authentication.Claims;
+using OrganizationRegister.Common.User;
 
 namespace OrganizationRegister.Application.Organization
 {
@@ -10,8 +12,9 @@ namespace OrganizationRegister.Application.Organization
     {
         private readonly IOrganizationRepository organizationRepository;
         private readonly ISettingsRepository settingsRepository;
+        private readonly IAuthenticatedUserContext userContext;
 
-        public OrganizationService(IOrganizationRepository organizationRepository, ISettingsRepository settingsRepository)
+        public OrganizationService(IOrganizationRepository organizationRepository, ISettingsRepository settingsRepository, IAuthenticatedUserContext userContext = null)
         {
             if (organizationRepository == null)
             {
@@ -23,25 +26,28 @@ namespace OrganizationRegister.Application.Organization
             }
             this.organizationRepository = organizationRepository;
             this.settingsRepository = settingsRepository;
+            this.userContext = userContext;
         }
 
         public Guid AddOrganization(string businessId, string oid, string type, string municipalityCode, IEnumerable<LocalizedText> names, IEnumerable<LocalizedText> descriptions, 
             DateTime? validFrom, DateTime? validTo, IEnumerable<LocalizedText> nameAbbreviations)
         {
+            CheckAddOrganizationPermission();
+
             IReadOnlyCollection<string> languageCodes = settingsRepository.GetDataLanguageCodes();
             // TODO: Wrap id generation into a service
             var id = Guid.NewGuid();
             var organization = new Organization(id, businessId, oid, type, municipalityCode, names, languageCodes) { Descriptions = descriptions, NameAbbreviations = nameAbbreviations, HomepageUrls = null};
             organization.SetValidity(validFrom, validTo);
             organizationRepository.AddOrganizationAndSave(organization);
-
-           
             return id;
         }
 
         public Guid AddSubOrganization(Guid parentOrganizationId, string businessId, string oid, string type, string municipalityCode, IEnumerable<LocalizedText> names,
             IEnumerable<LocalizedText> descriptions, DateTime? validFrom, DateTime? validTo, IEnumerable<LocalizedText> nameAbbreviations)
         {
+            CheckManageOrganizationPermission(parentOrganizationId);
+
             IReadOnlyCollection<string> languageCodes = settingsRepository.GetDataLanguageCodes();
             // TODO: Wrap id generation into a service
             var id = Guid.NewGuid();
@@ -99,6 +105,8 @@ namespace OrganizationRegister.Application.Organization
         public void SetOrganizationBasicInformation(Guid organizationId, string businessId, string oid, IEnumerable<LocalizedText> names, IEnumerable<LocalizedText> descriptions, 
             string type, string municipalityCode, DateTime? validFrom, DateTime? validTo, IEnumerable<LocalizedText> nameAbbreviations)
         {
+            CheckManageOrganizationPermission(organizationId);
+
             Organization organization = GetOrganization(organizationId) as Organization;
             organization.BusinessId = businessId;
             organization.Oid = oid;
@@ -113,6 +121,9 @@ namespace OrganizationRegister.Application.Organization
 
         public void SetOrganizationContactInformation(Guid organizationId, string phoneNumber, string callChargeType, IEnumerable<LocalizedText> callChargeInfos, string emailAddress, IEnumerable<WebPage> webSites, IEnumerable<LocalizedText> homepageUrls)
          {
+
+            CheckManageOrganizationPermission(organizationId);
+
             Organization organization = GetOrganization(organizationId) as Organization;
             organization.SetCallInformation(phoneNumber, callChargeType, callChargeInfos);
             organization.EmailAddress = emailAddress;
@@ -125,6 +136,8 @@ namespace OrganizationRegister.Application.Organization
         public void SetOrganizationVisitingAddress(Guid organizationId, IEnumerable<LocalizedText> streetAddresses, string postalCode, IEnumerable<LocalizedText> postalDistricts, 
             IEnumerable<LocalizedText> qualifiers)
         {
+            CheckManageOrganizationPermission(organizationId);
+
             Organization organization = GetOrganization(organizationId) as Organization;
             organization.SetVisitingAddress(streetAddresses, postalCode, postalDistricts);
             organization.VisitingAddressQualifiers = qualifiers;
@@ -136,6 +149,8 @@ namespace OrganizationRegister.Application.Organization
             IEnumerable<LocalizedText> streetAddressPostalDistricts, string postOfficeBox, string postOfficeBoxAddressPostalCode, 
             IEnumerable<LocalizedText> postOfficeBoxAddressPostalDistricts)
         {
+            CheckManageOrganizationPermission(organizationId);
+
             Organization organization = GetOrganization(organizationId) as Organization;
             organization.SetPostalAddress(useVisitingAddress, streetAddresses, streetAddressPostalCode, streetAddressPostalDistricts, postOfficeBox, 
                 postOfficeBoxAddressPostalCode, postOfficeBoxAddressPostalDistricts);
@@ -145,14 +160,46 @@ namespace OrganizationRegister.Application.Organization
 
         public void RemoveOrganization(Guid organizationId)
         {
+            CheckManageOrganizationPermission(organizationId);
+
             organizationRepository.RemoveOrganization(organizationId);
             organizationRepository.SaveChanges();
         }
 
         public void DeactivateOrganization(Guid organizationId)
         {
+            CheckManageOrganizationPermission(organizationId);
+
             organizationRepository.DeactivateOrganization(organizationId);
             organizationRepository.SaveChanges();
+        }
+
+
+
+        private void CheckManageOrganizationPermission(Guid organizationId)
+        {
+            if (userContext == null)
+            {
+                throw new ArgumentNullException("userContext");
+            }
+
+            Guid userOrganizationId = userContext.GetUserOrganizationId();
+            var userOrgs = this.GetCompleteOrganizationHierarchyForOrganization(userOrganizationId).Flatten(o => o.SubOrganizations);
+            // TODO: add specific permission to manage organization data
+            userContext.CheckPermission(userOrgs.Any(o => o.Id == organizationId)
+                ? Permissions.Users.MaintenanceOfOwnOrganizationUsers : Permissions.Users.MaintenanceOfAllUsers);
+        }
+
+        private void CheckAddOrganizationPermission()
+        {
+
+            if (userContext == null)
+            {
+                throw new ArgumentNullException("userContext");
+            }
+
+            // TODO: add specific permission to add organization
+            userContext.CheckPermission(Permissions.Users.MaintenanceOfAllUsers);
         }
     }
 }
