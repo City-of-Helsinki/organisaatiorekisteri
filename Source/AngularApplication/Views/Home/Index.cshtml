@@ -29,7 +29,7 @@
             <div class="container">
                 <nav>
                     <ul data-ng-show="controller.isUserLoggedIn">
-                        <li data-ng-class="{ 'current': controller.areOrganizationsActive() }" data-ng-click="controller.changeToOrganizations()">
+                        <li data-ng-if="controller.canCurrentUserModifyOrganizations()" data-ng-class="{ 'current': controller.areOrganizationsActive() }" data-ng-click="controller.changeToOrganizations()">
                             <a data-ng-href="#/">Organisaatiot</a>
                         </li>
                         <li data-ng-if="controller.canCurrentUserModifyUsers()" data-ng-class="{ 'current': controller.areUsersActive() }" data-ng-click="controller.changeToUsers()">

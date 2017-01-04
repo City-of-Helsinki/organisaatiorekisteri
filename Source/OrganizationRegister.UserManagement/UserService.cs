@@ -7,6 +7,8 @@ using Affecto.Authentication.Passwords.Specifications;
 using Affecto.Mapping;
 using Affecto.Patterns.Specification;
 using OrganizationRegister.Application.User;
+using OrganizationRegister.Application.Organization;
+using OrganizationRegister.Common;
 using OrganizationRegister.Common.User;
 using OrganizationRegister.UserManagement.Mapping;
 using IdentityManagement = Affecto.IdentityManagement.Interfaces;
@@ -19,13 +21,18 @@ namespace OrganizationRegister.UserManagement
         private readonly IdentityManagement.IIdentityManagementService identityManagementService;
         private readonly MapperFactory mapperFactory;
         private readonly IAuthenticatedUserContext userContext;
+        private readonly IOrganizationService organizationService;
 
-        public UserService(IdentityManagement.IIdentityManagementService identityManagementService, MapperFactory mapperFactory,
+        public UserService(IdentityManagement.IIdentityManagementService identityManagementService, IOrganizationService organizationService, MapperFactory mapperFactory,
             IAuthenticatedUserContext userContext)
         {
             if (identityManagementService == null)
             {
                 throw new ArgumentNullException(nameof(identityManagementService));
+            }
+            if (organizationService == null)
+            {
+                throw new ArgumentNullException(nameof(organizationService));
             }
             if (mapperFactory == null)
             {
@@ -37,6 +44,7 @@ namespace OrganizationRegister.UserManagement
             }
 
             this.identityManagementService = identityManagementService;
+            this.organizationService = organizationService;
             this.mapperFactory = mapperFactory;
             this.userContext = userContext;
         }
@@ -146,14 +154,9 @@ namespace OrganizationRegister.UserManagement
         private void CheckManageUsersOfOrganizationPermission(Guid organizationId)
         {
             Guid userOrganizationId = userContext.GetUserOrganizationId();
-            if (organizationId == userOrganizationId)
-            {
-                userContext.CheckPermission(Permissions.Users.MaintenanceOfOwnOrganizationUsers);
-            }
-            else
-            {
-                userContext.CheckPermission(Permissions.Users.MaintenanceOfAllUsers);
-            }
+            var userOrgs = organizationService.GetCompleteOrganizationHierarchyForOrganization(userOrganizationId).Flatten(o => o.SubOrganizations);
+            userContext.CheckPermission(userOrgs.Any(o => o.Id == organizationId)
+                ? Permissions.Users.MaintenanceOfOwnOrganizationUsers : Permissions.Users.MaintenanceOfAllUsers);
         }
 
         private void CheckManageUsersInRolePermission(Guid roleId)

@@ -2,24 +2,40 @@
 
 module OrganizationRegister
 {
-    export class OrganizationTreeController implements Affecto.Base.IController
+    export class OrganizationTreeController implements Affecto.Base.IController 
     {
-        public static $inject = ["$scope", "$routeParams", "$location", "organizationService", "busyIndicationService"];
+        public static $inject = ["$scope", "$routeParams", "$location", "organizationService", "busyIndicationService", "authenticationService"];
 
         public model: Tree;
         public selectedOrganizationId: string;
         public isEditModeEnabled: boolean;
         public treeOptions: any;
-
+        public canViewAllOrganizations: boolean;
+        public rootOrganizationId: string;
+        public user: AuthenticatedUser;
+       
         constructor(private $scope: Affecto.Base.IViewScope, $routeParams: IOrganizationRoute, private $location: angular.ILocationService,
-            private organizationService: OrganizationService, private busyIndicationService: Affecto.BusyIndication.IBusyIndicationService)
+            private organizationService: OrganizationService, private busyIndicationService: Affecto.BusyIndication.IBusyIndicationService, authenticationService: Affecto.Login.IAuthenticationService)
         {
+            
             $scope.controller = this;
             $scope.model = this.model;
 
+            var user: AuthenticatedUser = authenticationService.getUser<AuthenticatedUser>();
+            if (user.hasRole(Role.systemAdmin))
+            {
+                this.canViewAllOrganizations = true;
+            }
+            else if (user.hasRole(Role.organizationLevelAdmin))
+            {
+                this.canViewAllOrganizations = false;
+                this.rootOrganizationId = user.organizationId;
+            }
+           
             this.setSelectedOrganizationId($routeParams);
             this.createTreeOptions();
             this.retrieveOrganizationsAndExpandAllNodes();
+
             this.isEditModeEnabled = false;
         }
 
@@ -72,13 +88,30 @@ module OrganizationRegister
         private retrieveOrganizationsAndExpandAllNodes(): void
         {
             this.busyIndicationService.showBusyIndicator("Haetaan organisaatioita...");
-            this.organizationService.getOrganizationHierarchy()
-                .then((orgs: Tree) =>
-                {
-                    this.model = orgs;
-                    this.model.expandAll();
-                    this.busyIndicationService.hideBusyIndicator();
-                });
+
+            if (this.canViewAllOrganizations)
+            {
+                this.organizationService.getOrganizationHierarchy()
+                    .then((orgs: Tree) =>
+                    {
+                        this.setOrganizationsAndExpandAllNodes(orgs);
+                    });
+            }
+            else 
+            {
+                this.organizationService.getOrganizationHierarchyForOrganization(this.rootOrganizationId)
+                    .then((orgs: Tree) =>
+                    {
+                        this.setOrganizationsAndExpandAllNodes(orgs);
+                    });
+            }
+        }
+
+        private setOrganizationsAndExpandAllNodes(orgs: Tree)
+        {
+            this.model = orgs;
+            this.model.expandAll();
+            this.busyIndicationService.hideBusyIndicator();
         }
     }
 }

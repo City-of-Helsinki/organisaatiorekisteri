@@ -20,6 +20,8 @@ module OrganizationRegister
         public originalModel: User;
 
         public userInformationForm: angular.IFormController;
+        public canViewAllOrganizations: boolean;
+        public rootOrganizationId: string;
        
         private administratorUser: string = "Järjestelmän pääkäyttäjä";
 
@@ -42,13 +44,15 @@ module OrganizationRegister
             private organizationService: OrganizationService,
             private authenticationService: Affecto.Login.IAuthenticationService)
         {
+
             var user: AuthenticatedUser = authenticationService.getUser<AuthenticatedUser>();
-            if (!user.hasPermission(Permission.maintenanceOfOwnOrganizationUsers) ||
+            if (!user.hasPermission(Permission.maintenanceOfOwnOrganizationUsers) &&
                 !user.hasPermission(Permission.maintenanceOfAllUsers))
             {
                 this.$location.path(Affecto.ExceptionHandling.Routes.error)
                     .search("code", ErrorCode.insufficientPermissions);
             }
+
 
             this.initializeUser($routeParams);
 
@@ -222,11 +226,26 @@ module OrganizationRegister
             this.originalModel = angular.copy(this.model);
         }
 
+
+        private getOrganizationHierarchy(): angular.IPromise<Tree>
+        {
+            if (this.authenticationService.getUser<AuthenticatedUser>().hasPermission(Permission.maintenanceOfAllUsers))
+            {
+                return this.organizationService.getOrganizationHierarchy();
+            }
+            else
+            {
+                return this.organizationService
+                    .getOrganizationHierarchyForOrganization(this.authenticationService.getUser<AuthenticatedUser>()
+                        .organizationId);
+            }
+        }
+
         private initializeSelectionLists(): void
         {
             this.busyIndicationService.showBusyIndicator("Haetaan valintalistojen sisältöä...");
 
-            this.$q.all([this.organizationService.getOrganizationHierarchy(), this.settingsService.getUserRoles()])
+            this.$q.all([this.getOrganizationHierarchy(), this.settingsService.getUserRoles()])
                 .then((result: Array<any>) =>
                 {
                     this.organizationHiearchy = result[0];
@@ -239,7 +258,7 @@ module OrganizationRegister
                     }
                     else
                         {
-                        this.userRoles = userRoles.filter((item: UserRole) => item.name !== this.administratorUser);
+                        this.userRoles = userRoles.filter((item: UserRole) => item.name !== Role.systemAdmin);
                     }
                     this.busyIndicationService.hideBusyIndicator();
                    

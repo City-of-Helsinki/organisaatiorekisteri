@@ -68,6 +68,23 @@ namespace OrganizationRegister.Api.Tests.Organization
             Assert.IsTrue(result.Content.All(org => org.Equals(returnValue)));
         }
 
+
+        [TestMethod]
+        public void GetOrganizationHierarchyForOrganization()
+        {
+            Guid organizationId = Guid.NewGuid();
+            HierarchicalOrganization returnValue = new HierarchicalOrganization();
+            IHierarchicalOrganization appReturnValue = Substitute.For<IHierarchicalOrganization>();
+            hierarchicalOrganizationMapper.Map(appReturnValue).Returns(returnValue);
+            organizationService.GetCompleteOrganizationHierarchyForOrganization(organizationId).Returns(new List<IHierarchicalOrganization> { appReturnValue, appReturnValue });
+
+            var result = sut.GetOrganizationHierarchyForOrganization(organizationId) as OkNegotiatedContentResult<IEnumerable<HierarchicalOrganization>>;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Content.Count());
+            Assert.IsTrue(result.Content.All(org => org.Equals(returnValue)));
+        }
+
         [TestMethod]
         public void GetCurrentOrganizationHierarchyForOrganization()
         {

@@ -7,7 +7,10 @@ using Affecto.Authentication.Claims;
 using Affecto.Mapping;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
+using OrganizationRegister.Application;
 using OrganizationRegister.Application.User;
+using OrganizationRegister.Application.Organization;
+using OrganizationRegister.Common;
 using OrganizationRegister.Common.User;
 using OrganizationRegister.UserManagement.Mapping;
 using OrganizationRegister.UserManagement.Model;
@@ -20,6 +23,7 @@ namespace OrganizationRegister.UserManagement.Tests
     {
         private UserService sut;
         private IdentityManagement.IIdentityManagementService identityManagementService;
+        private IOrganizationService organizationService;
         private MapperFactory mapperFactory;
         private IAuthenticatedUserContext userContext;
 
@@ -36,9 +40,10 @@ namespace OrganizationRegister.UserManagement.Tests
         public void Setup()
         {
             identityManagementService = Substitute.For<IdentityManagement.IIdentityManagementService>();
+            organizationService = Substitute.For<IOrganizationService>();
             mapperFactory = Substitute.For<MapperFactory>();
             SetupUserContext();
-            sut = new UserService(identityManagementService, mapperFactory, userContext);
+            sut = new UserService(identityManagementService, organizationService, mapperFactory, userContext);
             SetupRoles();
         }
 
@@ -286,6 +291,10 @@ namespace OrganizationRegister.UserManagement.Tests
             mapper.Map(returnedUsers[0]).Returns(expectedUsers[0]);
             mapper.Map(returnedUsers[1]).Returns(expectedUsers[1]);
             mapperFactory.CreateUserMapper().Returns(mapper);
+
+            var returnedOrg = Substitute.For<IHierarchicalOrganization>();
+            returnedOrg.Id.Returns(organizationId);
+            organizationService.GetCompleteOrganizationHierarchyForOrganization(organizationId).Returns(new List<IHierarchicalOrganization> { returnedOrg });
 
             identityManagementService.GetUsers(CustomPropertyName.OrganizationId.ToString(), organizationId.ToString("D"), IdentityManagement.Model.AccountType.Password)
                 .Returns(returnedUsers);

@@ -66,6 +66,11 @@ namespace OrganizationRegister.Application.Organization
             return organizationRepository.GetOrganizationHierarchyForOrganization(organizationId, includeFutureOrganizations);
         }
 
+        public IEnumerable<IHierarchicalOrganization> GetCompleteOrganizationHierarchyForOrganization(Guid organizationId)
+        {
+            return organizationRepository.GetCompleteOrganizationHierarchyForOrganization(organizationId);
+        }
+
         public IEnumerable<IOrganizationName> GetOrganizations()
         {
             return organizationRepository.GetOrganizations();

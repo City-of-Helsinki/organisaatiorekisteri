@@ -38,6 +38,16 @@ namespace OrganizationRegister.Api.Organization
         }
 
         [HttpGet]
+        [GetRoute("organizationhierarchyfororganization/{organizationId}")]
+        public IHttpActionResult GetOrganizationHierarchyForOrganization(Guid organizationId)
+        {
+            IEnumerable<IHierarchicalOrganization> organizations = organizationService.GetCompleteOrganizationHierarchyForOrganization(organizationId);
+            var mapper = mapperFactory.CreateHierarchicalOrganizationMapper();
+            IEnumerable<HierarchicalOrganization> mappedOrganizations = mapper.Map(organizations);
+            return Ok(mappedOrganizations);
+        }
+
+        [HttpGet]
         [GetRoute("currentorganizationhierarchy")]
         public IHttpActionResult GetCurrentOrganizationHierarchy()
         {

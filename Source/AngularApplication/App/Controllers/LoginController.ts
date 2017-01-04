@@ -30,16 +30,27 @@ module OrganizationRegister
 
         private onLogInCompleted = (): void =>
         {
-            this.loginFailed = false;
-
-            if (this.requestedRoute && this.requestedRoute !== Route.login)
+           
+            var user: AuthenticatedUser = this.authenticationService.getUser<AuthenticatedUser>();
+            if (!user.hasRole(Role.systemAdmin) && !user.hasRole(Role.organizationLevelAdmin))
             {
-                this.$location.search(UrlParameter.requestedRoute, null);
-                this.$location.path(this.requestedRoute);
+                this.authenticationService.logOut();
+                this.$location.path(Affecto.ExceptionHandling.Routes.error)
+                    .search("code", ErrorCode.insufficientPermissions);
             }
             else
             {
-                this.$location.path(Route.frontPage);
+                this.loginFailed = false;
+
+                if (this.requestedRoute && this.requestedRoute !== Route.login)
+                {
+                    this.$location.search(UrlParameter.requestedRoute, null);
+                    this.$location.path(this.requestedRoute);
+                }
+                else
+                {
+                    this.$location.path(Route.frontPage);
+                }
             }
         }
 
