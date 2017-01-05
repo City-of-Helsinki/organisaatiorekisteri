@@ -110,6 +110,16 @@ namespace OrganizationRegister.Store.CodeFirst
             return CreateHierarchicalOrganizations(FilterByParentOrganization(dbOrganizations.ToList(), organizationId));
         }
 
+        public IReadOnlyCollection<IHierarchicalOrganization> GetCompleteOrganizationHierarchyForOrganization(Guid organizationId)
+        {
+            IEnumerable<Organization> dbOrganizations;
+            
+            var query = new ActiveOrganizationsQuery(context.Organizations);
+            dbOrganizations = query.Execute();
+           
+            return CreateHierarchicalOrganizations(FilterByParentOrganization(dbOrganizations.ToList(), organizationId));
+        }
+
 
         public IReadOnlyCollection<IOrganizationName> GetOrganizations()
         {

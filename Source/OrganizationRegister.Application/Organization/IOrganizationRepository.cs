@@ -11,6 +11,7 @@ namespace OrganizationRegister.Application.Organization
         IReadOnlyCollection<IHierarchicalOrganization> GetOrganizationHierarchy();
         IReadOnlyCollection<IHierarchicalOrganization> GetOrganizationHierarchy(bool includeFutureOrganizations);
         IReadOnlyCollection<IHierarchicalOrganization> GetOrganizationHierarchyForOrganization(Guid? rootOrganizationId, bool includeFutureOrganizations = false);
+        IReadOnlyCollection<IHierarchicalOrganization> GetCompleteOrganizationHierarchyForOrganization(Guid rootOrganizationId);
         IReadOnlyCollection<IOrganizationName> GetOrganizations();
         IReadOnlyCollection<IOrganizationName> GetMainOrganizations();
         IReadOnlyCollection<IOrganizationName> GetMainOrganizationsNames();

@@ -57,6 +57,12 @@ module OrganizationRegister
             return this.user != null && (this.user.hasPermission(Permission.maintenanceOfOwnOrganizationUsers) || this.user.hasPermission(Permission.maintenanceOfAllUsers));
         }
 
+        public canCurrentUserModifyOrganizations(): boolean
+        {
+            var user: AuthenticatedUser = <AuthenticatedUser>(this.user);
+            return this.user != null && (user.hasRole(Role.systemAdmin) || user.hasRole(Role.organizationLevelAdmin));
+        }
+
         protected onUserLoggedIn(): void
         {
             this.currentSection = CurrentNavigationSection.Organizations;

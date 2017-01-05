@@ -37,6 +37,15 @@ module OrganizationRegister
                 });
         }
 
+        public getOrganizationHierarchyForOrganization(id: string): angular.IPromise<Tree>
+        {
+            return this.$http.get(this.apiBaseUrl + "organizationregister/organizationhierarchyfororganization/" + id)
+                .then((response: angular.IHttpPromiseCallbackArg<any>): Tree =>
+                {
+                    return new Tree(HierarchicalOrganizationMapper.map(response.data));
+                });
+        }
+
         public getOrganization(id: string): angular.IPromise<Organization>
         {
             return this.$http.get(this.apiBaseUrl + "organizationregister/organizations/" + id)
