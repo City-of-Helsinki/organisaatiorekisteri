@@ -7,7 +7,9 @@
     <authors>Affecto</authors>
     <version>$version$</version>
     <releaseNotes>
-      Add user to suborganization
+      TPR-perhe logos added. Version number and copyright added to application footer.
+      App title renamed from organisaatiorekisteri to TPR-organisaatiosovellus.
+      Organization level admin can see own organizations tree and can add users to own organization.
     </releaseNotes>
   </metadata>
 </package>

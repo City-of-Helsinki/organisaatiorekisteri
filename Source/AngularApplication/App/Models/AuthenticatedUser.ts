@@ -9,5 +9,15 @@ module OrganizationRegister
         {
             super(name, accountName, roles, permissions, customProperties);
         }
+
+        public hasRole(role: string): boolean
+        {
+            if (this.roles == null)
+            {
+                return false;
+            }
+            return this.roles.indexOf(role) >= 0;
+        }
+
     }
 }

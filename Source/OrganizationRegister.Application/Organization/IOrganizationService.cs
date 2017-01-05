@@ -13,6 +13,7 @@ namespace OrganizationRegister.Application.Organization
         IEnumerable<IHierarchicalOrganization> GetOrganizationHierarchy();
         IEnumerable<IHierarchicalOrganization> GetOrganizationHierarchy(bool includeFutureOrganizations);
         IEnumerable<IOrganizationName> GetOrganizations();
+        IEnumerable<IHierarchicalOrganization> GetCompleteOrganizationHierarchyForOrganization(Guid rootOrganizationId);
         IEnumerable<IHierarchicalOrganization> GetOrganizationHierarchyForOrganization(Guid? rootOrganizationId, bool includeFutureOrganizations);
         IEnumerable<IOrganizationName> GetMainOrganizations();
         IEnumerable<IOrganizationName> GetMainOrganizationsNames();

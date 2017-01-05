@@ -1,5 +1,5 @@
 ﻿<p>
-    <a id="addOrganizationButton" data-ng-href="#/Organizations" class="button add" data-ng-show="controller.isEditModeEnabled">Lisää organisaatiotaso</a>
+    <a id="addOrganizationButton" data-ng-href="#/Organizations" class="button add" data-ng-show="controller.isEditModeEnabled && controller.canViewAllOrganizations">Lisää organisaatiotaso</a>
     <a id="editStructureButton" class="button add" href="javascript: void(0)" data-ng-click="controller.enableEditMode()" data-ng-show="controller.canEdit">Muokkaa rakennetta</a>
     <a id="quitEditStructureButton" href="javascript: void(0)" class="button cancel" data-ng-click="controller.disableEditMode()"
        data-ng-show="controller.isEditModeEnabled">

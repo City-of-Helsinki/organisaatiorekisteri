@@ -43,6 +43,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CollectionExtensions.cs" />
     <Compile Include="LocalizedText.cs" />
     <Compile Include="User\AuthenticationExtensionMethods.cs" />
     <Compile Include="User\ExistingUserAccountException.cs" />

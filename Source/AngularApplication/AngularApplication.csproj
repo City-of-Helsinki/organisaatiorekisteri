@@ -192,6 +192,8 @@
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\sprite.png" />
     <Content Include="Content\img\sprite_2x.png" />
+    <Content Include="Content\img\TPR-logo-white.png" />
+    <Content Include="Content\img\TPR-logo.png" />
     <Content Include="Content\Packages\BusyIndication\BusyIndication.css" />
     <Content Include="Content\Packages\BusyIndication\BusyIndication.min.css" />
     <Content Include="Content\screen.css">
@@ -364,6 +366,7 @@
     <TypeScriptCompile Include="App\Constants\InvalidBusinessIdentifierReason.ts" />
     <TypeScriptCompile Include="App\Constants\ErrorCode.ts" />
     <TypeScriptCompile Include="App\Constants\Permission.ts" />
+    <TypeScriptCompile Include="App\Constants\Role.ts" />
     <TypeScriptCompile Include="App\Constants\Route.ts" />
     <TypeScriptCompile Include="App\Constants\UrlParameter.ts" />
     <TypeScriptCompile Include="App\Controllers\ExternalLoginController.ts" />

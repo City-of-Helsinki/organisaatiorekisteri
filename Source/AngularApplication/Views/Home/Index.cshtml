@@ -2,14 +2,18 @@
 @using OrganizationRegister.AngularApplication.Configuration
 @{ ViewBag.Title = "Organisaatiorekisteri"; }
 
+
+
 <header id="page-header" role="banner">
     <div class="header-top" data-ng-controller="OrganizationRegister.MainNavigationController as controller">
         <div class="container">
             <h1>
                 <a href="#/" class="navbar-brand">
-                    Organisaatiorekisteri
+                    <img src="~/Content/img/TPR-logo-white.png" alt="TPR Perhe" />
+                    TPR-organisaatiosovellus
                 </a>
             </h1>
+
             <div class="site-options md-right">
                 <ul class="adjust-font-size" aria-hidden="true">
                     <li><button title="Pienennä tekstikokoa" class="decrease-font-size">A-</button></li>
@@ -25,11 +29,12 @@
                 </span>
             </div>
         </div>
+
         <div class="site-navigation">
             <div class="container">
                 <nav>
                     <ul data-ng-show="controller.isUserLoggedIn">
-                        <li data-ng-class="{ 'current': controller.areOrganizationsActive() }" data-ng-click="controller.changeToOrganizations()">
+                        <li data-ng-if="controller.canCurrentUserModifyOrganizations()" data-ng-class="{ 'current': controller.areOrganizationsActive() }" data-ng-click="controller.changeToOrganizations()">
                             <a data-ng-href="#/">Organisaatiot</a>
                         </li>
                         <li data-ng-if="controller.canCurrentUserModifyUsers()" data-ng-class="{ 'current': controller.areUsersActive() }" data-ng-click="controller.changeToUsers()">
@@ -50,10 +55,18 @@
 <footer id="page-footer" role="contentinfo">
     <div class="container">
         <div class="row">
-            <div id="footer-logo">
-                <img src="~/Content/img/logo.png" alt="Helsingin vaakuna">
+            <div class="col-xs-4">
+                <p> © Helsingin kaupunki 2017</p>
             </div>
-        </div>
+            <div class="col-xs-4">
+                <div id="footer-logo">
+                    <img src="~/Content/img/TPR-logo.png" alt="TPR-perhe logo">
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <p>Versio v@(MvcApplication.AppVersion.Major).@(MvcApplication.AppVersion.Minor).@(MvcApplication.AppVersion.Build).@(MvcApplication.AppVersion.Revision)</p>
+            </div>
+         </div>
     </div>
 </footer>
 

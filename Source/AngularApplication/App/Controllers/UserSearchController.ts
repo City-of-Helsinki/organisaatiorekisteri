@@ -8,8 +8,6 @@ module OrganizationRegister
 
         public model: Array<UserListItem>;
         public organizations: Array<OrganizationName>;
-        public canViewAllUsers: boolean;
-
         public organizationId: string;
         public userCount: number;
         public organizationHiearchy: Tree;
@@ -23,18 +21,11 @@ module OrganizationRegister
             $scope.model = this.model;
 
             var user: AuthenticatedUser = authenticationService.getUser<AuthenticatedUser>();
-
-            if (user.hasPermission(Permission.maintenanceOfAllUsers))
+            if (!user.hasPermission(Permission.maintenanceOfOwnOrganizationUsers) &&
+                !user.hasPermission(Permission.maintenanceOfAllUsers))
             {
-                this.canViewAllUsers = true;
-            }
-            else if (user.hasPermission(Permission.maintenanceOfOwnOrganizationUsers))
-            {
-                this.canViewAllUsers = false;
-            }
-            else
-            {
-                this.$location.path(Affecto.ExceptionHandling.Routes.error).search("code", ErrorCode.insufficientPermissions);
+                this.$location.path(Affecto.ExceptionHandling.Routes.error)
+                    .search("code", ErrorCode.insufficientPermissions);
             }
 
             this.retrieveUsersAndOrganizations($routeParams);
@@ -60,26 +51,33 @@ module OrganizationRegister
                 this.selectedOrganizationName = this.organizationHiearchy.get(this.organizationId).name;
                 this.retrieveUsers();
             }
+        }
+
+
+        private getOrganizationHierarchy(): angular.IPromise<Tree>
+        {
+            if (this.authenticationService.getUser<AuthenticatedUser>().hasPermission(Permission.maintenanceOfAllUsers))
+            {
+                return this.organizationService.getOrganizationHierarchy();
+            }
             else
             {
-                //this.organizationId = null;
-                //this.selectedOrganizationName = "";
+                return this.organizationService
+                    .getOrganizationHierarchyForOrganization(this.authenticationService.getUser<AuthenticatedUser>()
+                        .organizationId);
             }
-
-          
         }
 
         private retrieveUsersAndOrganizations($routeParams: IUserRoute): angular.IPromise<void>
         {
             this.organizationId = $routeParams.organizationId;
             this.busyIndicationService.showBusyIndicator("Haetaan käyttäjiä...");
-            return this.$q.all([this.organizationService.getOrganizationHierarchy(), this.userService.getUsers(this.organizationId)])
+
+            return this.$q.all([this.getOrganizationHierarchy(), this.userService.getUsers(this.organizationId)])
                 .then((result: Array<any>) =>
                 {
                     this.organizationHiearchy = result[0];
-
                     this.toggleOrganisationSelection(this.organizationId, true);
-
                     this.setUsers(result[1]);
                     this.busyIndicationService.hideBusyIndicator();
                 });

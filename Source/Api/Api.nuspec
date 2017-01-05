@@ -7,7 +7,8 @@
     <authors>Affecto</authors>
     <version>$version$</version>
     <releaseNotes>
-      Added parentId to organisation query JSON results.
+      Organization level permission checks added to organizationservice
+      API GetOrganizationHierarchyForOrganization method added
     </releaseNotes>
   </metadata>
 </package>
