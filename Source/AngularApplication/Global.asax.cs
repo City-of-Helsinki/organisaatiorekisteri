@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -12,11 +13,15 @@ namespace OrganizationRegister.AngularApplication
     {
         private const string ErrorAction = "/Home/Error";
 
+        public static Version AppVersion { get; set; }
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            AppVersion = Assembly.GetExecutingAssembly().GetName().Version;
         }
 
         protected void Application_Error(Object sender, EventArgs arguments)
