@@ -275,8 +275,10 @@
 			color: #f25d0d;
 		}
 		img {
-			display: block;
+			display: inline;
+            height: 36px;
 			margin-bottom: 5px;
+            vertical-align: middle;
 		}
 	}
 	
