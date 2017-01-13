@@ -22,11 +22,11 @@ module OrganizationRegister
             $scope.model = this.model;
 
             var user: AuthenticatedUser = authenticationService.getUser<AuthenticatedUser>();
-            if (user.hasRole(Role.systemAdmin))
+            if (user.hasPermission(Permission.maintenanceOfAllOrganizationData))
             {
                 this.canViewAllOrganizations = true;
             }
-            else if (user.hasRole(Role.organizationLevelAdmin))
+            else if (user.hasPermission(Permission.maintenanceOfOwnOrganizationData))
             {
                 this.canViewAllOrganizations = false;
                 this.rootOrganizationId = user.organizationId;

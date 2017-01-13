@@ -28,30 +28,33 @@ module OrganizationRegister
                 .then(this.onLogInCompleted, this.onLogInError);
         }
 
-        private onLogInCompleted = (): void =>
+        private checkPermission(): void
         {
-           
             var user: AuthenticatedUser = this.authenticationService.getUser<AuthenticatedUser>();
-            if (!user.hasRole(Role.systemAdmin) && !user.hasRole(Role.organizationLevelAdmin))
+            if (!user.hasPermission(Permission.maintenanceOfUsers) && !user.hasPermission(Permission.maintenanceOfOrganizationData))
+                {
+                    this.authenticationService.logOut();
+                    this.$location.path(Affecto.ExceptionHandling.Routes.error)
+                        .search("code", ErrorCode.insufficientPermissions);
+                }
+        }
+
+
+        private onLogInCompleted = (): void=>
+        {
+            this.checkPermission();
+            this.loginFailed = false;
+
+            if (this.requestedRoute && this.requestedRoute !== Route.login)
             {
-                this.authenticationService.logOut();
-                this.$location.path(Affecto.ExceptionHandling.Routes.error)
-                    .search("code", ErrorCode.insufficientPermissions);
+                this.$location.search(UrlParameter.requestedRoute, null);
+                this.$location.path(this.requestedRoute);
             }
             else
             {
-                this.loginFailed = false;
-
-                if (this.requestedRoute && this.requestedRoute !== Route.login)
-                {
-                    this.$location.search(UrlParameter.requestedRoute, null);
-                    this.$location.path(this.requestedRoute);
-                }
-                else
-                {
-                    this.$location.path(Route.frontPage);
-                }
+                this.$location.path(Route.frontPage);
             }
+            
         }
 
         private onLogInError = (): void=>
