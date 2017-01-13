@@ -8,10 +8,5 @@ module OrganizationRegister
         {
             return "Järjestelmän pääkäyttäjä";
         }
-
-        public static get organizationLevelAdmin(): string
-        {
-            return "Organisaatiotason pääkäyttäjä";
-        }
     }
 } 

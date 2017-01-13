@@ -7,8 +7,8 @@
     <authors>Affecto</authors>
     <version>$version$</version>
     <releaseNotes>
-      Organization level permission checks added to organizationservice
-      API GetOrganizationHierarchyForOrganization method added
+      Organization data maintenance permissions
+      User role checks replaced with organization data maintenance permission checks
     </releaseNotes>
   </metadata>
 </package>

@@ -185,21 +185,17 @@ namespace OrganizationRegister.Application.Organization
 
             Guid userOrganizationId = userContext.GetUserOrganizationId();
             var userOrgs = this.GetCompleteOrganizationHierarchyForOrganization(userOrganizationId).Flatten(o => o.SubOrganizations);
-            // TODO: add specific permission to manage organization data
             userContext.CheckPermission(userOrgs.Any(o => o.Id == organizationId)
-                ? Permissions.Users.MaintenanceOfOwnOrganizationUsers : Permissions.Users.MaintenanceOfAllUsers);
+                ? Permissions.Organization.MaintenanceOfOwnOrganizationData : Permissions.Organization.MaintenanceOfAllOrganizationData);
         }
 
         private void CheckAddOrganizationPermission()
         {
-
             if (userContext == null)
             {
                 throw new ArgumentNullException("userContext");
             }
-
-            // TODO: add specific permission to add organization
-            userContext.CheckPermission(Permissions.Users.MaintenanceOfAllUsers);
+            userContext.CheckPermission(Permissions.Organization.MaintenanceOfAllOrganizationData);
         }
     }
 }

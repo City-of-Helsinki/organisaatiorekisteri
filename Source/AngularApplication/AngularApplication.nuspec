@@ -7,9 +7,9 @@
     <authors>Affecto</authors>
     <version>$version$</version>
     <releaseNotes>
-      TPR-perhe logos added. Version number and copyright added to application footer.
-      App title renamed from organisaatiorekisteri to TPR-organisaatiosovellus.
-      Organization level admin can see own organizations tree and can add users to own organization.
+      Organization data maintenance permissions
+      User role checks replaced with organization data maintenance permission checks
+      "Organisaatiorekisteri" to "Organisaatiosovellus" naming updates
     </releaseNotes>
   </metadata>
 </package>
