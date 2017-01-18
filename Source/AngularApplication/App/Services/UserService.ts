@@ -10,6 +10,15 @@ module OrganizationRegister
         {
         }
 
+        //public getUser(userId: string): angular.IPromise<User>
+        //{
+        //    return this.$http.get(this.apiBaseUrl + "organizationregister/users/" + userId)
+        //        .then((response: angular.IHttpPromiseCallbackArg<any>): User =>
+        //        {
+        //            return UserMapper.map(response.data);
+        //        });
+        //}
+
         public getUser(userId: string): angular.IPromise<User>
         {
             return this.$http.get(this.apiBaseUrl + "organizationregister/users/" + userId)
@@ -46,6 +55,22 @@ module OrganizationRegister
                 });
         }
 
+        public setUser(user: User): angular.IPromise<void>
+        {
+            return this.$http.put(this.apiBaseUrl + "organizationregister/users/" + user.id, user)
+                .then((): void =>
+                {
+                });
+        }
+
+        public deleteUser(userId: string): angular.IPromise<void>
+        {
+            return this.$http.delete(this.apiBaseUrl + "organizationregister/users/" + userId)
+                .then((): void =>
+                {
+                });
+        }
+
         public isExistingUser(emailAddress: string): angular.IPromise<boolean>
         {
             return this.$http.post(this.apiBaseUrl + "organizationregister/users/isexisting", "\"" + emailAddress + "\"")
@@ -63,5 +88,6 @@ module OrganizationRegister
                     return response.data;
                 });            
         }
+
     }
 } 

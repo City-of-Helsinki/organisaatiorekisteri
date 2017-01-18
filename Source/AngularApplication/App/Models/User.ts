@@ -4,7 +4,7 @@ module OrganizationRegister
 {
     export class User implements Affecto.Base.IModel
     {
-        constructor(public emailAddress?: string, public password?: string, public passwordConfirm?: string, public lastName?: string, public firstName?: string,
+        constructor(public id?: string, public emailAddress?: string, public password?: string, public passwordConfirm?: string, public lastName?: string, public firstName?: string,
             public phoneNumber?: string, public organizationId?: string, public roleId?: string)
         {
         }
@@ -32,6 +32,11 @@ module OrganizationRegister
         public hasOrganizationId(): boolean
         {
             return this.organizationId != null && this.organizationId !== "";
+        }
+
+        public hasId(): boolean
+        {
+            return this.id != null && this.id !== "";
         }
 
         public hasPhoneNumber(): boolean

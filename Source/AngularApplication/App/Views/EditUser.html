@@ -1,0 +1,112 @@
+﻿<article>
+    <div>
+        <div class="container">
+            <div class="page-title">
+                <h1>Käyttäjän tietojen muokkaus</h1>
+            </div>
+        </div>
+        <div>
+            <div class="container">
+                <form class="form-horizontal" name="controller.userInformationForm" unsaved-warning-form autocomplete="off">
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <h3>Käyttäjän tiedot</h3>
+                            <button type="submit" class="button remove" data-ng-click="controller.deleteUser()">Poista</button>
+                               
+                            <button id="saveUserButton" type="submit" class="button edit" data-ng-click="controller.saveUser()"
+                                    data-ng-disabled="controller.userInformationForm.$invalid || !controller.canSaveUser() || controller.userInformationForm.$pristine">
+                                Tallenna
+                            </button>
+                            <button type="submit" class="button cancel" data-ng-click="controller.goToHomePage()">
+                                Keskeytä
+                            </button>
+                        </div>
+                        <div class="content-box-inner">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label class="mandatory-field">Sukunimi</label>
+                                    <input id="userLastNameInput" type="text" class="form-control" maxlength="100" data-ng-model="controller.model.lastName" data-ng-required="true" />
+                                </div>
+                                <div class="col-xs-6">
+                                    <label class="mandatory-field">Etunimi</label>
+                                    <input id="userFirstNameInput" type="text" class="form-control" maxlength="100" data-ng-model="controller.model.firstName" data-ng-required="true" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label>Sähköpostiosoite (=käyttäjätunnus)</label>
+                                    <span>{{ controller.model.emailAddress }}</span>
+                                </div>
+                                <div class="col-xs-6">
+                                    <label>Puhelinnumero</label>
+                                    <input id="userPhoneNumberInput" type="text" class="form-control" name="phoneNumber" maxlength="50"
+                                           data-ng-model="controller.model.phoneNumber" data-ng-blur="controller.validatePhoneNumber()" autocomplete="off">
+                                    <input id="phoneNumberInputToDisableAutocomplete" type="text" style="display: none;" />
+                                    <div id="userPhoneNumberErrorMessage" aria-live="polite" class="validation-message" data-ng-show="!controller.validPhoneNumber">
+                                        Virheellinen puhelinnumero
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label>Uusi salasana</label>
+                                    <input id="userPasswordInput" type="password" class="form-control" maxlength="100" data-ng-model="controller.model.password"
+                                           data-ng-change="controller.validateConfirmedPassword()"  autocomplete="off"
+                                           data-ng-blur="controller.validatePassword()" />
+                                    <input id="passwordInputToDisableAutocomplete" type="password" style="display: none;" />
+                                    <div id="userPasswordErrorMessage" aria-live="polite" class="validation-message" data-ng-show="!controller.validPassword">
+                                        Salasanan pituus on vähintään 10 merkkiä ja siinä pitää olla merkkejä vähintään kolmesta luokasta (pienet kirjaimet, isot kirjaimet, numerot, erikoismerkit)
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <label>Uusi salasana uudelleen</label>
+                                    <input id="userPasswordAgainInput" type="password" class="form-control" maxlength="100" data-ng-required="controller.model.password" data-ng-model="controller.model.passwordConfirm"
+                                           data-ng-change="controller.validateConfirmedPassword()" autocomplete="off" />
+                                    <input id="passwordConfirmInputToDisableAutocomplete" type="password" style="display: none;" />
+                                    <div id="userConfirmedPasswordErrorMessage" aria-live="polite" class="validation-message" data-ng-show="!controller.validConfirmedPassword">
+                                        Salasana ei täsmää
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                               
+
+                                <div class="col-xs-6">
+                                    <label>
+                                        Käyttäjän organisaatio*
+                                    </label>
+                                    <div class="ui-tree-container2">
+                                        <treecontrol id="organizationTree" class="tree-light"
+                                                     data-tree-model="controller.organizationHiearchy.value"
+                                                     data-on-selection="controller.toggleOrganisationSelection(node.id, selected)"
+                                                     order-by="name" filter-comparator="false">
+                                            {{node.name}}
+                                        </treecontrol>
+                                    </div>
+
+                                    <p class="services-sum">
+                                        Valittu organisaatio: <strong>{{ controller.selectedOrganizationName }}</strong>
+                                    </p>
+                                </div>
+
+
+                                <div class="col-xs-6">
+                                    <label class="mandatory-field">Rooli</label>
+                                    <select id="userRoleInput" class="form-control" data-ng-model="controller.model.roleIdProperty"
+                                            data-ng-options="role.id as role.name for role in controller.userRoles" data-ng-required="true"></select>
+                                </div>
+                            </div>
+
+                           
+
+
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</article>

@@ -15,5 +15,11 @@ namespace OrganizationRegister.UserManagement.Mapping
         {
             return new UserListItemMapper(CreateRoleMapper());
         }
+
+
+        public virtual IMapper<IUser, User> CreateInternalUserMapper()
+        {
+            return new UserMapper();
+        }
     }
 }

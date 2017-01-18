@@ -53,8 +53,10 @@
                                     </tr>
                                     <tr data-ng-repeat="user in controller.model | orderBy: 'fullName'">
                                         <td id="userName">
+                                            
+                                           
 
-                                            <a href="#/Organizations/{{ controller.organizationId }}/Users/{{ user.id }}">{{ user.lastName }} {{ user.firstName }}</a>
+                                            <a href="#/Organizations/{{ controller.organizationId }}/internalusers/{{ user.id }}">{{ user.lastName }} {{ user.firstName }}</a>
                                         </td>
 
                                         <td id="userEmail">{{ user.emailAddress }}</td>

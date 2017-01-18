@@ -158,6 +158,7 @@
   <ItemGroup>
     <Content Include="App\Directives\HelpPopup\HelpPopup.html" />
     <Content Include="App\Packages\BusyIndication\Directives\BusyIndicator.html" />
+    <Content Include="App\Views\EditUser.html" />
     <Content Include="App\Views\ExternalLogin.html" />
     <Content Include="App\Views\Logout.html" />
     <Content Include="App\Views\OrganizationPartials\EditBasicInformation.html" />

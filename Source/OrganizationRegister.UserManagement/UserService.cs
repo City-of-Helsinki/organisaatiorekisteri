@@ -4,14 +4,18 @@ using System.Linq;
 using Affecto.Authentication.Claims;
 using Affecto.Authentication.Passwords;
 using Affecto.Authentication.Passwords.Specifications;
+using Affecto.IdentityManagement.Interfaces.Model;
 using Affecto.Mapping;
 using Affecto.Patterns.Specification;
-using OrganizationRegister.Application.User;
+using Microsoft.AspNet.Identity;
 using OrganizationRegister.Application.Organization;
 using OrganizationRegister.Common;
 using OrganizationRegister.Common.User;
 using OrganizationRegister.UserManagement.Mapping;
 using IdentityManagement = Affecto.IdentityManagement.Interfaces;
+using IRole = OrganizationRegister.Application.User.IRole;
+using IUser = OrganizationRegister.Application.User.IUser;
+using IUserListItem = OrganizationRegister.Application.User.IUserListItem;
 using IUserService = OrganizationRegister.Application.User.IUserService;
 
 namespace OrganizationRegister.UserManagement
@@ -139,6 +143,61 @@ namespace OrganizationRegister.UserManagement
             return user.Id;
         }
 
+
+
+        public void SetUser(Guid id, Guid roleId, Guid organizationId, string emailAddress, string password, string lastName, string firstName, string phoneNumber)
+        {
+            CheckManageUsersOfOrganizationPermission(organizationId);
+            CheckManageUsersInRolePermission(roleId);
+
+
+            if (id == Guid.Empty)
+            {
+                throw new ArgumentException("User's id cannot be empty.", nameof(roleId));
+            }
+
+            if (roleId == Guid.Empty)
+            {
+                throw new ArgumentException("User's role id cannot be empty.", nameof(roleId));
+            }
+            if (organizationId == Guid.Empty)
+            {
+                throw new ArgumentException("User's organization id cannot be empty.", nameof(organizationId));
+            }
+            if (string.IsNullOrWhiteSpace(emailAddress))
+            {
+                throw new ArgumentException("User's email address cannot be empty.", nameof(emailAddress));
+            }
+            
+            if (string.IsNullOrWhiteSpace(lastName))
+            {
+                throw new ArgumentException("User's last name cannot be empty.", nameof(lastName));
+            }
+            if (string.IsNullOrWhiteSpace(firstName))
+            {
+                throw new ArgumentException("User's first name cannot be empty.", nameof(firstName));
+            }
+
+            if (!IsExistingUser(emailAddress))
+            {
+                throw new ExistingUserAccountException($"User account '{emailAddress}' not exists.");
+            }
+
+            string displayName = $"{lastName} {firstName}";
+
+            var customProperties = new CustomProperties
+            {
+                OrganizationId = organizationId,
+                LastName = lastName,
+                FirstName = firstName,
+                EmailAddress = emailAddress,
+                PhoneNumber = string.IsNullOrWhiteSpace(phoneNumber) ? null : phoneNumber
+            };
+
+        
+
+        }
+
         public IEnumerable<IUserListItem> GetInternalUsers(Guid organizationId)
         {
             CheckManageUsersOfOrganizationPermission(organizationId);
@@ -149,6 +208,32 @@ namespace OrganizationRegister.UserManagement
 
             var mapper = mapperFactory.CreateUserMapper();
             return mapper.Map(users).ToList();
+        }
+
+        public IUser GetUser(Guid userId)
+        {
+
+            IdentityManagement.Model.IUser user = identityManagementService.GetUser(userId);
+            var mapper = mapperFactory.CreateInternalUserMapper();
+            var mappedUser =  mapper.Map(user);
+
+            CheckManageUsersOfOrganizationPermission(mappedUser.OrganizationId);
+
+            return mappedUser;
+        }
+
+        public void  DeleteUser(Guid userId)
+        {
+
+            IdentityManagement.Model.IUser user = identityManagementService.GetUser(userId);
+            var mapper = mapperFactory.CreateInternalUserMapper();
+            var mappedUser = mapper.Map(user);
+
+            CheckManageUsersOfOrganizationPermission(mappedUser.OrganizationId);
+
+            //identityManagementService.RemoveUserRole(userId,mappedUser.RoleId);
+            //identityManagementService.RemoveUserAccount(userId, AccountType.Password, mappedUser.EmailAddress);
+            //identityManagementService.RemoveUser();
         }
 
         private void CheckManageUsersOfOrganizationPermission(Guid organizationId)
