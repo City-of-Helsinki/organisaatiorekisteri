@@ -11,8 +11,8 @@ namespace OrganizationRegister.Api.User
         public string PhoneNumber { get; set; }
         public Guid OrganizationId { get; set; }
         public Guid RoleId { get; set; }
-
         public Guid Id { get; set; }
+        public bool IsDisabled { get; set; }
     }
 }
 

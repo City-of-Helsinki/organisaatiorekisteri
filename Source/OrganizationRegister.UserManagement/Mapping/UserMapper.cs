@@ -37,7 +37,8 @@ namespace OrganizationRegister.UserManagement.Mapping
                 EmailAddress = customProperties.EmailAddress,
                 LastName = customProperties.LastName,
                 FirstName = customProperties.FirstName,
-                PhoneNumber = customProperties.PhoneNumber
+                PhoneNumber = customProperties.PhoneNumber,
+                IsDisabled = source.IsDisabled
             };
 
             return result;

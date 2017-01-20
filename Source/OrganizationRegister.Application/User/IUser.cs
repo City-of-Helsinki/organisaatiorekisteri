@@ -11,5 +11,6 @@ namespace OrganizationRegister.Application.User
         string LastName { get; }
         string FirstName { get; }
         string PhoneNumber { get; }
+        bool IsDisabled { get; }
     }
 }

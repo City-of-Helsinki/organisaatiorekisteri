@@ -15,7 +15,8 @@ module OrganizationRegister
                 data.firstName,
                 data.phoneNumber,
                 data.organizationId,
-                data.roleId);
+                data.roleId,
+                data.isDisabled);
 
         }
     }

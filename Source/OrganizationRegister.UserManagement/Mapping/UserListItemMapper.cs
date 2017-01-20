@@ -46,7 +46,8 @@ namespace OrganizationRegister.UserManagement.Mapping
                 OrganizationId = customProperties.OrganizationId.Value,
                 EmailAddress = customProperties.EmailAddress,
                 LastName = customProperties.LastName,
-                FirstName = customProperties.FirstName
+                FirstName = customProperties.FirstName,
+                IsDisabled = source.IsDisabled
             };
 
             return result;

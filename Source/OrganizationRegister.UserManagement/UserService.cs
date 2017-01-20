@@ -147,32 +147,37 @@ namespace OrganizationRegister.UserManagement
 
         public void SetUser(Guid id, Guid roleId, Guid organizationId, string emailAddress, string password, string lastName, string firstName, string phoneNumber)
         {
-            CheckManageUsersOfOrganizationPermission(organizationId);
+
+            var user = GetUser(id);
+            CheckManageUsersOfOrganizationPermission(user.OrganizationId);
             CheckManageUsersInRolePermission(roleId);
 
 
             if (id == Guid.Empty)
             {
-                throw new ArgumentException("User's id cannot be empty.", nameof(roleId));
+                throw new ArgumentException("User's id cannot be empty.", nameof(id));
             }
 
             if (roleId == Guid.Empty)
             {
                 throw new ArgumentException("User's role id cannot be empty.", nameof(roleId));
             }
+
             if (organizationId == Guid.Empty)
             {
                 throw new ArgumentException("User's organization id cannot be empty.", nameof(organizationId));
             }
+
             if (string.IsNullOrWhiteSpace(emailAddress))
             {
                 throw new ArgumentException("User's email address cannot be empty.", nameof(emailAddress));
             }
-            
+       
             if (string.IsNullOrWhiteSpace(lastName))
             {
                 throw new ArgumentException("User's last name cannot be empty.", nameof(lastName));
             }
+
             if (string.IsNullOrWhiteSpace(firstName))
             {
                 throw new ArgumentException("User's first name cannot be empty.", nameof(firstName));
@@ -185,6 +190,13 @@ namespace OrganizationRegister.UserManagement
 
             string displayName = $"{lastName} {firstName}";
 
+            // TODO: relocate user activation
+            if (user.IsDisabled)
+            {
+                // activate user if disabled
+                identityManagementService.UpdateUser(id, displayName, false);
+            }
+
             var customProperties = new CustomProperties
             {
                 OrganizationId = organizationId,
@@ -194,7 +206,17 @@ namespace OrganizationRegister.UserManagement
                 PhoneNumber = string.IsNullOrWhiteSpace(phoneNumber) ? null : phoneNumber
             };
 
-        
+            if (roleId != user.RoleId)
+            {
+                identityManagementService.RemoveUserRole(id, user.RoleId);
+                identityManagementService.AddUserRole(id, roleId);
+            }
+
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                // set pwd
+            }
+
 
         }
 
@@ -217,6 +239,7 @@ namespace OrganizationRegister.UserManagement
             var mapper = mapperFactory.CreateInternalUserMapper();
             var mappedUser =  mapper.Map(user);
 
+           
             CheckManageUsersOfOrganizationPermission(mappedUser.OrganizationId);
 
             return mappedUser;
@@ -225,11 +248,17 @@ namespace OrganizationRegister.UserManagement
         public void  DeleteUser(Guid userId)
         {
 
-            IdentityManagement.Model.IUser user = identityManagementService.GetUser(userId);
-            var mapper = mapperFactory.CreateInternalUserMapper();
-            var mappedUser = mapper.Map(user);
+            if (userId == Guid.Empty)
+            {
+                throw new ArgumentException("User's id cannot be empty.", nameof(userId));
+            }
 
-            CheckManageUsersOfOrganizationPermission(mappedUser.OrganizationId);
+            var user = GetUser(userId);
+
+            CheckManageUsersOfOrganizationPermission(user.OrganizationId);
+
+            string name = $"{user.LastName} {user.FirstName}";
+            identityManagementService.UpdateUser(userId, name, true);
 
             //identityManagementService.RemoveUserRole(userId,mappedUser.RoleId);
             //identityManagementService.RemoveUserAccount(userId, AccountType.Password, mappedUser.EmailAddress);

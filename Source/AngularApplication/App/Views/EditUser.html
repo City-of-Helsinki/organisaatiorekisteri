@@ -11,25 +11,34 @@
                     <div class="content-box">
                         <div class="content-box-header">
                             <h3>Käyttäjän tiedot</h3>
-                            <button type="submit" class="button remove" data-ng-click="controller.deleteUser()">Poista</button>
+                            <button type="submit" data-ng-disabled="controller.model.isDisabled" class="button remove" data-ng-click="controller.deleteUser()">Poista</button>
                                
                             <button id="saveUserButton" type="submit" class="button edit" data-ng-click="controller.saveUser()"
-                                    data-ng-disabled="controller.userInformationForm.$invalid || !controller.canSaveUser() || controller.userInformationForm.$pristine">
+                                    data-ng-disabled="(controller.userInformationForm.$invalid || !controller.canSaveUser() || controller.userInformationForm.$pristine) && !controller.model.isDisabled">
                                 Tallenna
                             </button>
                             <button type="submit" class="button cancel" data-ng-click="controller.goToHomePage()">
                                 Keskeytä
                             </button>
                         </div>
+                        
+                      
                         <div class="content-box-inner">
+                            
+                            <div class="row info-container" data-ng-show="controller.model.isDisabled">
+                                <div class="info-box col-xs-12" >
+                                    Käyttäjä ei ole aktiivinen. Tietojen tallentaminen palauttaa käyttäjän aktiiviksi.
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-xs-6">
                                     <label class="mandatory-field">Sukunimi</label>
-                                    <input id="userLastNameInput" type="text" class="form-control" maxlength="100" data-ng-model="controller.model.lastName" data-ng-required="true" />
+                                    <input id="userLastNameInput" type="text" class="form-control" maxlength="100" data-ng-model="controller.model.lastName" data-ng-required="true"/>
                                 </div>
                                 <div class="col-xs-6">
                                     <label class="mandatory-field">Etunimi</label>
-                                    <input id="userFirstNameInput" type="text" class="form-control" maxlength="100" data-ng-model="controller.model.firstName" data-ng-required="true" />
+                                    <input id="userFirstNameInput" type="text" class="form-control" maxlength="100" data-ng-model="controller.model.firstName" data-ng-required="true"/>
                                 </div>
                             </div>
                             <div class="row">
@@ -41,20 +50,20 @@
                                     <label>Puhelinnumero</label>
                                     <input id="userPhoneNumberInput" type="text" class="form-control" name="phoneNumber" maxlength="50"
                                            data-ng-model="controller.model.phoneNumber" data-ng-blur="controller.validatePhoneNumber()" autocomplete="off">
-                                    <input id="phoneNumberInputToDisableAutocomplete" type="text" style="display: none;" />
+                                    <input id="phoneNumberInputToDisableAutocomplete" type="text" style="display: none;"/>
                                     <div id="userPhoneNumberErrorMessage" aria-live="polite" class="validation-message" data-ng-show="!controller.validPhoneNumber">
                                         Virheellinen puhelinnumero
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col-xs-6">
                                     <label>Uusi salasana</label>
                                     <input id="userPasswordInput" type="password" class="form-control" maxlength="100" data-ng-model="controller.model.password"
-                                           data-ng-change="controller.validateConfirmedPassword()"  autocomplete="off"
-                                           data-ng-blur="controller.validatePassword()" />
-                                    <input id="passwordInputToDisableAutocomplete" type="password" style="display: none;" />
+                                           data-ng-change="controller.validateConfirmedPassword()" autocomplete="off"
+                                           data-ng-blur="controller.validatePassword()"/>
+                                    <input id="passwordInputToDisableAutocomplete" type="password" style="display: none;"/>
                                     <div id="userPasswordErrorMessage" aria-live="polite" class="validation-message" data-ng-show="!controller.validPassword">
                                         Salasanan pituus on vähintään 10 merkkiä ja siinä pitää olla merkkejä vähintään kolmesta luokasta (pienet kirjaimet, isot kirjaimet, numerot, erikoismerkit)
                                     </div>
@@ -62,8 +71,8 @@
                                 <div class="col-xs-6">
                                     <label>Uusi salasana uudelleen</label>
                                     <input id="userPasswordAgainInput" type="password" class="form-control" maxlength="100" data-ng-required="controller.model.password" data-ng-model="controller.model.passwordConfirm"
-                                           data-ng-change="controller.validateConfirmedPassword()" autocomplete="off" />
-                                    <input id="passwordConfirmInputToDisableAutocomplete" type="password" style="display: none;" />
+                                           data-ng-change="controller.validateConfirmedPassword()" autocomplete="off"/>
+                                    <input id="passwordConfirmInputToDisableAutocomplete" type="password" style="display: none;"/>
                                     <div id="userConfirmedPasswordErrorMessage" aria-live="polite" class="validation-message" data-ng-show="!controller.validConfirmedPassword">
                                         Salasana ei täsmää
                                     </div>
@@ -71,7 +80,7 @@
                             </div>
 
                             <div class="row">
-                               
+
 
                                 <div class="col-xs-6">
                                     <label>
@@ -99,7 +108,7 @@
                                 </div>
                             </div>
 
-                           
+
 
 
                         </div>

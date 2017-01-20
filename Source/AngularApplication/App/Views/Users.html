@@ -49,6 +49,7 @@
                                         <th>Nimi</th>
                                         <th>Sähköposti</th>
                                         <th>Rooli</th>
+                                        <th>Poistettu</th>
                                         <!--<th>Organisaatio</th>-->
                                     </tr>
                                     <tr data-ng-repeat="user in controller.model | orderBy: 'fullName'">
@@ -61,6 +62,7 @@
 
                                         <td id="userEmail">{{ user.emailAddress }}</td>
                                         <td id="userRole">{{ user.role.name }}</td>
+                                        <td id="userDisabled" class="text-center"><span data-ng-show="user.isDisabled">X</span></td>
                                         <!--<td id="userOrganization">{{ user.organization.name }}</td>-->
                                     </tr>
                                     </tbody>
