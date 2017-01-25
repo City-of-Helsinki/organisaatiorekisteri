@@ -2,31 +2,36 @@
     <div>
         <div class="container">
             <div class="page-title">
-                <h1>Käyttäjän tietojen muokkaus</h1>
+                <h2>Käyttäjän tietojen muokkaus</h2>
+                <button type="submit" data-ng-disabled="controller.model.isDisabled" class="button remove" data-ng-click="controller.deleteUser()">Poista</button>
             </div>
         </div>
         <div>
             <div class="container">
                 <form class="form-horizontal" name="controller.userInformationForm" unsaved-warning-form autocomplete="off">
+                    
+                  
                     <div class="content-box">
                         <div class="content-box-header">
                             <h3>Käyttäjän tiedot</h3>
-                            <button type="submit" data-ng-disabled="controller.model.isDisabled" class="button remove" data-ng-click="controller.deleteUser()">Poista</button>
-                               
+                            
+
                             <button id="saveUserButton" type="submit" class="button edit" data-ng-click="controller.saveUser()"
                                     data-ng-disabled="(controller.userInformationForm.$invalid || !controller.canSaveUser() || controller.userInformationForm.$pristine) && !controller.model.isDisabled">
                                 Tallenna
                             </button>
                             <button type="submit" class="button cancel" data-ng-click="controller.goToHomePage()">
-                                Keskeytä
+                                Peruuta
                             </button>
-                        </div>
-                        
-                      
-                        <div class="content-box-inner">
                             
+                            
+                        </div>
+
+
+                        <div class="content-box-inner">
+
                             <div class="row info-container" data-ng-show="controller.model.isDisabled">
-                                <div class="info-box col-xs-12" >
+                                <div class="info-box col-xs-12">
                                     Käyttäjä ei ole aktiivinen. Tietojen tallentaminen palauttaa käyttäjän aktiiviksi.
                                 </div>
                             </div>
@@ -86,6 +91,11 @@
                                     <label>
                                         Käyttäjän organisaatio*
                                     </label>
+
+                                    <p class="services-sum">
+                                        Valittu organisaatio: <strong>{{ controller.selectedOrganizationName }}</strong>
+                                    </p>
+
                                     <div class="ui-tree-container2">
                                         <treecontrol id="organizationTree" class="tree-light"
                                                      data-tree-model="controller.organizationHiearchy.value"
@@ -95,9 +105,8 @@
                                         </treecontrol>
                                     </div>
 
-                                    <p class="services-sum">
-                                        Valittu organisaatio: <strong>{{ controller.selectedOrganizationName }}</strong>
-                                    </p>
+
+
                                 </div>
 
 

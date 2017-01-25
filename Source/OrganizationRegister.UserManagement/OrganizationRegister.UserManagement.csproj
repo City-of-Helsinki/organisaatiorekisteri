@@ -35,8 +35,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Affecto.AuditTrail.Interfaces, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Affecto.AuditTrail.Interfaces.2.0.0\lib\net451\Affecto.AuditTrail.Interfaces.dll</HintPath>
+    <Reference Include="Affecto.AuditTrail.Interfaces, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Affecto.AuditTrail.Interfaces.3.0.0\lib\net451\Affecto.AuditTrail.Interfaces.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Affecto.Authentication.Claims, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -55,32 +55,32 @@
       <HintPath>..\packages\Affecto.EntityFramework.PostgreSql.3.0.0\lib\net45\Affecto.EntityFramework.PostgreSql.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Affecto.IdentityManagement.ApplicationServices, Version=9.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Affecto.IdentityManagement.Autofac.9.2.0\lib\net451\Affecto.IdentityManagement.ApplicationServices.dll</HintPath>
+    <Reference Include="Affecto.IdentityManagement.ApplicationServices, Version=9.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Affecto.IdentityManagement.Autofac.9.3.0\lib\net451\Affecto.IdentityManagement.ApplicationServices.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Affecto.IdentityManagement.Autofac, Version=9.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Affecto.IdentityManagement.Autofac.9.2.0\lib\net451\Affecto.IdentityManagement.Autofac.dll</HintPath>
+    <Reference Include="Affecto.IdentityManagement.Autofac, Version=9.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Affecto.IdentityManagement.Autofac.9.3.0\lib\net451\Affecto.IdentityManagement.Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Affecto.IdentityManagement.Commanding, Version=9.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Affecto.IdentityManagement.Store.Mocking.8.0.4\lib\net451\Affecto.IdentityManagement.Commanding.dll</HintPath>
+    <Reference Include="Affecto.IdentityManagement.Commanding, Version=9.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Affecto.IdentityManagement.Autofac.9.3.0\lib\net451\Affecto.IdentityManagement.Commanding.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Affecto.IdentityManagement.Interfaces, Version=9.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Affecto.IdentityManagement.Interfaces.9.2.0\lib\net451\Affecto.IdentityManagement.Interfaces.dll</HintPath>
+    <Reference Include="Affecto.IdentityManagement.Interfaces, Version=9.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Affecto.IdentityManagement.Interfaces.9.3.0\lib\net451\Affecto.IdentityManagement.Interfaces.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Affecto.IdentityManagement.Querying, Version=9.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Affecto.IdentityManagement.Store.Mocking.8.0.4\lib\net451\Affecto.IdentityManagement.Querying.dll</HintPath>
+    <Reference Include="Affecto.IdentityManagement.Querying, Version=9.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Affecto.IdentityManagement.Autofac.9.3.0\lib\net451\Affecto.IdentityManagement.Querying.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Affecto.IdentityManagement.Store, Version=9.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Affecto.IdentityManagement.Store.Mocking.8.0.4\lib\net451\Affecto.IdentityManagement.Store.dll</HintPath>
+    <Reference Include="Affecto.IdentityManagement.Store, Version=9.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Affecto.IdentityManagement.Autofac.9.3.0\lib\net451\Affecto.IdentityManagement.Store.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Affecto.IdentityManagement.Store.EntityFramework, Version=9.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Affecto.IdentityManagement.Store.Mocking.8.0.4\lib\net451\Affecto.IdentityManagement.Store.EntityFramework.dll</HintPath>
+    <Reference Include="Affecto.IdentityManagement.Store.EntityFramework, Version=9.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Affecto.IdentityManagement.Autofac.9.3.0\lib\net451\Affecto.IdentityManagement.Store.EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Affecto.IdentityManagement.Store.Mocking, Version=8.0.4.0, Culture=neutral, processorArchitecture=MSIL">

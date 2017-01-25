@@ -125,7 +125,7 @@ namespace OrganizationRegister.UserManagement
                 throw new ExistingUserAccountException($"User account '{emailAddress}' already exists.");
             }
 
-            string displayName = $"{lastName} {firstName}";
+            string name = $"{lastName} {firstName}";
 
             var customProperties = new CustomProperties
             {
@@ -136,7 +136,7 @@ namespace OrganizationRegister.UserManagement
                 PhoneNumber = string.IsNullOrWhiteSpace(phoneNumber) ? null : phoneNumber
             };
 
-            IdentityManagement.Model.IUserListItem user = identityManagementService.CreateUser(displayName, customProperties.ToKeyValuePairs());
+            IdentityManagement.Model.IUserListItem user = identityManagementService.CreateUser(name, customProperties.ToKeyValuePairs());
             identityManagementService.AddUserAccount(user.Id, emailAddress, password);
             identityManagementService.AddUserRole(user.Id, roleId);
 
@@ -151,7 +151,6 @@ namespace OrganizationRegister.UserManagement
             var user = GetUser(id);
             CheckManageUsersOfOrganizationPermission(user.OrganizationId);
             CheckManageUsersInRolePermission(roleId);
-
 
             if (id == Guid.Empty)
             {
@@ -172,7 +171,7 @@ namespace OrganizationRegister.UserManagement
             {
                 throw new ArgumentException("User's email address cannot be empty.", nameof(emailAddress));
             }
-       
+
             if (string.IsNullOrWhiteSpace(lastName))
             {
                 throw new ArgumentException("User's last name cannot be empty.", nameof(lastName));
@@ -188,15 +187,7 @@ namespace OrganizationRegister.UserManagement
                 throw new ExistingUserAccountException($"User account '{emailAddress}' not exists.");
             }
 
-            string displayName = $"{lastName} {firstName}";
-
-            // TODO: relocate user activation
-            if (user.IsDisabled)
-            {
-                // activate user if disabled
-                identityManagementService.UpdateUser(id, displayName, false);
-            }
-
+            string name = $"{lastName} {firstName}";
             var customProperties = new CustomProperties
             {
                 OrganizationId = organizationId,
@@ -205,6 +196,7 @@ namespace OrganizationRegister.UserManagement
                 EmailAddress = emailAddress,
                 PhoneNumber = string.IsNullOrWhiteSpace(phoneNumber) ? null : phoneNumber
             };
+            identityManagementService.UpdateUser(id, name, user.IsDisabled, customProperties.ToKeyValuePairs());
 
             if (roleId != user.RoleId)
             {
@@ -212,9 +204,9 @@ namespace OrganizationRegister.UserManagement
                 identityManagementService.AddUserRole(id, roleId);
             }
 
-            if (string.IsNullOrWhiteSpace(password))
+            if (!string.IsNullOrWhiteSpace(password))
             {
-                // set pwd
+                identityManagementService.ChangeUserPassword(id, password);
             }
 
 
@@ -239,7 +231,6 @@ namespace OrganizationRegister.UserManagement
             var mapper = mapperFactory.CreateInternalUserMapper();
             var mappedUser =  mapper.Map(user);
 
-           
             CheckManageUsersOfOrganizationPermission(mappedUser.OrganizationId);
 
             return mappedUser;
@@ -260,9 +251,6 @@ namespace OrganizationRegister.UserManagement
             string name = $"{user.LastName} {user.FirstName}";
             identityManagementService.UpdateUser(userId, name, true);
 
-            //identityManagementService.RemoveUserRole(userId,mappedUser.RoleId);
-            //identityManagementService.RemoveUserAccount(userId, AccountType.Password, mappedUser.EmailAddress);
-            //identityManagementService.RemoveUser();
         }
 
         private void CheckManageUsersOfOrganizationPermission(Guid organizationId)
