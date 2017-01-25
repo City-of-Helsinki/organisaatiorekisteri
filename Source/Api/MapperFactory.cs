@@ -1,4 +1,5 @@
 ﻿using Affecto.Mapping;
+using Microsoft.AspNet.Identity;
 using OrganizationRegister.Api.Organization;
 using OrganizationRegister.Api.Settings;
 using OrganizationRegister.Api.User;
@@ -6,6 +7,8 @@ using OrganizationRegister.Api.Validation;
 using OrganizationRegister.Application.Organization;
 using OrganizationRegister.Application.User;
 using OrganizationRegister.Application.Validation;
+using IRole = OrganizationRegister.Application.User.IRole;
+using IUser = OrganizationRegister.Application.User.IUser;
 
 namespace OrganizationRegister.Api
 {
@@ -39,6 +42,11 @@ namespace OrganizationRegister.Api
         public virtual IMapper<IUserListItem, UserListItem> CreateUserListItemMapper()
         {
             return new UserListItemMapper(CreateRoleMapper());
+        }
+
+        public virtual IMapper<IUser, User.User> CreateUserMapper()
+        {
+            return new UserMapper();
         }
     }
 }
