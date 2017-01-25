@@ -259,6 +259,7 @@
     <Compile Include="User\UserListItemMapper.cs" />
     <Compile Include="User\User.cs" />
     <Compile Include="User\AuthorizedUserController.cs" />
+    <Compile Include="User\UserMapper.cs" />
     <Compile Include="Validation\AuthorizedValidationController.cs" />
     <Compile Include="Validation\BusinessIdentifierValidationResultMapper.cs" />
     <Compile Include="MapperFactory.cs" />

@@ -10,5 +10,6 @@ namespace OrganizationRegister.Application.User
         string EmailAddress { get; }
         string LastName { get; }
         string FirstName { get; }
+        bool IsDisabled { get; }
     }
 }

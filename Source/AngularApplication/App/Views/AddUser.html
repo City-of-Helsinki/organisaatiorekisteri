@@ -2,7 +2,7 @@
     <div>
         <div class="container">
             <div class="page-title">
-                <h1>Uuden käyttäjän lisäys</h1>
+                <h2>Uuden käyttäjän lisäys</h2>
             </div>
         </div>
 
@@ -17,7 +17,7 @@
                                 Tallenna
                             </button>
                             <button type="submit" class="button cancel" data-ng-click="controller.goToHomePage()">
-                                Keskeytä
+                                Peruuta
                             </button>
                         </div>
                         <div class="content-box-inner">
@@ -55,40 +55,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <!--<div class="col-xs-6">
-                                    <label class="mandatory-field">Organisaatio</label>
-                                    <select id="userOrganizationInput" class="form-control" data-ng-model="model.organizationIdProperty"
-                                            data-ng-options="org.id as org.name for org in controller.organizations" data-ng-required="true"></select>
-                                </div>-->
-                                
-                                
-                                <div class="col-xs-6">
-                                    <label>
-                                        Käyttäjän organisaatio*
-                                    </label>
-                                    <div class="ui-tree-container2">
-                                        <treecontrol id="organizationTree" class="tree-light"
-                                                     data-tree-model="controller.organizationHiearchy.value"
-                                                     data-on-selection="controller.toggleOrganisationSelection(node.id, selected)"
-                                                     order-by="name" filter-comparator="false">
-                                            {{node.name}}
-                                        </treecontrol>
-                                    </div>
-
-                                    <p class="services-sum">
-                                        Valittu organisaatio: <strong>{{ controller.selectedOrganizationName }}</strong>
-                                    </p>
-                                </div>
-
-
-                                <div class="col-xs-6">
-                                    <label class="mandatory-field">Rooli</label>
-                                    <select id="userRoleInput" class="form-control" data-ng-model="model.roleIdProperty"
-                                            data-ng-options="role.id as role.name for role in controller.userRoles" data-ng-required="true"></select>
-                                </div>
-                            </div>
-
+                            
                             <div class="row">
                                 <div class="col-xs-6">
                                     <label class="mandatory-field">Salasana</label>
@@ -110,6 +77,36 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                
+                                <div class="col-xs-6">
+                                    <label>
+                                        Käyttäjän organisaatio*
+                                    </label>
+                                    
+                                    <p class="services-sum">
+                                        Valittu organisaatio: <strong>{{ controller.selectedOrganizationName }}</strong>
+                                    </p>
+
+                                    <div class="ui-tree-container2">
+                                        <treecontrol id="organizationTree" class="tree-light"
+                                                     data-tree-model="controller.organizationHiearchy.value"
+                                                     data-on-selection="controller.toggleOrganisationSelection(node.id, selected)"
+                                                     order-by="name" filter-comparator="false">
+                                            {{node.name}}
+                                        </treecontrol>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-6">
+                                    <label class="mandatory-field">Rooli</label>
+                                    <select id="userRoleInput" class="form-control" data-ng-model="model.roleIdProperty"
+                                            data-ng-options="role.id as role.name for role in controller.userRoles" data-ng-required="true"></select>
+                                </div>
+                            </div>
+
+
                             
                           
                         </div>

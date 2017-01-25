@@ -18,7 +18,7 @@ module OrganizationRegister
         {
             var organization: OrganizationName = OrganizationNameMapper.mapSingle(data.organization);
             var role: UserRole = UserRoleMapper.mapSingle(data.role);
-            return new UserListItem(data.id, role, organization, data.emailAddress, data.lastName, data.firstName);
+            return new UserListItem(data.id, role, organization, data.emailAddress, data.lastName, data.firstName, data.isDisabled);
         }
     }
 }

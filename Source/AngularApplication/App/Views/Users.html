@@ -28,7 +28,7 @@
                                 </p>
 
                                 <div class="ui-tree-container2">
-                                    <treecontrol id="organizationTree" class="tree-light"
+                                    <treecontrol id="organizationTree"  class="tree-light" 
                                                  data-tree-model="controller.organizationHiearchy.value"
                                                  data-on-selection="controller.toggleOrganisationSelection(node.id, selected)"
                                                  order-by="name" filter-comparator="false">
@@ -49,16 +49,20 @@
                                         <th>Nimi</th>
                                         <th>Sähköposti</th>
                                         <th>Rooli</th>
+                                        <th>Poistettu</th>
                                         <!--<th>Organisaatio</th>-->
                                     </tr>
                                     <tr data-ng-repeat="user in controller.model | orderBy: 'fullName'">
                                         <td id="userName">
+                                            
+                                           
 
-                                            <a href="#/Organizations/{{ controller.organizationId }}/Users/{{ user.id }}">{{ user.lastName }} {{ user.firstName }}</a>
+                                            <a href="#/Organizations/{{ controller.organizationId }}/internalusers/{{ user.id }}">{{ user.lastName }} {{ user.firstName }}</a>
                                         </td>
 
                                         <td id="userEmail">{{ user.emailAddress }}</td>
                                         <td id="userRole">{{ user.role.name }}</td>
+                                        <td id="userDisabled" class="text-center"><span data-ng-show="user.isDisabled">X</span></td>
                                         <!--<td id="userOrganization">{{ user.organization.name }}</td>-->
                                     </tr>
                                     </tbody>

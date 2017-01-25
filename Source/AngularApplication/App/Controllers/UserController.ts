@@ -8,9 +8,7 @@ module OrganizationRegister
             "$scope", "$location", "$routeParams", "$sce", "$q", "userService", "settingsService", "validationService", "busyIndicationService", "organizationService", "authenticationService"
         ];
 
-        //public organizations: Array<OrganizationName>;
         public userRoles: Array<UserRole>;
-
         public validPhoneNumber: boolean;
         public validEmailAddress: boolean;
         public existingEmailAddress: boolean;
@@ -18,20 +16,13 @@ module OrganizationRegister
         public validConfirmedPassword: boolean;
         public model: User;
         public originalModel: User;
-
         public userInformationForm: angular.IFormController;
         public canViewAllOrganizations: boolean;
-        public rootOrganizationId: string;
-       
-        private administratorUser: string = "Järjestelmän pääkäyttäjä";
-
-        // 
-       
+        public rootOrganizationId: string; 
         public organizationHiearchy: Tree;
         public selectedOrganizationName: string;
 
-        //
-
+       
         constructor(private $scope: Affecto.Base.IViewScope,
             private $location: angular.ILocationService,
             $routeParams: IUserRoute,
@@ -53,10 +44,14 @@ module OrganizationRegister
                     .search("code", ErrorCode.insufficientPermissions);
             }
 
-
-            this.initializeUser($routeParams);
-
             $scope.controller = this;
+            
+            this.initializeUser($routeParams)
+            .then(() =>
+            {
+                this.initializeSelectionLists();
+            });
+
             $scope.model = this.model;
 
             this.validPhoneNumber = true;
@@ -64,8 +59,7 @@ module OrganizationRegister
             this.existingEmailAddress = false;
             this.validConfirmedPassword = true;
             this.validPassword = true;
-
-            this.initializeSelectionLists();
+            
         }
 
         public toggleOrganisationSelection(classId: string, selected: boolean): void
@@ -91,6 +85,12 @@ module OrganizationRegister
                 this.validPassword &&
                 this.validConfirmedPassword &&
                 this.model.hasOrganizationId();
+        }
+
+        public canSaveUser(): boolean
+        {
+            return this.canAddUser() &&
+                    this.model.hasId();
         }
 
         public goToHomePage(): void
@@ -168,6 +168,33 @@ module OrganizationRegister
                 });
         }
 
+
+        public saveUser()
+        {
+            this.busyIndicationService.showBusyIndicator("Tallennetaan käyttäjän tietoja...");
+            this.originalModel = angular.copy(this.model);
+
+            return this.userService.setUser(this.model)
+                .then(() =>
+                {
+                    this.busyIndicationService.hideBusyIndicator();
+                    this.goToHomePage();
+                });
+        }
+
+        public deleteUser(): void
+        {
+
+            this.busyIndicationService.showBusyIndicator("Poistetaan käyttäjän tietoja...");
+            this.userService.deleteUser(this.model.id)
+            .then(() =>
+            {
+                this.busyIndicationService.hideBusyIndicator();
+                this.goToHomePage();
+            });
+            
+        }
+
         private setEmailAddressValidity = (isValid: boolean, isExisting: boolean): void =>
         {
             this.validEmailAddress = isValid;
@@ -205,11 +232,14 @@ module OrganizationRegister
             }
         }
 
+
         private initializeUser($routeParams: IUserRoute): angular.IPromise<void>
         {
+
+            this.model = new User();
+
             if ($routeParams.id === undefined || $routeParams.id == null)
             {
-                this.model = new User();
                 this.model.organizationId = $routeParams.organizationId;
             }
             else
@@ -219,6 +249,7 @@ module OrganizationRegister
                     .then((user: User) =>
                     {
                         this.model = user;
+                        this.model.organizationId = user.organizationId;
                         this.busyIndicationService.hideBusyIndicator();
                     });
             }
@@ -249,7 +280,7 @@ module OrganizationRegister
                 .then((result: Array<any>) =>
                 {
                     this.organizationHiearchy = result[0];
-                    this.toggleOrganisationSelection(this.model.organizationId, true); // TODO: relocate
+                    this.toggleOrganisationSelection(this.model.organizationId, true);
 
                     var userRoles: Array<UserRole> = result[1];
                     if (this.authenticationService.getUser<AuthenticatedUser>().hasPermission(Permission.maintenanceOfAllUsers))

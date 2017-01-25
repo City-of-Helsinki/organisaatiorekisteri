@@ -6,8 +6,18 @@ module OrganizationRegister
     {
         public static map(data: any): User
         {
-            return new User(data.emailAddress, data.password, data.lastName, data.firstName, data.phoneNumber, data.organizationId,
-                data.roleId);
+            
+            return new User(data.id,
+                data.emailAddress,
+                data.password,
+                null,
+                data.lastName,
+                data.firstName,
+                data.phoneNumber,
+                data.organizationId,
+                data.roleId,
+                data.isDisabled);
+
         }
     }
 }

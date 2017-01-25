@@ -70,6 +70,50 @@ namespace OrganizationRegister.Api.User
             return Ok(userId);
         }
 
+
+        [HttpPut]
+        [PutRoute("users/{userId}")]
+        public IHttpActionResult SetUser(Guid userId, User user)
+        {
+            if (user == null)
+            {
+                throw new ArgumentNullException("user");
+            }
+
+            userService.SetUser(userId, user.RoleId, user.OrganizationId, user.EmailAddress, user.Password, user.LastName, user.FirstName, user.PhoneNumber);
+            return Ok();
+        }
+
+        [HttpGet]
+        [GetRoute("users/{userId}")]
+        public IHttpActionResult GetUser(Guid userId)
+        {
+            if (userId == Guid.Empty)
+            {
+                throw new ArgumentException("userId");
+            }
+
+            var userMapper = mapperFactory.CreateUserMapper();
+            IUser user = userService.GetUser(userId);
+            User mappedUser = userMapper.Map(user);
+
+            return Ok(mappedUser);
+        }
+
+        [HttpDelete]
+        [DeleteRoute("users/{userId}")]
+        public IHttpActionResult DeleteUser(Guid userId)
+        {
+            if (userId == Guid.Empty)
+            {
+                throw new ArgumentException("userId");
+            }
+
+            userService.DeleteUser(userId);
+
+            return Ok();
+        }
+
         [HttpGet]
         [GetRoute("organizations/{organizationId}/internalusers")]
         public IHttpActionResult GetInternalUsers(Guid organizationId)
@@ -97,5 +141,7 @@ namespace OrganizationRegister.Api.User
 
             return Ok(results.AsEnumerable());
         }
+
+      
     }
 }

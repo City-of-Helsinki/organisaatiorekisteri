@@ -7,9 +7,9 @@
     <authors>Affecto</authors>
     <version>$version$</version>
     <releaseNotes>
-      Organization data maintenance permissions
-      User role checks replaced with organization data maintenance permission checks
-      "Organisaatiorekisteri" to "Organisaatiosovellus" naming updates
+      Update user information.
+      Change user password.
+      TPR-perhe favicon added.
     </releaseNotes>
   </metadata>
 </package>

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Affecto.IdentityManagement.Interfaces.Model;
@@ -7,20 +7,10 @@ using OrganizationRegister.UserManagement.Model;
 
 namespace OrganizationRegister.UserManagement.Mapping
 {
-    internal class UserListItemMapper : IMapper<IUser, UserListItem>
+    internal class UserMapper : IMapper<IUser, User>
     {
-        private readonly IMapper<IRole, Role> roleMapper;
 
-        public UserListItemMapper(IMapper<IRole, Role> roleMapper)
-        {
-            if (roleMapper == null)
-            {
-                throw new ArgumentNullException("roleMapper");
-            }
-            this.roleMapper = roleMapper;
-        }
-
-        public UserListItem Map(IUser source)
+        public User Map(IUser source)
         {
             if (source == null)
             {
@@ -39,21 +29,23 @@ namespace OrganizationRegister.UserManagement.Mapping
             var customProperties = new CustomProperties(keyValuePairs);
             customProperties.ValidateRequiredProperties();
 
-            var result = new UserListItem
+            var result = new User
             {
                 Id = source.Id,
-                Role = GetRole(source),
+                RoleId = GetRoleId(source),
                 OrganizationId = customProperties.OrganizationId.Value,
                 EmailAddress = customProperties.EmailAddress,
                 LastName = customProperties.LastName,
                 FirstName = customProperties.FirstName,
+                PhoneNumber = customProperties.PhoneNumber,
                 IsDisabled = source.IsDisabled
             };
 
             return result;
         }
 
-        private Role GetRole(IUser user)
+
+        private Guid GetRoleId(IUser user)
         {
             if (user.Roles == null)
             {
@@ -64,7 +56,7 @@ namespace OrganizationRegister.UserManagement.Mapping
                 throw new ArgumentException("User must have a single role.", "user");
             }
 
-            return roleMapper.Map(user.Roles.Single());
+            return user.Roles.Single().Id;
         }
     }
 }

@@ -4,14 +4,18 @@ using System.Linq;
 using Affecto.Authentication.Claims;
 using Affecto.Authentication.Passwords;
 using Affecto.Authentication.Passwords.Specifications;
+using Affecto.IdentityManagement.Interfaces.Model;
 using Affecto.Mapping;
 using Affecto.Patterns.Specification;
-using OrganizationRegister.Application.User;
+using Microsoft.AspNet.Identity;
 using OrganizationRegister.Application.Organization;
 using OrganizationRegister.Common;
 using OrganizationRegister.Common.User;
 using OrganizationRegister.UserManagement.Mapping;
 using IdentityManagement = Affecto.IdentityManagement.Interfaces;
+using IRole = OrganizationRegister.Application.User.IRole;
+using IUser = OrganizationRegister.Application.User.IUser;
+using IUserListItem = OrganizationRegister.Application.User.IUserListItem;
 using IUserService = OrganizationRegister.Application.User.IUserService;
 
 namespace OrganizationRegister.UserManagement
@@ -121,7 +125,7 @@ namespace OrganizationRegister.UserManagement
                 throw new ExistingUserAccountException($"User account '{emailAddress}' already exists.");
             }
 
-            string displayName = $"{lastName} {firstName}";
+            string name = $"{lastName} {firstName}";
 
             var customProperties = new CustomProperties
             {
@@ -132,11 +136,80 @@ namespace OrganizationRegister.UserManagement
                 PhoneNumber = string.IsNullOrWhiteSpace(phoneNumber) ? null : phoneNumber
             };
 
-            IdentityManagement.Model.IUserListItem user = identityManagementService.CreateUser(displayName, customProperties.ToKeyValuePairs());
+            IdentityManagement.Model.IUserListItem user = identityManagementService.CreateUser(name, customProperties.ToKeyValuePairs());
             identityManagementService.AddUserAccount(user.Id, emailAddress, password);
             identityManagementService.AddUserRole(user.Id, roleId);
 
             return user.Id;
+        }
+
+
+
+        public void SetUser(Guid id, Guid roleId, Guid organizationId, string emailAddress, string password, string lastName, string firstName, string phoneNumber)
+        {
+
+            var user = GetUser(id);
+            CheckManageUsersOfOrganizationPermission(user.OrganizationId);
+            CheckManageUsersInRolePermission(roleId);
+
+            if (id == Guid.Empty)
+            {
+                throw new ArgumentException("User's id cannot be empty.", nameof(id));
+            }
+
+            if (roleId == Guid.Empty)
+            {
+                throw new ArgumentException("User's role id cannot be empty.", nameof(roleId));
+            }
+
+            if (organizationId == Guid.Empty)
+            {
+                throw new ArgumentException("User's organization id cannot be empty.", nameof(organizationId));
+            }
+
+            if (string.IsNullOrWhiteSpace(emailAddress))
+            {
+                throw new ArgumentException("User's email address cannot be empty.", nameof(emailAddress));
+            }
+
+            if (string.IsNullOrWhiteSpace(lastName))
+            {
+                throw new ArgumentException("User's last name cannot be empty.", nameof(lastName));
+            }
+
+            if (string.IsNullOrWhiteSpace(firstName))
+            {
+                throw new ArgumentException("User's first name cannot be empty.", nameof(firstName));
+            }
+
+            if (!IsExistingUser(emailAddress))
+            {
+                throw new ExistingUserAccountException($"User account '{emailAddress}' not exists.");
+            }
+
+            string name = $"{lastName} {firstName}";
+            var customProperties = new CustomProperties
+            {
+                OrganizationId = organizationId,
+                LastName = lastName,
+                FirstName = firstName,
+                EmailAddress = emailAddress,
+                PhoneNumber = string.IsNullOrWhiteSpace(phoneNumber) ? null : phoneNumber
+            };
+            identityManagementService.UpdateUser(id, name, user.IsDisabled, customProperties.ToKeyValuePairs());
+
+            if (roleId != user.RoleId)
+            {
+                identityManagementService.RemoveUserRole(id, user.RoleId);
+                identityManagementService.AddUserRole(id, roleId);
+            }
+
+            if (!string.IsNullOrWhiteSpace(password))
+            {
+                identityManagementService.ChangeUserPassword(id, password);
+            }
+
+
         }
 
         public IEnumerable<IUserListItem> GetInternalUsers(Guid organizationId)
@@ -149,6 +222,35 @@ namespace OrganizationRegister.UserManagement
 
             var mapper = mapperFactory.CreateUserMapper();
             return mapper.Map(users).ToList();
+        }
+
+        public IUser GetUser(Guid userId)
+        {
+
+            IdentityManagement.Model.IUser user = identityManagementService.GetUser(userId);
+            var mapper = mapperFactory.CreateInternalUserMapper();
+            var mappedUser =  mapper.Map(user);
+
+            CheckManageUsersOfOrganizationPermission(mappedUser.OrganizationId);
+
+            return mappedUser;
+        }
+
+        public void  DeleteUser(Guid userId)
+        {
+
+            if (userId == Guid.Empty)
+            {
+                throw new ArgumentException("User's id cannot be empty.", nameof(userId));
+            }
+
+            var user = GetUser(userId);
+
+            CheckManageUsersOfOrganizationPermission(user.OrganizationId);
+
+            string name = $"{user.LastName} {user.FirstName}";
+            identityManagementService.UpdateUser(userId, name, true);
+
         }
 
         private void CheckManageUsersOfOrganizationPermission(Guid organizationId)
