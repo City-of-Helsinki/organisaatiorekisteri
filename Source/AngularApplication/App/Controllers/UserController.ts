@@ -44,14 +44,18 @@ module OrganizationRegister
                     .search("code", ErrorCode.insufficientPermissions);
             }
 
-            $scope.controller = this;
-            
-            this.initializeUser($routeParams)
-            .then(() =>
+            if ($routeParams.id === undefined || $routeParams.id == null)
             {
+                this.model = new User();
+                this.model.organizationId = $routeParams.organizationId;
                 this.initializeSelectionLists();
-            });
+            }
+            else
+            {
+                this.initializeUserAndSelectionLists($routeParams);
+            }
 
+            $scope.controller = this;
             $scope.model = this.model;
 
             this.validPhoneNumber = true;
@@ -233,28 +237,23 @@ module OrganizationRegister
         }
 
 
-        private initializeUser($routeParams: IUserRoute): angular.IPromise<void>
+        private initializeUserAndSelectionLists($routeParams: IUserRoute): angular.IPromise<void>
         {
 
-            this.model = new User();
+            this.busyIndicationService.showBusyIndicator("Haetaan käyttäjän tietoja...");
+            return this.userService.getUser($routeParams.id)
+                .then((user: User) =>
+                {
+                    this.model = new User();
+                    this.model = user;
+                    this.model.organizationId = user.organizationId;
 
-            if ($routeParams.id === undefined || $routeParams.id == null)
-            {
-                this.model.organizationId = $routeParams.organizationId;
-            }
-            else
-            {
-                this.busyIndicationService.showBusyIndicator("Haetaan käyttäjän tietoja...");
-                return this.userService.getUser($routeParams.id)
-                    .then((user: User) =>
-                    {
-                        this.model = user;
-                        this.model.organizationId = user.organizationId;
-                        this.busyIndicationService.hideBusyIndicator();
-                    });
-            }
+                    this.initializeSelectionLists();
 
-            this.originalModel = angular.copy(this.model);
+                    this.originalModel = angular.copy(this.model);
+                    this.busyIndicationService.hideBusyIndicator();
+                });
+         
         }
 
 
@@ -281,7 +280,6 @@ module OrganizationRegister
                 {
                     this.organizationHiearchy = result[0];
                     this.toggleOrganisationSelection(this.model.organizationId, true);
-
                     var userRoles: Array<UserRole> = result[1];
                     if (this.authenticationService.getUser<AuthenticatedUser>().hasPermission(Permission.maintenanceOfAllUsers))
                 {

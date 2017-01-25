@@ -21,7 +21,7 @@
                     <div>
 
                         <div class="row">
-                            <div class="col-xs-6">
+                            <div class="col-xs-5">
 
                                 <p class="services-sum">
                                     Valittu organisaatio: <strong>{{ controller.selectedOrganizationName }}</strong>
@@ -37,7 +37,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-xs-6">
+                            <div class="col-xs-7">
 
                                 <p>
                                     Organisaation käyttäjät <strong>{{ controller.userCount }}</strong> kpl
@@ -50,20 +50,17 @@
                                         <th>Sähköposti</th>
                                         <th>Rooli</th>
                                         <th>Poistettu</th>
-                                        <!--<th>Organisaatio</th>-->
+                                        
                                     </tr>
                                     <tr data-ng-repeat="user in controller.model | orderBy: 'fullName'">
                                         <td id="userName">
-                                            
-                                           
-
                                             <a href="#/Organizations/{{ controller.organizationId }}/internalusers/{{ user.id }}">{{ user.lastName }} {{ user.firstName }}</a>
                                         </td>
 
                                         <td id="userEmail">{{ user.emailAddress }}</td>
                                         <td id="userRole">{{ user.role.name }}</td>
                                         <td id="userDisabled" class="text-center"><span data-ng-show="user.isDisabled">X</span></td>
-                                        <!--<td id="userOrganization">{{ user.organization.name }}</td>-->
+                                       
                                     </tr>
                                     </tbody>
                                 </table>
