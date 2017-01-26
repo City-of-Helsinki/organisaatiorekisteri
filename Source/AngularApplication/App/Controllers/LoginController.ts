@@ -33,9 +33,12 @@ module OrganizationRegister
             var user: AuthenticatedUser = this.authenticationService.getUser<AuthenticatedUser>();
             if (!user.hasPermission(Permission.maintenanceOfUsers) && !user.hasPermission(Permission.maintenanceOfOrganizationData))
                 {
+                    
                     this.authenticationService.logOut();
-                    this.$location.path(Affecto.ExceptionHandling.Routes.error)
-                        .search("code", ErrorCode.insufficientPermissions);
+                    this.busyIndicationService.hideBusyIndicator();
+                    this.$location
+                        .path(Affecto.ExceptionHandling.Routes.error)
+                        .search(Affecto.ExceptionHandling.UrlParameters.errorCode, ErrorCode.insufficientPermissions);
                 }
         }
 
@@ -43,6 +46,7 @@ module OrganizationRegister
         private onLogInCompleted = (): void=>
         {
             this.checkPermission();
+
             this.loginFailed = false;
 
             if (this.requestedRoute && this.requestedRoute !== Route.login)
