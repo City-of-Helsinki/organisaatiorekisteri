@@ -196,7 +196,7 @@ namespace OrganizationRegister.UserManagement
                 EmailAddress = emailAddress,
                 PhoneNumber = string.IsNullOrWhiteSpace(phoneNumber) ? null : phoneNumber
             };
-            identityManagementService.UpdateUser(id, name, user.IsDisabled, customProperties.ToKeyValuePairs());
+            identityManagementService.UpdateUser(id, name, false, customProperties.ToKeyValuePairs());
 
             if (roleId != user.RoleId)
             {

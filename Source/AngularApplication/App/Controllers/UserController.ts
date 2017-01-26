@@ -68,6 +68,12 @@ module OrganizationRegister
 
         public toggleOrganisationSelection(classId: string, selected: boolean): void
         {
+
+            if (this.model.organizationId !== classId)
+            {
+                this.userInformationForm.$setDirty();
+            }
+
             if (selected)
             {
                 this.model.organizationId = classId;
