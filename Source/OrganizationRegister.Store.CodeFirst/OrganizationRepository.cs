@@ -70,27 +70,24 @@ namespace OrganizationRegister.Store.CodeFirst
             {
                 var query = new ActiveCurrentAndFutureOrganizationsQuery(context.Organizations);
                 dbOrganizations = query.Execute();
-                return CreateHierarchicalOrganizations(dbOrganizations.ToList());
             }
             else
             {
                 var query = new ActiveCurrentOrganizationsQuery(context.Organizations);
                 dbOrganizations = query.Execute();
-
-                var dbOrgs = dbOrganizations.ToList();
-                // Filter out orphan suborganizations whose parent (future org) is not present.
-                // Filtering is made by first finding all root orgs and then calling FilterByParentOrganization for each of them
-                var rootOrgs = dbOrgs.Where(org => org.ParentOrganization == null);
-                var orgs = new List<Organization>();
-                foreach (var rootOrg in rootOrgs)
-                {
-                    orgs.AddRange(FilterByParentOrganization(dbOrgs, rootOrg.Id));
-                }
-
-                return CreateHierarchicalOrganizations(orgs);
             }
 
-            
+            var dbOrgs = dbOrganizations.ToList();
+            // Filter out orphan suborganizations whose parent (future org) is not present.
+            // Filtering is made by first finding all root orgs and then calling FilterByParentOrganization for each of them
+            var rootOrgs = dbOrgs.Where(org => org.ParentOrganization == null);
+            var orgs = new List<Organization>();
+            foreach (var rootOrg in rootOrgs)
+            {
+                orgs.AddRange(FilterByParentOrganization(dbOrgs, rootOrg.Id));
+            }
+
+            return CreateHierarchicalOrganizations(orgs);            
         }
 
         public IReadOnlyCollection<IHierarchicalOrganization> GetOrganizationHierarchyForOrganization(Guid? organizationId, bool includeFutureOrganizations)
