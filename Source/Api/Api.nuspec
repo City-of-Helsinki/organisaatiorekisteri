@@ -7,9 +7,7 @@
     <authors>Affecto</authors>
     <version>$version$</version>
     <releaseNotes>
-      Update user information.
-      Change user password.
-      Updated identity management package.
+      Bugfix: getting current and future organizations didn't filter out expired organizations.
     </releaseNotes>
   </metadata>
 </package>
