@@ -21,6 +21,7 @@ module OrganizationRegister
 
         public logOut()
         {
+            this.organizationService.setSearchTerm("");
             this.authenticationService.logOut();
             if (this.useExternalLogin)
             {

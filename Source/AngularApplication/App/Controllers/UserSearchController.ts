@@ -4,7 +4,7 @@ module OrganizationRegister
 {
     export class UserSearchController implements Affecto.Base.IController
     {
-        public static $inject = ["$scope", "$location", "$routeParams", "userService", "busyIndicationService", "organizationService", "authenticationService", "$q"];
+        public static $inject = ["$scope",  "$location", "$routeParams", "userService", "busyIndicationService", "organizationService", "authenticationService", "$q"];
 
         public model: Array<UserListItem>;
         public organizations: Array<OrganizationName>;
@@ -20,6 +20,7 @@ module OrganizationRegister
             $scope.controller = this;
             $scope.model = this.model;
 
+           
             var user: AuthenticatedUser = authenticationService.getUser<AuthenticatedUser>();
             if (!user.hasPermission(Permission.maintenanceOfOwnOrganizationUsers) &&
                 !user.hasPermission(Permission.maintenanceOfAllUsers))

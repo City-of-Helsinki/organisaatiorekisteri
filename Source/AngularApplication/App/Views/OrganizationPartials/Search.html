@@ -1,0 +1,84 @@
+﻿
+           
+                <form class="form-horizontal" autocomplete="off">
+
+
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <h3>Haku</h3>
+                        </div>
+
+
+                        <div class="content-box-inner">
+
+
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label>Organisaation nimi tai nimen osa</label>
+                                    <input id="searchTerm" type="text" class="form-control" maxlength="100" data-ng-model="controller.searchTerm" />
+                                </div>
+                               
+                                <div class="col-xs-6"></div>
+                            </div>
+
+                            <div class="row">
+                               
+                                <div class="col-xs-6">
+                                   
+                                        <button id="searchButton" class="button add" type="submit" data-ng-disabled="!controller.searchTerm" data-ng-click="controller.search()">
+                                            Suorita haku
+                                        </button>
+                                        <button id="resetButton" class="button cancel" type="reset" data-ng-click="controller.resetSearch()">
+                                            Tyhjennä
+                                        </button>
+                                    
+                                </div>
+                                <div class="col-xs-6"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    
+
+                                    <div data-ng-show="controller.model.searchResult && controller.model.searchResult.length > 0">
+                                        <span class="text-small">Hakutuloksia: {{ controller.model.searchResult.length }}</span>
+                                    </div>
+
+                                    <table id="searchResult" class="content-table common-descriptions">
+                                        
+                                        <tbody>
+                                        <tr data-ng-repeat="item in controller.model.searchResult | orderBy: 'name'">
+                                            <td>
+                                                <a class="btn-link" data-ng-click="controller.selectSearchResult(item.id)">{{ item.name }} </a>
+                                                <div data-ng-show="item.validFrom || item.validTo ? true : false">
+
+                                                    <span data-ng-show="item.validFrom ? true : false">
+                                                        Voimassa alkaen: {{ item.validFrom }}
+                                                    </span>
+
+                                                    <span data-ng-show="item.validFrom && item.validTo ? true : false"> <br/> </span>
+
+                                                    <span data-ng-show="item.validTo ? true : false">
+                                                        Voimassa asti: {{ item.validTo }}
+                                                    </span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr data-ng-show="controller.model.searchResult && controller.model.searchResult.length == 0">
+                                            <td>Ei hakutuloksia</td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                   
+
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                        </div>
+                       
+
+                </form>
+            

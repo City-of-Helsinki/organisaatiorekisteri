@@ -7,8 +7,8 @@
     </a>
 </p>
 
-<treecontrol id="organizationTree" class="tree-organization" tree-model="controller.model.value" order-by="name" options="controller.treeOptions" 
-             expanded-nodes="controller.model.expanded" data-on-selection="controller.navigateToOrganization(node.id, selected)">
+<treecontrol id="organizationTree" class="tree-organization" tree-model="controller.model.tree.value" order-by="name" options="controller.treeOptions" 
+             expanded-nodes="controller.model.tree.expanded" data-on-selection="controller.navigateToOrganization(node.id, selected)">
     {{node.name}}
     <button id="addSubOrganizationButton" class="add org-tree-add" data-ng-if="controller.isEditModeEnabled" data-ng-click="controller.createSubOrganization($event, node)">
         Lisää
