@@ -62,6 +62,25 @@ namespace OrganizationRegister.Application.Organization
             return organizationRepository.GetOrganizationHierarchy();
         }
 
+        public IEnumerable<IHierarchicalOrganization> GetOrganizationsAsFlatlist(string searchTerm, Guid? organizationId)
+        {
+            // TODO : repository methods for searching organizations
+            IEnumerable<IHierarchicalOrganization> orgs; 
+            if (organizationId != null)
+            {
+                orgs = organizationRepository.GetCompleteOrganizationHierarchyForOrganization((Guid)organizationId).Flatten(o => o.SubOrganizations);
+            }
+            else
+            {
+                orgs = organizationRepository.GetOrganizationHierarchy().Flatten(o => o.SubOrganizations);
+            }
+
+            return from org in orgs
+                   where org.Names.Any(x => x.LocalizedValue!= null && x.LocalizedValue.IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) >= 0)
+                                select org;
+
+        }
+
         public IEnumerable<IHierarchicalOrganization> GetOrganizationHierarchy(bool includeFutureOrganizations)
         {
             return organizationRepository.GetOrganizationHierarchy(includeFutureOrganizations);

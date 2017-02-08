@@ -27,6 +27,30 @@ namespace OrganizationRegister.Api.Organization
             this.mapperFactory = mapperFactory;
         }
 
+
+        [HttpGet]
+        [GetRoute("organizationflatlist/{organizationId}/{searchTerm}")]
+        public IHttpActionResult GetOrganizationFlatlistForOrganization(string searchTerm, Guid? organizationId)
+        {
+            // TODO: replace return type IHierarchicalOrganization with new type ("IOrganizationListItem" etc) 
+            IEnumerable<IHierarchicalOrganization> organizations = organizationService.GetOrganizationsAsFlatlist(searchTerm, organizationId);
+            var mapper = mapperFactory.CreateHierarchicalOrganizationMapper();
+            IEnumerable<HierarchicalOrganization> mappedOrganizations = mapper.Map(organizations);
+            return Ok(mappedOrganizations);
+        }
+
+
+        [HttpGet]
+        [GetRoute("organizationflatlist/{searchTerm}")]
+        public IHttpActionResult GetOrganizationFlatlist(string searchTerm)
+        {
+            // TODO: replace return type IHierarchicalOrganization with new type ("IOrganizationListItem" etc) 
+            IEnumerable<IHierarchicalOrganization> organizations = organizationService.GetOrganizationsAsFlatlist(searchTerm, null);
+            var mapper = mapperFactory.CreateHierarchicalOrganizationMapper();
+            IEnumerable<HierarchicalOrganization> mappedOrganizations = mapper.Map(organizations);
+            return Ok(mappedOrganizations);
+        }
+
         [HttpGet]
         [GetRoute("organizationhierarchy")]
         public IHttpActionResult GetOrganizationHierarchy()
