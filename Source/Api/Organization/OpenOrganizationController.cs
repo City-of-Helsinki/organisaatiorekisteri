@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using Affecto.Mapping;
 using Affecto.WebApi.Toolkit.CustomRoutes;
@@ -48,6 +49,17 @@ namespace OrganizationRegister.Api.Organization
             IEnumerable<IHierarchicalOrganization> organizations = organizationService.GetOrganizationsAsFlatlist(searchTerm, null);
             var mapper = mapperFactory.CreateHierarchicalOrganizationMapper();
             IEnumerable<HierarchicalOrganization> mappedOrganizations = mapper.Map(organizations);
+            return Ok(mappedOrganizations);
+        }
+
+        [HttpGet]
+        [GetRoute("organizationformunicipality/{rootMunicipalityCode}")]
+        public IHttpActionResult GetOrganizationForMunicipality(int rootMunicipalityCode)
+        {
+
+            IEnumerable<IOrganizationName> organizations = organizationService.GetOrganizationForMunicipality(rootMunicipalityCode);
+            var mapper = mapperFactory.CreateOrganizationNameMapper();
+            IEnumerable<OrganizationName> mappedOrganizations = mapper.Map(organizations);
             return Ok(mappedOrganizations);
         }
 

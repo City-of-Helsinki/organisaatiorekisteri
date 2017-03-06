@@ -53,13 +53,13 @@
                                                 <div data-ng-show="item.validFrom || item.validTo ? true : false">
 
                                                     <span data-ng-show="item.validFrom ? true : false">
-                                                        Voimassa alkaen: {{ item.validFrom }}
+                                                        Voimassa alkaen: {{ item.validFrom | date:"dd.MM.yyyy" }}
                                                     </span>
 
                                                     <span data-ng-show="item.validFrom && item.validTo ? true : false"> <br/> </span>
 
                                                     <span data-ng-show="item.validTo ? true : false">
-                                                        Voimassa asti: {{ item.validTo }}
+                                                        Voimassa asti: {{ item.validTo | date:"dd.MM.yyyy" }}
                                                     </span>
                                                 </div>
                                             </td>
@@ -78,7 +78,6 @@
                         </div>
                         
                         </div>
-                       
-
+                      
                 </form>
             
