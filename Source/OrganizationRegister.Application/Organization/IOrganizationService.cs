@@ -33,5 +33,8 @@ namespace OrganizationRegister.Application.Organization
         void RemoveOrganization(Guid organizationId);
         void DeactivateOrganization(Guid organizationId);
         IOrganizationName GetOrganizationName(Guid organizationId);
+
+        IEnumerable<IHierarchicalOrganization> GetOrganizationsAsFlatlist(string searchTerm, Guid? organizationId);
+        IEnumerable<IOrganizationName> GetOrganizationForMunicipality(int rootMunicipalityCode);
     }
 }

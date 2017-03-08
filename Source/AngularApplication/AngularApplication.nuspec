@@ -7,9 +7,7 @@
     <authors>Affecto</authors>
     <version>$version$</version>
     <releaseNotes>
-      Update user information.
-      Change user password.
-      TPR-perhe favicon added.
+      Search organizations by name
     </releaseNotes>
   </metadata>
 </package>

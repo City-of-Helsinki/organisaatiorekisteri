@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using Affecto.Mapping;
 using Affecto.WebApi.Toolkit.CustomRoutes;
@@ -25,6 +26,41 @@ namespace OrganizationRegister.Api.Organization
             }
             this.organizationService = organizationService;
             this.mapperFactory = mapperFactory;
+        }
+
+
+        [HttpGet]
+        [GetRoute("organizationflatlist/{organizationId}/{searchTerm}")]
+        public IHttpActionResult GetOrganizationFlatlistForOrganization(string searchTerm, Guid? organizationId)
+        {
+            // TODO: replace return type IHierarchicalOrganization with new type ("IOrganizationListItem" etc) 
+            IEnumerable<IHierarchicalOrganization> organizations = organizationService.GetOrganizationsAsFlatlist(searchTerm, organizationId);
+            var mapper = mapperFactory.CreateHierarchicalOrganizationMapper();
+            IEnumerable<HierarchicalOrganization> mappedOrganizations = mapper.Map(organizations);
+            return Ok(mappedOrganizations);
+        }
+
+
+        [HttpGet]
+        [GetRoute("organizationflatlist/{searchTerm}")]
+        public IHttpActionResult GetOrganizationFlatlist(string searchTerm)
+        {
+            // TODO: replace return type IHierarchicalOrganization with new type ("IOrganizationListItem" etc) 
+            IEnumerable<IHierarchicalOrganization> organizations = organizationService.GetOrganizationsAsFlatlist(searchTerm, null);
+            var mapper = mapperFactory.CreateHierarchicalOrganizationMapper();
+            IEnumerable<HierarchicalOrganization> mappedOrganizations = mapper.Map(organizations);
+            return Ok(mappedOrganizations);
+        }
+
+        [HttpGet]
+        [GetRoute("organizationformunicipality/{rootMunicipalityCode}")]
+        public IHttpActionResult GetOrganizationForMunicipality(int rootMunicipalityCode)
+        {
+
+            IEnumerable<IOrganizationName> organizations = organizationService.GetOrganizationForMunicipality(rootMunicipalityCode);
+            var mapper = mapperFactory.CreateOrganizationNameMapper();
+            IEnumerable<OrganizationName> mappedOrganizations = mapper.Map(organizations);
+            return Ok(mappedOrganizations);
         }
 
         [HttpGet]

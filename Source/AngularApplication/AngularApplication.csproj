@@ -165,6 +165,7 @@
     <Content Include="App\Views\OrganizationPartials\EditContactInformation.html" />
     <Content Include="App\Views\OrganizationPartials\EditPostalAddress.html" />
     <Content Include="App\Views\OrganizationPartials\EditVisitingAddress.html" />
+    <Content Include="App\Views\OrganizationPartials\Search.html" />
     <Content Include="App\Views\OrganizationPartials\Tree.html" />
     <Content Include="App\Views\OrganizationPartials\ViewBasicInformation.html" />
     <Content Include="App\Views\OrganizationPartials\ViewContactInformation.html" />
@@ -425,6 +426,7 @@
     <TypeScriptCompile Include="App\Models\EditedOrganizationSection.ts" />
     <TypeScriptCompile Include="App\Models\User.ts" />
     <TypeScriptCompile Include="App\Models\UserListItem.ts" />
+    <TypeScriptCompile Include="App\Models\TreeSearch.ts" />
     <TypeScriptCompile Include="App\Models\UserRole.ts" />
     <TypeScriptCompile Include="App\Models\WebPage.ts" />
     <TypeScriptCompile Include="App\Controllers\OrganizationController.ts" />

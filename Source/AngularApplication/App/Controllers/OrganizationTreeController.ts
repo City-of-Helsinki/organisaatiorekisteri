@@ -6,14 +6,18 @@ module OrganizationRegister
     {
         public static $inject = ["$scope", "$routeParams", "$location", "organizationService", "busyIndicationService", "authenticationService"];
 
-        public model: Tree;
+        public model: TreeSearch;
+
+     
         public selectedOrganizationId: string;
         public isEditModeEnabled: boolean;
         public treeOptions: any;
         public canViewAllOrganizations: boolean;
         public rootOrganizationId: string;
         public user: AuthenticatedUser;
-       
+        public searchTerm: string;
+
+
         constructor(private $scope: Affecto.Base.IViewScope, $routeParams: IOrganizationRoute, private $location: angular.ILocationService,
             private organizationService: OrganizationService, private busyIndicationService: Affecto.BusyIndication.IBusyIndicationService, authenticationService: Affecto.Login.IAuthenticationService)
         {
@@ -35,13 +39,23 @@ module OrganizationRegister
             this.setSelectedOrganizationId($routeParams);
             this.createTreeOptions();
             this.retrieveOrganizationsAndExpandAllNodes();
-
             this.isEditModeEnabled = false;
+
+            this.searchTerm = this.organizationService.getSearchTerm();
+            if (this.searchTerm !== "")
+            {
+                this.search();
+            }
+
+           
+            
         }
 
+       
+        
         public navigateToOrganization(orgId: string, selected: boolean): void
         {
-            if (selected)
+            if(selected)
             {
                 this.$location.path("/Organizations/" + orgId);
             }
@@ -53,9 +67,11 @@ module OrganizationRegister
             this.$location.path("/Organizations/" + node.id + "/Organizations");
         }
 
+
         public get canEdit(): boolean
         {
-            return !this.isEditModeEnabled && this.model != null && this.model.value != null && this.model.value.length > 0;
+
+            return !this.isEditModeEnabled && this.model != null && this.model.tree.value != null && this.model.tree.value.length > 0;
         }
 
         public enableEditMode(): void
@@ -75,6 +91,47 @@ module OrganizationRegister
                 isOrgTree: true,
                 selectedNodeId: this.selectedOrganizationId
             }
+        }
+
+
+        public search(): void
+        {
+            if (this.searchTerm !== "")
+            {
+                if (this.canViewAllOrganizations)
+                {
+                    this.organizationService.getOrganizationFlatlist(this.searchTerm)
+                        .then((orgs: Array<Hierarchical>) =>
+                        {
+                            this.model.searchResult = orgs;
+                        });
+                }
+                else
+                {
+                    this.organizationService
+                        .getOrganizationFlatlistForOrganization(this.searchTerm, this.rootOrganizationId)
+                        .then((orgs: Array<Hierarchical>) =>
+                        {
+                            this.model.searchResult = orgs;
+                        });
+                    }
+            }
+            
+
+            this.organizationService.setSearchTerm(this.searchTerm);
+        }
+
+        public resetSearch(): void
+        {
+            this.model.searchResult = null;
+            this.searchTerm = "";
+            this.organizationService.setSearchTerm(this.searchTerm);
+        }
+
+        public selectSearchResult(id: string): void
+        {
+            this.selectedOrganizationId = id;
+            this.navigateToOrganization(id,true);
         }
 
         private setSelectedOrganizationId($routeParams: IOrganizationRoute): void
@@ -109,8 +166,8 @@ module OrganizationRegister
 
         private setOrganizationsAndExpandAllNodes(orgs: Tree)
         {
-            this.model = orgs;
-            this.model.expandAll();
+            this.model.tree = orgs;
+            this.model.tree.expandAll();
             this.busyIndicationService.hideBusyIndicator();
         }
     }

@@ -137,14 +137,14 @@ module OrganizationRegister
                 if (this.containsOnTopLevel(id, collection))
                 {
                     var foundClass: Hierarchical = this.getFromCollection(id, collection);
-                    return new Hierarchical(foundClass.id, foundClass.name, new Array<Hierarchical>());
+                    return new Hierarchical(foundClass.id, foundClass.name, new Array<Hierarchical>(), foundClass.validFrom, foundClass.validTo);
                 }
                 for (var i = 0; i < collection.length; i++)
                 {
                     if (this.containsOnAnyLevel(id, collection[i].children))
                     {
                         return new Hierarchical(collection[i].id, collection[i].name,
-                            new Array<Hierarchical>(this.getClassCopyWithParentChainAndNoChildrenFromCollection(id, collection[i].children)));
+                            new Array<Hierarchical>(this.getClassCopyWithParentChainAndNoChildrenFromCollection(id, collection[i].children)), collection[i].validFrom, collection[i].validTo);
                     }
                 }
             }

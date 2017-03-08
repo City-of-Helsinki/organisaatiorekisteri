@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using OrganizationRegister.Application.Settings;
 using OrganizationRegister.Common;
 using Affecto.Authentication.Claims;
@@ -60,6 +62,35 @@ namespace OrganizationRegister.Application.Organization
         public IEnumerable<IHierarchicalOrganization> GetOrganizationHierarchy()
         {
             return organizationRepository.GetOrganizationHierarchy();
+        }
+
+        public IEnumerable<IHierarchicalOrganization> GetOrganizationsAsFlatlist(string searchTerm, Guid? organizationId)
+        {
+            // TODO : repository methods for searching organizations
+            IEnumerable<IHierarchicalOrganization> orgs; 
+            if (organizationId != null)
+            {
+                orgs = organizationRepository.GetCompleteOrganizationHierarchyForOrganization((Guid)organizationId).Flatten(o => o.SubOrganizations);
+            }
+            else
+            {
+                orgs = organizationRepository.GetOrganizationHierarchy().Flatten(o => o.SubOrganizations);
+            }
+
+            return from org in orgs
+                   where org.Names.Any(x => x.LocalizedValue!= null && x.LocalizedValue.IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) >= 0)
+                                select org;
+
+        }
+
+        public IEnumerable<IOrganizationName> GetOrganizationForMunicipality(int rootMunicipalityCode)
+        {
+            var orgs = new List<IOrganizationName>();
+            foreach (var org in organizationRepository.GetMunicipalMainOrganizations(rootMunicipalityCode))
+            {
+                orgs.AddRange(organizationRepository.GetOrganizationsForOrganization(org.Id));
+            }
+            return orgs;
         }
 
         public IEnumerable<IHierarchicalOrganization> GetOrganizationHierarchy(bool includeFutureOrganizations)

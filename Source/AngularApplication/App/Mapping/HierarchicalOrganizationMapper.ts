@@ -10,7 +10,7 @@ module OrganizationRegister
             data.forEach((item: any) =>
             {
                 var names: Array<LocalizedText> = LocalizedTextMapper.map(item.names);
-                result.push(new Hierarchical(item.id, names[0].localizedValue, this.map(item.subOrganizations)));
+                result.push(new Hierarchical(item.id, names[0].localizedValue, this.map(item.subOrganizations), item.validFrom, item.validTo));
             });
             return result;
         }

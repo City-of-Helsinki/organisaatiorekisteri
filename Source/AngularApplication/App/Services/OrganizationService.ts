@@ -6,6 +6,8 @@ module OrganizationRegister
     {
         public static $inject = ["$http", "apiBaseUrl"];
 
+        private searchTerm: string;
+
         constructor(private $http: angular.IHttpService, private apiBaseUrl: string)
         {
         }
@@ -28,6 +30,16 @@ module OrganizationRegister
                 });                
         }
 
+        public setSearchTerm(term?: string): void
+        {
+            this.searchTerm = term == null ? "" : term;
+        }
+
+        public getSearchTerm(): string
+        {
+            return this.searchTerm == null ? "" : this.searchTerm;
+        }
+
         public getOrganizationHierarchy(): angular.IPromise<Tree>
         {
             return this.$http.get(this.apiBaseUrl + "organizationregister/organizationhierarchy")
@@ -36,6 +48,25 @@ module OrganizationRegister
                     return new Tree(HierarchicalOrganizationMapper.map(response.data));
                 });
         }
+
+        public getOrganizationFlatlist(searchTerm: string): angular.IPromise<Array<Hierarchical>>
+        {
+            return this.$http.get(this.apiBaseUrl + "organizationregister/organizationflatlist/" + searchTerm)
+                .then((response: angular.IHttpPromiseCallbackArg<any>): Array<Hierarchical> =>
+                {
+                    return HierarchicalOrganizationMapper.map(response.data);
+                });
+        }
+
+        public getOrganizationFlatlistForOrganization(searchTerm: string, organizationId: string): angular.IPromise<Array<Hierarchical>>
+        {
+            return this.$http.get(this.apiBaseUrl + "organizationregister/organizationflatlist/" + organizationId + "/" + searchTerm)
+                .then((response: angular.IHttpPromiseCallbackArg<any>): Array<Hierarchical> =>
+                {
+                    return HierarchicalOrganizationMapper.map(response.data);
+                });
+        }
+
 
         public getOrganizationHierarchyForOrganization(id: string): angular.IPromise<Tree>
         {
