@@ -917,6 +917,7 @@ module OrganizationRegister
             if ($routeParams.organizationId == null && $routeParams.parentOrganizationId == null)
             {
                 this.model = new Organization();
+                this.model.canBeTransferredToFsc = true;
                 return this.fetchTypeLists();
             }
             else if ($routeParams.organizationId == null && $routeParams.parentOrganizationId != null)
@@ -944,7 +945,7 @@ module OrganizationRegister
             this.model.phoneNumber = parent.phoneNumber;
             this.model.phoneCallChargeType = parent.phoneCallChargeType;
             this.model.phoneCallChargeInfos = parent.phoneCallChargeInfos;
-            
+            this.model.canBeTransferredToFsc = parent.canBeTransferredToFsc;
         }
 
         private initializeEditedSection($route: any): void

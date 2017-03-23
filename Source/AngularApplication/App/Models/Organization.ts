@@ -26,6 +26,7 @@ module OrganizationRegister
         public postalPostOfficeBoxAddressPostalCode: string;
         public postalPostOfficeBoxAddressPostalDistricts: Array<LocalizedText>;
         public postalAddressTypes: PostalAddressTypes;
+       
 
         constructor(public id?: string,
             public numericId?: number,
@@ -49,7 +50,8 @@ module OrganizationRegister
             public postalPostOfficeBoxAddress?: PostOfficeBoxAddress,
             public homepageUrls?: Array<LocalizedText>,
             public nameAbbreviations?: Array<LocalizedText>,
-            public isSubOrganization?: boolean)
+            public isSubOrganization?: boolean,
+            public canBeTransferredToFsc?: boolean)
         {
             this.initializeLocalizedNames(names);
             this.initializeLocalizedNameAbbreviations(nameAbbreviations);

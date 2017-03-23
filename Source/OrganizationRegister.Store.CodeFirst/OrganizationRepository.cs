@@ -189,7 +189,7 @@ namespace OrganizationRegister.Store.CodeFirst
                 dbOrganization.GetPostalPostOfficeBoxAddressPostOfficeBox(), dbOrganization.GetPostalPostOfficeBoxAddressPostalCode(),
                 CreatePostalPostOfficeBoxAddressLocalities(postalAddresses), dbOrganization.UseStreetAddressAsPostalAddress,
                 dbOrganization.ParentOrganizationId.HasValue,
-                settingsRepository.GetDataLanguageCodes(), dbOrganization.GetHomepageUrls(), dbOrganization.GetNameAbbreviations());
+                settingsRepository.GetDataLanguageCodes(), dbOrganization.GetHomepageUrls(), dbOrganization.GetNameAbbreviations(), dbOrganization.CanBeTransferredToFsc);
         }
 
         public IOrganizationName GetOrganizationName(Guid id)

@@ -15,5 +15,7 @@ namespace OrganizationRegister.Api.Organization
         public string Oid { get; set; }
         public DateTime? ValidFrom { get; set; }
         public DateTime? ValidTo { get; set; }
+
+        public bool CanBeTransferredToFsc { get; set; }
     }
 }

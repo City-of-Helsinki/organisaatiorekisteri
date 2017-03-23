@@ -16,5 +16,7 @@ namespace OrganizationRegister.Application.Organization
      
         DateTime? ValidFrom { get; }
         DateTime? ValidTo { get; }
+
+        bool CanBeTransferredToFsc { get; set; }
     }
 }

@@ -13,9 +13,11 @@ namespace OrganizationRegister.Store.CodeFirst.Model.Configuration
             Property(organization => organization.BusinessId);
             Property(organization => organization.Oid);
             Property(organization => organization.Active);
+            Property(organization => organization.CanBeTransferredToFsc);
 
             HasRequired(organization => organization.Type);
-            
+          
+
             HasOptional(organization => organization.ParentOrganization);
             HasOptional(organization => organization.VisitingAddress);
             HasOptional(organization => organization.EmailAddress);
