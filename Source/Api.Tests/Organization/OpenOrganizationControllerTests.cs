@@ -171,5 +171,24 @@ namespace OrganizationRegister.Api.Tests.Organization
 
             Assert.AreSame(returnValue, result.Content.Single());
         }
+
+        [TestMethod]
+        public void GetOrganizationListForMunicipality()
+        {
+            int municipalityId = 91;
+            OrganizationListItem returnValue = new OrganizationListItem();
+            IOrganizationListItem appReturnValue = Substitute.For<IOrganizationListItem>();
+
+            organizationListItemMapper.Map(appReturnValue).Returns(returnValue);
+
+            organizationService.GetOrganizationListForMunicipality(municipalityId).Returns(new List<IOrganizationListItem> { appReturnValue, appReturnValue });
+
+            var result = sut.GetOrganizationListForMunicipality(municipalityId) as OkNegotiatedContentResult<IEnumerable<OrganizationListItem>>;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Content.Count());
+            Assert.IsTrue(result.Content.All(org => org.Equals(returnValue)));
+        
+        }
     }
 }

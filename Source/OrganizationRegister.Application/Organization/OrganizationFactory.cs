@@ -39,5 +39,10 @@ namespace OrganizationRegister.Application.Organization
         {
             return new OrganizationName(id, names);
         }
+
+        public static IOrganizationListItem CreateOrganizationListItem(Guid id, IEnumerable<LocalizedText> names, string type, bool canBeTransferredToFsc)
+        {
+            return new OrganizationListItem(id, names, type, canBeTransferredToFsc);
+        }
     }
 }

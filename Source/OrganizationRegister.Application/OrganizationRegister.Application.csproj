@@ -68,8 +68,10 @@
     <Compile Include="Location\PostalAddresses.cs" />
     <Compile Include="Localization\MandatoryLocalizedSingleTexts.cs" />
     <Compile Include="HierarchicalCollection.cs" />
+    <Compile Include="Organization\OrganizationListItem.cs" />
     <Compile Include="Organization\IBasicInformation.cs" />
     <Compile Include="Organization\IContactInformation.cs" />
+    <Compile Include="Organization\IOrganizationListItem.cs" />
     <Compile Include="Organization\ILocalizedText.cs" />
     <Compile Include="Organization\IOrganizationName.cs" />
     <Compile Include="Organization\IOrganizationRepository.cs" />

@@ -20,7 +20,11 @@ namespace OrganizationRegister.Application.Organization
 
         IReadOnlyCollection<IOrganizationName> GetMunicipalMainOrganizations(int municipalityCode);
 
-       
+
+        IReadOnlyCollection<IOrganizationListItem> GetOrganizationListForOrganization(Guid organizationId);
+
+
+
         void SaveChanges();
         IOrganization GetOrganization(Guid id);
         void UpdateOrganizationBasicInformation(Guid id, IBasicInformation information, bool allowExistingBusinessId);

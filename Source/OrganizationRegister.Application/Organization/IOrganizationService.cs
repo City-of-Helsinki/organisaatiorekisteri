@@ -36,5 +36,7 @@ namespace OrganizationRegister.Application.Organization
 
         IEnumerable<IHierarchicalOrganization> GetOrganizationsAsFlatlist(string searchTerm, Guid? organizationId);
         IEnumerable<IOrganizationName> GetOrganizationForMunicipality(int rootMunicipalityCode);
+
+        IEnumerable<IOrganizationListItem> GetOrganizationListForMunicipality(int rootMunicipalityCode);
     }
 }

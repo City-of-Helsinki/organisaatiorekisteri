@@ -93,6 +93,16 @@ namespace OrganizationRegister.Application.Organization
             return orgs;
         }
 
+        public IEnumerable<IOrganizationListItem> GetOrganizationListForMunicipality(int rootMunicipalityCode)
+        {
+            var orgs = new List<IOrganizationListItem>();
+            foreach (var org in organizationRepository.GetMunicipalMainOrganizations(rootMunicipalityCode))
+            {
+                orgs.AddRange(organizationRepository.GetOrganizationListForOrganization(org.Id));
+            }
+            return orgs;
+        }
+
         public IEnumerable<IHierarchicalOrganization> GetOrganizationHierarchy(bool includeFutureOrganizations)
         {
             return organizationRepository.GetOrganizationHierarchy(includeFutureOrganizations);

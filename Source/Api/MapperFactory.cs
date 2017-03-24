@@ -24,6 +24,11 @@ namespace OrganizationRegister.Api
             return new OrganizationNameMapper();
         }
 
+        public virtual IMapper<IOrganizationListItem, OrganizationListItem> CreateOrganizationListItemMapper()
+        {
+            return new OrganizationListItemMapper();
+        }
+
         public virtual IMapper<IBusinessIdentifierValidationResult, BusinessIdentifierValidationResult> CreateBusinessIdentifierValidationResultMapper()
         {
             return new BusinessIdentifierValidationResultMapper();

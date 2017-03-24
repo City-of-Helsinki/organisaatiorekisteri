@@ -64,6 +64,17 @@ namespace OrganizationRegister.Api.Organization
         }
 
         [HttpGet]
+        [GetRoute("organizationlistformunicipality/{rootMunicipalityCode}")]
+        public IHttpActionResult GetOrganizationListForMunicipality(int rootMunicipalityCode)
+        {
+
+            IEnumerable<IOrganizationListItem> organizations = organizationService.GetOrganizationListForMunicipality(rootMunicipalityCode);
+            var mapper = mapperFactory.CreateOrganizationListItemMapper();
+            IEnumerable<OrganizationListItem> mappedOrganizations = mapper.Map(organizations);
+            return Ok(mappedOrganizations);
+        }
+
+        [HttpGet]
         [GetRoute("organizationhierarchy")]
         public IHttpActionResult GetOrganizationHierarchy()
         {
