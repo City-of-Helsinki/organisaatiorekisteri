@@ -7,7 +7,7 @@
     <authors>Affecto</authors>
     <version>$version$</version>
     <releaseNotes>
-      Search organizations by name
+      Can be transferred to FSC field added to organizations basic information
     </releaseNotes>
   </metadata>
 </package>

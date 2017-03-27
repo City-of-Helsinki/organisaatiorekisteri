@@ -7,10 +7,8 @@
     <authors>Affecto</authors>
     <version>$version$</version>
     <releaseNotes>
-      Added new API-method GetOrganizationFlatlist
-      Added new API-method GetOrganizationFlatlistForOrganization
-      Added new API-method GetOrganizationForMunicipality.
-      New repository method for creating hierarchical organization when sub organization is root organization.
+      New api method GetOrganizationListForMunicipality added
+      Unused api method GetOrganizationForMunicipality removed
     </releaseNotes>
   </metadata>
 </package>
