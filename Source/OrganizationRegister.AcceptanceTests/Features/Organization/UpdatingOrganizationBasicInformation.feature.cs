@@ -98,7 +98,8 @@ this.FeatureBackground();
                         "Valid from",
                         "Valid to",
                         "Finnish name abbreviation",
-                        "Swedish name abbreviation"});
+                        "Swedish name abbreviation",
+                        "Can be added to FSC"});
             table1.AddRow(new string[] {
                         "1069622-4",
                         "654321",
@@ -110,7 +111,8 @@ this.FeatureBackground();
                         "12.11.2015",
                         "20.10.2016",
                         "AFE",
-                        "AFEsv"});
+                        "AFEsv",
+                        "false"});
 #line 7
  testRunner.When("the following basic information is set to the organization:", ((string)(null)), table1, "When ");
 #line hidden
@@ -125,7 +127,8 @@ this.FeatureBackground();
                         "Valid from",
                         "Valid to",
                         "Finnish name abbreviation",
-                        "Swedish name abbreviation"});
+                        "Swedish name abbreviation",
+                        "Can be added to FSC"});
             table2.AddRow(new string[] {
                         "1069622-4",
                         "654321",
@@ -137,7 +140,8 @@ this.FeatureBackground();
                         "12.11.2015",
                         "20.10.2016",
                         "AFE",
-                        "AFEsv"});
+                        "AFEsv",
+                        "false"});
 #line 10
  testRunner.Then("the organization has the following basic information:", ((string)(null)), table2, "Then ");
 #line hidden
@@ -159,12 +163,14 @@ this.FeatureBackground();
                         "Business id",
                         "Type",
                         "Finnish name",
-                        "Municipality code"});
+                        "Municipality code",
+                        "Can be added to FSC"});
             table3.AddRow(new string[] {
                         "1069622-4",
                         "Kunta",
                         "Kaarina",
-                        "202"});
+                        "202",
+                        "false"});
 #line 15
  testRunner.When("the following basic information is set to the organization:", ((string)(null)), table3, "When ");
 #line hidden
@@ -172,12 +178,14 @@ this.FeatureBackground();
                         "Business id",
                         "Type",
                         "Finnish name",
-                        "Municipality code"});
+                        "Municipality code",
+                        "Can be added to FSC"});
             table4.AddRow(new string[] {
                         "1069622-4",
                         "Kunta",
                         "Kaarina",
-                        "202"});
+                        "202",
+                        "false"});
 #line 18
  testRunner.Then("the organization has the following basic information:", ((string)(null)), table4, "Then ");
 #line hidden
@@ -199,12 +207,14 @@ this.FeatureBackground();
                         "Business id",
                         "Type",
                         "Finnish name",
-                        "Municipality code"});
+                        "Municipality code",
+                        "Can be added to FSC"});
             table5.AddRow(new string[] {
                         "1069622-4",
                         "Kunta",
                         "Kaarina",
-                        "202"});
+                        "202",
+                        "false"});
 #line 23
  testRunner.Given("the following basic information is set to the organization:", ((string)(null)), table5, "Given ");
 #line hidden
@@ -215,7 +225,8 @@ this.FeatureBackground();
                         "Finnish name",
                         "Swedish name",
                         "Finnish description",
-                        "Swedish description"});
+                        "Swedish description",
+                        "Can be added to FSC"});
             table6.AddRow(new string[] {
                         "1069622-4",
                         "654321",
@@ -223,7 +234,8 @@ this.FeatureBackground();
                         "Affecto",
                         "Affecto",
                         "Ohjelmistoyritys",
-                        "Programvara företaget"});
+                        "Programvara företaget",
+                        "true"});
 #line 26
  testRunner.When("the following basic information is set to the organization:", ((string)(null)), table6, "When ");
 #line hidden
@@ -234,7 +246,8 @@ this.FeatureBackground();
                         "Finnish name",
                         "Swedish name",
                         "Finnish description",
-                        "Swedish description"});
+                        "Swedish description",
+                        "Can be added to FSC"});
             table7.AddRow(new string[] {
                         "1069622-4",
                         "654321",
@@ -242,7 +255,8 @@ this.FeatureBackground();
                         "Affecto",
                         "Affecto",
                         "Ohjelmistoyritys",
-                        "Programvara företaget"});
+                        "Programvara företaget",
+                        "true"});
 #line 29
  testRunner.Then("the organization has the following basic information:", ((string)(null)), table7, "Then ");
 #line hidden
@@ -263,22 +277,26 @@ this.FeatureBackground();
             TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                         "Business id",
                         "Type",
-                        "Finnish name"});
+                        "Finnish name",
+                        "Can be added to FSC"});
             table8.AddRow(new string[] {
                         "1234567-1",
                         "Yritys",
-                        "Firma"});
+                        "Firma",
+                        "true"});
 #line 34
  testRunner.When("the following basic information is set to the organization:", ((string)(null)), table8, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                         "Business id",
                         "Type",
-                        "Finnish name"});
+                        "Finnish name",
+                        "Can be added to FSC"});
             table9.AddRow(new string[] {
                         "1234567-1",
                         "Yritys",
-                        "Firma"});
+                        "Firma",
+                        "true"});
 #line 37
  testRunner.Then("the organization has the following basic information:", ((string)(null)), table9, "Then ");
 #line hidden
@@ -307,7 +325,8 @@ this.FeatureBackground();
                         "Valid from",
                         "Valid to",
                         "Finnish name abbreviation",
-                        "Swedish name abbreviation"});
+                        "Swedish name abbreviation",
+                        "Can be added to FSC"});
             table10.AddRow(new string[] {
                         "1069622-4",
                         "654321",
@@ -319,7 +338,8 @@ this.FeatureBackground();
                         "12.11.2015",
                         "20.10.2016",
                         "AFE",
-                        "AFEsv"});
+                        "AFEsv",
+                        "true"});
 #line 42
  testRunner.Given("the following basic information is set to the organization:", ((string)(null)), table10, "Given ");
 #line hidden
@@ -327,12 +347,14 @@ this.FeatureBackground();
                         "Business id",
                         "Type",
                         "Finnish name",
-                        "Finnish name abbreviation"});
+                        "Finnish name abbreviation",
+                        "Can be added to FSC"});
             table11.AddRow(new string[] {
                         "1234567-1",
                         "Yritys",
                         "Firma",
-                        "AFEfi"});
+                        "AFEfi",
+                        "false"});
 #line 45
  testRunner.When("the following basic information is set to the organization:", ((string)(null)), table11, "When ");
 #line hidden
@@ -340,12 +362,14 @@ this.FeatureBackground();
                         "Business id",
                         "Type",
                         "Finnish name",
-                        "Finnish name abbreviation"});
+                        "Finnish name abbreviation",
+                        "Can be added to FSC"});
             table12.AddRow(new string[] {
                         "1234567-1",
                         "Yritys",
                         "Firma",
-                        "AFEfi"});
+                        "AFEfi",
+                        "false"});
 #line 48
  testRunner.Then("the organization has the following basic information:", ((string)(null)), table12, "Then ");
 #line hidden
@@ -366,11 +390,13 @@ this.FeatureBackground();
             TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                         "Business id",
                         "Type",
-                        "Finnish name"});
+                        "Finnish name",
+                        "Can be added to FSC"});
             table13.AddRow(new string[] {
                         "1069622-44",
                         "Yritys",
-                        "Affecto"});
+                        "Affecto",
+                        "true"});
 #line 53
  testRunner.When("the following basic information is set to the organization:", ((string)(null)), table13, "When ");
 #line 56
@@ -392,21 +418,25 @@ this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
                         "Business id",
-                        "Finnish name"});
+                        "Finnish name",
+                        "Can be added to FSC"});
             table14.AddRow(new string[] {
                         "1069622-4",
-                        "Affecto"});
+                        "Affecto",
+                        "true"});
 #line 59
  testRunner.Given("the following company is added:", ((string)(null)), table14, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
                         "Business id",
                         "Type",
-                        "Finnish name"});
+                        "Finnish name",
+                        "Can be added to FSC"});
             table15.AddRow(new string[] {
                         "1069622-4",
                         "Yritys",
-                        "Affecto"});
+                        "Affecto",
+                        "true"});
 #line 62
  testRunner.When("the following basic information is set to the previously added organization:", ((string)(null)), table15, "When ");
 #line 65
@@ -428,10 +458,12 @@ this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                         "Business id",
-                        "Finnish name"});
+                        "Finnish name",
+                        "Can be added to FSC"});
             table16.AddRow(new string[] {
                         "1069622-4",
-                        "Affecto"});
+                        "Affecto",
+                        "true"});
 #line 68
  testRunner.Given("the following company is added:", ((string)(null)), table16, "Given ");
 #line hidden
@@ -447,22 +479,26 @@ this.FeatureBackground();
             TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
                         "Business id",
                         "Type",
-                        "Finnish name"});
+                        "Finnish name",
+                        "Can be added to FSC"});
             table18.AddRow(new string[] {
                         "1069622-4",
                         "Yritys",
-                        "Affecto Finland Oy"});
+                        "Affecto Finland Oy",
+                        "true"});
 #line 74
  testRunner.When("the following basic information is set to organization \'Affecto Finland Oy\':", ((string)(null)), table18, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
                         "Business id",
                         "Type",
-                        "Finnish name"});
+                        "Finnish name",
+                        "Can be added to FSC"});
             table19.AddRow(new string[] {
                         "1069622-4",
                         "Yritys",
-                        "Affecto Finland Oy"});
+                        "Affecto Finland Oy",
+                        "true"});
 #line 77
  testRunner.Then("the organization \'Affecto Finland Oy\' has the following basic information:", ((string)(null)), table19, "Then ");
 #line hidden
@@ -482,10 +518,12 @@ this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
                         "Business id",
-                        "Finnish name"});
+                        "Finnish name",
+                        "Can be added to FSC"});
             table20.AddRow(new string[] {
                         "1069622-4",
-                        "Affecto"});
+                        "Affecto",
+                        "true"});
 #line 82
  testRunner.Given("the following company is added:", ((string)(null)), table20, "Given ");
 #line hidden
@@ -501,22 +539,26 @@ this.FeatureBackground();
             TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
                         "Business id",
                         "Type",
-                        "Finnish name"});
+                        "Finnish name",
+                        "Can be added to FSC"});
             table22.AddRow(new string[] {
                         "",
                         "Yritys",
-                        "Affecto Finland Oy"});
+                        "Affecto Finland Oy",
+                        "true"});
 #line 88
  testRunner.When("the following basic information is set to organization \'Affecto Finland Oy\':", ((string)(null)), table22, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
                         "Business id",
                         "Type",
-                        "Finnish name"});
+                        "Finnish name",
+                        "Can be added to FSC"});
             table23.AddRow(new string[] {
                         "",
                         "Yritys",
-                        "Affecto Finland Oy"});
+                        "Affecto Finland Oy",
+                        "true"});
 #line 91
  testRunner.Then("the organization \'Affecto Finland Oy\' has the following basic information:", ((string)(null)), table23, "Then ");
 #line hidden
@@ -538,12 +580,14 @@ this.FeatureBackground();
                         "Business id",
                         "Type",
                         "Finnish name",
-                        "Municipality code"});
+                        "Municipality code",
+                        "Can be added to FSC"});
             table24.AddRow(new string[] {
                         "1069622-4",
                         "Kunta",
                         "Kaarina",
-                        "2002"});
+                        "2002",
+                        "true"});
 #line 96
  testRunner.When("the following basic information is set to the organization:", ((string)(null)), table24, "When ");
 #line 99
@@ -568,13 +612,15 @@ this.FeatureBackground();
                         "Type",
                         "Finnish name",
                         "Valid from",
-                        "Valid to"});
+                        "Valid to",
+                        "Can be added to FSC"});
             table25.AddRow(new string[] {
                         "1069622-4",
                         "Yritys",
                         "Affecto",
                         "01.01.2012",
-                        "01.01.2010"});
+                        "01.01.2010",
+                        "true"});
 #line 102
  testRunner.When("the following basic information is set to the organization:", ((string)(null)), table25, "When ");
 #line 105

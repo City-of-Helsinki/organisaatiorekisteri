@@ -12,10 +12,10 @@ namespace OrganizationRegister.Application.Organization
             IEnumerable<LocalizedText> visitingAddressQualifier, IEnumerable<LocalizedText> postalStreetAddresses, string postalStreetAddressPostalCode, 
             IEnumerable<LocalizedText> postalStreetAddressLocalities, string postalAddressPostOfficeBox, string postalPostOfficeBoxAddressPostalCode,
             IEnumerable<LocalizedText> postalPostOfficeBoxAddressLocalities, bool useVisitingAddressAsPostalAddress, bool isSubOrganization, IEnumerable<string> languageCodes, 
-            IEnumerable<LocalizedText> homepageUrls, IEnumerable<LocalizedText> nameAbbreviations)
+            IEnumerable<LocalizedText> homepageUrls, IEnumerable<LocalizedText> nameAbbreviations, bool canBeTransferredToFsc)
         {
-            Organization organization = isSubOrganization ? new SubOrganization(id, numericId, businessId, oid, type, municipalityCode, names, languageCodes) :
-                new Organization(id, numericId, businessId, oid, type, municipalityCode, names, languageCodes);
+            Organization organization = isSubOrganization ? new SubOrganization(id, numericId, businessId, oid, type, municipalityCode, names, languageCodes, canBeTransferredToFsc) :
+                new Organization(id, numericId, businessId, oid, type, municipalityCode, names, languageCodes, canBeTransferredToFsc);
             organization.Descriptions = descriptions;
             organization.SetValidity(validFrom, validTo);
             organization.EmailAddress = emailAddress;
@@ -38,6 +38,11 @@ namespace OrganizationRegister.Application.Organization
         public static IOrganizationName CreateOrganizationName(Guid id, IEnumerable<LocalizedText> names)
         {
             return new OrganizationName(id, names);
+        }
+
+        public static IOrganizationListItem CreateOrganizationListItem(Guid id, IEnumerable<LocalizedText> names, string type, bool canBeTransferredToFsc)
+        {
+            return new OrganizationListItem(id, names, type, canBeTransferredToFsc);
         }
     }
 }

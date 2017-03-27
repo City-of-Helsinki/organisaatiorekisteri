@@ -115,11 +115,12 @@ namespace OrganizationRegister.Store.CodeFirst
             return CreateHierarchicalOrganizationsForOrganization(FilterByParentOrganization(dbOrganizations.ToList(), organizationId), organizationId);
         }
 
-        public IReadOnlyCollection<IOrganizationName> GetOrganizationsForOrganization(Guid organizationId)
+
+        public IReadOnlyCollection<IOrganizationListItem> GetOrganizationListForOrganization(Guid organizationId)
         {
             var query = new ActiveCurrentOrganizationsQuery(context.Organizations);
             var dbOrganizations = query.Execute();
-            return CreateOrganizationNames(FilterByParentOrganization(dbOrganizations.ToList(), organizationId));
+            return CreateOrganizationListItems(FilterByParentOrganization(dbOrganizations.ToList(), organizationId));
         }
 
         public IReadOnlyCollection<IOrganizationName> GetOrganizations()
@@ -189,7 +190,7 @@ namespace OrganizationRegister.Store.CodeFirst
                 dbOrganization.GetPostalPostOfficeBoxAddressPostOfficeBox(), dbOrganization.GetPostalPostOfficeBoxAddressPostalCode(),
                 CreatePostalPostOfficeBoxAddressLocalities(postalAddresses), dbOrganization.UseStreetAddressAsPostalAddress,
                 dbOrganization.ParentOrganizationId.HasValue,
-                settingsRepository.GetDataLanguageCodes(), dbOrganization.GetHomepageUrls(), dbOrganization.GetNameAbbreviations());
+                settingsRepository.GetDataLanguageCodes(), dbOrganization.GetHomepageUrls(), dbOrganization.GetNameAbbreviations(), dbOrganization.CanBeTransferredToFsc);
         }
 
         public IOrganizationName GetOrganizationName(Guid id)
@@ -383,6 +384,19 @@ namespace OrganizationRegister.Store.CodeFirst
             }
             return organizations;
         }
+
+
+        private static IReadOnlyCollection<IOrganizationListItem> CreateOrganizationListItems(IReadOnlyCollection<Organization> dbOrganizations)
+        {
+            List<IOrganizationListItem> organizations = new List<IOrganizationListItem>();
+            foreach (Organization dbOrganization in dbOrganizations)
+            {
+                organizations.Add(OrganizationFactory.CreateOrganizationListItem(dbOrganization.Id, dbOrganization.GetNames(), dbOrganization.Type.Name,
+                    dbOrganization.CanBeTransferredToFsc));
+            }
+            return organizations;
+        }
+
 
         private static IReadOnlyCollection<Organization> FilterByParentOrganization(IReadOnlyCollection<Organization> organizations, Guid? parentOrganizationId)
         {

@@ -27,6 +27,15 @@ namespace OrganizationRegister.AcceptanceTests.Infrastructure
             AssertOptionalValue(expectedBasicInfo.GetOptionalValue("Municipality code"), organization.MunicipalityCode);
             AssertOptionalValue(expectedBasicInfo.GetOptionalValue("Valid from"), organization.ValidFrom);
             AssertOptionalValue(expectedBasicInfo.GetOptionalValue("Valid to"), organization.ValidTo);
+
+
+
+            if (expectedBasicInfo.ContainsKey("Can be added to FSC"))
+            {
+
+                Assert.AreEqual(bool.Parse(expectedBasicInfo["Can be added to FSC"]), organization.CanBeTransferredToFsc);
+            }
+
             Assert.AreEqual(expectedBasicInfo["Type"], organization.Type, expectedBasicInfo.ToTableString());
             if (expectedBasicInfo.ContainsKey("Finnish description"))
             {

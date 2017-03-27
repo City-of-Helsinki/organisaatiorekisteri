@@ -88,7 +88,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Valid from",
                         "Valid to",
                         "Finnish name abbreviation",
-                        "Swedish name abbreviation"});
+                        "Swedish name abbreviation",
+                        "Can be added to FSC"});
             table1.AddRow(new string[] {
                         "1234567-1",
                         "123456",
@@ -100,7 +101,8 @@ this.ScenarioSetup(scenarioInfo);
                         "01.01.2015",
                         "01.01.2016",
                         "AFE",
-                        "AFEsv"});
+                        "AFEsv",
+                        "false"});
 #line 4
  testRunner.When("the following company is added:", ((string)(null)), table1, "When ");
 #line hidden
@@ -115,7 +117,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Valid from",
                         "Valid to",
                         "Finnish name abbreviation",
-                        "Swedish name abbreviation"});
+                        "Swedish name abbreviation",
+                        "Can be added to FSC"});
             table2.AddRow(new string[] {
                         "1234567-1",
                         "123456",
@@ -127,7 +130,8 @@ this.ScenarioSetup(scenarioInfo);
                         "01.01.2015",
                         "01.01.2016",
                         "AFE",
-                        "AFEsv"});
+                        "AFEsv",
+                        "false"});
 #line 7
  testRunner.Then("there are following organizations:", ((string)(null)), table2, "Then ");
 #line hidden
@@ -150,7 +154,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Finnish name",
                         "Swedish name",
                         "Municipality code",
-                        "Valid from"});
+                        "Valid from",
+                        "Can be added to FSC"});
             table3.AddRow(new string[] {
                         "1234567-1",
                         "123456",
@@ -158,7 +163,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Turku",
                         "Åbo",
                         "853",
-                        "01.02.2014"});
+                        "01.02.2014",
+                        "true"});
 #line 13
  testRunner.When("the following municipality is added:", ((string)(null)), table3, "When ");
 #line hidden
@@ -169,7 +175,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Finnish name",
                         "Swedish name",
                         "Municipality code",
-                        "Valid from"});
+                        "Valid from",
+                        "Can be added to FSC"});
             table4.AddRow(new string[] {
                         "1069622-4",
                         "",
@@ -177,7 +184,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Kaarina",
                         "St. Karins",
                         "202",
-                        "01.03.2014"});
+                        "01.03.2014",
+                        "false"});
 #line 16
  testRunner.And("the following municipality is added:", ((string)(null)), table4, "And ");
 #line hidden
@@ -188,7 +196,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Finnish name",
                         "Swedish name",
                         "Municipality code",
-                        "Valid from"});
+                        "Valid from",
+                        "Can be added to FSC"});
             table5.AddRow(new string[] {
                         "1234567-1",
                         "123456",
@@ -196,7 +205,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Turku",
                         "Åbo",
                         "853",
-                        "01.02.2014"});
+                        "01.02.2014",
+                        "true"});
             table5.AddRow(new string[] {
                         "1069622-4",
                         "",
@@ -204,7 +214,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Kaarina",
                         "St. Karins",
                         "202",
-                        "01.03.2014"});
+                        "01.03.2014",
+                        "false"});
 #line 19
  testRunner.Then("there are following organizations:", ((string)(null)), table5, "Then ");
 #line hidden
@@ -226,14 +237,16 @@ this.ScenarioSetup(scenarioInfo);
                         "Type",
                         "Finnish name",
                         "Swedish name",
-                        "Municipality code"});
+                        "Municipality code",
+                        "Can be added to FSC"});
             table6.AddRow(new string[] {
                         "1234567-12",
                         "123456",
                         "Kunta",
                         "Turku",
                         "Åbo",
-                        "853"});
+                        "853",
+                        "true"});
 #line 25
  testRunner.When("the following municipality is added:", ((string)(null)), table6, "When ");
 #line 28
@@ -260,7 +273,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Finnish description",
                         "Swedish description",
                         "Valid from",
-                        "Valid to"});
+                        "Valid to",
+                        "Can be added to FSC"});
             table7.AddRow(new string[] {
                         "1234567-1",
                         "123456",
@@ -270,7 +284,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Ohjelmistoyritys",
                         "Programvara företaget",
                         "01.01.2017",
-                        "01.01.2016"});
+                        "01.01.2016",
+                        "true"});
 #line 31
  testRunner.When("the following company is added:", ((string)(null)), table7, "When ");
 #line 34
@@ -295,7 +310,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Finnish name",
                         "Swedish name",
                         "Finnish description",
-                        "Swedish description"});
+                        "Swedish description",
+                        "Can be added to FSC"});
             table8.AddRow(new string[] {
                         "1234567-1",
                         "123456",
@@ -303,7 +319,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Affecto",
                         "Affecto",
                         "Ohjelmistoyritys",
-                        "Programvara företaget"});
+                        "Programvara företaget",
+                        "false"});
 #line 37
  testRunner.Given("the following company is added:", ((string)(null)), table8, "Given ");
 #line hidden
@@ -313,14 +330,16 @@ this.ScenarioSetup(scenarioInfo);
                         "Type",
                         "Finnish name",
                         "Swedish name",
-                        "Municipality code"});
+                        "Municipality code",
+                        "Can be added to FSC"});
             table9.AddRow(new string[] {
                         "1234567-1",
                         "123456",
                         "Kunta",
                         "Turku",
                         "Åbo",
-                        "853"});
+                        "853",
+                        "false"});
 #line 40
  testRunner.When("the following municipality is added:", ((string)(null)), table9, "When ");
 #line 43
@@ -335,7 +354,7 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void AddingAMunicipalityWithInvalidId()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Adding a municipality with invalid id", ((string[])(null)));
-#line 45
+#line 47
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
@@ -344,17 +363,19 @@ this.ScenarioSetup(scenarioInfo);
                         "Type",
                         "Finnish name",
                         "Swedish name",
-                        "Municipality code"});
+                        "Municipality code",
+                        "Can be added to FSC"});
             table10.AddRow(new string[] {
                         "1234567-1",
                         "123456",
                         "Kunta",
                         "Turku",
                         "Åbo",
-                        "8533"});
-#line 46
+                        "8533",
+                        "true"});
+#line 48
  testRunner.When("the following municipality is added:", ((string)(null)), table10, "When ");
-#line 49
+#line 51
  testRunner.Then("Adding the organization fails", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -366,7 +387,7 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void AddingSubOrganizations()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Adding sub organizations", ((string[])(null)));
-#line 51
+#line 53
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
@@ -376,7 +397,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Finnish name",
                         "Swedish name",
                         "Finnish description",
-                        "Swedish description"});
+                        "Swedish description",
+                        "Can be added to FSC"});
             table11.AddRow(new string[] {
                         "1234567-1",
                         "123456",
@@ -384,8 +406,9 @@ this.ScenarioSetup(scenarioInfo);
                         "Affecto",
                         "Affecto",
                         "Ohjelmistoyritys",
-                        "Programvara företaget"});
-#line 52
+                        "Programvara företaget",
+                        "false"});
+#line 54
  testRunner.Given("the following company is added:", ((string)(null)), table11, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
@@ -406,7 +429,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Ohjelmistoyritys",
                         "Programvara företaget",
                         "01.01.2074"});
-#line 55
+#line 57
  testRunner.When("the following company is added as a sub organization of \'Affecto\'", ((string)(null)), table12, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
@@ -425,7 +448,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Affecto Finland",
                         "Ohjelmistoyritys",
                         "Programvara företaget"});
-#line 58
+#line 60
  testRunner.And("the following company is added as a sub organization of \'Affecto\'", ((string)(null)), table13, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
@@ -444,7 +467,7 @@ this.ScenarioSetup(scenarioInfo);
                         "karta centrum Helsingfors",
                         "",
                         ""});
-#line 61
+#line 63
  testRunner.And("the following company is added as a sub organization of \'Karttakeskus\'", ((string)(null)), table14, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
@@ -492,7 +515,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Ohjelmistoyritys",
                         "Programvara företaget",
                         ""});
-#line 64
+#line 66
  testRunner.Then("there are following organizations:", ((string)(null)), table15, "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
@@ -501,13 +524,13 @@ this.ScenarioSetup(scenarioInfo);
             table16.AddRow(new string[] {
                         "Affecto",
                         "Affecto"});
-#line 70
+#line 72
  testRunner.And("there are following main organizations:", ((string)(null)), table16, "And ");
-#line 73
- testRunner.And("\'Karttakeskus\' is a sub organization of \'Affecto\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 74
- testRunner.And("\'Affecto Finland\' is a sub organization of \'Affecto\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 75
+ testRunner.And("\'Karttakeskus\' is a sub organization of \'Affecto\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 76
+ testRunner.And("\'Affecto Finland\' is a sub organization of \'Affecto\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 77
  testRunner.And("\'Karttakeskus Helsinki\' is a sub organization of \'Karttakeskus\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -519,7 +542,7 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SubOrganizationDoesnTNeedABusinessId()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sub organization doesn\'t need a business id", ((string[])(null)));
-#line 77
+#line 79
 this.ScenarioSetup(scenarioInfo);
 #line hidden
             TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
@@ -529,7 +552,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Finnish name",
                         "Swedish name",
                         "Finnish description",
-                        "Swedish description"});
+                        "Swedish description",
+                        "Can be added to FSC"});
             table17.AddRow(new string[] {
                         "1234567-1",
                         "123456",
@@ -537,8 +561,9 @@ this.ScenarioSetup(scenarioInfo);
                         "Affecto",
                         "Affecto",
                         "Ohjelmistoyritys",
-                        "Programvara företaget"});
-#line 78
+                        "Programvara företaget",
+                        "false"});
+#line 80
  testRunner.Given("the following company is added:", ((string)(null)), table17, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
@@ -559,7 +584,7 @@ this.ScenarioSetup(scenarioInfo);
                         "karta centrum",
                         "Ohjelmistoyritys",
                         "Programvara företaget"});
-#line 81
+#line 83
  testRunner.When("the following company is added as a sub organization of \'Affecto\'", ((string)(null)), table18, "When ");
 #line hidden
             TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
@@ -586,9 +611,9 @@ this.ScenarioSetup(scenarioInfo);
                         "karta centrum",
                         "Ohjelmistoyritys",
                         "Programvara företaget"});
-#line 84
+#line 86
  testRunner.Then("there are following organizations:", ((string)(null)), table19, "Then ");
-#line 88
+#line 90
  testRunner.And("\'Karttakeskus\' is a sub organization of \'Affecto\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

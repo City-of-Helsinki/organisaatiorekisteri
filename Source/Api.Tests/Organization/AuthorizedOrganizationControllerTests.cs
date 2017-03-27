@@ -35,7 +35,8 @@ namespace OrganizationRegister.Api.Tests.Organization
             const string type = "Liikelaitos";
             const string finnishLanguageCode = "fi";
             const string englishLanguageCode = "en";
-            
+            const bool canBeTransferredToFsc = false;
+
             BasicInformation information = new BasicInformation
             {
                 BusinessId = businessId,
@@ -45,7 +46,8 @@ namespace OrganizationRegister.Api.Tests.Organization
                     new LocalizedText(englishLanguageCode, englishName)
                 },
                 Type = type,
-                Oid = oid
+                Oid = oid,
+                CanBeTransferredToFsc = canBeTransferredToFsc
             };
 
             sut.AddOrganization(information);
@@ -53,7 +55,7 @@ namespace OrganizationRegister.Api.Tests.Organization
             organizationService.Received(1).AddOrganization(businessId, oid, type, null,
                 Arg.Is<IEnumerable<LocalizedText>>(names => names.Count() == 2 && names.Any(name => name.LanguageCode.Equals(finnishLanguageCode) && name.LocalizedValue.Equals(finnishName))
                     && names.Any(name => name.LanguageCode.Equals(englishLanguageCode) && name.LocalizedValue.Equals(englishName))), Arg.Any<IEnumerable<LocalizedText>>(),
-                    Arg.Any<DateTime?>(), Arg.Any<DateTime?>(), Arg.Any<IEnumerable<LocalizedText>>());
+                    Arg.Any<DateTime?>(), Arg.Any<DateTime?>(), Arg.Any<IEnumerable<LocalizedText>>(), canBeTransferredToFsc);
         }
 
         [TestMethod]
@@ -67,7 +69,8 @@ namespace OrganizationRegister.Api.Tests.Organization
             const string oid = "132456";
             const string type = "Kunta";
             const string finnishLanguageCode = "fi";
-            
+            const bool canBeTransferredToFsc = false;
+
             DateTime? validFrom = new DateTime(2015, 1, 1);
             DateTime? validTo = new DateTime(2016, 1, 1);
 
@@ -87,6 +90,7 @@ namespace OrganizationRegister.Api.Tests.Organization
                 Oid = oid,
                 ValidFrom = validFrom,
                 ValidTo = validTo,
+                CanBeTransferredToFsc = canBeTransferredToFsc,
                 NameAbbreviations = new List<LocalizedText>
                 {
                     new LocalizedText(finnishLanguageCode, finnishAbbreviation)
@@ -100,7 +104,7 @@ namespace OrganizationRegister.Api.Tests.Organization
                 Arg.Is<IEnumerable<LocalizedText>>(descriptions => descriptions.Single().Equals(new LocalizedText(finnishLanguageCode, finnishDescription))),
                 validFrom, validTo,
                 Arg.Is<IEnumerable<LocalizedText>>(
-                    nameAbbreviations => nameAbbreviations.Single().Equals(new LocalizedText(finnishLanguageCode, finnishAbbreviation))));
+                    nameAbbreviations => nameAbbreviations.Single().Equals(new LocalizedText(finnishLanguageCode, finnishAbbreviation))), canBeTransferredToFsc);
         }
 
         [TestMethod]
@@ -118,7 +122,7 @@ namespace OrganizationRegister.Api.Tests.Organization
                 Type = "Kolmas sektori",
             };
             organizationService.AddOrganization(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<IEnumerable<LocalizedText>>(),
-                Arg.Any<IEnumerable<LocalizedText>>(), Arg.Any<DateTime?>(), Arg.Any<DateTime?>(), Arg.Any<IEnumerable<LocalizedText>>()).Returns(organizationId);
+                Arg.Any<IEnumerable<LocalizedText>>(), Arg.Any<DateTime?>(), Arg.Any<DateTime?>(), Arg.Any<IEnumerable<LocalizedText>>(),false).Returns(organizationId);
 
             var result = sut.AddOrganization(company) as OkNegotiatedContentResult<Guid>;
 
@@ -137,6 +141,8 @@ namespace OrganizationRegister.Api.Tests.Organization
             const string type = "Liikelaitos";
             const string finnishLanguageCode = "fi";
             const string englishLanguageCode = "en";
+            const bool canBeTransferredToFsc = false;
+
 
             BasicInformation information = new BasicInformation
             {
@@ -147,7 +153,8 @@ namespace OrganizationRegister.Api.Tests.Organization
                     new LocalizedText(englishLanguageCode, englishName)
                 },
                 Type = type,
-                Oid = oid
+                Oid = oid,
+                CanBeTransferredToFsc = canBeTransferredToFsc
             };
 
             sut.AddSubOrganization(parentOrganizationId, information);
@@ -155,7 +162,7 @@ namespace OrganizationRegister.Api.Tests.Organization
             organizationService.Received(1).AddSubOrganization(parentOrganizationId, businessId, oid, type, null,
                 Arg.Is<IEnumerable<LocalizedText>>(names => names.Count() == 2 && names.Any(name => name.LanguageCode.Equals(finnishLanguageCode) && name.LocalizedValue.Equals(finnishName))
                     && names.Any(name => name.LanguageCode.Equals(englishLanguageCode) && name.LocalizedValue.Equals(englishName))), Arg.Any<IEnumerable<LocalizedText>>(),
-                    Arg.Any<DateTime?>(), Arg.Any<DateTime?>(), Arg.Any<IEnumerable<LocalizedText>>());
+                    Arg.Any<DateTime?>(), Arg.Any<DateTime?>(), Arg.Any<IEnumerable<LocalizedText>>(), canBeTransferredToFsc);
         }
 
         [TestMethod]
@@ -170,7 +177,8 @@ namespace OrganizationRegister.Api.Tests.Organization
             const string oid = "132456";
             const string type = "Kunta";
             const string finnishLanguageCode = "fi";
-           
+            const bool canBeTransferredToFsc = false;
+
             DateTime? validFrom = DateTime.Today;
             DateTime? validTo = DateTime.Today.AddDays(1);
 
@@ -190,6 +198,7 @@ namespace OrganizationRegister.Api.Tests.Organization
                 Oid = oid,
                 ValidFrom = validFrom,
                 ValidTo = validTo,
+                CanBeTransferredToFsc = canBeTransferredToFsc,
                 NameAbbreviations = new List<LocalizedText>
                 {
                     new LocalizedText(finnishLanguageCode, finnishAbbreviation)
@@ -202,7 +211,7 @@ namespace OrganizationRegister.Api.Tests.Organization
                 Arg.Is<IEnumerable<LocalizedText>>(names => names.Single().Equals(new LocalizedText(finnishLanguageCode, finnishName))),
                 Arg.Is<IEnumerable<LocalizedText>>(descriptions => descriptions.Single().Equals(new LocalizedText(finnishLanguageCode, finnishDescription))),
                 validFrom, validTo, Arg.Is<IEnumerable<LocalizedText>>(
-                    nameAbbreviations => nameAbbreviations.Single().Equals(new LocalizedText(finnishLanguageCode, finnishAbbreviation))));
+                    nameAbbreviations => nameAbbreviations.Single().Equals(new LocalizedText(finnishLanguageCode, finnishAbbreviation))), canBeTransferredToFsc);
         }
 
         [TestMethod]
@@ -221,7 +230,7 @@ namespace OrganizationRegister.Api.Tests.Organization
             };
             organizationService.AddSubOrganization(Arg.Any<Guid>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>(), 
                 Arg.Any<IEnumerable<LocalizedText>>(), Arg.Any<IEnumerable<LocalizedText>>(), Arg.Any<DateTime?>(), Arg.Any<DateTime?>(), 
-                Arg.Any<IEnumerable<LocalizedText>>()).Returns(organizationId);
+                Arg.Any<IEnumerable<LocalizedText>>(), false).Returns(organizationId);
 
             var result = sut.AddSubOrganization(Guid.NewGuid(), company) as OkNegotiatedContentResult<Guid>;
 
@@ -241,6 +250,8 @@ namespace OrganizationRegister.Api.Tests.Organization
             const string oid = "132456";
             const string finnishLanguageCode = "fi";
             const string type = "Kunta";
+            const bool canBeTransferredToFsc = false;
+
             DateTime? validFrom = DateTime.Today;
             DateTime? validTo = DateTime.Today.AddDays(1);
 
@@ -260,6 +271,7 @@ namespace OrganizationRegister.Api.Tests.Organization
                 Oid = oid,
                 ValidFrom = validFrom,
                 ValidTo = validTo,
+                CanBeTransferredToFsc = canBeTransferredToFsc,
                 NameAbbreviations = new List<LocalizedText>
                 {
                     new LocalizedText(finnishLanguageCode, finnishAbbreviation)
@@ -274,7 +286,7 @@ namespace OrganizationRegister.Api.Tests.Organization
                 Arg.Is<IEnumerable<LocalizedText>>(texts => texts.Count() == 1 && texts.Any(text => text.LanguageCode.Equals(finnishLanguageCode) && 
                     text.LocalizedValue.Equals(finnishDescription))), type, municipalityCode, validFrom, validTo,
                  Arg.Is<IEnumerable<LocalizedText>>(texts => texts.Count() == 1 && texts.Any(text => text.LanguageCode.Equals(finnishLanguageCode) &&
-                    text.LocalizedValue.Equals(finnishAbbreviation))));
+                    text.LocalizedValue.Equals(finnishAbbreviation))), canBeTransferredToFsc);
         }
 
         [TestMethod]

@@ -183,6 +183,15 @@ namespace OrganizationRegister.Api.Tests.Organization
         }
 
         [TestMethod]
+        public void CanBeTransferredToFscIsMapped()
+        {
+            const bool canBeTransferredToFsc = true;
+            source.CanBeTransferredToFsc.Returns(canBeTransferredToFsc);
+            destination = sut.Map(source);
+            Assert.AreEqual(canBeTransferredToFsc, destination.CanBeTransferredToFsc);
+        }
+
+        [TestMethod]
         public void PHoneNumberIsMapped()
         {
             const string phoneNumber = "0100100";

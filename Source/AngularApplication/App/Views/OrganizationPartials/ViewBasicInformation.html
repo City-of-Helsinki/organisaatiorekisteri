@@ -2,18 +2,24 @@
     <strong>ID:</strong> {{ controller.model.numericId }}
 </div>
 <div class="row">
-    <div class="col-xs-3">
+    <div class="col-xs-4">
         <label>Organisaatiotyyppi</label>
         {{ controller.model.type }}
     </div>
-    <div class="col-xs-3">
+    <div class="col-xs-2">
         <label>Y-tunnus</label>
         {{ controller.model.businessId }}
     </div>
-    <div class="col-xs-3">
+    <div class="col-xs-2" data-ng-show="controller.model.isMunicipality()">
         <label>Kunnan numero</label>
         {{ controller.model.municipalityCode }}
     </div>
+    
+    <div class="col-xs-4">
+        <label>Tiedot voidaan viedä palvelutietovarantoon (PTV)</label>
+        {{ controller.model.canBeTransferredToFsc ? "Kyllä" : "Ei"}}
+    </div>
+
 </div>
 <div class="row">
     <div class="col-xs-6">
@@ -48,19 +54,25 @@
     </div>
 
 </div>
+
 <div class="row">
-    <div class="col-xs-6">
-        <label>OID</label>
-        {{ controller.model.oid }}
-    </div>
-</div>
-<div class="row">
-    <div class="col-xs-6">
+    <div class="col-xs-3">
         <label>Voimassaolo alkaa</label>
         <span>{{ controller.model.validFromText }}</span>
     </div>
-    <div class="col-xs-6">
+    <div class="col-xs-3">
         <label>Voimassaolo päättyy</label>
         {{ controller.model.validToText }}
     </div>
+    
+    <div class="col-xs-3 col-xs-offset-2">
+        <label>OID</label>
+        {{ controller.model.oid }}
+    </div>
+
 </div>
+
+<div class="row">
+   
+</div>
+

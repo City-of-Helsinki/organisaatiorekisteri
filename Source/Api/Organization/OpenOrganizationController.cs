@@ -52,14 +52,15 @@ namespace OrganizationRegister.Api.Organization
             return Ok(mappedOrganizations);
         }
 
+       
         [HttpGet]
-        [GetRoute("organizationformunicipality/{rootMunicipalityCode}")]
-        public IHttpActionResult GetOrganizationForMunicipality(int rootMunicipalityCode)
+        [GetRoute("organizationlistformunicipality/{rootMunicipalityCode}")]
+        public IHttpActionResult GetOrganizationListForMunicipality(int rootMunicipalityCode)
         {
 
-            IEnumerable<IOrganizationName> organizations = organizationService.GetOrganizationForMunicipality(rootMunicipalityCode);
-            var mapper = mapperFactory.CreateOrganizationNameMapper();
-            IEnumerable<OrganizationName> mappedOrganizations = mapper.Map(organizations);
+            IEnumerable<IOrganizationListItem> organizations = organizationService.GetOrganizationListForMunicipality(rootMunicipalityCode);
+            var mapper = mapperFactory.CreateOrganizationListItemMapper();
+            IEnumerable<OrganizationListItem> mappedOrganizations = mapper.Map(organizations);
             return Ok(mappedOrganizations);
         }
 

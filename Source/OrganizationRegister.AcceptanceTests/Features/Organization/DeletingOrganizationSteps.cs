@@ -16,7 +16,7 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
         public void GivenThereIsAFullyFilledOrganizationWithBusinessId(string organizationName, string businessId)
         {
             Guid organizationId = OrganizationService.AddOrganization(businessId, "", "Yritys", null,
-                new List<LocalizedText> { new LocalizedText(LanguageCode, organizationName) }, new List<LocalizedText> { new LocalizedText(LanguageCode, "Kiva kaupunki") }, null, null, null);
+                new List<LocalizedText> { new LocalizedText(LanguageCode, organizationName) }, new List<LocalizedText> { new LocalizedText(LanguageCode, "Kiva kaupunki") }, null, null, null, false);
             SetAllOrganizationData(organizationId);
         }
 

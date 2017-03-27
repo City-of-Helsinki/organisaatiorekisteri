@@ -84,7 +84,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Finnish name",
                         "Swedish name",
                         "Finnish description",
-                        "Swedish description"});
+                        "Swedish description",
+                        "Can be added to FSC"});
             table1.AddRow(new string[] {
                         "1234567-1",
                         "123456",
@@ -92,7 +93,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Affecto Oy",
                         "Affecto Ab",
                         "Ohjelmistoyritys",
-                        "Programvara företaget"});
+                        "Programvara företaget",
+                        "false"});
 #line 4
  testRunner.Given("the following company is added:", ((string)(null)), table1, "Given ");
 #line 7

@@ -2,56 +2,58 @@
 
 Scenario: Adding a company
 	When the following company is added:
-	| Business id | Oid    | Type   | Finnish name | Swedish name | Finnish description | Swedish description   | Valid from | Valid to   | Finnish name abbreviation | Swedish name abbreviation |
-	| 1234567-1   | 123456 | Yritys | Affecto      | Affecto      | Ohjelmistoyritys    | Programvara företaget | 01.01.2015 | 01.01.2016 | AFE                       | AFEsv                     |
+	| Business id | Oid    | Type   | Finnish name | Swedish name | Finnish description | Swedish description   | Valid from | Valid to   | Finnish name abbreviation | Swedish name abbreviation | Can be added to FSC |
+	| 1234567-1   | 123456 | Yritys | Affecto      | Affecto      | Ohjelmistoyritys    | Programvara företaget | 01.01.2015 | 01.01.2016 | AFE                       | AFEsv                     | false                |
 	Then there are following organizations:
-	| Business id | Oid    | Type   | Finnish name | Swedish name | Finnish description | Swedish description   | Valid from | Valid to   | Finnish name abbreviation | Swedish name abbreviation |
-	| 1234567-1   | 123456 | Yritys | Affecto      | Affecto      | Ohjelmistoyritys    | Programvara företaget | 01.01.2015 | 01.01.2016 | AFE                       | AFEsv                     |
+	| Business id | Oid    | Type   | Finnish name | Swedish name | Finnish description | Swedish description   | Valid from | Valid to   | Finnish name abbreviation | Swedish name abbreviation | Can be added to FSC |
+	| 1234567-1   | 123456 | Yritys | Affecto      | Affecto      | Ohjelmistoyritys    | Programvara företaget | 01.01.2015 | 01.01.2016 | AFE                       | AFEsv                     | false                |
 
 
 Scenario: Adding a municipality
 	When the following municipality is added:
-	| Business id | Oid    | Type  | Finnish name | Swedish name | Municipality code | Valid from |
-	| 1234567-1   | 123456 | Kunta | Turku        | Åbo          | 853               | 01.02.2014 |
+	| Business id | Oid    | Type  | Finnish name | Swedish name | Municipality code | Valid from | Can be added to FSC |
+	| 1234567-1   | 123456 | Kunta | Turku        | Åbo          | 853               | 01.02.2014 | true                |
 	And the following municipality is added:
-    | Business id | Oid | Type  | Finnish name | Swedish name | Municipality code | Valid from |
-    | 1069622-4   |     | Kunta | Kaarina      | St. Karins   | 202               | 01.03.2014 |
+    | Business id | Oid | Type  | Finnish name | Swedish name | Municipality code | Valid from | Can be added to FSC |
+    | 1069622-4   |     | Kunta | Kaarina      | St. Karins   | 202               | 01.03.2014 | false               |
 	Then there are following organizations:
-	| Business id | Oid    | Type  | Finnish name | Swedish name | Municipality code | Valid from |
-	| 1234567-1   | 123456 | Kunta | Turku        | Åbo          | 853               | 01.02.2014 |
-	| 1069622-4   |        | Kunta | Kaarina      | St. Karins   | 202               | 01.03.2014 |
+	| Business id | Oid    | Type  | Finnish name | Swedish name | Municipality code | Valid from | Can be added to FSC |
+	| 1234567-1   | 123456 | Kunta | Turku        | Åbo          | 853               | 01.02.2014 | true                |
+	| 1069622-4   |        | Kunta | Kaarina      | St. Karins   | 202               | 01.03.2014 | false               |
 
 Scenario: Adding an organization with invalid business id
 	When the following municipality is added:
-	| Business id | Oid    | Type  | Finnish name | Swedish name | Municipality code |
-	| 1234567-12  | 123456 | Kunta | Turku        | Åbo          | 853               |
+	| Business id | Oid    | Type  | Finnish name | Swedish name | Municipality code | Can be added to FSC |
+	| 1234567-12  | 123456 | Kunta | Turku        | Åbo          | 853               | true                |
 	Then Adding the organization fails
 
 Scenario: Adding an organization with validity starting after it has ended
 	When the following company is added:
-	| Business id | Oid    | Type   | Finnish name | Swedish name | Finnish description | Swedish description   | Valid from | Valid to   |
-	| 1234567-1   | 123456 | Yritys | Affecto      | Affecto      | Ohjelmistoyritys    | Programvara företaget | 01.01.2017 | 01.01.2016 |
+	| Business id | Oid    | Type   | Finnish name | Swedish name | Finnish description | Swedish description   | Valid from | Valid to   | Can be added to FSC |
+	| 1234567-1   | 123456 | Yritys | Affecto      | Affecto      | Ohjelmistoyritys    | Programvara företaget | 01.01.2017 | 01.01.2016 | true                |
 	Then Adding the organization fails
 
 Scenario: Adding two organizations with the same business id
 	Given the following company is added:
-	| Business id | Oid    | Type   | Finnish name | Swedish name | Finnish description | Swedish description   |
-	| 1234567-1   | 123456 | Yritys | Affecto      | Affecto      | Ohjelmistoyritys    | Programvara företaget |
+	| Business id | Oid    | Type   | Finnish name | Swedish name | Finnish description | Swedish description   | Can be added to FSC |
+	| 1234567-1   | 123456 | Yritys | Affecto      | Affecto      | Ohjelmistoyritys    | Programvara företaget | false               |
 	When the following municipality is added:
-	| Business id | Oid    | Type  | Finnish name | Swedish name | Municipality code |
-	| 1234567-1   | 123456 | Kunta | Turku        | Åbo          | 853               |
+	| Business id | Oid    | Type  | Finnish name | Swedish name | Municipality code | Can be added to FSC |
+	| 1234567-1   | 123456 | Kunta | Turku        | Åbo          | 853               | false               |
 	Then Adding the organization fails
+
+
 
 Scenario: Adding a municipality with invalid id
 	When the following municipality is added:
-	| Business id | Oid    | Type  | Finnish name | Swedish name | Municipality code |
-	| 1234567-1   | 123456 | Kunta | Turku        | Åbo          | 8533              |
+	| Business id | Oid    | Type  | Finnish name | Swedish name | Municipality code | Can be added to FSC |
+	| 1234567-1   | 123456 | Kunta | Turku        | Åbo          | 8533              | true                |
 	Then Adding the organization fails
 
 Scenario: Adding sub organizations
 	Given the following company is added:
-	| Business id | Oid    | Type   | Finnish name | Swedish name | Finnish description | Swedish description   | 
-	| 1234567-1   | 123456 | Yritys | Affecto      | Affecto      | Ohjelmistoyritys    | Programvara företaget |
+	| Business id | Oid    | Type   | Finnish name | Swedish name | Finnish description | Swedish description   | Can be added to FSC |
+	| 1234567-1   | 123456 | Yritys | Affecto      | Affecto      | Ohjelmistoyritys    | Programvara företaget | false               |
 	When the following company is added as a sub organization of 'Affecto'
 	| Business id | Oid    | Type   | Finnish name | Swedish name  | Finnish description | Swedish description   | Valid to   |
 	| 2352175-7   | 654321 | Yritys | Karttakeskus | karta centrum | Ohjelmistoyritys    | Programvara företaget | 01.01.2074 |
@@ -62,7 +64,7 @@ Scenario: Adding sub organizations
 	| Business id | Oid | Type   | Finnish name          | Swedish name              | Finnish description | Swedish description |
 	| 2352175-7   | 12  | Yritys | Karttakeskus Helsinki | karta centrum Helsingfors |                     |                     |
 	Then there are following organizations:
-	| Business id | Oid     | Type   | Finnish name          | Swedish name              | Finnish description | Swedish description   | Valid to   |
+	| Business id | Oid     | Type   | Finnish name          | Swedish name              | Finnish description | Swedish description   | Valid to   | 
 	| 1234567-1   | 123456  | Yritys | Affecto               | Affecto                   | Ohjelmistoyritys    | Programvara företaget |            |
 	| 2352175-7   | 654321  | Yritys | Karttakeskus          | karta centrum             | Ohjelmistoyritys    | Programvara företaget | 01.01.2074 |
 	| 2352175-7   | 12      | Yritys | Karttakeskus Helsinki | karta centrum Helsingfors |                     |                       |            |
@@ -76,8 +78,8 @@ Scenario: Adding sub organizations
 
 Scenario: Sub organization doesn't need a business id
 	Given the following company is added:
-	| Business id | Oid    | Type   | Finnish name | Swedish name | Finnish description | Swedish description   |
-	| 1234567-1   | 123456 | Yritys | Affecto      | Affecto      | Ohjelmistoyritys    | Programvara företaget |
+	| Business id | Oid    | Type   | Finnish name | Swedish name | Finnish description | Swedish description   | Can be added to FSC |
+	| 1234567-1   | 123456 | Yritys | Affecto      | Affecto      | Ohjelmistoyritys    | Programvara företaget | false               |
 	When the following company is added as a sub organization of 'Affecto'
 	| Business id | Oid |  | Type   | Finnish name | Swedish name  | Finnish description | Swedish description   |
 	|             |     |  | Yritys | Karttakeskus | karta centrum | Ohjelmistoyritys    | Programvara företaget |

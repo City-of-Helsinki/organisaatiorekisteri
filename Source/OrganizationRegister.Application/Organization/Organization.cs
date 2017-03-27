@@ -23,13 +23,13 @@ namespace OrganizationRegister.Application.Organization
         protected BusinessIdentifier businessId;
         
         public Organization(Guid id, long numericId, string businessId, string oid, string type, int? municipalityCode, IEnumerable<LocalizedText> names,
-            IEnumerable<string> languageCodes)
-            : this(id, businessId, oid, type, municipalityCode.HasValue ? municipalityCode.Value.ToString(CultureInfo.InvariantCulture) : null, names, languageCodes)
+            IEnumerable<string> languageCodes, bool canBeTransferredToFsc)
+            : this(id, businessId, oid, type, municipalityCode.HasValue ? municipalityCode.Value.ToString(CultureInfo.InvariantCulture) : null, names, languageCodes, canBeTransferredToFsc)
         {
             NumericId = numericId;
         }
 
-        public Organization(Guid id, string businessId, string oid, string type, string municipalityCode, IEnumerable<LocalizedText> names, IEnumerable<string> languageCodes)
+        public Organization(Guid id, string businessId, string oid, string type, string municipalityCode, IEnumerable<LocalizedText> names, IEnumerable<string> languageCodes, bool canBeTransferredToFsc)
         {
             if (id == Guid.Empty)
             {
@@ -39,8 +39,11 @@ namespace OrganizationRegister.Application.Organization
             this.languageCodes = languageCodes.ToList();
             Id = id;
             BusinessId = businessId;
+          
             Oid = oid;
             webPages = new WebPages();
+
+            CanBeTransferredToFsc = canBeTransferredToFsc;
             
             localizedTextsContainer = new LocalizedTextsContainer(this.languageCodes);
             Names = names;
@@ -67,6 +70,9 @@ namespace OrganizationRegister.Application.Organization
         }
 
         public string Oid { get; set; }
+
+
+        public bool CanBeTransferredToFsc { get; set; }
 
         public IEnumerable<WebPage> WebPages
         {

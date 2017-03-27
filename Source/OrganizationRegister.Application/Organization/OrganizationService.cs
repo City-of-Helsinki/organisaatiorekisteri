@@ -32,28 +32,28 @@ namespace OrganizationRegister.Application.Organization
         }
 
         public Guid AddOrganization(string businessId, string oid, string type, string municipalityCode, IEnumerable<LocalizedText> names, IEnumerable<LocalizedText> descriptions, 
-            DateTime? validFrom, DateTime? validTo, IEnumerable<LocalizedText> nameAbbreviations)
+            DateTime? validFrom, DateTime? validTo, IEnumerable<LocalizedText> nameAbbreviations, bool canBeTransferredToFsc)
         {
             CheckAddOrganizationPermission();
 
             IReadOnlyCollection<string> languageCodes = settingsRepository.GetDataLanguageCodes();
             // TODO: Wrap id generation into a service
             var id = Guid.NewGuid();
-            var organization = new Organization(id, businessId, oid, type, municipalityCode, names, languageCodes) { Descriptions = descriptions, NameAbbreviations = nameAbbreviations, HomepageUrls = null};
+            var organization = new Organization(id, businessId, oid, type, municipalityCode, names, languageCodes, canBeTransferredToFsc) { Descriptions = descriptions, NameAbbreviations = nameAbbreviations, HomepageUrls = null};
             organization.SetValidity(validFrom, validTo);
             organizationRepository.AddOrganizationAndSave(organization);
             return id;
         }
 
         public Guid AddSubOrganization(Guid parentOrganizationId, string businessId, string oid, string type, string municipalityCode, IEnumerable<LocalizedText> names,
-            IEnumerable<LocalizedText> descriptions, DateTime? validFrom, DateTime? validTo, IEnumerable<LocalizedText> nameAbbreviations)
+            IEnumerable<LocalizedText> descriptions, DateTime? validFrom, DateTime? validTo, IEnumerable<LocalizedText> nameAbbreviations, bool canBeTransferredToFsc)
         {
             CheckManageOrganizationPermission(parentOrganizationId);
 
             IReadOnlyCollection<string> languageCodes = settingsRepository.GetDataLanguageCodes();
             // TODO: Wrap id generation into a service
             var id = Guid.NewGuid();
-            var organization = new SubOrganization(id, businessId, oid, type, municipalityCode, names, languageCodes) { Descriptions = descriptions, NameAbbreviations = nameAbbreviations, HomepageUrls = null };
+            var organization = new SubOrganization(id, businessId, oid, type, municipalityCode, names, languageCodes, canBeTransferredToFsc) { Descriptions = descriptions, NameAbbreviations = nameAbbreviations, HomepageUrls = null };
             organization.SetValidity(validFrom, validTo);
             organizationRepository.AddSubOrganizationAndSave(parentOrganizationId, organization);
             return id;
@@ -83,12 +83,13 @@ namespace OrganizationRegister.Application.Organization
 
         }
 
-        public IEnumerable<IOrganizationName> GetOrganizationForMunicipality(int rootMunicipalityCode)
+
+        public IEnumerable<IOrganizationListItem> GetOrganizationListForMunicipality(int rootMunicipalityCode)
         {
-            var orgs = new List<IOrganizationName>();
+            var orgs = new List<IOrganizationListItem>();
             foreach (var org in organizationRepository.GetMunicipalMainOrganizations(rootMunicipalityCode))
             {
-                orgs.AddRange(organizationRepository.GetOrganizationsForOrganization(org.Id));
+                orgs.AddRange(organizationRepository.GetOrganizationListForOrganization(org.Id));
             }
             return orgs;
         }
@@ -134,7 +135,7 @@ namespace OrganizationRegister.Application.Organization
         }
 
         public void SetOrganizationBasicInformation(Guid organizationId, string businessId, string oid, IEnumerable<LocalizedText> names, IEnumerable<LocalizedText> descriptions, 
-            string type, string municipalityCode, DateTime? validFrom, DateTime? validTo, IEnumerable<LocalizedText> nameAbbreviations)
+            string type, string municipalityCode, DateTime? validFrom, DateTime? validTo, IEnumerable<LocalizedText> nameAbbreviations, bool canBeTransferredToFsc)
         {
             CheckManageOrganizationPermission(organizationId);
 
@@ -144,6 +145,7 @@ namespace OrganizationRegister.Application.Organization
             organization.Names = names;
             organization.Descriptions = descriptions;
             organization.NameAbbreviations = nameAbbreviations;
+            organization.CanBeTransferredToFsc = canBeTransferredToFsc;
             organization.SetType(type, municipalityCode);
             organization.SetValidity(validFrom, validTo);
             organizationRepository.UpdateOrganizationBasicInformation(organizationId, organization, organization is SubOrganization);

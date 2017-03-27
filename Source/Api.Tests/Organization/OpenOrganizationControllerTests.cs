@@ -158,18 +158,25 @@ namespace OrganizationRegister.Api.Tests.Organization
             Assert.AreEqual(returnValue, result.Content);
         }
 
+       
+
         [TestMethod]
-        public void GetOrganizationForMunicipality()
+        public void GetOrganizationListForMunicipality()
         {
             int municipalityId = 91;
-            OrganizationName returnValue = new OrganizationName();
-            IOrganizationName appReturnValue = Substitute.For<IOrganizationName>();
-            organizationNameMapper.Map(appReturnValue).Returns(returnValue);
-            organizationService.GetOrganizationForMunicipality(municipalityId).Returns(new List<IOrganizationName> { appReturnValue });
+            OrganizationListItem returnValue = new OrganizationListItem();
+            IOrganizationListItem appReturnValue = Substitute.For<IOrganizationListItem>();
 
-            var result = sut.GetOrganizationForMunicipality(municipalityId) as OkNegotiatedContentResult<IEnumerable<OrganizationName>>;
+            organizationListItemMapper.Map(appReturnValue).Returns(returnValue);
 
-            Assert.AreSame(returnValue, result.Content.Single());
+            organizationService.GetOrganizationListForMunicipality(municipalityId).Returns(new List<IOrganizationListItem> { appReturnValue, appReturnValue });
+
+            var result = sut.GetOrganizationListForMunicipality(municipalityId) as OkNegotiatedContentResult<IEnumerable<OrganizationListItem>>;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Content.Count());
+            Assert.IsTrue(result.Content.All(org => org.Equals(returnValue)));
+        
         }
     }
 }

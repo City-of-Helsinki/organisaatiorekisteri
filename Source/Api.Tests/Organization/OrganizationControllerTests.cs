@@ -11,6 +11,7 @@ namespace OrganizationRegister.Api.Tests.Organization
         protected IMapper<IHierarchicalOrganization, HierarchicalOrganization> hierarchicalOrganizationMapper;
         protected IMapper<IOrganization, Api.Organization.Organization> organizationMapper;
         protected IMapper<IOrganizationName, OrganizationName> organizationNameMapper;
+        protected IMapper<IOrganizationListItem, OrganizationListItem> organizationListItemMapper;
 
         protected void SetupMappers()
         {
@@ -18,9 +19,11 @@ namespace OrganizationRegister.Api.Tests.Organization
             hierarchicalOrganizationMapper = Substitute.For<IMapper<IHierarchicalOrganization, HierarchicalOrganization>>();
             organizationMapper = Substitute.For<IMapper<IOrganization, Api.Organization.Organization>>();
             organizationNameMapper = Substitute.For<IMapper<IOrganizationName, OrganizationName>>();
+            organizationListItemMapper = Substitute.For<IMapper<IOrganizationListItem, OrganizationListItem>>();
             mapperFactory.CreateHierarchicalOrganizationMapper().Returns(hierarchicalOrganizationMapper);
             mapperFactory.CreateOrganizationMapper().Returns(organizationMapper);
             mapperFactory.CreateOrganizationNameMapper().Returns(organizationNameMapper);
+            mapperFactory.CreateOrganizationListItemMapper().Returns(organizationListItemMapper);
         }
     }
 }

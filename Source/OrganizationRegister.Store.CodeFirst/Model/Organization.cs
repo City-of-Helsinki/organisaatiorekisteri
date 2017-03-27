@@ -33,6 +33,7 @@ namespace OrganizationRegister.Store.CodeFirst.Model
         public DateTime? ValidFrom { get; set; }
         public bool Active { get; set; }
         public bool? StreetAddressAsPostalAddress { get; set; }
+        public bool CanBeTransferredToFsc { get; set; }
         public virtual ICollection<OrganizationLanguageSpecification> LanguageSpecifications { get; set; }
       
         public virtual Organization ParentOrganization { get; set; }
@@ -291,6 +292,7 @@ namespace OrganizationRegister.Store.CodeFirst.Model
             SetMunicipalityCode(information.MunicipalityCode);
             ValidFrom = information.ValidFrom;
             ValidTo = information.ValidTo;
+            CanBeTransferredToFsc = information.CanBeTransferredToFsc;
 
             SetLocalizedTexts(information, context);
 
