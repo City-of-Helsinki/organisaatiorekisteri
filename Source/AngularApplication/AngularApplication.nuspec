@@ -7,7 +7,8 @@
     <authors>Affecto</authors>
     <version>$version$</version>
     <releaseNotes>
-      Can be transferred to FSC field added to organizations basic information
+      Organization tree layout fixes.
+      Ask confirmation before deleting organization.
     </releaseNotes>
   </metadata>
 </package>
