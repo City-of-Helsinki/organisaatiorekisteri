@@ -11,8 +11,20 @@
                 </div>
                 <div class="page-title">
                     <h2>{{ controller.model.name }}</h2>
-                    <button type="submit" class="button remove" data-ng-click="controller.deleteOrganization()">Poista</button>
+                   
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button type="button" class="button remove" data-ng-click="controller.showDeleteOrganizationConfirm(true)" 
+                                    data-ng-show="!controller.displayOrganizationDeleteConfirm">Poista</button>
+                            <div data-ng-show="controller.displayOrganizationDeleteConfirm">
+                                <button type="button" class="button cancel" data-ng-click="controller.showDeleteOrganizationConfirm(false)">Peruuta</button>
+                                <button type="button" class="button edit" data-ng-click="controller.deleteOrganization()">Vahvista organisaation poisto</button>
+                            </div>
+                        </div>
+                    </div>
+                   
                 </div>
+              
             </div>
 
             <div id="step1" data-ng-class="{'edit-mode-active': controller.isBasicInformationBeingEdited()}">

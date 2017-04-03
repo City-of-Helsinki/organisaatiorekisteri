@@ -36,12 +36,16 @@ module OrganizationRegister
         public visitingAddressForm: angular.IFormController;
         public postalAddressForm: angular.IFormController;
 
+        public displayOrganizationDeleteConfirm: boolean;
+
         constructor(private $scope: Affecto.Base.IViewScope, private $location: angular.ILocationService, $routeParams: IOrganizationRoute, private $sce: angular.ISCEService,
             $route: angular.route.IRouteService, private $q: angular.IQService, private organizationService: OrganizationService, private settingsService: SettingsService,
             private validationService: ValidationService, private busyIndicationService: Affecto.BusyIndication.IBusyIndicationService)
         {
             $scope.controller = this;
             $scope.model = this.model;
+
+            this.displayOrganizationDeleteConfirm = false;
 
             this.validBusinessId = true;
             this.validValidity = true;
@@ -60,6 +64,11 @@ module OrganizationRegister
             this.fetchServerData($routeParams);
             this.initializeEditedSection($route);
         }
+
+        public showDeleteOrganizationConfirm(display: boolean): void
+        {
+            this.displayOrganizationDeleteConfirm = display;
+        };
 
         public get editBusinessIdentifierLabel(): string
         {
