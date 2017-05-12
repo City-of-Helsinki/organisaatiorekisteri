@@ -52,7 +52,6 @@ namespace OrganizationRegister.Api.Organization
             return Ok(mappedOrganizations);
         }
 
-       
         [HttpGet]
         [GetRoute("organizationlistformunicipality/{rootMunicipalityCode}")]
         public IHttpActionResult GetOrganizationListForMunicipality(int rootMunicipalityCode)

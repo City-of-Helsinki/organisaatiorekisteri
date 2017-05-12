@@ -192,6 +192,15 @@ namespace OrganizationRegister.Api.Tests.Organization
         }
 
         [TestMethod]
+        public void CanBeResponsibleDeptForServicecIsMapped()
+        {
+            const bool cannBeResponsibleDeptForServicec= true;
+            source.CanBeTransferredToFsc.Returns(cannBeResponsibleDeptForServicec);
+            destination = sut.Map(source);
+            Assert.AreEqual(cannBeResponsibleDeptForServicec, destination.CanBeTransferredToFsc);
+        }
+
+        [TestMethod]
         public void PHoneNumberIsMapped()
         {
             const string phoneNumber = "0100100";

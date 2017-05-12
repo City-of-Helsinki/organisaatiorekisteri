@@ -14,6 +14,7 @@ namespace OrganizationRegister.Store.CodeFirst.Model.Configuration
             Property(organization => organization.Oid);
             Property(organization => organization.Active);
             Property(organization => organization.CanBeTransferredToFsc);
+            Property(organization => organization.CanBeResponsibleDeptForService);
 
             HasRequired(organization => organization.Type);
           

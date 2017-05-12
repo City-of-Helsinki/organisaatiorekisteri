@@ -14,9 +14,8 @@ namespace OrganizationRegister.Application.Tests.Organization
         private const string Oid = "123456";
         private const string Type = "Yritys";
         private const string ValidLanguageCode = "fi";
-
-
         private const bool CanBeTransferredToFsc = false;
+        private const bool CanBeResponsibleDeptForService = false;
 
         private Application.Organization.Organization sut;
 
@@ -25,21 +24,21 @@ namespace OrganizationRegister.Application.Tests.Organization
         public void EmptyIdIsNotAllowed()
         {
             sut = new Application.Organization.Organization(Guid.Empty, 1, ValidBusinessId, Oid, Type, null, CreateLocalizedTextsWithOneText(ValidLanguageCode, "nimi"),
-                new List<string> { ValidLanguageCode }, CanBeTransferredToFsc);
+                new List<string> { ValidLanguageCode }, CanBeTransferredToFsc, CanBeResponsibleDeptForService);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void EmptyNamesCollectionIsNotAllowed()
         {
-            sut = new Application.Organization.Organization(Guid.NewGuid(), 1, ValidBusinessId, Oid, Type, null, new LocalizedSingleTexts(), new List<string> { ValidLanguageCode }, false);
+            sut = new Application.Organization.Organization(Guid.NewGuid(), 1, ValidBusinessId, Oid, Type, null, new LocalizedSingleTexts(), new List<string> { ValidLanguageCode }, false, false);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void NullNamesCollectionIsNotAllowed()
         {
-            sut = new Application.Organization.Organization(Guid.NewGuid(), 1, ValidBusinessId, Oid, Type, null, null, new List<string> { ValidLanguageCode }, false);
+            sut = new Application.Organization.Organization(Guid.NewGuid(), 1, ValidBusinessId, Oid, Type, null, null, new List<string> { ValidLanguageCode }, false, false);
         }
 
         [TestMethod]
@@ -48,7 +47,7 @@ namespace OrganizationRegister.Application.Tests.Organization
         {
             sut = new Application.Organization.Organization(Guid.NewGuid(), 1, ValidBusinessId, Oid, Type, null, 
                 new LocalizedSingleTexts(new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "Nimi"), new LocalizedText("fi", null) }),
-                new List<string> { ValidLanguageCode, "fi" }, false);
+                new List<string> { ValidLanguageCode, "fi" }, false, false);
         }
 
         [TestMethod]
@@ -56,7 +55,7 @@ namespace OrganizationRegister.Application.Tests.Organization
         public void EmptyNameValueIsNotAllowed()
         {
             sut = new Application.Organization.Organization(Guid.NewGuid(), 1, ValidBusinessId, Oid, Type, null, 
-                new LocalizedSingleTexts(new List<LocalizedText> { new LocalizedText("SE", string.Empty) }), new List<string> { "SE" }, false);
+                new LocalizedSingleTexts(new List<LocalizedText> { new LocalizedText("SE", string.Empty) }), new List<string> { "SE" }, false, false);
         }
 
         [TestMethod]
@@ -64,7 +63,7 @@ namespace OrganizationRegister.Application.Tests.Organization
         public void NameCannotHaveUnsupportedLanguage()
         {
             sut = new Application.Organization.Organization(Guid.NewGuid(), 1, ValidBusinessId, Oid, Type, null,
-                new LocalizedSingleTexts(new List<LocalizedText> { new LocalizedText("fi", "organisaatio") }), new List<string> { "SE" }, false);
+                new LocalizedSingleTexts(new List<LocalizedText> { new LocalizedText("fi", "organisaatio") }), new List<string> { "SE" }, false, false);
         }
 
         [TestMethod]
@@ -99,7 +98,7 @@ namespace OrganizationRegister.Application.Tests.Organization
         public void TypeCannotBeNull()
         {
             sut = new Application.Organization.Organization(Guid.NewGuid(), 1, ValidBusinessId, Oid, null, null, CreateLocalizedTextsWithOneText(ValidLanguageCode, "Nimi"), 
-                new List<string> { ValidLanguageCode }, false);
+                new List<string> { ValidLanguageCode }, false, false);
         }
 
         [TestMethod]
@@ -107,7 +106,7 @@ namespace OrganizationRegister.Application.Tests.Organization
         public void TypeCannotBeEmpty()
         {
             sut = new Application.Organization.Organization(Guid.NewGuid(), 1, ValidBusinessId, Oid, string.Empty, null, CreateLocalizedTextsWithOneText(ValidLanguageCode, "Nimi"),
-                new List<string> { ValidLanguageCode }, false);
+                new List<string> { ValidLanguageCode }, false, false);
         }
 
         [TestMethod]
@@ -115,7 +114,7 @@ namespace OrganizationRegister.Application.Tests.Organization
         public void MunicipalityTypeCannotBeWithEmptymunicipalityCode()
         {
             sut = new Application.Organization.Organization(Guid.NewGuid(), ValidBusinessId, Oid, OrganizationType.Municipality, string.Empty, 
-                CreateLocalizedTextsWithOneText(ValidLanguageCode, "Nimi"), new List<string> { ValidLanguageCode }, false);
+                CreateLocalizedTextsWithOneText(ValidLanguageCode, "Nimi"), new List<string> { ValidLanguageCode }, false, false);
         }
 
         [TestMethod]
@@ -123,7 +122,7 @@ namespace OrganizationRegister.Application.Tests.Organization
         public void MunicipalityTypeCannotBeWithNullmunicipalityCode()
         {
             sut = new Application.Organization.Organization(Guid.NewGuid(), 1, ValidBusinessId, Oid, OrganizationType.Municipality, null,
-                CreateLocalizedTextsWithOneText(ValidLanguageCode, "Nimi"), new List<string> { ValidLanguageCode }, false);
+                CreateLocalizedTextsWithOneText(ValidLanguageCode, "Nimi"), new List<string> { ValidLanguageCode }, false, false);
         }
 
         [TestMethod]
@@ -131,7 +130,7 @@ namespace OrganizationRegister.Application.Tests.Organization
         public void OtherThanMunicipalityTypeCannotBeWithmunicipalityCode()
         {
             sut = new Application.Organization.Organization(Guid.NewGuid(), ValidBusinessId, Oid, "Other", "12",
-                CreateLocalizedTextsWithOneText(ValidLanguageCode, "Nimi"), new List<string> { ValidLanguageCode }, false);
+                CreateLocalizedTextsWithOneText(ValidLanguageCode, "Nimi"), new List<string> { ValidLanguageCode }, false, false);
         }
 
         [TestMethod]
@@ -139,7 +138,7 @@ namespace OrganizationRegister.Application.Tests.Organization
         {
             const string finalDescription = "Yritys";
             sut = new Application.Organization.Organization(Guid.NewGuid(), 1, ValidBusinessId, Oid, Type, null, 
-                CreateLocalizedTextsWithOneText(ValidLanguageCode, "Affecto"), new List<string> { ValidLanguageCode }, false);
+                CreateLocalizedTextsWithOneText(ValidLanguageCode, "Affecto"), new List<string> { ValidLanguageCode }, false, false);
 
             sut.Descriptions = new LocalizedSingleTexts(new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "Firma") });
             sut.Descriptions = new LocalizedSingleTexts(new List<LocalizedText> { new LocalizedText(ValidLanguageCode, finalDescription) });
@@ -152,7 +151,7 @@ namespace OrganizationRegister.Application.Tests.Organization
         {
             const string finalAbbreviation = "finalVal";
             sut = new Application.Organization.Organization(Guid.NewGuid(), 1, ValidBusinessId, Oid, Type, null,
-                CreateLocalizedTextsWithOneText(ValidLanguageCode, "Affecto"), new List<string> { ValidLanguageCode }, false);
+                CreateLocalizedTextsWithOneText(ValidLanguageCode, "Affecto"), new List<string> { ValidLanguageCode }, false, false);
 
             sut.NameAbbreviations = new LocalizedSingleTexts(new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "Val") });
             sut.NameAbbreviations = new LocalizedSingleTexts(new List<LocalizedText> { new LocalizedText(ValidLanguageCode, finalAbbreviation) });
@@ -166,7 +165,7 @@ namespace OrganizationRegister.Application.Tests.Organization
         {
             const string finalUrl = "http://firma.com";
             sut = new Application.Organization.Organization(Guid.NewGuid(), 1, ValidBusinessId, Oid, Type, null,
-                CreateLocalizedTextsWithOneText(ValidLanguageCode, "firma"), new List<string> { ValidLanguageCode }, false);
+                CreateLocalizedTextsWithOneText(ValidLanguageCode, "firma"), new List<string> { ValidLanguageCode }, false, false);
 
             sut.HomepageUrls = new LocalizedSingleTexts(new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "http://firma.fi") });
             sut.HomepageUrls = new LocalizedSingleTexts(new List<LocalizedText> { new LocalizedText(ValidLanguageCode, finalUrl) });
@@ -179,7 +178,7 @@ namespace OrganizationRegister.Application.Tests.Organization
         {
             const string finalQualifier = "Portaiden päässä";
             sut = new Application.Organization.Organization(Guid.NewGuid(), 1, ValidBusinessId, Oid, Type, null, CreateLocalizedTextsWithOneText(ValidLanguageCode, "Affecto"),
-                new List<string> { ValidLanguageCode }, false);
+                new List<string> { ValidLanguageCode }, false, false);
 
             sut.VisitingAddressQualifiers = new LocalizedSingleTexts(new List<LocalizedText> { new LocalizedText(ValidLanguageCode, "Kellarissa") });
             sut.VisitingAddressQualifiers = new LocalizedSingleTexts(new List<LocalizedText> { new LocalizedText(ValidLanguageCode, finalQualifier) });
@@ -504,7 +503,7 @@ namespace OrganizationRegister.Application.Tests.Organization
         private static Application.Organization.Organization CreateSut()
         {
             return new Application.Organization.Organization(Guid.NewGuid(), 1, ValidBusinessId, Oid, Type, null, 
-                CreateLocalizedTextsWithOneText(ValidLanguageCode, "Affecto"), new List<string> { ValidLanguageCode }, false);
+                CreateLocalizedTextsWithOneText(ValidLanguageCode, "Affecto"), new List<string> { ValidLanguageCode }, false, false);
         }
 
         private static LocalizedSingleTexts CreateLocalizedTextsWithOneText(string languageCode, string text)

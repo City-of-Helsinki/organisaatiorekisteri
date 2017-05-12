@@ -31,5 +31,6 @@ namespace OrganizationRegister.Api.Organization
         public IEnumerable<LocalizedText> HomepageUrls { get; set; }
         public IEnumerable<LocalizedText> NameAbbreviations { get; set; }
         public bool CanBeTransferredToFsc { get; set; }
+        public bool CanBeResponsibleDeptForService { get; set; }
     }
 }

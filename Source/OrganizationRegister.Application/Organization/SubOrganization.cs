@@ -8,14 +8,14 @@ namespace OrganizationRegister.Application.Organization
     internal class SubOrganization : Organization
     {
         public SubOrganization(Guid id, long numericId, string businessId, string oid, string type, int? municipalityCode, IEnumerable<LocalizedText> names,
-            IEnumerable<string> languageCodes, bool canBeTransferredToFsc)
-            : base(id, numericId, businessId, oid, type, municipalityCode, names, languageCodes, canBeTransferredToFsc)
+            IEnumerable<string> languageCodes, bool canBeTransferredToFsc, bool canBeResponsibleDeptForService)
+            : base(id, numericId, businessId, oid, type, municipalityCode, names, languageCodes, canBeTransferredToFsc, canBeResponsibleDeptForService)
         {
         }
 
         public SubOrganization(Guid id, string businessId, string oid, string type, string municipalityCode, IEnumerable<LocalizedText> names, 
-            IEnumerable<string> languageCodes, bool canBeTransferredToFsc)
-            : base(id, businessId, oid, type, municipalityCode, names, languageCodes, canBeTransferredToFsc)
+            IEnumerable<string> languageCodes, bool canBeTransferredToFsc, bool canBeResponsibleDeptForService)
+            : base(id, businessId, oid, type, municipalityCode, names, languageCodes, canBeTransferredToFsc, canBeResponsibleDeptForService)
         {
         }
 

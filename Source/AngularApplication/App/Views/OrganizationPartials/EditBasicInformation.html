@@ -3,7 +3,7 @@
 
 <div class="row">
     
-    <div class="col-xs-4">
+    <div class="col-xs-5">
         <label>
             Organisaatiotyyppi*
             <affecto-help-popup paragraphs='["Valitse valikosta organisaatiotyyppi, jota organisaatiosi edustaa. Mikäli valitset organisaatiotyypiksi \"Kunta\", tulee sinun syöttää erilliseen kenttään myös kuntasi kuntanumero."]'/>
@@ -23,7 +23,7 @@
        
     </div>
 
-    <div class="col-xs-2" id="organizationTypeDiv" style="margin-top:3px"  data-ng-show="controller.model.isMunicipality()"> 
+    <div class="col-xs-2 col-xs-offset-1" id="organizationTypeDiv"  data-ng-show="controller.model.isMunicipality()"> 
         <label class="mandatory-field">Kunnan numero</label>
         <input id="organizationMunicipalityCode" type="number" class="form-control" name="municipalityCode" maxlength="3" min="1" placeholder="Kuntanumero"
                data-ng-model="controller.model.municipalityCode" data-ng-required="controller.model.isMunicipality()"/>
@@ -33,11 +33,7 @@
     </div>
     
     
-    <div class="col-xs-4" style="margin-top:3px"> 
-        <label>Tiedot voidaan viedä palvelutietovarantoon (PTV)</label>
-        <input id="canBeTransferredToFsc" type="checkbox" class="form-control" name="canBeTransferredToFsc" 
-               data-ng-model="controller.model.canBeTransferredToFsc" />
-    </div>
+   
 
 </div>
 
@@ -84,7 +80,6 @@
 
 
 <div class="row">
-
     <div class="col-xs-3">
         <label>
             Voimassaolo alkaa
@@ -104,7 +99,6 @@
                data-uib-datepicker-popup="dd.MM.yyyy" data-is-open="controller.isValidToCalendarShown" data-show-button-bar="false"
                data-datepicker-options="{'startingDay': 1, 'formatDayTitle': 'MM yyyy'}" data-ng-click="controller.showValidToCalendar()" />
     </div>
-    
     <div class="col-xs-3 col-xs-offset-2" style="margin-top:-4px">
         <label>
             OID
@@ -112,7 +106,25 @@
         </label>
         <input id="organizationOid" type="text" class="form-control" maxlength="100" data-ng-model="controller.model.oid" />
     </div>
+</div>
 
+
+<div class="row">
+    <div class="col-xs-12">
+        <label>
+            Näkyvyys tietojärjestelmissä
+        </label>
+        <ul>
+            <li>
+                <input id="canBeTransferredToFsc" type="checkbox" class="form-control" name="canBeTransferredToFsc"
+                       data-ng-model="controller.model.canBeTransferredToFsc"/> Organisaatioyksikön toimipisteiden tiedot saa viedä kansalliseen palvelutietovarantoon (PTV)
+            </li>
+            <li data-ng-show="controller.model.isMunincipalSubOrganization()">
+                <input id="canBeResponsibleDeptForService" type="checkbox" class="form-control" name="canBeResponsibleDeptForService"
+                       data-ng-model="controller.model.canBeResponsibleDeptForService" /> Organisaatioyksikkö voi olla palvelurekisterissä vastuuyksikkö
+            </li>
+        </ul>
+    </div>
 </div>
 
 

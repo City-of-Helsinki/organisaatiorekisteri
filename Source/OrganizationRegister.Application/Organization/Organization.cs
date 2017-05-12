@@ -23,13 +23,13 @@ namespace OrganizationRegister.Application.Organization
         protected BusinessIdentifier businessId;
         
         public Organization(Guid id, long numericId, string businessId, string oid, string type, int? municipalityCode, IEnumerable<LocalizedText> names,
-            IEnumerable<string> languageCodes, bool canBeTransferredToFsc)
-            : this(id, businessId, oid, type, municipalityCode.HasValue ? municipalityCode.Value.ToString(CultureInfo.InvariantCulture) : null, names, languageCodes, canBeTransferredToFsc)
+            IEnumerable<string> languageCodes, bool canBeTransferredToFsc, bool canBeResponsibleDeptForService)
+            : this(id, businessId, oid, type, municipalityCode.HasValue ? municipalityCode.Value.ToString(CultureInfo.InvariantCulture) : null, names, languageCodes, canBeTransferredToFsc, canBeResponsibleDeptForService)
         {
             NumericId = numericId;
         }
 
-        public Organization(Guid id, string businessId, string oid, string type, string municipalityCode, IEnumerable<LocalizedText> names, IEnumerable<string> languageCodes, bool canBeTransferredToFsc)
+        public Organization(Guid id, string businessId, string oid, string type, string municipalityCode, IEnumerable<LocalizedText> names, IEnumerable<string> languageCodes, bool canBeTransferredToFsc, bool canBeResponsibleDeptForService)
         {
             if (id == Guid.Empty)
             {
@@ -42,15 +42,15 @@ namespace OrganizationRegister.Application.Organization
           
             Oid = oid;
             webPages = new WebPages();
-
             CanBeTransferredToFsc = canBeTransferredToFsc;
-            
+            CanBeResponsibleDeptForService = canBeResponsibleDeptForService;
             localizedTextsContainer = new LocalizedTextsContainer(this.languageCodes);
             Names = names;
           
             Type = type;
             SetMunicipalityCode(municipalityCode);
             ValidateType();
+            ValidateCanBeResponsibleDeptForService();
 
             postalAddresses = new PostalAddresses(this.languageCodes);
         }
@@ -73,6 +73,8 @@ namespace OrganizationRegister.Application.Organization
 
 
         public bool CanBeTransferredToFsc { get; set; }
+
+        public bool CanBeResponsibleDeptForService { get; set; }
 
         public IEnumerable<WebPage> WebPages
         {
@@ -236,6 +238,13 @@ namespace OrganizationRegister.Application.Organization
             ValidateType();
         }
 
+        public void SetCanBeResponsibleDeptForService(bool newCanBeResponsibleDeptForService)
+        {
+            CanBeResponsibleDeptForService = newCanBeResponsibleDeptForService;
+
+            ValidateCanBeResponsibleDeptForService();
+        }
+
         public void SetCallInformation(string newPhoneNumber, string newCallChargeType, IEnumerable<LocalizedText> newCallChargeinfos)
         {
             phoneNumber = null;
@@ -308,6 +317,25 @@ namespace OrganizationRegister.Application.Organization
             {
                 throw new ArgumentException("Municipality organization must have municipality code.");
             }
+        }
+
+        private void ValidateCanBeResponsibleDeptForService()
+        {
+           
+            if (CanBeResponsibleDeptForService && !IsSubOrganization)
+            {
+                throw new ArgumentException("Only sub organizations can be marked as responsible dept for service");
+            }
+
+
+            if (CanBeResponsibleDeptForService && Type != OrganizationType.Municipality 
+                                                && Type != OrganizationType.MunicipalEnterpriseGroup 
+                                                && Type != OrganizationType.MunicipallyOwnedCompany)
+            {
+                throw new ArgumentException($"Organization with type:{Type} can't be marked as responsible dept for service");
+            }
+
+           
         }
     }
 }

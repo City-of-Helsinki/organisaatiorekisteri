@@ -51,7 +51,8 @@ module OrganizationRegister
             public homepageUrls?: Array<LocalizedText>,
             public nameAbbreviations?: Array<LocalizedText>,
             public isSubOrganization?: boolean,
-            public canBeTransferredToFsc?: boolean)
+            public canBeTransferredToFsc?: boolean,
+            public canBeResponsibleDeptForService?: boolean)
         {
             this.initializeLocalizedNames(names);
             this.initializeLocalizedNameAbbreviations(nameAbbreviations);
@@ -278,20 +279,30 @@ module OrganizationRegister
 
         public isMunicipality(): boolean
         {
+            // TODO: make value configurable
             return this.type === "Kunta";
         }
 
-        public get typeProperty(): string
+        public isMunincipalSubOrganization(): boolean
         {
+            // TODO: make values configurable
+            return (this.type === "Kunta" ||
+                    this.type === "Kunnan liikelaitos" ||
+                    this.type === "Kunnan konserniyhteisö") && this.isSubOrganization;
+        }
+
+        public get typeProperty(): string {
             return this.type;
         }
 
-        public set typeProperty(value: string)
-        {
+        public set typeProperty(value: string) {
             this.type = value;
-            if (!this.isMunicipality())
-            {
+            if (!this.isMunicipality()) {
                 this.municipalityCode = null;
+            }
+
+            if (!this.isMunincipalSubOrganization()) {
+                this.canBeResponsibleDeptForService = false;
             }
         }
 

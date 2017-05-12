@@ -7,9 +7,9 @@ namespace OrganizationRegister.Application.Organization
     public interface IOrganizationService
     {
         Guid AddOrganization(string businessId, string oid, string type, string municipalityCode, IEnumerable<LocalizedText> names, IEnumerable<LocalizedText> descriptions, 
-            DateTime? validFrom, DateTime? validTo, IEnumerable<LocalizedText> nameAbbreviations, bool canBeTransferredToFsc);
+            DateTime? validFrom, DateTime? validTo, IEnumerable<LocalizedText> nameAbbreviations, bool canBeTransferredToFsc, bool canBeResponsibleDeptForService);
         Guid AddSubOrganization(Guid parentOrganizationId, string businessId, string oid, string type, string municipalityCode, IEnumerable<LocalizedText> names, 
-            IEnumerable<LocalizedText> descriptions, DateTime? validFrom, DateTime? validTo, IEnumerable<LocalizedText> nameAbbreviations, bool canBeTransferredToFsc);
+            IEnumerable<LocalizedText> descriptions, DateTime? validFrom, DateTime? validTo, IEnumerable<LocalizedText> nameAbbreviations, bool canBeTransferredToFsc, bool canBeResponsibleDeptForService);
         IEnumerable<IHierarchicalOrganization> GetOrganizationHierarchy();
         IEnumerable<IHierarchicalOrganization> GetOrganizationHierarchy(bool includeFutureOrganizations);
         IEnumerable<IOrganizationName> GetOrganizations();
@@ -19,7 +19,7 @@ namespace OrganizationRegister.Application.Organization
         IEnumerable<IOrganizationName> GetMainOrganizationsNames();
         IOrganization GetOrganization(Guid organizationId);
         void SetOrganizationBasicInformation(Guid organizationId, string businessId, string oid, IEnumerable<LocalizedText> names, IEnumerable<LocalizedText> descriptions, 
-            string type, string municipalityCode, DateTime? validFrom, DateTime? validTo, IEnumerable<LocalizedText> nameAbbreviations, bool canBeTransferredToFsc);
+            string type, string municipalityCode, DateTime? validFrom, DateTime? validTo, IEnumerable<LocalizedText> nameAbbreviations, bool canBeTransferredToFsc, bool canBeResponsibleDeptForService);
         //void SetOrganizationContactInformation(Guid organizationId, string phoneNumber, string phoneCallFee, string emailAddress, IEnumerable<WebPage> webSites, IEnumerable<LocalizedText> homepgeUrls);
 
         void SetOrganizationContactInformation(Guid organizationId, string phoneNumber, string callChargeType, IEnumerable<LocalizedText> callChargeInfos,

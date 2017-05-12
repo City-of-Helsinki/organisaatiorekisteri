@@ -21,7 +21,7 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
 
             Try(() => OrganizationService.AddOrganization(municipality["Business id"], municipality.GetOptionalValue("Oid"), OrganizationType.Municipality,
                 municipality["Municipality code"], LocalizedTextHelper.CreateNamesCollection(municipality), LocalizedTextHelper.CreateDescriptionsCollection(municipality), 
-                municipality.GetOptionalFinnishDate("Valid from"), municipality.GetOptionalFinnishDate("Valid to"), LocalizedTextHelper.CreateNameAbbreviationsCollection(municipality), bool.Parse(municipality["Can be added to FSC"])));
+                municipality.GetOptionalFinnishDate("Valid from"), municipality.GetOptionalFinnishDate("Valid to"), LocalizedTextHelper.CreateNameAbbreviationsCollection(municipality), bool.Parse(municipality["Can be added to FSC"]), bool.Parse(municipality["Can Be Responsible Dept For Service"])));
         }
 
         [Then(@"there are following organizations:")]
@@ -61,7 +61,7 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
                 
             Try(() => OrganizationService.AddSubOrganization(parentOrganizationId, company["Business id"], company.GetOptionalValue("Oid"), company["Type"], null,
                 LocalizedTextHelper.CreateNamesCollection(company), LocalizedTextHelper.CreateDescriptionsCollection(company), company.GetOptionalFinnishDate("Valid from"),
-                company.GetOptionalFinnishDate("Valid to"), LocalizedTextHelper.CreateNameAbbreviationsCollection(company), false));
+                company.GetOptionalFinnishDate("Valid to"), LocalizedTextHelper.CreateNameAbbreviationsCollection(company), false, false));
         }
 
         [Then(@"'(.+)' is a sub organization of '(.+)'")]

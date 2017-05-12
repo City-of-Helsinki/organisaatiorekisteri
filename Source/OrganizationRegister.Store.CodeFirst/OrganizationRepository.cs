@@ -190,7 +190,7 @@ namespace OrganizationRegister.Store.CodeFirst
                 dbOrganization.GetPostalPostOfficeBoxAddressPostOfficeBox(), dbOrganization.GetPostalPostOfficeBoxAddressPostalCode(),
                 CreatePostalPostOfficeBoxAddressLocalities(postalAddresses), dbOrganization.UseStreetAddressAsPostalAddress,
                 dbOrganization.ParentOrganizationId.HasValue,
-                settingsRepository.GetDataLanguageCodes(), dbOrganization.GetHomepageUrls(), dbOrganization.GetNameAbbreviations(), dbOrganization.CanBeTransferredToFsc);
+                settingsRepository.GetDataLanguageCodes(), dbOrganization.GetHomepageUrls(), dbOrganization.GetNameAbbreviations(), dbOrganization.CanBeTransferredToFsc, dbOrganization.CanBeResponsibleDeptForService);
         }
 
         public IOrganizationName GetOrganizationName(Guid id)
@@ -392,7 +392,7 @@ namespace OrganizationRegister.Store.CodeFirst
             foreach (Organization dbOrganization in dbOrganizations)
             {
                 organizations.Add(OrganizationFactory.CreateOrganizationListItem(dbOrganization.Id, dbOrganization.GetNames(), dbOrganization.Type.Name,
-                    dbOrganization.CanBeTransferredToFsc));
+                    dbOrganization.CanBeTransferredToFsc, dbOrganization.CanBeResponsibleDeptForService));
             }
             return organizations;
         }

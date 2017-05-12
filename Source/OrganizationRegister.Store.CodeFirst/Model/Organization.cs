@@ -34,6 +34,8 @@ namespace OrganizationRegister.Store.CodeFirst.Model
         public bool Active { get; set; }
         public bool? StreetAddressAsPostalAddress { get; set; }
         public bool CanBeTransferredToFsc { get; set; }
+        public bool CanBeResponsibleDeptForService { get; set; }
+
         public virtual ICollection<OrganizationLanguageSpecification> LanguageSpecifications { get; set; }
       
         public virtual Organization ParentOrganization { get; set; }
@@ -293,8 +295,11 @@ namespace OrganizationRegister.Store.CodeFirst.Model
             ValidFrom = information.ValidFrom;
             ValidTo = information.ValidTo;
             CanBeTransferredToFsc = information.CanBeTransferredToFsc;
+            CanBeResponsibleDeptForService = information.CanBeResponsibleDeptForService;
 
             SetLocalizedTexts(information, context);
+
+           
 
             //RemoveAllLanguageSpecificData();
 
