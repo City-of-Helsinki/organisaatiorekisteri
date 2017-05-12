@@ -7,8 +7,7 @@
     <authors>Affecto</authors>
     <version>$version$</version>
     <releaseNotes>
-      New api method GetOrganizationListForMunicipality added
-      Unused api method GetOrganizationForMunicipality removed
+      "Can Be Responsible Dept For Service" field added to organizations basic information.
     </releaseNotes>
   </metadata>
 </package>
