@@ -7,8 +7,7 @@
     <authors>Affecto</authors>
     <version>$version$</version>
     <releaseNotes>
-      Organization tree layout fixes.
-      Ask confirmation before deleting organization.
+      "Can Be Responsible Dept For Service" field added to organizations basic information.
     </releaseNotes>
   </metadata>
 </package>
