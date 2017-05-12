@@ -47,6 +47,52 @@ describe("Organization", () =>
         });
     });
 
+    describe("munincipal sub organization", () => {
+
+        it("is munincipal sub organization when type is munincipal and is a sub organization", () => {
+            
+            sut.isSubOrganization = true;
+
+            sut.type = "Kunta";
+            expect(sut.isMunincipalSubOrganization()).toBeTruthy();
+
+            sut.type = "Kunnan liikelaitos";
+            expect(sut.isMunincipalSubOrganization()).toBeTruthy();
+ 
+            sut.type = "Kunnan konserniyhteisö";
+            expect(sut.isMunincipalSubOrganization()).toBeTruthy();
+        });
+
+        it("is not munincipal sub organization when type is not munincipal", () => {
+
+            sut.isSubOrganization = true;
+
+            sut.type = "Yritys";
+            expect(sut.isMunincipalSubOrganization()).toBeFalsy();
+        });
+
+        it("is not munincipal sub organization when  is not a sub organization", () => {
+
+            sut.isSubOrganization = false;
+
+            sut.type = "Kunta";
+            expect(sut.isMunincipalSubOrganization()).toBeFalsy();
+        });
+    });
+
+    describe("can be responsible dept for service", () => {
+
+        it("changing sub organization type (property) to non munincipal sets canBeResponsibleDeptForService to false", () => {
+
+            sut.isSubOrganization = true;
+            sut.type = "Kunta";
+            sut.canBeResponsibleDeptForService = true;
+
+            sut.typeProperty = "Yritys";
+            expect(sut.canBeResponsibleDeptForService).toBeFalsy();
+        });
+    });
+
     describe("business id", () =>
     {
         it("has no business id when business id is null", () =>

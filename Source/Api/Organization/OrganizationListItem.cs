@@ -10,5 +10,6 @@ namespace OrganizationRegister.Api.Organization
         public IEnumerable<LocalizedText> Names { get; set; }
         public string Type { get; set; }
         public bool CanBeTransferredToFsc { get; set; }
+        public bool CanBeResponsibleDeptForService { get; set; }
     }
 }

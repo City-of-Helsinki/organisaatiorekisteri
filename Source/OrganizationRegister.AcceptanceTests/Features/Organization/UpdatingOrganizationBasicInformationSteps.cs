@@ -17,7 +17,7 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
         {
             TableRow info = basicInformation.Rows.Single();
             OrganizationService.AddOrganization(info["Business id"], info.GetOptionalValue("Oid"), "Yritys", null, LocalizedTextHelper.CreateNamesCollection(info), null,
-                info.GetOptionalFinnishDate("Valid from"), info.GetOptionalFinnishDate("Valid to"), LocalizedTextHelper.CreateNameAbbreviationsCollection(info), bool.Parse(info["Can be added to FSC"]));
+                info.GetOptionalFinnishDate("Valid from"), info.GetOptionalFinnishDate("Valid to"), LocalizedTextHelper.CreateNameAbbreviationsCollection(info), bool.Parse(info["Can be added to FSC"]), bool.Parse(info["Can Be Responsible Dept For Service"]));
         }
 
         [When(@"the following basic information is set to the previously added organization:")]
@@ -28,7 +28,7 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
             TableRow info = basicInformation.Rows.Single();
             Try(() => OrganizationService.SetOrganizationBasicInformation(CurrentScenarioContext.OrganizationId, info["Business id"], info.GetOptionalValue("Oid"), 
                 LocalizedTextHelper.CreateNamesCollection(info), LocalizedTextHelper.CreateDescriptionsCollection(info), info["Type"], info.GetOptionalValue("Municipality code"),
-                info.GetOptionalFinnishDate("Valid from"), info.GetOptionalFinnishDate("Valid to"), LocalizedTextHelper.CreateNameAbbreviationsCollection(info), bool.Parse(info["Can be added to FSC"])));
+                info.GetOptionalFinnishDate("Valid from"), info.GetOptionalFinnishDate("Valid to"), LocalizedTextHelper.CreateNameAbbreviationsCollection(info), bool.Parse(info["Can be added to FSC"]), bool.Parse(info["Can Be Responsible Dept For Service"])));
         }
 
         [Then(@"the organization has the following basic information:")]
@@ -51,7 +51,7 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
             IHierarchicalOrganization parent = OrganizationHelper.GetOrganization(OrganizationService.GetOrganizationHierarchy().ToList(), parentOrganizationName);
             OrganizationService.AddSubOrganization(parent.Id, info["Business id"], info.GetOptionalValue("Oid"), "Yritys", null,
                 LocalizedTextHelper.CreateNamesCollection(info), LocalizedTextHelper.CreateDescriptionsCollection(info), info.GetOptionalFinnishDate("Valid from"),
-                info.GetOptionalFinnishDate("Valid to"), null, false);
+                info.GetOptionalFinnishDate("Valid to"), null, false, false);
         }
 
         [When(@"the following basic information is set to organization '(.+)':")]
@@ -61,7 +61,7 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
             IOrganizationName organization = OrganizationService.GetOrganizations().Single(o => o.Names.Any(name => name.LocalizedValue.Equals(organizationName)));
             Try(() => OrganizationService.SetOrganizationBasicInformation(organization.Id, info["Business id"], info.GetOptionalValue("Oid"),
                 LocalizedTextHelper.CreateNamesCollection(info), LocalizedTextHelper.CreateDescriptionsCollection(info), info["Type"],
-                info.GetOptionalValue("Municipality code"), info.GetOptionalFinnishDate("Valid from"), info.GetOptionalFinnishDate("Valid to"),null, bool.Parse(info["Can be added to FSC"])));
+                info.GetOptionalValue("Municipality code"), info.GetOptionalFinnishDate("Valid from"), info.GetOptionalFinnishDate("Valid to"),null, bool.Parse(info["Can be added to FSC"]), bool.Parse(info["Can Be Responsible Dept For Service"])));
         }
 
         [Then(@"the organization '(.+)' has the following basic information:")]

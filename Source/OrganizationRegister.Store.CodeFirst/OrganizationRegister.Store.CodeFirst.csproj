@@ -94,6 +94,10 @@
     <Compile Include="Migrations\201703211449501_AddCanBeTransferredToFsc.Designer.cs">
       <DependentUpon>201703211449501_AddCanBeTransferredToFsc.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705091307344_AddCanBeResponsibleDeptForService.cs" />
+    <Compile Include="Migrations\201705091307344_AddCanBeResponsibleDeptForService.Designer.cs">
+      <DependentUpon>201705091307344_AddCanBeResponsibleDeptForService.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\OrganizationRegisterDbMigration.cs" />
     <Compile Include="Model\Address.cs" />
@@ -177,6 +181,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703211449501_AddCanBeTransferredToFsc.resx">
       <DependentUpon>201703211449501_AddCanBeTransferredToFsc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705091307344_AddCanBeResponsibleDeptForService.resx">
+      <DependentUpon>201705091307344_AddCanBeResponsibleDeptForService.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

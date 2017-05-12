@@ -12,10 +12,10 @@ namespace OrganizationRegister.Application.Organization
             IEnumerable<LocalizedText> visitingAddressQualifier, IEnumerable<LocalizedText> postalStreetAddresses, string postalStreetAddressPostalCode, 
             IEnumerable<LocalizedText> postalStreetAddressLocalities, string postalAddressPostOfficeBox, string postalPostOfficeBoxAddressPostalCode,
             IEnumerable<LocalizedText> postalPostOfficeBoxAddressLocalities, bool useVisitingAddressAsPostalAddress, bool isSubOrganization, IEnumerable<string> languageCodes, 
-            IEnumerable<LocalizedText> homepageUrls, IEnumerable<LocalizedText> nameAbbreviations, bool canBeTransferredToFsc)
+            IEnumerable<LocalizedText> homepageUrls, IEnumerable<LocalizedText> nameAbbreviations, bool canBeTransferredToFsc, bool canBeResponsibleDeptForService)
         {
-            Organization organization = isSubOrganization ? new SubOrganization(id, numericId, businessId, oid, type, municipalityCode, names, languageCodes, canBeTransferredToFsc) :
-                new Organization(id, numericId, businessId, oid, type, municipalityCode, names, languageCodes, canBeTransferredToFsc);
+            Organization organization = isSubOrganization ? new SubOrganization(id, numericId, businessId, oid, type, municipalityCode, names, languageCodes, canBeTransferredToFsc, canBeResponsibleDeptForService) :
+                new Organization(id, numericId, businessId, oid, type, municipalityCode, names, languageCodes, canBeTransferredToFsc, canBeResponsibleDeptForService);
             organization.Descriptions = descriptions;
             organization.SetValidity(validFrom, validTo);
             organization.EmailAddress = emailAddress;
@@ -40,9 +40,9 @@ namespace OrganizationRegister.Application.Organization
             return new OrganizationName(id, names);
         }
 
-        public static IOrganizationListItem CreateOrganizationListItem(Guid id, IEnumerable<LocalizedText> names, string type, bool canBeTransferredToFsc)
+        public static IOrganizationListItem CreateOrganizationListItem(Guid id, IEnumerable<LocalizedText> names, string type, bool canBeTransferredToFsc, bool canBeResponsibleDeptForService)
         {
-            return new OrganizationListItem(id, names, type, canBeTransferredToFsc);
+            return new OrganizationListItem(id, names, type, canBeTransferredToFsc, canBeResponsibleDeptForService);
         }
     }
 }

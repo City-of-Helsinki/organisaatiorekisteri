@@ -8,6 +8,8 @@ namespace OrganizationRegister.Application.Organization
         string Type { get; }
 
         bool CanBeTransferredToFsc { get; }
-       
+
+        bool CanBeResponsibleDeptForService { get; }
+
     }
 }

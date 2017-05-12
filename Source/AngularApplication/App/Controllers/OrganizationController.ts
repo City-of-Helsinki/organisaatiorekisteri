@@ -179,6 +179,8 @@ module OrganizationRegister
             return this.parentOrganizationId != null || (this.model != null && this.model.isSubOrganization);
         }
 
+       
+
         public canAddingBeCancelled(): boolean
         {
             return this.model == null || !this.model.isAdded();

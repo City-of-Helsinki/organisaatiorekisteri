@@ -2,7 +2,7 @@
     <strong>ID:</strong> {{ controller.model.numericId }}
 </div>
 <div class="row">
-    <div class="col-xs-4">
+    <div class="col-xs-5">
         <label>Organisaatiotyyppi</label>
         {{ controller.model.type }}
     </div>
@@ -15,14 +15,11 @@
         {{ controller.model.municipalityCode }}
     </div>
     
-    <div class="col-xs-4">
-        <label>Tiedot voidaan viedä palvelutietovarantoon (PTV)</label>
-        {{ controller.model.canBeTransferredToFsc ? "Kyllä" : "Ei"}}
-    </div>
+   
 
 </div>
 <div class="row">
-    <div class="col-xs-6">
+    <div class="col-xs-7">
         <label>Nimi</label>
         
         <div data-ng-repeat="name in controller.model.names">
@@ -32,7 +29,7 @@
         </div>
     </div>
 
-    <div class="col-xs-6">
+    <div class="col-xs-5">
         <label>Nimen lyhenne</label>
 
         <div data-ng-repeat="abbreviation in controller.model.nameAbbreviations">
@@ -60,16 +57,33 @@
         <label>Voimassaolo alkaa</label>
         <span>{{ controller.model.validFromText }}</span>
     </div>
-    <div class="col-xs-3">
+    <div class="col-xs-4">
         <label>Voimassaolo päättyy</label>
         {{ controller.model.validToText }}
     </div>
-    
-    <div class="col-xs-3 col-xs-offset-2">
+    <div class="col-xs-3 ">
         <label>OID</label>
         {{ controller.model.oid }}
     </div>
+</div>
 
+
+<div class="row">
+    <div class="col-xs-12">
+        <label>
+            Näkyvyys tietojärjestelmissä
+        </label>
+        <ul>
+            <li>
+                Tiedot voidaan viedä palvelutietovarantoon (PTV):
+                {{ controller.model.canBeTransferredToFsc ? "Kyllä" : "Ei"}}
+            </li>
+            <li data-ng-show="controller.model.isMunincipalSubOrganization()">
+                Organisaatioyksikkö voi olla palvelurekisterissä vastuuyksikkö:
+                {{ controller.model.canBeResponsibleDeptForService ? "Kyllä" : "Ei"}}
+            </li>
+        </ul>
+    </div>
 </div>
 
 <div class="row">

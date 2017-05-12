@@ -34,7 +34,7 @@ namespace OrganizationRegister.Api.Organization
             }
 
             Guid organizationId = organizationService.AddOrganization(organization.BusinessId, organization.Oid, organization.Type, organization.MunicipalityCode,
-                organization.Names, organization.Descriptions, organization.ValidFrom, organization.ValidTo, organization.NameAbbreviations, organization.CanBeTransferredToFsc);
+                organization.Names, organization.Descriptions, organization.ValidFrom, organization.ValidTo, organization.NameAbbreviations, organization.CanBeTransferredToFsc, organization.CanBeResponsibleDeptForService);
             return Ok(organizationId);
         }
 
@@ -48,7 +48,7 @@ namespace OrganizationRegister.Api.Organization
             }
 
             Guid subOrganizationId = organizationService.AddSubOrganization(parentOrganizationId, organization.BusinessId, organization.Oid, organization.Type, 
-                organization.MunicipalityCode, organization.Names, organization.Descriptions, organization.ValidFrom, organization.ValidTo, organization.NameAbbreviations, organization.CanBeTransferredToFsc);
+                organization.MunicipalityCode, organization.Names, organization.Descriptions, organization.ValidFrom, organization.ValidTo, organization.NameAbbreviations, organization.CanBeTransferredToFsc, organization.CanBeResponsibleDeptForService);
             return Ok(subOrganizationId);
         }
 
@@ -61,7 +61,7 @@ namespace OrganizationRegister.Api.Organization
                 throw new ArgumentNullException("information");
             }
             organizationService.SetOrganizationBasicInformation(organizationId, information.BusinessId, information.Oid, information.Names, information.Descriptions, 
-                information.Type, information.MunicipalityCode, information.ValidFrom, information.ValidTo, information.NameAbbreviations, information.CanBeTransferredToFsc);
+                information.Type, information.MunicipalityCode, information.ValidFrom, information.ValidTo, information.NameAbbreviations, information.CanBeTransferredToFsc, information.CanBeResponsibleDeptForService);
             return Ok();
         }
 

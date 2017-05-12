@@ -89,7 +89,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Valid to",
                         "Finnish name abbreviation",
                         "Swedish name abbreviation",
-                        "Can be added to FSC"});
+                        "Can be added to FSC",
+                        "Can Be Responsible Dept For Service"});
             table1.AddRow(new string[] {
                         "1234567-1",
                         "123456",
@@ -102,6 +103,7 @@ this.ScenarioSetup(scenarioInfo);
                         "01.01.2016",
                         "AFE",
                         "AFEsv",
+                        "false",
                         "false"});
 #line 4
  testRunner.When("the following company is added:", ((string)(null)), table1, "When ");
@@ -118,7 +120,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Valid to",
                         "Finnish name abbreviation",
                         "Swedish name abbreviation",
-                        "Can be added to FSC"});
+                        "Can be added to FSC",
+                        "Can Be Responsible Dept For Service"});
             table2.AddRow(new string[] {
                         "1234567-1",
                         "123456",
@@ -131,6 +134,7 @@ this.ScenarioSetup(scenarioInfo);
                         "01.01.2016",
                         "AFE",
                         "AFEsv",
+                        "false",
                         "false"});
 #line 7
  testRunner.Then("there are following organizations:", ((string)(null)), table2, "Then ");
@@ -155,7 +159,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Swedish name",
                         "Municipality code",
                         "Valid from",
-                        "Can be added to FSC"});
+                        "Can be added to FSC",
+                        "Can Be Responsible Dept For Service"});
             table3.AddRow(new string[] {
                         "1234567-1",
                         "123456",
@@ -164,7 +169,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Åbo",
                         "853",
                         "01.02.2014",
-                        "true"});
+                        "true",
+                        "false"});
 #line 13
  testRunner.When("the following municipality is added:", ((string)(null)), table3, "When ");
 #line hidden
@@ -176,7 +182,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Swedish name",
                         "Municipality code",
                         "Valid from",
-                        "Can be added to FSC"});
+                        "Can be added to FSC",
+                        "Can Be Responsible Dept For Service"});
             table4.AddRow(new string[] {
                         "1069622-4",
                         "",
@@ -185,6 +192,7 @@ this.ScenarioSetup(scenarioInfo);
                         "St. Karins",
                         "202",
                         "01.03.2014",
+                        "false",
                         "false"});
 #line 16
  testRunner.And("the following municipality is added:", ((string)(null)), table4, "And ");
@@ -197,7 +205,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Swedish name",
                         "Municipality code",
                         "Valid from",
-                        "Can be added to FSC"});
+                        "Can be added to FSC",
+                        "Can Be Responsible Dept For Service"});
             table5.AddRow(new string[] {
                         "1234567-1",
                         "123456",
@@ -206,7 +215,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Åbo",
                         "853",
                         "01.02.2014",
-                        "true"});
+                        "true",
+                        "false"});
             table5.AddRow(new string[] {
                         "1069622-4",
                         "",
@@ -215,6 +225,7 @@ this.ScenarioSetup(scenarioInfo);
                         "St. Karins",
                         "202",
                         "01.03.2014",
+                        "false",
                         "false"});
 #line 19
  testRunner.Then("there are following organizations:", ((string)(null)), table5, "Then ");
@@ -238,7 +249,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Finnish name",
                         "Swedish name",
                         "Municipality code",
-                        "Can be added to FSC"});
+                        "Can be added to FSC",
+                        "Can Be Responsible Dept For Service"});
             table6.AddRow(new string[] {
                         "1234567-12",
                         "123456",
@@ -246,7 +258,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Turku",
                         "Åbo",
                         "853",
-                        "true"});
+                        "true",
+                        "false"});
 #line 25
  testRunner.When("the following municipality is added:", ((string)(null)), table6, "When ");
 #line 28
@@ -274,7 +287,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Swedish description",
                         "Valid from",
                         "Valid to",
-                        "Can be added to FSC"});
+                        "Can be added to FSC",
+                        "Can Be Responsible Dept For Service"});
             table7.AddRow(new string[] {
                         "1234567-1",
                         "123456",
@@ -285,7 +299,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Programvara företaget",
                         "01.01.2017",
                         "01.01.2016",
-                        "true"});
+                        "true",
+                        "false"});
 #line 31
  testRunner.When("the following company is added:", ((string)(null)), table7, "When ");
 #line 34
@@ -311,7 +326,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Swedish name",
                         "Finnish description",
                         "Swedish description",
-                        "Can be added to FSC"});
+                        "Can be added to FSC",
+                        "Can Be Responsible Dept For Service"});
             table8.AddRow(new string[] {
                         "1234567-1",
                         "123456",
@@ -320,6 +336,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Affecto",
                         "Ohjelmistoyritys",
                         "Programvara företaget",
+                        "false",
                         "false"});
 #line 37
  testRunner.Given("the following company is added:", ((string)(null)), table8, "Given ");
@@ -331,7 +348,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Finnish name",
                         "Swedish name",
                         "Municipality code",
-                        "Can be added to FSC"});
+                        "Can be added to FSC",
+                        "Can Be Responsible Dept For Service"});
             table9.AddRow(new string[] {
                         "1234567-1",
                         "123456",
@@ -339,6 +357,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Turku",
                         "Åbo",
                         "853",
+                        "false",
                         "false"});
 #line 40
  testRunner.When("the following municipality is added:", ((string)(null)), table9, "When ");
@@ -364,7 +383,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Finnish name",
                         "Swedish name",
                         "Municipality code",
-                        "Can be added to FSC"});
+                        "Can be added to FSC",
+                        "Can Be Responsible Dept For Service"});
             table10.AddRow(new string[] {
                         "1234567-1",
                         "123456",
@@ -372,6 +392,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Turku",
                         "Åbo",
                         "8533",
+                        "true",
                         "true"});
 #line 48
  testRunner.When("the following municipality is added:", ((string)(null)), table10, "When ");
@@ -398,7 +419,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Swedish name",
                         "Finnish description",
                         "Swedish description",
-                        "Can be added to FSC"});
+                        "Can be added to FSC",
+                        "Can Be Responsible Dept For Service"});
             table11.AddRow(new string[] {
                         "1234567-1",
                         "123456",
@@ -407,6 +429,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Affecto",
                         "Ohjelmistoyritys",
                         "Programvara företaget",
+                        "false",
                         "false"});
 #line 54
  testRunner.Given("the following company is added:", ((string)(null)), table11, "Given ");
@@ -553,7 +576,8 @@ this.ScenarioSetup(scenarioInfo);
                         "Swedish name",
                         "Finnish description",
                         "Swedish description",
-                        "Can be added to FSC"});
+                        "Can be added to FSC",
+                        "Can Be Responsible Dept For Service"});
             table17.AddRow(new string[] {
                         "1234567-1",
                         "123456",
@@ -562,6 +586,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Affecto",
                         "Ohjelmistoyritys",
                         "Programvara företaget",
+                        "false",
                         "false"});
 #line 80
  testRunner.Given("the following company is added:", ((string)(null)), table17, "Given ");

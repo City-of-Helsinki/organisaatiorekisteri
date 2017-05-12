@@ -18,5 +18,6 @@ namespace OrganizationRegister.Application.Organization
         DateTime? ValidTo { get; }
 
         bool CanBeTransferredToFsc { get; set; }
+        bool CanBeResponsibleDeptForService { get; set; }
     }
 }
