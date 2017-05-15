@@ -943,9 +943,7 @@ module OrganizationRegister
 
         private createSubOrganization(parent: Organization): void
         {
-           
             this.parentOrganizationNames = parent.names;
-
             this.model = new Organization();
             this.model.type = parent.type;
             if (parent.isMunicipality())
@@ -957,6 +955,8 @@ module OrganizationRegister
             this.model.phoneCallChargeType = parent.phoneCallChargeType;
             this.model.phoneCallChargeInfos = parent.phoneCallChargeInfos;
             this.model.canBeTransferredToFsc = parent.canBeTransferredToFsc;
+            this.model.isSubOrganization = true;
+            this.model.canBeResponsibleDeptForService = false;
         }
 
         private initializeEditedSection($route: any): void
