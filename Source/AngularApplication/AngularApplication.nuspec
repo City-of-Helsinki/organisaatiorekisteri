@@ -7,7 +7,7 @@
     <authors>Affecto</authors>
     <version>$version$</version>
     <releaseNotes>
-      "Can Be Responsible Dept For Service" field added to organizations basic information.
+      Fix: "Can Be Responsible Dept For Service" is initialized when adding a new suborganization
     </releaseNotes>
   </metadata>
 </package>
