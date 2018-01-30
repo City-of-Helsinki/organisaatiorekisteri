@@ -35,7 +35,10 @@ namespace OrganizationRegister.Application.Organization
         IOrganizationName GetOrganizationName(Guid organizationId);
 
         IEnumerable<IHierarchicalOrganization> GetOrganizationsAsFlatlist(string searchTerm, Guid? organizationId);
-       
+
+        IEnumerable<IOrganizationListItem> GetGroupOrganizationsAsFlatlist(string groupIds);
+
+
         IEnumerable<IOrganizationListItem> GetOrganizationListForMunicipality(int rootMunicipalityCode);
     }
 }

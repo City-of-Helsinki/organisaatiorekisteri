@@ -23,7 +23,7 @@ namespace OrganizationRegister.Application.Organization
 
         IReadOnlyCollection<IOrganizationListItem> GetOrganizationListForOrganization(Guid organizationId);
 
-
+        IReadOnlyCollection<IOrganizationListItem> GetOrganizationListForGroup(Guid groupId);
 
         void SaveChanges();
         IOrganization GetOrganization(Guid id);
