@@ -40,9 +40,9 @@ namespace OrganizationRegister.Application.Organization
             return new OrganizationName(id, names);
         }
 
-        public static IOrganizationListItem CreateOrganizationListItem(Guid id, IEnumerable<LocalizedText> names, string type, bool canBeTransferredToFsc, bool canBeResponsibleDeptForService)
+        public static IOrganizationListItem CreateOrganizationListItem(Guid id, Guid? parentId, IEnumerable<LocalizedText> names, string type, bool canBeTransferredToFsc, bool canBeResponsibleDeptForService)
         {
-            return new OrganizationListItem(id, names, type, canBeTransferredToFsc, canBeResponsibleDeptForService);
+            return new OrganizationListItem(id, parentId, names, type, canBeTransferredToFsc, canBeResponsibleDeptForService);
         }
     }
 }

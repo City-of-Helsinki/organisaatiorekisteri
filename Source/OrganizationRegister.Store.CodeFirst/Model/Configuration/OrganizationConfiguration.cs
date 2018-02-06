@@ -43,6 +43,8 @@ namespace OrganizationRegister.Store.CodeFirst.Model.Configuration
                     conf.MapRightKey("webaddressid");
                     conf.ToTable("organization_webaddress");
                 });
+
+
         }
     }
 }

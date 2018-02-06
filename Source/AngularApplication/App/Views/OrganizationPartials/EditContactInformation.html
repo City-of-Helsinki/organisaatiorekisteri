@@ -24,7 +24,7 @@
 <div class="row">
    
     <div class="col-xs-6">
-        <label for="phoneCallChargeType">Puhelun hintatiedot </label>
+        <label for="phoneCallChargeType">Puhelun hintatieto </label>
         <ul>
             <li data-ng-repeat="type in controller.callChargeTypes track by $index">
                 <label>
@@ -40,7 +40,7 @@
     </div>
 
     <div class="col-xs-6">
-        <label for="phoneCallChargeInfos"> Puhelun hintatietojen selite <affecto-help-popup paragraphs='["Kerro sanallisesti, mitä puhelinnumeroon soittaminen maksaa. Kuvaus saa olla maksimissaan 150 merkkiä pitkä."]'/></label>
+        <label for="phoneCallChargeInfos"> Puhelun hintatiedon selite <affecto-help-popup paragraphs='["Kerro sanallisesti, mitä puhelinnumeroon soittaminen maksaa. Kuvaus saa olla maksimissaan 150 merkkiä pitkä."]'/></label>
         <div data-ng-repeat="info in controller.model.phoneCallChargeInfos">
             <p>
                 <input type="text" class="form-control" data-ng-required="info.isRequired" data-ng-model="info.localizedValue"

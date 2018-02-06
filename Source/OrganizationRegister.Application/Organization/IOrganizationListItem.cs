@@ -5,6 +5,9 @@ namespace OrganizationRegister.Application.Organization
 {
     public interface IOrganizationListItem : IOrganizationName
     {
+
+        Guid? ParentId { get; set; }
+
         string Type { get; }
 
         bool CanBeTransferredToFsc { get; }

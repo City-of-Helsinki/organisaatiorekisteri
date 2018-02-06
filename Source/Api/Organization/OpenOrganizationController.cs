@@ -154,5 +154,19 @@ namespace OrganizationRegister.Api.Organization
             Organization mappedOrganization = mapper.Map(organization);
             return Ok(mappedOrganization);
         }
+
+
+
+
+        [HttpGet]
+        [GetRoute("organizationflatlistforgroups/{groupIds}")]
+        public IHttpActionResult GetOrganizationFlatlistForGroups(string groupIds)
+        {
+            IEnumerable<IOrganizationListItem> organizations = organizationService.GetGroupOrganizationsAsFlatlist(groupIds);
+            var mapper = mapperFactory.CreateOrganizationListItemMapper();
+            IEnumerable<OrganizationListItem> mappedOrganizations = mapper.Map(organizations);
+            return Ok(mappedOrganizations);
+        }
+
     }
 }

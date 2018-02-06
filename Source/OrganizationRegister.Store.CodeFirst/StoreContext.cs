@@ -46,6 +46,8 @@ namespace OrganizationRegister.Store.CodeFirst
         public IDbSet<AvailableDataLanguage> DataLanguages { get; set; }
         public IDbSet<CallChargeType> CallChargeTypes { get; set; }
 
+        public IDbSet<AuthorizationGroup> OrganizationAuthorizationGroups { get; set; }
+
 
         public OrganizationType GetOrganizationType(string type)
         {

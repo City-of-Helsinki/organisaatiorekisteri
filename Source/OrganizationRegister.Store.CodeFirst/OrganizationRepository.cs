@@ -123,6 +123,13 @@ namespace OrganizationRegister.Store.CodeFirst
             return CreateOrganizationListItems(FilterByParentOrganization(dbOrganizations.ToList(), organizationId));
         }
 
+        public IReadOnlyCollection<IOrganizationListItem> GetOrganizationListForGroup(Guid groupId)
+        {
+            var query = new GroupOrganizationsQuery(context.Organizations, groupId);
+            var dbOrganizations = query.Execute();
+            return CreateOrganizationListItems(dbOrganizations.ToList());
+        }
+
         public IReadOnlyCollection<IOrganizationName> GetOrganizations()
         {
             var query = new ActiveOrganizationsQuery(context.Organizations);
@@ -391,7 +398,7 @@ namespace OrganizationRegister.Store.CodeFirst
             List<IOrganizationListItem> organizations = new List<IOrganizationListItem>();
             foreach (Organization dbOrganization in dbOrganizations)
             {
-                organizations.Add(OrganizationFactory.CreateOrganizationListItem(dbOrganization.Id, dbOrganization.GetNames(), dbOrganization.Type.Name,
+                organizations.Add(OrganizationFactory.CreateOrganizationListItem(dbOrganization.Id, dbOrganization.ParentOrganizationId, dbOrganization.GetNames(), dbOrganization.Type.Name,
                     dbOrganization.CanBeTransferredToFsc, dbOrganization.CanBeResponsibleDeptForService));
             }
             return organizations;
@@ -422,6 +429,7 @@ namespace OrganizationRegister.Store.CodeFirst
 
             return filteredOrganizations;
         }
+
 
 
     }

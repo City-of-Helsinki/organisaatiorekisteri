@@ -45,6 +45,7 @@ namespace OrganizationRegister.Store.CodeFirst.Model
         public virtual ICollection<WebPage> WebPages { get; set; }
         public virtual Address VisitingAddress { get; set; }
         public virtual ICollection<Address> PostalAddresses { get; set; }
+        public virtual ICollection<AuthorizationGroup> AuthorizationGroups { get; set; }
 
         internal bool UseStreetAddressAsPostalAddress
         {

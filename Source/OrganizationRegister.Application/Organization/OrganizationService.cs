@@ -84,6 +84,37 @@ namespace OrganizationRegister.Application.Organization
         }
 
 
+        public IEnumerable<IOrganizationListItem> GetGroupOrganizationsAsFlatlist(string groups)
+        {
+            if (string.IsNullOrWhiteSpace(groups))
+            {
+                throw new ArgumentNullException("groupIds");
+            }
+
+            // groupids: 11112222-3333-4444-5555-666677778888;22223333-4444-5555-6666-777788889999;...
+            var ids = groups.Split(';').ToList();
+            List<IOrganizationListItem> orgs = new List<IOrganizationListItem>();
+            if (ids.Any())
+            {
+                ids.ForEach(id =>
+                {
+                    Guid groupId = Guid.Parse(id);
+                    var parentOrgs = organizationRepository.GetOrganizationListForGroup(groupId);
+
+                    foreach (var parentOrg in parentOrgs)
+                    {
+                        orgs.AddRange(organizationRepository.GetOrganizationListForOrganization(parentOrg.Id));
+                    }
+
+                });
+
+                orgs = orgs.Distinct().ToList();
+            }
+
+            return orgs;
+
+        }
+
         public IEnumerable<IOrganizationListItem> GetOrganizationListForMunicipality(int rootMunicipalityCode)
         {
             var orgs = new List<IOrganizationListItem>();
