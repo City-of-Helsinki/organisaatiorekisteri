@@ -178,5 +178,28 @@ namespace OrganizationRegister.Api.Tests.Organization
             Assert.IsTrue(result.Content.All(org => org.Equals(returnValue)));
         
         }
+    
+
+        [TestMethod]
+        public void GetOrganizationFlatlistForGroups()
+        {
+            string groupIds = "11111111-1111-1111-1111-111111111111;22222222-2222-2222-2222-222222222222";
+
+            OrganizationListItem returnValue = new OrganizationListItem();
+            IOrganizationListItem appReturnValue = Substitute.For<IOrganizationListItem>();
+
+            organizationListItemMapper.Map(appReturnValue).Returns(returnValue);
+
+            organizationService.GetGroupOrganizationsAsFlatlist(groupIds).Returns(new List<IOrganizationListItem> { appReturnValue, appReturnValue });
+
+            var result = sut.GetOrganizationFlatlistForGroups(groupIds) as OkNegotiatedContentResult<IEnumerable<OrganizationListItem>>;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Content.Count());
+            Assert.IsTrue(result.Content.All(org => org.Equals(returnValue)));
+
+        }
+
+
     }
 }

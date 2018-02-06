@@ -98,11 +98,16 @@
     <Compile Include="Migrations\201705091307344_AddCanBeResponsibleDeptForService.Designer.cs">
       <DependentUpon>201705091307344_AddCanBeResponsibleDeptForService.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801291422185_AddAuthorizationGroup.cs" />
+    <Compile Include="Migrations\201801291422185_AddAuthorizationGroup.Designer.cs">
+      <DependentUpon>201801291422185_AddAuthorizationGroup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\OrganizationRegisterDbMigration.cs" />
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\AddressLanguageSpecification.cs" />
     <Compile Include="Model\AvailableDataLanguage.cs" />
+    <Compile Include="Model\Configuration\OrganizationAuthorizationGroupConfiguration.cs" />
     <Compile Include="Model\Configuration\AddressConfiguration.cs" />
     <Compile Include="Model\Configuration\PhoneNumberLanguageSpecificationConfiguration.cs" />
     <Compile Include="Model\Configuration\AddressLanguageSpecificationConfiguration.cs" />
@@ -123,12 +128,14 @@
     <Compile Include="Model\OrganizationLanguageSpecification.cs" />
     <Compile Include="Model\PhoneNumber.cs" />
     <Compile Include="Model\OrganizationType.cs" />
+    <Compile Include="Model\AuthorizationGroup.cs" />
     <Compile Include="Model\WebPage.cs" />
     <Compile Include="Model\Configuration\OrganizationConfiguration.cs" />
     <Compile Include="Model\CallChargeType.cs" />
     <Compile Include="Model\WebPageType.cs" />
     <Compile Include="OrganizationRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Querying\GroupOrganizationsQuery.cs" />
     <Compile Include="Querying\ActiveMainMunicipalOrganizationsQuery.cs" />
     <Compile Include="Querying\ActiveMainOrganizationsQuery.cs" />
     <Compile Include="Querying\ActiveCurrentAndFutureOrganizationsQuery.cs" />
@@ -184,6 +191,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705091307344_AddCanBeResponsibleDeptForService.resx">
       <DependentUpon>201705091307344_AddCanBeResponsibleDeptForService.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801291422185_AddAuthorizationGroup.resx">
+      <DependentUpon>201801291422185_AddAuthorizationGroup.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

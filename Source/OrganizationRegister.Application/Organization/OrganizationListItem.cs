@@ -8,14 +8,18 @@ namespace OrganizationRegister.Application.Organization
     internal class OrganizationListItem : OrganizationName, IOrganizationListItem
     {
        
-        public OrganizationListItem(Guid id, IEnumerable<LocalizedText> names, string type, bool canBeTransferredToFsc, bool canBeResponsibleDeptForService)
+        public OrganizationListItem(Guid id, Guid? parentId, IEnumerable<LocalizedText> names, string type, bool canBeTransferredToFsc, bool canBeResponsibleDeptForService)
 
             : base(id, names)
         {
+            ParentId = parentId;
             Type = type;
             CanBeTransferredToFsc = canBeTransferredToFsc;
             CanBeResponsibleDeptForService = canBeResponsibleDeptForService;
+
         }
+
+        public Guid? ParentId { get; set; }
 
         public string Type { get; }
 
@@ -23,5 +27,6 @@ namespace OrganizationRegister.Application.Organization
 
         public bool CanBeResponsibleDeptForService { get; }
 
+        
     }
 }
