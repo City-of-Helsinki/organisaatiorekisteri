@@ -1,0 +1,17 @@
+﻿
+<div class="row">
+    <div class="col-xs-4">
+        <label>Käyttöoikeusryhmä</label>
+    </div>
+    <div class="col-xs-4">
+        <label>Rooli</label>
+    </div>
+</div>
+<div class="row website-row" data-ng-repeat="group in controller.model.authorizationGroups | orderBy: 'name'">
+    <div class="col-xs-4">
+        <span>{{ group.name }}</span>
+    </div>
+    <div class="col-xs-4">
+        <span>{{ group.roleName }}</span>
+    </div>
+</div>

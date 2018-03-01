@@ -26,7 +26,13 @@ module OrganizationRegister
         public postalPostOfficeBoxAddressPostalCode: string;
         public postalPostOfficeBoxAddressPostalDistricts: Array<LocalizedText>;
         public postalAddressTypes: PostalAddressTypes;
-       
+        public authorizationGroupName: string;
+        public authorizationGroupRole: UserRole;
+        public editedAuthorizationGroupName: string;
+        public editedAuthorizationGroupRole: UserRole;
+
+      
+
 
         constructor(public id?: string,
             public numericId?: number,
@@ -52,7 +58,8 @@ module OrganizationRegister
             public nameAbbreviations?: Array<LocalizedText>,
             public isSubOrganization?: boolean,
             public canBeTransferredToFsc?: boolean,
-            public canBeResponsibleDeptForService?: boolean)
+            public canBeResponsibleDeptForService?: boolean,
+            public authorizationGroups?: Array<AuthorizationGroup>)
         {
             this.initializeLocalizedNames(names);
             this.initializeLocalizedNameAbbreviations(nameAbbreviations);
@@ -65,6 +72,11 @@ module OrganizationRegister
             if (this.webPages == null)
             {
                 this.webPages = new Array<WebPage>();
+            }
+
+            if (this.authorizationGroups == null)
+            {
+                this.authorizationGroups = new Array<AuthorizationGroup>();
             }
         }
 
@@ -430,9 +442,17 @@ module OrganizationRegister
                 this.editedWebPageType !== "";
         }
 
+
         public hasEditedWebPageUrl(): boolean
         {
             return this.editedWebPageUrl != null && this.editedWebPageUrl !== "";
+        }
+
+
+        public hasEditedAuthorizationGroup(): boolean {
+            return this.editedAuthorizationGroupName != null &&
+                this.editedAuthorizationGroupName !== "" &&
+                this.editedAuthorizationGroupRole != null;
         }
 
         public hasContactInformation(): boolean
@@ -473,6 +493,26 @@ module OrganizationRegister
 
         }
 
+
+        public hasAuthorizationGroup(): boolean
+        {
+            return this.authorizationGroupName != null &&
+                this.authorizationGroupName !== "" &&
+                this.authorizationGroupRole != null;
+        }
+
+        public authorizationGroupExists(): boolean
+        {
+            for (let i = 0; i < this.authorizationGroups.length; i++)
+            {
+                if (this.authorizationGroups[i].name.toLocaleUpperCase() === this.authorizationGroupName.toLocaleUpperCase())
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public addWebPage(name: string, url: string, pageType: string): void
         {
             if (name != null && name !== "" && url != null && url !== "" && pageType != null && pageType !== "" && !this.containsWebPageUrl(url))
@@ -492,6 +532,27 @@ module OrganizationRegister
                 }
             }
         }
+
+
+
+        public addAuthorizationGroup(groupName: string, groupRoleId: string, groupRoleName: string): void
+        {
+            if (groupName != null && groupName !== "" && groupRoleId != null && groupRoleId !== "" && !this.containsAuthorazionGroupName(groupName)) {
+                this.authorizationGroups.push(new AuthorizationGroup(groupName, groupRoleId, groupRoleName));
+            }
+        }
+      
+      
+        public removeAuthorizationGroup(groupName: string): void
+        {
+            for (var i = 0; i < this.authorizationGroups.length; i++) {
+                if (this.authorizationGroups[i].name === groupName) {
+                    this.authorizationGroups.splice(i, 1);
+                    break;
+                }
+            }
+        }
+
 
         public isAdded(): boolean
         {
@@ -517,6 +578,14 @@ module OrganizationRegister
             return this.webPages.length > 0 && !this.webPages.every((item: WebPage) =>
             {
                 return item.address !== url;
+            });
+        }
+
+
+        private containsAuthorazionGroupName(name: string): boolean {
+            return this.authorizationGroups.length > 0 && !this.authorizationGroups.every((group: AuthorizationGroup) =>
+            {
+                return group.name !== name;
             });
         }
 

@@ -12,7 +12,7 @@ namespace OrganizationRegister.Application.Organization
             IEnumerable<LocalizedText> visitingAddressQualifier, IEnumerable<LocalizedText> postalStreetAddresses, string postalStreetAddressPostalCode, 
             IEnumerable<LocalizedText> postalStreetAddressLocalities, string postalAddressPostOfficeBox, string postalPostOfficeBoxAddressPostalCode,
             IEnumerable<LocalizedText> postalPostOfficeBoxAddressLocalities, bool useVisitingAddressAsPostalAddress, bool isSubOrganization, IEnumerable<string> languageCodes, 
-            IEnumerable<LocalizedText> homepageUrls, IEnumerable<LocalizedText> nameAbbreviations, bool canBeTransferredToFsc, bool canBeResponsibleDeptForService)
+            IEnumerable<LocalizedText> homepageUrls, IEnumerable<LocalizedText> nameAbbreviations, bool canBeTransferredToFsc, bool canBeResponsibleDeptForService, IEnumerable<AuthorizationGroup> authorizationGroups)
         {
             Organization organization = isSubOrganization ? new SubOrganization(id, numericId, businessId, oid, type, municipalityCode, names, languageCodes, canBeTransferredToFsc, canBeResponsibleDeptForService) :
                 new Organization(id, numericId, businessId, oid, type, municipalityCode, names, languageCodes, canBeTransferredToFsc, canBeResponsibleDeptForService);
@@ -27,6 +27,7 @@ namespace OrganizationRegister.Application.Organization
                 postalAddressPostOfficeBox, postalPostOfficeBoxAddressPostalCode, postalPostOfficeBoxAddressLocalities);
             organization.HomepageUrls = homepageUrls;
             organization.NameAbbreviations = nameAbbreviations;
+            organization.AuthorizationGroups = authorizationGroups;
             return organization;
         }
 

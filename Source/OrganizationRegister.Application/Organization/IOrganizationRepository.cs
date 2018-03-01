@@ -32,6 +32,9 @@ namespace OrganizationRegister.Application.Organization
         void UpdateOrganizationVisitingAddress(Guid id, IVisitingAddress address);
         void UpdateOrganizationPostalAddresses(Guid id, IPostalAddress addresses);
         bool HasActiveOrganization(string businessId, Guid? excludedOrganizationId);
+
+        void UpdateOrganizationAuthorizationtInformation(Guid id, IAuthorizationInformation information);
+
         void RemoveOrganization(Guid id);
         void DeactivateOrganization(Guid id);
         IOrganizationName GetOrganizationName(Guid id);

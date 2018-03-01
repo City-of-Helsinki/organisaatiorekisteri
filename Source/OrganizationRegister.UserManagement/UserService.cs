@@ -212,6 +212,7 @@ namespace OrganizationRegister.UserManagement
 
         }
 
+
         public IEnumerable<IUserListItem> GetInternalUsers(Guid organizationId)
         {
             CheckManageUsersOfOrganizationPermission(organizationId);

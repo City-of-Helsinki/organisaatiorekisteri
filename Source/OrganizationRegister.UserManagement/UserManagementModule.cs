@@ -24,6 +24,7 @@ namespace OrganizationRegister.UserManagement
             base.Load(builder);
 
             builder.RegisterType<UserService>().As<IUserService>();
+            builder.RegisterType<GroupService>().As<IGroupService>();
             builder.RegisterType<UserManagementTestEnvironment>();
             builder.RegisterType<MapperFactory>();
             builder.RegisterModule<IdentityManagement.Autofac.ModuleRegistration>();

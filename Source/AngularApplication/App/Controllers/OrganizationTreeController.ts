@@ -167,7 +167,7 @@ module OrganizationRegister
         private setOrganizationsAndExpandAllNodes(orgs: Tree)
         {
             this.model.tree = orgs;
-            this.model.tree.expandAll();
+            //this.model.tree.expandAll();
             this.busyIndicationService.hideBusyIndicator();
         }
     }
