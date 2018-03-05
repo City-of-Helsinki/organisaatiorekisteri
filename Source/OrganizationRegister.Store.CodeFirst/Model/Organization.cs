@@ -15,6 +15,7 @@ namespace OrganizationRegister.Store.CodeFirst.Model
         {
             LanguageSpecifications = new Collection<OrganizationLanguageSpecification>();
             WebPages = new Collection<WebPage>();
+            AuthorizationGroups = new Collection<AuthorizationGroup>();
             PostalAddresses = new Collection<Address>();
             Active = true;
         }

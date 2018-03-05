@@ -135,6 +135,12 @@
       <DependentUpon>DeletingOrganization.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\Organization\DeletingOrganizationSteps.cs" />
+    <Compile Include="Features\Organization\UpdatingOrganizationAuthorizationInformation.feature.cs">
+      <DependentUpon>UpdatingOrganizationAuthorizationInformation.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Features\Organization\UpdatingOrganizationAuthorizationInformationSteps.cs" />
     <Compile Include="Features\Settings.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -225,6 +231,10 @@
     <None Include="Features\Organization\DeletingOrganization.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>DeletingOrganization.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Organization\UpdatingOrganizationAuthorizationInformation.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>UpdatingOrganizationAuthorizationInformation.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Settings.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
