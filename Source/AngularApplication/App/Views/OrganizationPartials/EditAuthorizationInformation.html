@@ -1,0 +1,73 @@
+﻿<div class="row">
+    <div class="col-xs-3">
+        <label for="groupName">
+            Käyttöoikeusryhmä
+            <affecto-help-popup paragraphs='["Ryhmän nimi muodossa toimialue\\ryhmännimi"]' />
+        </label>
+    </div>
+    <div class="col-xs-3">
+        <label for="groupRole">
+            Rooli
+            <affecto-help-popup paragraphs='["Käyttöoikeusryhmän rooli TPR sovelluksissa"]' />
+        </label>
+    </div>
+   
+</div>
+<div class="row website-row">
+    
+    <div class="col-xs-3">
+        <input type="text" id="groupName" class="form-control" 
+               maxlength="250" 
+               data-affecto-ignore-dirty-form-field 
+               data-ng-model="controller.model.authorizationGroupName" 
+               data-ng-disabled="controller.authorizationGroupEditModeOn">
+    </div>
+
+    <div class="col-xs-3">
+        <select id="groupRole" class="form-control" data-ng-model="controller.model.authorizationGroupRole"
+                data-ng-options="role as role.name for role in controller.groupRoles | orderBy: 'toString()'" 
+                data-affecto-ignore-dirty-form-field data-ng-disabled="controller.authorizationGroupEditModeOn"></select>
+    </div>
+
+    <div class="col-xs-3">
+        <button id="add-new-group" type="button" class="button add" data-ng-click="controller.addNewAuthorizationGroup()"
+                data-ng-show="controller.isAuthorizationInformationBeingEdited()" data-ng-disabled="!controller.canAddNewAuthorizationGroup()">
+            Lisää uusi
+        </button>
+    </div>
+</div>
+<div id="addedAuthorizationGroups" class="row website-row" data-ng-repeat="group in controller.model.authorizationGroups | orderBy: 'groupName'">
+    
+    <div class="col-xs-3">
+        <span data-ng-hide="controller.isAuthorizationGroupBeingEdited(group.name)">{{ group.name }}</span>
+        <input type="text" id="edited-website-name" class="form-control" maxlength="100" data-ng-model="controller.model.editedAuthorizationGroupName"
+               data-ng-hide="!controller.isAuthorizationGroupBeingEdited(group.name)" data-ng-init="controller.model.editedAuthorizationGroupName=group.name"
+               data-affecto-ignore-dirty-form-field data-ng-required="true">
+    </div>
+    
+    <div class="col-xs-3">
+        <span data-ng-hide="controller.isAuthorizationGroupBeingEdited(group.name)">{{ group.roleName }}</span>
+        <select id="edited-website-type" class="form-control" data-ng-model="controller.model.editedAuthorizationGroupRole"
+                data-ng-options="role as role.name for role in controller.groupRoles | orderBy: 'toString()'"
+                data-ng-hide="!controller.isAuthorizationGroupBeingEdited(group.name)" data-affecto-ignore-dirty-form-field></select>
+    </div>
+    
+    <div class="col-xs-3">
+        <button id="edit-authorizationgroup" type="button" class="button edit" data-ng-click="controller.editAuthorizationGroup(group.name, group.roleId)"
+                data-ng-hide="controller.isAuthorizationGroupBeingEdited(group.name)" data-ng-disabled="controller.isOtherAuthorizationGroupBeingEdited(group.name)">
+            Muokkaa
+        </button>
+        <button id="save-authorizationgroup" type="button" class="button edit" data-ng-click="controller.saveEditedAuthorizationGroup()"
+                data-ng-hide="!controller.isAuthorizationGroupBeingEdited(group.name)" data-ng-disabled="!controller.canSaveAuthorizationGroup()">
+            Tallenna
+        </button>
+        <button id="remove-authorizationgroup" type="button" class="button remove" data-ng-click="controller.removeAuthorizationGroup(group.name)"
+                data-ng-hide="controller.authorizationGroupEditModeOn">
+            Poista
+        </button>
+        <button id="cancel-edit-authorizationgroup" type="button" class="button remove" data-ng-click="controller.cancelAuthorizationGroupEditing()"
+                data-ng-hide="!controller.isAuthorizationGroupBeingEdited(group.name)">
+            Peruuta
+        </button>
+    </div>
+</div>

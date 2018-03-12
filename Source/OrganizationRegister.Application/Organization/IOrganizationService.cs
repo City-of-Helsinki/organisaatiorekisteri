@@ -30,6 +30,7 @@ namespace OrganizationRegister.Application.Organization
         void SetOrganizationPostalAddresses(Guid organizationId, bool useVisitingAddress, IEnumerable<LocalizedText> streetAddresses, string streetAddressPostalCode, 
             IEnumerable<LocalizedText> streetAddressPostalDistricts, string postOfficeBox, string postOfficeBoxAddressPostalCode, 
             IEnumerable<LocalizedText> postOfficeBoxAddressPostalDistricts);
+        void SetOrganizationAuthorizationInformation(Guid organizationId, IEnumerable<AuthorizationGroup> groups);
         void RemoveOrganization(Guid organizationId);
         void DeactivateOrganization(Guid organizationId);
         IOrganizationName GetOrganizationName(Guid organizationId);

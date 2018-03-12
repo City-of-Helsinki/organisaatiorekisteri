@@ -112,6 +112,14 @@ module OrganizationRegister
                 });
         }
 
+
+        public setOrganizationAuthorizationtInformation(organization: Organization): angular.IPromise<void> {
+            return this.$http.put(this.apiBaseUrl + "organizationregister/organizations/" + organization.id + "/authorizationinformation", organization)
+                .then((): void => {
+                });
+        }
+
+
         public setOrganizationBasicInformation(organization: Organization): angular.IPromise<void>
         {
             return this.$http.put(this.apiBaseUrl + "organizationregister/organizations/" + organization.id + "/basicinformation", organization)

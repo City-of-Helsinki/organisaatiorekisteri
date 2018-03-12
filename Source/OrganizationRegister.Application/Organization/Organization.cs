@@ -15,6 +15,9 @@ namespace OrganizationRegister.Application.Organization
         private readonly IReadOnlyCollection<string> languageCodes;
         private readonly PostalAddresses postalAddresses;
         private WebPages webPages;
+
+        private ICollection<AuthorizationGroup> authorizationGroups;
+
         private PhoneNumber phoneNumber;
         private EmailAddress emailAddress;
         private MunicipalityCode municipalityCode;
@@ -50,9 +53,12 @@ namespace OrganizationRegister.Application.Organization
             Type = type;
             SetMunicipalityCode(municipalityCode);
             ValidateType();
-            ValidateCanBeResponsibleDeptForService();
+            // ValidateCanBeResponsibleDeptForService();
 
             postalAddresses = new PostalAddresses(this.languageCodes);
+
+            authorizationGroups = new List<AuthorizationGroup>();
+
         }
 
         public Guid Id { get; protected set; }
@@ -85,6 +91,19 @@ namespace OrganizationRegister.Application.Organization
                 if (value != null)
                 {
                     webPages = new WebPages(value);
+                }
+            }
+        }
+
+        public IEnumerable<AuthorizationGroup> AuthorizationGroups
+        {
+            get { return authorizationGroups; }
+            set
+            {
+                authorizationGroups.Clear();
+                if (value != null)
+                {
+                    authorizationGroups = value.ToList();
                 }
             }
         }
@@ -242,7 +261,7 @@ namespace OrganizationRegister.Application.Organization
         {
             CanBeResponsibleDeptForService = newCanBeResponsibleDeptForService;
 
-            ValidateCanBeResponsibleDeptForService();
+            //ValidateCanBeResponsibleDeptForService();
         }
 
         public void SetCallInformation(string newPhoneNumber, string newCallChargeType, IEnumerable<LocalizedText> newCallChargeinfos)

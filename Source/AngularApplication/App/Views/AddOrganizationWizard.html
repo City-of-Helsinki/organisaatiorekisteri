@@ -160,16 +160,60 @@
                             </button>
                         </div>
                         <div class="right">
-                            <button type="submit" id="saveOrganizationPostalAddressAndQuit" class="button" data-ng-click="controller.saveOrganizationPostalAddressAndQuit()"
+                            <button type="submit" id="saveOrganizationPostalAddressAndQuit" class="button cancel" data-ng-click="controller.saveOrganizationPostalAddressAndQuit()"
                                     data-ng-show="controller.isPostalAddressBeingEdited()"
                                     data-ng-disabled="controller.postalAddressForm.$invalid">
-                                Valmis
+                                Tallenna keskeneräisenä
+                            </button>
+                            <button type="submit" id="saveOrganizationPostalAddressAndMoveToNextStep" class="button scroll-button" data-go-step="#step5" data-ng-click="controller.saveOrganizationPostalAddressAndMoveToNextStep()"
+                                    data-ng-show="controller.isPostalAddressBeingEdited()"
+                                    data-ng-disabled="controller.postalAddressForm.$invalid">
+                                Siirry seuraavaan
                             </button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
+        
+        
+        
+        <div id="step5" data-ng-class="{'edit-mode-active': controller.isAuthorizationInformationBeingEdited(), 'edit-area': controller.isAuthorizationInformationBeingEdited()}">
+
+            <div class="container">
+                <div class="phase-title">
+                    <span data-ng-show="!controller.isSubOrganization" class="section-title">Uusi pääorganisaatio</span>
+                    <span data-ng-show="controller.isSubOrganization" class="section-title">Uusi alaorganisaatio</span>
+                    <h3>Vaihe 5/5: Täytä käyttöoikeusryhmät</h3>
+                </div>
+                
+                <form class="form-horizontal" name="controller.authorizationInformationForm" unsaved-warning-form>
+                    <div class="content-box active">
+                        <div class="content-box-inner" data-ng-include src="'App/Views/OrganizationPartials/EditAuthorizationInformation.html'">
+                        </div>
+                    </div>
+                    <div class="button-row">
+                        <div class="left">
+                            <button type="submit" id="saveOrganizationAuthorizationInformationAndMoveToPreviousStep" class="button scroll-button"
+                                    data-go-step="#step4" data-ng-click="controller.saveOrganizationAuthorizationInformationAndMoveToPreviousStep()"
+                                    data-ng-show="controller.isAuthorizationInformationBeingEdited()"
+                                    data-ng-disabled="controller.authorizationInformationForm.$invalid">
+                                Palaa edelliseen
+                            </button>
+                        </div>
+                        <div class="right">
+                            <button type="submit" id="saveOrganizationAuthorizationInformationAndQuit" class="button" data-ng-click="controller.saveOrganizationAuthorizationInformationAndQuit()"
+                                    data-ng-show="controller.isAuthorizationInformationBeingEdited()"
+                                    data-ng-disabled="controller.authorizationInformationForm.$invalid">
+                                Valmis
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+
     </article>
 </div>
 

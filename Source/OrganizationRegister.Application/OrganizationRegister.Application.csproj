@@ -68,6 +68,7 @@
     <Compile Include="Location\PostalAddresses.cs" />
     <Compile Include="Localization\MandatoryLocalizedSingleTexts.cs" />
     <Compile Include="HierarchicalCollection.cs" />
+    <Compile Include="Organization\IAuthorizationInformation.cs" />
     <Compile Include="Organization\OrganizationListItem.cs" />
     <Compile Include="Organization\IBasicInformation.cs" />
     <Compile Include="Organization\IContactInformation.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="User\IRole.cs" />
     <Compile Include="User\IUser.cs" />
     <Compile Include="User\IUserListItem.cs" />
+    <Compile Include="User\IGroupService.cs" />
     <Compile Include="User\IUserService.cs" />
     <Compile Include="Validation\BusinessIdentifierValidationResult.cs" />
     <Compile Include="Organization\HierarchicalOrganization.cs" />

@@ -12,6 +12,7 @@ namespace OrganizationRegister.Api.Organization
             Mapper.CreateMap<IOrganization, Organization>();
             Mapper.CreateMap<StreetAddress, Location.StreetAddress>();
             Mapper.CreateMap<PostOfficeBoxAddress, Location.PostOfficeBoxAddress>();
+            
         }
     }
 }
