@@ -13,5 +13,6 @@ namespace OrganizationRegister.Application.User
         bool IsExistingUser(string emailAddress);
         bool ValidatePasswordStrength(string password);
         void DeleteUser(Guid userId);
+
     }
 }

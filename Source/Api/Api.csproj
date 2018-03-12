@@ -249,6 +249,7 @@
     <Compile Include="Authentication\AuthenticationServerConfiguration.cs" />
     <Compile Include="Authentication\IAuthenticationServerConfiguration.cs" />
     <Compile Include="Organization\AuthorizedOrganizationController.cs" />
+    <Compile Include="Organization\AuthorizationInformation.cs" />
     <Compile Include="Organization\OpenOrganizationController.cs" />
     <Compile Include="Organization\OrganizationListItem.cs" />
     <Compile Include="Organization\OrganizationName.cs" />

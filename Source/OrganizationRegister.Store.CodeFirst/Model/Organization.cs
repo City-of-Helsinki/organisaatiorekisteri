@@ -15,6 +15,7 @@ namespace OrganizationRegister.Store.CodeFirst.Model
         {
             LanguageSpecifications = new Collection<OrganizationLanguageSpecification>();
             WebPages = new Collection<WebPage>();
+            AuthorizationGroups = new Collection<AuthorizationGroup>();
             PostalAddresses = new Collection<Address>();
             Active = true;
         }
@@ -113,12 +114,35 @@ namespace OrganizationRegister.Store.CodeFirst.Model
             }
         }
 
+
+        internal void SetAuthorizationInformation(IAuthorizationInformation information, IStoreContext context)
+        {
+            RemoveAllAuthorizationGroups(context);
+
+            if (information.AuthorizationGroups != null)
+            {
+                foreach (Common.AuthorizationGroup group in information.AuthorizationGroups)
+                {
+                    AuthorizationGroups.Add(new AuthorizationGroup { Id = Guid.NewGuid(), GroupId = group.GroupId.Value, GroupName = group.Name, RoleId = group.RoleId});
+                }
+            }
+        }
+
         internal void RemoveAllWebPages(IStoreContext context)
         {
             foreach (WebPage webPage in WebPages.ToList())
             {
                 context.WebPages.Remove(webPage);
                 WebPages.Remove(webPage);
+            }
+        }
+
+        internal void RemoveAllAuthorizationGroups(IStoreContext context)
+        {
+            foreach (AuthorizationGroup group in AuthorizationGroups.ToList())
+            {
+                context.AuthorizationGroups.Remove(group);
+                AuthorizationGroups.Remove(group);
             }
         }
 

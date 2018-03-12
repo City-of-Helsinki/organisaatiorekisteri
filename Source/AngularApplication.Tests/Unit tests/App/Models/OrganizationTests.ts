@@ -80,18 +80,7 @@ describe("Organization", () =>
         });
     });
 
-    describe("can be responsible dept for service", () => {
-
-        it("changing sub organization type (property) to non munincipal sets canBeResponsibleDeptForService to false", () => {
-
-            sut.isSubOrganization = true;
-            sut.type = "Kunta";
-            sut.canBeResponsibleDeptForService = true;
-
-            sut.typeProperty = "Yritys";
-            expect(sut.canBeResponsibleDeptForService).toBeFalsy();
-        });
-    });
+   
 
     describe("business id", () =>
     {
@@ -630,6 +619,145 @@ describe("Organization", () =>
             expect(remainingSite.address).toEqual("http://www.google.com");
         });
     });
+
+    describe("authorization group", () =>
+    {
+        var groupRole: OrganizationRegister.UserRole = new OrganizationRegister.UserRole("123", "adminrole");
+
+        it("has no authorization group when authorization group name is null", () =>
+        {
+            sut.authorizationGroupName = null;
+            sut.authorizationGroupRole = groupRole;
+            expect(sut.hasAuthorizationGroup()).toBeFalsy();
+        });
+
+        it("has no authorization group when authorization group name is empty", () => {
+            sut.authorizationGroupName = "";
+            sut.authorizationGroupRole = groupRole;
+            expect(sut.hasAuthorizationGroup()).toBeFalsy();
+        });
+
+        it("has no authorization group when authorization group role is null", () => {
+            sut.authorizationGroupName = "groupname";
+            sut.authorizationGroupRole = null;
+            expect(sut.hasAuthorizationGroup()).toBeFalsy();
+        });
+
+        it("has no authorization group when authorization group name & role are null", () => {
+            sut.authorizationGroupName = null;
+            sut.authorizationGroupRole = null;
+            expect(sut.hasAuthorizationGroup()).toBeFalsy();
+        });
+
+        it("has no authorization group when authorization group name is empty & role is null", () => {
+            sut.authorizationGroupName = "";
+            sut.authorizationGroupRole = null;
+            expect(sut.hasAuthorizationGroup()).toBeFalsy();
+        });
+
+        it("has authorization group when authorization group name and role are defined", () => {
+            sut.authorizationGroupName = "groupname";
+            sut.authorizationGroupRole = groupRole;
+            expect(sut.hasAuthorizationGroup()).toBeTruthy();
+        });
+
+
+        it("has no edited authorization group when authorization group name is null", () => {
+            sut.editedAuthorizationGroupName = null;
+            sut.editedAuthorizationGroupRole = groupRole;
+            expect(sut.hasEditedAuthorizationGroup()).toBeFalsy();
+        });
+
+        it("has no edited authorization group when authorization group name is empty", () => {
+            sut.editedAuthorizationGroupName = "";
+            sut.editedAuthorizationGroupRole = groupRole;
+            expect(sut.hasEditedAuthorizationGroup()).toBeFalsy();
+        });
+
+        it("has no edited authorization group when authorization group role is null", () => {
+            sut.editedAuthorizationGroupName = "groupname";
+            sut.editedAuthorizationGroupRole = null;
+            expect(sut.hasEditedAuthorizationGroup()).toBeFalsy();
+        });
+
+        it("has no edited authorization group when authorization group name & role are null", () => {
+            sut.editedAuthorizationGroupName = null;
+            sut.editedAuthorizationGroupRole = null;
+            expect(sut.hasEditedAuthorizationGroup()).toBeFalsy();
+        });
+
+        it("has no edited authorization group when authorization group name is empty & role is null", () => {
+            sut.editedAuthorizationGroupName = "";
+            sut.editedAuthorizationGroupRole = null;
+            expect(sut.hasEditedAuthorizationGroup()).toBeFalsy();
+        });
+
+        it("has edited authorization group when authorization group name and role are defined", () => {
+            sut.editedAuthorizationGroupName = "groupname";
+            sut.editedAuthorizationGroupRole = groupRole;
+            expect(sut.hasEditedAuthorizationGroup()).toBeTruthy();
+        });
+
+    });
+
+
+    describe("adding authorization group", () => {
+        it("authorization group is not added without a group name", () => {
+            sut.authorizationGroups = new Array<OrganizationRegister.AuthorizationGroup>();
+            sut.addAuthorizationGroup("", "roleId", "roleName");
+            expect(sut.authorizationGroups.length).toBe(0);
+        });
+
+        it("authorization group is not added without a role id", () => {
+            sut.authorizationGroups = new Array<OrganizationRegister.AuthorizationGroup>();
+            sut.addAuthorizationGroup("groupName", "", "roleName");
+            expect(sut.authorizationGroups.length).toBe(0);
+        });
+
+        it("authorization group is added", () => {
+            sut.authorizationGroups = new Array<OrganizationRegister.AuthorizationGroup>();
+            sut.addAuthorizationGroup("groupName", "roleId", "roleName");
+            expect(sut.authorizationGroups.length).toBe(1);
+
+            var addedGroup: OrganizationRegister.AuthorizationGroup = sut.authorizationGroups[0];
+            expect(addedGroup.name).toEqual("groupName");
+            expect(addedGroup.roleId).toEqual("roleId");
+        });
+
+        it("authorization group with same name cannot be added twice", () => {
+            sut.authorizationGroups = new Array<OrganizationRegister.AuthorizationGroup>();
+            sut.addAuthorizationGroup("groupName", "roleId", "roleName");
+            sut.addAuthorizationGroup("groupName", "roleId", "roleName");
+            expect(sut.authorizationGroups.length).toBe(1);
+        });
+
+    });
+
+
+    describe("removing an authorization group", () => {
+        it("removing from an empty collection", () => {
+            sut.removeAuthorizationGroup("groupName");
+            expect(sut.authorizationGroups.length).toBe(0);
+        });
+
+        it("removing an authorization group that doesn't exist", () => {
+            sut.addAuthorizationGroup("groupName", "roleId", "roleName");
+            sut.removeAuthorizationGroup("groupNameX");
+            expect(sut.authorizationGroups.length).toBe(1);
+        });
+
+        it("removing an authorization group exists", () => {
+            sut.addAuthorizationGroup("groupName1", "roleId", "roleName");
+            sut.addAuthorizationGroup("groupName2", "roleId2", "roleName2");
+            sut.removeAuthorizationGroup("groupName1");
+            expect(sut.authorizationGroups.length).toBe(1);
+            var remainingGroup: OrganizationRegister.AuthorizationGroup = sut.authorizationGroups[0];
+            expect(remainingGroup.name).toEqual("groupName2");
+            expect(remainingGroup.roleId).toEqual("roleId2");
+        });
+    });
+
+
 
     describe("visiting address parts", () =>
     {

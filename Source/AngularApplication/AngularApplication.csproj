@@ -162,12 +162,14 @@
     <Content Include="App\Views\ExternalLogin.html" />
     <Content Include="App\Views\Logout.html" />
     <Content Include="App\Views\OrganizationPartials\EditBasicInformation.html" />
+    <Content Include="App\Views\OrganizationPartials\EditAuthorizationInformation.html" />
     <Content Include="App\Views\OrganizationPartials\EditContactInformation.html" />
     <Content Include="App\Views\OrganizationPartials\EditPostalAddress.html" />
     <Content Include="App\Views\OrganizationPartials\EditVisitingAddress.html" />
     <Content Include="App\Views\OrganizationPartials\Search.html" />
     <Content Include="App\Views\OrganizationPartials\Tree.html" />
     <Content Include="App\Views\OrganizationPartials\ViewBasicInformation.html" />
+    <Content Include="App\Views\OrganizationPartials\ViewAuthorizationInformation.html" />
     <Content Include="App\Views\OrganizationPartials\ViewContactInformation.html" />
     <Content Include="App\Views\OrganizationPartials\ViewPostalAddress.html" />
     <Content Include="App\Views\OrganizationPartials\ViewVisitingAddress.html" />
@@ -427,6 +429,7 @@
     <TypeScriptCompile Include="App\Models\User.ts" />
     <TypeScriptCompile Include="App\Models\UserListItem.ts" />
     <TypeScriptCompile Include="App\Models\TreeSearch.ts" />
+    <TypeScriptCompile Include="App\Models\AuthorizationGroup.ts" />
     <TypeScriptCompile Include="App\Models\UserRole.ts" />
     <TypeScriptCompile Include="App\Models\WebPage.ts" />
     <TypeScriptCompile Include="App\Controllers\OrganizationController.ts" />

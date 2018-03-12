@@ -167,6 +167,9 @@ namespace OrganizationRegister.Store.CodeFirst
         {
             Organization dbOrganization = GetDbOrganization(id);
             ICollection<Model.WebPage> webPages = dbOrganization.WebPages;
+
+            ICollection<Model.AuthorizationGroup> authorizationGroups = dbOrganization.AuthorizationGroups;
+
             ICollection<AddressLanguageSpecification> languageSpecificAddressData = dbOrganization.GetLanguageSpecificStreetAddressData();
             ICollection<Address> postalAddresses = dbOrganization.PostalAddresses;
             Guid? visitingAddressId = (dbOrganization.VisitingAddress != null) ? dbOrganization.VisitingAddress.Id : (Guid?) null;
@@ -197,7 +200,12 @@ namespace OrganizationRegister.Store.CodeFirst
                 dbOrganization.GetPostalPostOfficeBoxAddressPostOfficeBox(), dbOrganization.GetPostalPostOfficeBoxAddressPostalCode(),
                 CreatePostalPostOfficeBoxAddressLocalities(postalAddresses), dbOrganization.UseStreetAddressAsPostalAddress,
                 dbOrganization.ParentOrganizationId.HasValue,
-                settingsRepository.GetDataLanguageCodes(), dbOrganization.GetHomepageUrls(), dbOrganization.GetNameAbbreviations(), dbOrganization.CanBeTransferredToFsc, dbOrganization.CanBeResponsibleDeptForService);
+                settingsRepository.GetDataLanguageCodes(), 
+                dbOrganization.GetHomepageUrls(), 
+                dbOrganization.GetNameAbbreviations(), 
+                dbOrganization.CanBeTransferredToFsc, 
+                dbOrganization.CanBeResponsibleDeptForService, 
+                CreateAuthorizationGroups(authorizationGroups));
         }
 
         public IOrganizationName GetOrganizationName(Guid id)
@@ -232,6 +240,12 @@ namespace OrganizationRegister.Store.CodeFirst
         {
             Organization dbOrganization = GetDbOrganization(id);
             dbOrganization.SetPostalAddresses(addresses, context);
+        }
+
+        public void UpdateOrganizationAuthorizationtInformation(Guid id, IAuthorizationInformation information)
+        {
+            Organization dbOrganization = GetDbOrganization(id);
+            dbOrganization.SetAuthorizationInformation(information, context);
         }
 
         public bool HasActiveOrganization(string businessId, Guid? excludedOrganizationId)
@@ -293,6 +307,12 @@ namespace OrganizationRegister.Store.CodeFirst
         {
             return webPages == null
                 ? Enumerable.Empty<WebPage>() : webPages.Select(address => new WebPage(address.Name, address.Url, context.GetWebPageType(address.TypeId).Type));
+        }
+
+
+        private IEnumerable<Common.AuthorizationGroup> CreateAuthorizationGroups(IEnumerable<Model.AuthorizationGroup> authorizationGroups)
+        {
+            return authorizationGroups?.Select(group => new Common.AuthorizationGroup(group.GroupName,group.RoleId, group.GroupId)) ?? Enumerable.Empty<Common.AuthorizationGroup>();
         }
 
         private IEnumerable<LocalizedText> CreatePhoneCallChargeInfos(Guid? phoneNumberId, ICollection<PhoneNumberLanguageSpecification> callChargeInfos)

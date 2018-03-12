@@ -8,6 +8,7 @@ module OrganizationRegister
         BasicInfromation,
         ContactInformation,
         VisitingAddress,
-        PostalAddress
+        PostalAddress,
+        Authorization
     };
 }

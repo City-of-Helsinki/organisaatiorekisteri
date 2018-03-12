@@ -6,6 +6,7 @@ using System.Threading;
 using OrganizationRegister.Application.Settings;
 using OrganizationRegister.Common;
 using Affecto.Authentication.Claims;
+using OrganizationRegister.Application.User;
 using OrganizationRegister.Common.User;
 
 namespace OrganizationRegister.Application.Organization
@@ -15,6 +16,8 @@ namespace OrganizationRegister.Application.Organization
         private readonly IOrganizationRepository organizationRepository;
         private readonly ISettingsRepository settingsRepository;
         private readonly IAuthenticatedUserContext userContext;
+
+       
 
         public OrganizationService(IOrganizationRepository organizationRepository, ISettingsRepository settingsRepository, IAuthenticatedUserContext userContext = null)
         {
@@ -26,8 +29,11 @@ namespace OrganizationRegister.Application.Organization
             {
                 throw new ArgumentNullException("settingsRepository");
             }
+
+          
             this.organizationRepository = organizationRepository;
             this.settingsRepository = settingsRepository;
+           
             this.userContext = userContext;
         }
 
@@ -222,6 +228,21 @@ namespace OrganizationRegister.Application.Organization
             organizationRepository.UpdateOrganizationPostalAddresses(organizationId, organization);
             organizationRepository.SaveChanges();
         }
+
+
+        public void SetOrganizationAuthorizationInformation(Guid organizationId, IEnumerable<AuthorizationGroup> groups)
+        {
+            CheckManageOrganizationPermission(organizationId);
+
+           
+
+            Organization organization = GetOrganization(organizationId) as Organization;
+            organization.AuthorizationGroups = groups;
+            organizationRepository.UpdateOrganizationAuthorizationtInformation(organizationId, organization);
+            organizationRepository.SaveChanges();
+        }
+
+
 
         public void RemoveOrganization(Guid organizationId)
         {

@@ -163,6 +163,42 @@
                     </form>
                 </div>
             </div>
+            
+            
+            <div id="step5" data-ng-class="{'edit-mode-active': controller.isAuthorizationInformationBeingEdited()}">
+                <div class="container" data-ng-show="!controller.isAuthorizationInformationBeingEdited()">
+                    <div class="content-box">
+                        <div class="content-box-header">
+                            <h3>Käyttöoikeudet</h3>
+                            <button type="submit" class="button edit scroll-button" data-go-step="#step4" data-ng-click="controller.editAuthorizatioInformation()"
+                                    data-ng-hide="controller.isOrganizationBeingEdited()">
+                                Muokkaa
+                            </button>
+                        </div>
+                        <div class="content-box-inner" data-ng-include src="'App/Views/OrganizationPartials/ViewAuthorizationInformation.html'">
+                        </div>
+                    </div>
+                </div>
+                <div class="container" data-ng-show="controller.isAuthorizationInformationBeingEdited()">
+                    <form class="form-horizontal" name="controller.authorizationInformationForm" unsaved-warning-form>
+                        <div class="content-box">
+                            <div class="content-box-header">
+                                <h3>Käyttöoikeudet</h3>
+                                <button type="submit" class="button edit" data-ng-click="controller.saveOrganizationAuthorizationInformation()"
+                                        data-ng-disabled="controller.authorizationInformationForm.$invalid">
+                                    Tallenna
+                                </button>
+                                <button type="submit" class="button cancel" data-ng-click="controller.cancelEditing()">
+                                    Peruuta
+                                </button>
+                            </div>
+                            <div class="content-box-inner" data-ng-include src="'App/Views/OrganizationPartials/EditAuthorizationInformation.html'">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
         </div>
     </article>
 </div>

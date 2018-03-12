@@ -15,6 +15,7 @@ namespace OrganizationRegister.Store.CodeFirst
         IDbSet<EmailAddress> EmailAddresses { get; set; }
         IDbSet<WebPage> WebPages { get; set; }
         IDbSet<CallChargeType> CallChargeTypes { get; set; }
+        IDbSet<AuthorizationGroup> AuthorizationGroups { get; set; }
         AvailableDataLanguage GetDataLanguage(string languageCode);
         OrganizationType GetOrganizationType(string type);
         WebPageType GetWebPageType(string type);

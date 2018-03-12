@@ -7,6 +7,7 @@ using NSubstitute;
 using OrganizationRegister.Api.Location;
 using OrganizationRegister.Api.Organization;
 using OrganizationRegister.Application.Organization;
+using OrganizationRegister.Application.User;
 using OrganizationRegister.Common;
 
 namespace OrganizationRegister.Api.Tests.Organization
@@ -15,6 +16,7 @@ namespace OrganizationRegister.Api.Tests.Organization
     public class AuthorizedOrganizationControllerTests : OrganizationControllerTests
     {
         private IOrganizationService organizationService;
+        private IGroupService groupService;
         private AuthorizedOrganizationController sut;
 
         [TestInitialize]
@@ -22,7 +24,8 @@ namespace OrganizationRegister.Api.Tests.Organization
         {
             SetupMappers();
             organizationService = Substitute.For<IOrganizationService>();
-            sut = new AuthorizedOrganizationController(organizationService, mapperFactory);
+            groupService = Substitute.For<IGroupService>();
+            sut = new AuthorizedOrganizationController(organizationService, new Lazy<IGroupService>(() => groupService), mapperFactory);
         }
 
         [TestMethod]
@@ -377,6 +380,26 @@ namespace OrganizationRegister.Api.Tests.Organization
 
             organizationService.Received(1).SetOrganizationPostalAddresses(organizationId, useVisitingAddress, streetAddresses, streetAddressPostalCode, streetAddressPostalDistricts,
                 postOfficeBox, postOfficeBoxAddressPostalCode, postOfficeBoxAddressPostalDistricts);
+        }
+
+
+        [TestMethod]
+        public void SetOrganizationAuthorizationInformation()
+        {
+            Guid organizationId = Guid.NewGuid();
+
+            string groupName = "domaingroup";
+            Guid roleId = Guid.NewGuid();
+            Guid? groupId = Guid.NewGuid();
+
+      
+            IEnumerable<AuthorizationGroup> authorizationGroups = new List<AuthorizationGroup> { new AuthorizationGroup(groupName, roleId, groupId) };
+            var authorizationInformation = new AuthorizationInformation() {AuthorizationGroups = authorizationGroups};
+
+            sut.SetOrganizationAuthorizationInformation(organizationId, authorizationInformation);
+
+            organizationService.Received(1).
+                SetOrganizationAuthorizationInformation(organizationId, Arg.Is<IEnumerable<AuthorizationGroup>>(groups => groups.Count() == 1 && groups.Any(group => group.Name.Equals(groupName) && group.RoleId.Equals(roleId))));
         }
 
         [TestMethod]

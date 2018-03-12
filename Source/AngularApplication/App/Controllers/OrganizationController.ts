@@ -9,6 +9,7 @@ module OrganizationRegister
         public organizationTypes: Array<string>;
         public webPageTypes: Array<string>;
         public callChargeTypes: Array<string>;
+        public groupRoles: Array<UserRole>;
 
         public validBusinessId: boolean;
         public validValidity: boolean;
@@ -35,6 +36,9 @@ module OrganizationRegister
         public contactInformationForm: angular.IFormController;
         public visitingAddressForm: angular.IFormController;
         public postalAddressForm: angular.IFormController;
+        public authorizationInformationForm: angular.IFormController;
+        public authorizationGroupEditModeOn: boolean;
+        public authorizationGroupNameBeforeEditing: string;
 
         public displayOrganizationDeleteConfirm: boolean;
 
@@ -102,6 +106,11 @@ module OrganizationRegister
             return this.webPageEditModeOn && this.webPageUrlBeforeEditing === url && !this.validEditedWebPageUrl;
         }
 
+
+        public canSaveAuthorizationGroup(): boolean {
+            return this.authorizationGroupEditModeOn && this.model.hasEditedAuthorizationGroup();
+        }
+
         public showPostOfficeBoxPostalAddress(): boolean
         {
             if (this.model == null)
@@ -144,6 +153,10 @@ module OrganizationRegister
             return this.webPageEditModeOn && this.webPageUrlBeforeEditing === url;
         }
 
+        public isAuthorizationGroupBeingEdited(groupName: string) {
+            return this.authorizationGroupEditModeOn && this.authorizationGroupNameBeforeEditing === groupName;
+        }
+
         public isOtherWebPageBeingEdited(url: string)
         {
             return this.webPageEditModeOn && this.webPageUrlBeforeEditing !== url;
@@ -173,6 +186,18 @@ module OrganizationRegister
         {
             return this.editedSection === EditedOrganizationSection.PostalAddress;
         }
+
+        public isAuthorizationInformationBeingEdited(): boolean {
+            return this.editedSection === EditedOrganizationSection.Authorization;
+        }
+
+        public isOtherAuthorizationGroupBeingEdited(groupName: string) {
+            return this.authorizationGroupEditModeOn && this.authorizationGroupNameBeforeEditing !== groupName;
+        }
+
+
+        
+
 
         public isSubOrganization(): boolean
         {
@@ -291,6 +316,13 @@ module OrganizationRegister
             }
         }
 
+        public saveEditedOrganizationAuthorizationInformation(): angular.IPromise<void> {
+            this.editedSection = EditedOrganizationSection.None;
+            if (this.isModelChanged()) {
+                return this.saveOrganizationContactInformation(false);
+            }
+        }
+
         public saveOrganizationContactInformationAndMoveToNextStep(): angular.IPromise<void>
         {
             this.editedSection = EditedOrganizationSection.VisitingAddress;
@@ -389,6 +421,14 @@ module OrganizationRegister
             }
         }
 
+        public saveOrganizationPostalAddressAndMoveToNextStep(): angular.IPromise<void> {
+            this.editedSection = EditedOrganizationSection.Authorization;
+            if (this.isModelChanged()) {
+                return this.saveOrganizationPostalAddress(false);
+            }
+        }
+
+
         public saveOrganizationPostalAddressAndQuit(): angular.IPromise<void>
         {
             if (this.isModelChanged())
@@ -400,6 +440,70 @@ module OrganizationRegister
             }
             this.goToHomePage();
         }
+
+
+
+        public saveOrganizationAuthorizationInformationAndMoveToPreviousStep(): angular.IPromise<void> {
+            this.editedSection = EditedOrganizationSection.PostalAddress;
+            if (this.isModelChanged()) {
+                return this.saveOrganizationAuthorizationInformation(false);
+            }
+        }
+
+       
+        public saveOrganizationAuthorizationInformationAndQuit(): angular.IPromise<void> {
+            if (this.isModelChanged()) {
+                if (this.model.isAdded()) {
+                    return this.saveOrganizationAuthorizationInformation(true);
+                }
+            }
+            this.goToHomePage();
+        }
+
+
+
+        public editAuthorizatioInformation(): void
+        {
+            this.originalModel = angular.copy(this.model);
+            this.authorizationInformationForm.$setPristine();
+            this.editedSection = EditedOrganizationSection.Authorization;
+        }
+
+        public addNewAuthorizationGroup(): void
+        {
+
+            this.model.addAuthorizationGroup(this.model.authorizationGroupName, this.model.authorizationGroupRole.id, this.model.authorizationGroupRole.name);
+            this.model.authorizationGroupName = null;
+            this.model.authorizationGroupRole = null;
+            
+        }
+
+
+        public editAuthorizationGroup(groupName: string, groupRoleId: string): void
+        {
+            this.authorizationGroupNameBeforeEditing = groupName;
+            this.model.editedAuthorizationGroupName = groupName;
+           
+            for (let i = 0; i < this.groupRoles.length; i++) {
+                if (this.groupRoles[i].id === groupRoleId)
+                {
+                    this.model.editedAuthorizationGroupRole = this.groupRoles[i];
+                    break;
+                }
+            }
+            
+            this.authorizationGroupEditModeOn = true;
+            
+        }
+
+
+        public canAddNewAuthorizationGroup(): boolean
+        {
+           
+
+            return this.model != null && this.model.hasAuthorizationGroup() && !this.model.authorizationGroupExists() && !this.authorizationGroupEditModeOn;
+        }
+
 
         public addNewWebPage(): void
         {
@@ -423,6 +527,7 @@ module OrganizationRegister
                 this.setWebPageUrlValidity(true);
             }
         }
+
 
         public editWebPage(name: string, url: string, pageType: string): void
         {
@@ -456,6 +561,24 @@ module OrganizationRegister
             }
         }
 
+        public saveEditedAuthorizationGroup(): void
+        {
+            if (this.canSaveAuthorizationGroup())
+            {
+                this.model.removeAuthorizationGroup(this.authorizationGroupNameBeforeEditing);
+
+                //this.model.addAuthorizationGroup(this.model.editedAuthorizationGroupName, this.model.editedAuthorizationGroupRole);
+
+                this.model.addAuthorizationGroup(this.model.editedAuthorizationGroupName, this.model.editedAuthorizationGroupRole.id, this.model.editedAuthorizationGroupRole.name);
+                this.authorizationGroupEditModeOn = false;
+            }
+        }
+
+        public removeAuthorizationGroup(groupName: string): void {
+            this.model.removeAuthorizationGroup(groupName);
+        }
+
+
         public cancelWebPageEditing(): void
         {
             this.webPageEditModeOn = false;
@@ -464,6 +587,11 @@ module OrganizationRegister
         public removeWebPage(url: string): void
         {
             this.model.removeWebPage(url);
+        }
+
+
+        public cancelAuthorizationGroupEditing(): void {
+            this.authorizationGroupEditModeOn = false;
         }
 
         public addOrganizationPostalAddress(): void
@@ -712,6 +840,21 @@ module OrganizationRegister
                 });
         }
 
+        private saveOrganizationAuthorizationInformation(goToHomePage: boolean): angular.IPromise<void> {
+            this.busyIndicationService.showBusyIndicator("Tallennetaan organisaation käyttöoikeustietoja...");
+            this.originalModel = angular.copy(this.model);
+            return this.organizationService.setOrganizationAuthorizationtInformation(this.model)
+                .then(() => {
+                    this.model.initializeLocalizedTexts();
+                    this.busyIndicationService.hideBusyIndicator();
+                    if (goToHomePage) {
+                        this.goToHomePage();
+                    }
+                });
+        }
+
+
+
         private saveOrganizationBasicInformation(goToHomePage: boolean)
         {
             this.busyIndicationService.showBusyIndicator("Tallennetaan organisaation perustietoja...");
@@ -734,6 +877,10 @@ module OrganizationRegister
                     }
                 });
         }
+
+
+
+
 
         private addOrganizationWithBasicAndContactInformation(goToHomePage: boolean): angular.IPromise<void>
         {
@@ -882,7 +1029,7 @@ module OrganizationRegister
         {
             this.busyIndicationService.showBusyIndicator("Haetaan organisaation tietoja...");
             return this.$q.all([this.organizationService.getOrganization($routeParams.organizationId), this.settingsService.getOrganizationTypes(),
-                this.settingsService.getWebPageTypes(), this.settingsService.getCallChargeTypes()])
+                this.settingsService.getWebPageTypes(), this.settingsService.getCallChargeTypes(), this.settingsService.getUserRoles()])
                 .then((result: Array<any>) =>
                 {
                     var organization: Organization = result[0];
@@ -896,8 +1043,23 @@ module OrganizationRegister
                     this.organizationTypes = result[1];
                     this.webPageTypes = result[2];
                     this.callChargeTypes = result[3];
+                    this.groupRoles = result[4].filter((item: UserRole) => item.name !== Role.systemAdmin);  // TODO: Handle system admin role
+                    this.fetchAuthorizationGroupRoleNames();
+
                     this.busyIndicationService.hideBusyIndicator();
                 });            
+        }
+
+        private fetchAuthorizationGroupRoleNames(): void
+        {
+            this.model.authorizationGroups.forEach((desc, index) => {
+                for (let i = 0; i < this.groupRoles.length; i++) {
+                    if (this.groupRoles[i].id === this.model.authorizationGroups[index].roleId) {
+                        this.model.authorizationGroups[index].roleName = this.groupRoles[i].name;
+                        break;
+                    }
+                }
+            });
         }
 
         private fetchParentOrganizationAndTypeLists($routeParams: IOrganizationRoute): angular.IPromise<void>
@@ -905,7 +1067,7 @@ module OrganizationRegister
             this.busyIndicationService.showBusyIndicator("Haetaan organisaation esitietoja...");
             this.parentOrganizationId = $routeParams.parentOrganizationId;
             return this.$q.all([this.organizationService.getOrganization(this.parentOrganizationId), this.settingsService.getOrganizationTypes(),
-                this.settingsService.getWebPageTypes(), this.settingsService.getCallChargeTypes()])
+                this.settingsService.getWebPageTypes(), this.settingsService.getCallChargeTypes(), this.settingsService.getUserRoles()])
                 .then((result: Array<any>) =>
                 {
                     var organization: Organization = result[0];
@@ -919,6 +1081,10 @@ module OrganizationRegister
                     this.organizationTypes = result[1];
                     this.webPageTypes = result[2];
                     this.callChargeTypes = result[3];
+                    var roles: Array<UserRole> = result[4];
+                    // TODO: Handle system admin role
+                    this.groupRoles = roles.filter((item: UserRole) => item.name !== Role.systemAdmin);
+
                     this.busyIndicationService.hideBusyIndicator();
                 });            
         }
