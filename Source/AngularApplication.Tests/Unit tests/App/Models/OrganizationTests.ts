@@ -80,18 +80,7 @@ describe("Organization", () =>
         });
     });
 
-    describe("can be responsible dept for service", () => {
-
-        it("changing sub organization type (property) to non munincipal sets canBeResponsibleDeptForService to false", () => {
-
-            sut.isSubOrganization = true;
-            sut.type = "Kunta";
-            sut.canBeResponsibleDeptForService = true;
-
-            sut.typeProperty = "Yritys";
-            expect(sut.canBeResponsibleDeptForService).toBeFalsy();
-        });
-    });
+   
 
     describe("business id", () =>
     {

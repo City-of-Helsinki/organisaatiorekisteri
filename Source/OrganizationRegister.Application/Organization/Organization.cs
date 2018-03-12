@@ -53,7 +53,7 @@ namespace OrganizationRegister.Application.Organization
             Type = type;
             SetMunicipalityCode(municipalityCode);
             ValidateType();
-            ValidateCanBeResponsibleDeptForService();
+            // ValidateCanBeResponsibleDeptForService();
 
             postalAddresses = new PostalAddresses(this.languageCodes);
 
@@ -261,7 +261,7 @@ namespace OrganizationRegister.Application.Organization
         {
             CanBeResponsibleDeptForService = newCanBeResponsibleDeptForService;
 
-            ValidateCanBeResponsibleDeptForService();
+            //ValidateCanBeResponsibleDeptForService();
         }
 
         public void SetCallInformation(string newPhoneNumber, string newCallChargeType, IEnumerable<LocalizedText> newCallChargeinfos)

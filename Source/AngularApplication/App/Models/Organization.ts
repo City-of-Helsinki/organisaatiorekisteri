@@ -313,9 +313,9 @@ module OrganizationRegister
                 this.municipalityCode = null;
             }
 
-            if (!this.isMunincipalSubOrganization()) {
-                this.canBeResponsibleDeptForService = false;
-            }
+            //if (!this.isMunincipalSubOrganization()) {
+            //    this.canBeResponsibleDeptForService = false;
+            //}
         }
 
         public initializeLocalizedTexts(): void
