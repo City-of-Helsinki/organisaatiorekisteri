@@ -7,7 +7,8 @@
     <authors>Affecto</authors>
     <version>$version$</version>
     <releaseNotes>
-      "Can Be Responsible Dept For Service" field added to organizations basic information.
+      Organization authorization group maintenance.
+      All organizations can be responsible depts for services.
     </releaseNotes>
   </metadata>
 </package>

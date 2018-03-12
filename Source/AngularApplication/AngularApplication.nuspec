@@ -7,7 +7,8 @@
     <authors>Affecto</authors>
     <version>$version$</version>
     <releaseNotes>
-      Added new db table to store mappings between AD groups and organizations. Added new API method to return organizations based on GroupIds.
+      Organization authorization group maintenance.
+      All organizations can be responsible depts for services.
     </releaseNotes>
   </metadata>
 </package>
