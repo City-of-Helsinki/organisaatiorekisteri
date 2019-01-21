@@ -64,6 +64,40 @@ namespace OrganizationRegister.Api.Organization
         }
 
         [HttpGet]
+        [GetRoute("organizationlistfororganization/{businessId:length(9)}")]
+        public IHttpActionResult GetOrganizationListForOrganizationByBusinessId(string businessId)
+        {
+
+            IEnumerable<IOrganizationListItem> organizations = organizationService.GetOrganizationListForOrganization(businessId);
+            var mapper = mapperFactory.CreateOrganizationListItemMapper();
+            IEnumerable<OrganizationListItem> mappedOrganizations = mapper.Map(organizations);
+            return Ok(mappedOrganizations);
+        }
+
+
+        [HttpGet]
+        [GetRoute("organizationlistfororganization/{organizationId:guid}")]
+        public IHttpActionResult GetOrganizationListForOrganization(Guid organizationId)
+        {
+
+            IEnumerable<IOrganizationListItem> organizations = organizationService.GetOrganizationListForOrganization(organizationId);
+            var mapper = mapperFactory.CreateOrganizationListItemMapper();
+            IEnumerable<OrganizationListItem> mappedOrganizations = mapper.Map(organizations);
+            return Ok(mappedOrganizations);
+        }
+
+        [HttpGet]
+        [GetRoute("mainorganizationlist")]
+        public IHttpActionResult GetMainOrganizationList()
+        {
+
+            IEnumerable<IOrganizationListItem> organizations = organizationService.GetMainOrganizationList();
+            var mapper = mapperFactory.CreateOrganizationListItemMapper();
+            IEnumerable<OrganizationListItem> mappedOrganizations = mapper.Map(organizations);
+            return Ok(mappedOrganizations);
+        }
+
+        [HttpGet]
         [GetRoute("organizationhierarchy")]
         public IHttpActionResult GetOrganizationHierarchy()
         {

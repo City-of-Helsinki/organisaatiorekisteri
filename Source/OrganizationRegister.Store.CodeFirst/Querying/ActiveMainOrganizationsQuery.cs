@@ -22,5 +22,10 @@ namespace OrganizationRegister.Store.CodeFirst.Querying
         {
             return organizations.Where(o => o.Active && o.ParentOrganizationId == null);
         }
+
+        public IEnumerable<Organization> Execute(string businessId)
+        {
+            return organizations.Where(o => o.Active && o.ParentOrganizationId == null && o.BusinessId == businessId);
+        }
     }
 }

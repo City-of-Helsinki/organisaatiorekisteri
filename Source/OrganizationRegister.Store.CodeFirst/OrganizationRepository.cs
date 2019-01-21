@@ -123,6 +123,21 @@ namespace OrganizationRegister.Store.CodeFirst
             return CreateOrganizationListItems(FilterByParentOrganization(dbOrganizations.ToList(), organizationId));
         }
 
+
+        public IReadOnlyCollection<IOrganizationListItem> GetMainOrganizationList(string businessId)
+        {
+            var query = new ActiveMainOrganizationsQuery(context.Organizations);
+            IEnumerable<Organization> dbOrganizations = query.Execute(businessId);
+            return CreateOrganizationListItems(dbOrganizations.ToList());
+        }
+
+        public IReadOnlyCollection<IOrganizationListItem> GetMainOrganizationList()
+        {
+            var query = new ActiveMainOrganizationsQuery(context.Organizations);
+            IEnumerable<Organization> dbOrganizations = query.Execute();
+            return CreateOrganizationListItems(dbOrganizations.ToList());
+        }
+
         public IReadOnlyCollection<IOrganizationListItem> GetOrganizationListForGroup(Guid groupId)
         {
             var query = new GroupOrganizationsQuery(context.Organizations, groupId);

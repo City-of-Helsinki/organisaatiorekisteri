@@ -41,5 +41,11 @@ namespace OrganizationRegister.Application.Organization
 
 
         IEnumerable<IOrganizationListItem> GetOrganizationListForMunicipality(int rootMunicipalityCode);
+
+        IEnumerable<IOrganizationListItem> GetOrganizationListForOrganization(Guid organizationId);
+
+        IEnumerable<IOrganizationListItem> GetOrganizationListForOrganization(string businessId);
+
+        IEnumerable<IOrganizationListItem> GetMainOrganizationList();
     }
 }
