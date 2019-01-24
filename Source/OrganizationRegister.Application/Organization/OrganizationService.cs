@@ -131,6 +131,25 @@ namespace OrganizationRegister.Application.Organization
             return orgs;
         }
 
+        public IEnumerable<IOrganizationListItem> GetOrganizationListForOrganization(Guid organizationId)
+        {
+            return organizationRepository.GetOrganizationListForOrganization(organizationId);
+        }
+        public IEnumerable<IOrganizationListItem> GetOrganizationListForOrganization(string businessId)
+        {
+            var orgs = new List<IOrganizationListItem>();
+            foreach (var org in organizationRepository.GetMainOrganizationList(businessId))
+            {
+                orgs.AddRange(organizationRepository.GetOrganizationListForOrganization(org.Id));
+            }
+            return orgs;
+        }
+
+        public IEnumerable<IOrganizationListItem> GetMainOrganizationList()
+        {
+            return organizationRepository.GetMainOrganizationList();
+        }
+
         public IEnumerable<IHierarchicalOrganization> GetOrganizationHierarchy(bool includeFutureOrganizations)
         {
             return organizationRepository.GetOrganizationHierarchy(includeFutureOrganizations);

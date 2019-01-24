@@ -178,7 +178,63 @@ namespace OrganizationRegister.Api.Tests.Organization
             Assert.IsTrue(result.Content.All(org => org.Equals(returnValue)));
         
         }
-    
+
+
+        [TestMethod]
+        public void GetOrganizationListForOrganization()
+        {
+            var organizationId = Guid.NewGuid();
+            var returnValue = new OrganizationListItem();
+            var appReturnValue = Substitute.For<IOrganizationListItem>();
+            organizationListItemMapper.Map(appReturnValue).Returns(returnValue);
+
+            organizationService.GetOrganizationListForOrganization(organizationId).Returns(new List<IOrganizationListItem> { appReturnValue, appReturnValue });
+            var result = sut.GetOrganizationListForOrganization(organizationId) as OkNegotiatedContentResult<IEnumerable<OrganizationListItem>>;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Content.Count());
+            Assert.IsTrue(result.Content.All(org => org.Equals(returnValue)));
+        }
+
+
+        [TestMethod]
+        public void GetOrganizationListForOrganizationByBusinessId()
+        {
+
+            var businessId = "";
+            var returnValue = new OrganizationListItem();
+            var appReturnValue = Substitute.For<IOrganizationListItem>();
+           
+            organizationListItemMapper.Map(appReturnValue).Returns(returnValue);
+
+            organizationService.GetOrganizationListForOrganization(businessId).Returns(new List<IOrganizationListItem> { appReturnValue, appReturnValue });
+            var result = sut.GetOrganizationListForOrganizationByBusinessId(businessId) as OkNegotiatedContentResult<IEnumerable<OrganizationListItem>>;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Content.Count());
+            Assert.IsTrue(result.Content.All(org => org.Equals(returnValue)));
+
+        }
+
+        [TestMethod]
+        public void GetMainOrganizationList()
+        {
+          
+            OrganizationListItem returnValue = new OrganizationListItem();
+            IOrganizationListItem appReturnValue = Substitute.For<IOrganizationListItem>();
+
+            organizationListItemMapper.Map(appReturnValue).Returns(returnValue);
+
+            organizationService.GetMainOrganizationList().Returns(new List<IOrganizationListItem> { appReturnValue, appReturnValue });
+
+            var result = sut.GetMainOrganizationList() as OkNegotiatedContentResult<IEnumerable<OrganizationListItem>>;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Content.Count());
+            Assert.IsTrue(result.Content.All(org => org.Equals(returnValue)));
+
+        }
+
 
         [TestMethod]
         public void GetOrganizationFlatlistForGroups()
