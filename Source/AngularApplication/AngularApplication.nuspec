@@ -7,8 +7,7 @@
     <authors>Affecto</authors>
     <version>$version$</version>
     <releaseNotes>
-      Organization authorization group maintenance.
-      All organizations can be responsible depts for services.
+      Bootstrap updated to version 3.4.1
     </releaseNotes>
   </metadata>
 </package>
