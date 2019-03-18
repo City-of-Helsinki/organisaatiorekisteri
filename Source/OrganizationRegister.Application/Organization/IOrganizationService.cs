@@ -39,6 +39,7 @@ namespace OrganizationRegister.Application.Organization
 
         IEnumerable<IOrganizationListItem> GetGroupOrganizationsAsFlatlist(string groupIds);
 
+        IOrganizationListContainer GetGroupOrganizationsAndRoles(string groups);
 
         IEnumerable<IOrganizationListItem> GetOrganizationListForMunicipality(int rootMunicipalityCode);
 

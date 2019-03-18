@@ -21,18 +21,8 @@ namespace OrganizationRegister.Application.Organization
 
         public OrganizationService(IOrganizationRepository organizationRepository, ISettingsRepository settingsRepository, IAuthenticatedUserContext userContext = null)
         {
-            if (organizationRepository == null)
-            {
-                throw new ArgumentNullException("organizationRepository");
-            }
-            if (settingsRepository == null)
-            {
-                throw new ArgumentNullException("settingsRepository");
-            }
-
-          
-            this.organizationRepository = organizationRepository;
-            this.settingsRepository = settingsRepository;
+            this.organizationRepository = organizationRepository ?? throw new ArgumentNullException("organizationRepository");
+            this.settingsRepository = settingsRepository ?? throw new ArgumentNullException("settingsRepository");
            
             this.userContext = userContext;
         }
@@ -120,6 +110,53 @@ namespace OrganizationRegister.Application.Organization
             return orgs;
 
         }
+
+        public IOrganizationListContainer GetGroupOrganizationsAndRoles(string groups)
+        {
+            if (string.IsNullOrWhiteSpace(groups))
+            {
+                throw new ArgumentNullException("groupIds");
+            }
+            
+            var peruskayttajaRoleGuid = Guid.Parse("0ccf78ea-10ea-4b00-a16b-9776c77ca46f");
+            var esteettomyysRoleGuid = Guid.Parse("919c81e2-db6e-4f00-92ed-780b756ebf03");
+
+            // groups contains ;-delimited guids: 11112222-3333-4444-5555-666677778888;22223333-4444-5555-6666-777788889999;...
+            var ids = groups.Split(';').ToList();
+            List<IOrganizationListItem> peruskayttajaOrgs = new List<IOrganizationListItem>();
+            List<IOrganizationListItem> esteettomyysOrgs = new List<IOrganizationListItem>();
+            if (ids.Any())
+            {
+                ids.ForEach(id =>
+                {
+                    Guid groupId = Guid.Parse(id);
+
+                    var parentOrgs = organizationRepository.GetOrganizationListForGroupAndRole(groupId, peruskayttajaRoleGuid);
+                    foreach (var parentOrg in parentOrgs)
+                    {
+                        peruskayttajaOrgs.AddRange(organizationRepository.GetOrganizationListForOrganization(parentOrg.Id));
+                    }
+
+                    parentOrgs = organizationRepository.GetOrganizationListForGroupAndRole(groupId, esteettomyysRoleGuid);
+                    foreach (var parentOrg in parentOrgs)
+                    {
+                        esteettomyysOrgs.AddRange(organizationRepository.GetOrganizationListForOrganization(parentOrg.Id));
+                    }
+
+
+                });
+
+                //TODO: Get distinct organizations
+                peruskayttajaOrgs = peruskayttajaOrgs.Distinct().ToList();
+                esteettomyysOrgs = esteettomyysOrgs.Distinct().ToList();
+
+            }
+
+            var orgListContainer = new OrganizationListContainer(peruskayttajaOrgs, esteettomyysOrgs);
+            return orgListContainer;
+
+        }
+
 
         public IEnumerable<IOrganizationListItem> GetOrganizationListForMunicipality(int rootMunicipalityCode)
         {

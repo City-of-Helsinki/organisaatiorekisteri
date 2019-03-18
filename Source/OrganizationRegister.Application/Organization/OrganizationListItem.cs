@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using OrganizationRegister.Common;
 
 namespace OrganizationRegister.Application.Organization

@@ -27,6 +27,7 @@
     <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -251,7 +252,9 @@
     <Compile Include="Organization\AuthorizedOrganizationController.cs" />
     <Compile Include="Organization\AuthorizationInformation.cs" />
     <Compile Include="Organization\OpenOrganizationController.cs" />
+    <Compile Include="Organization\OrganizationListContainer.cs" />
     <Compile Include="Organization\OrganizationListItem.cs" />
+    <Compile Include="Organization\OrganizationListContainerMapper.cs" />
     <Compile Include="Organization\OrganizationName.cs" />
     <Compile Include="Organization\OrganizationListItemMapper.cs" />
     <Compile Include="Organization\OrganizationNameMapper.cs" />
@@ -315,7 +318,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="DatabaseConnectionStrings.config" />
-    <None Include="Authentication.config" />
+    <None Include="Authentication.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="DatabaseSchemas.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>

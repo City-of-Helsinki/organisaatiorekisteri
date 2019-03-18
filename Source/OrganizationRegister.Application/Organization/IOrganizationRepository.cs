@@ -23,8 +23,8 @@ namespace OrganizationRegister.Application.Organization
 
         IReadOnlyCollection<IOrganizationListItem> GetOrganizationListForOrganization(Guid organizationId);
 
-
         IReadOnlyCollection<IOrganizationListItem> GetOrganizationListForGroup(Guid groupId);
+        IReadOnlyCollection<IOrganizationListItem> GetOrganizationListForGroupAndRole(Guid groupId, Guid roleId);
 
         IReadOnlyCollection<IOrganizationListItem> GetMainOrganizationList();
 

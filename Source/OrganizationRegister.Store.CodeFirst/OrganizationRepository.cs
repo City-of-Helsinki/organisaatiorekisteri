@@ -140,8 +140,15 @@ namespace OrganizationRegister.Store.CodeFirst
 
         public IReadOnlyCollection<IOrganizationListItem> GetOrganizationListForGroup(Guid groupId)
         {
-            var query = new GroupOrganizationsQuery(context.Organizations, groupId);
-            var dbOrganizations = query.Execute();
+            var query = new GroupOrganizationsQuery(context.Organizations);
+            var dbOrganizations = query.Execute(groupId);
+            return CreateOrganizationListItems(dbOrganizations.ToList());
+        }
+
+        public IReadOnlyCollection<IOrganizationListItem> GetOrganizationListForGroupAndRole(Guid groupId, Guid roleId)
+        {
+            var query = new GroupOrganizationsQuery(context.Organizations);
+            var dbOrganizations = query.Execute(groupId, roleId);
             return CreateOrganizationListItems(dbOrganizations.ToList());
         }
 
@@ -438,7 +445,6 @@ namespace OrganizationRegister.Store.CodeFirst
             }
             return organizations;
         }
-
 
         private static IReadOnlyCollection<Organization> FilterByParentOrganization(IReadOnlyCollection<Organization> organizations, Guid? parentOrganizationId)
         {

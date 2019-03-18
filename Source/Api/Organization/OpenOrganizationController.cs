@@ -202,5 +202,19 @@ namespace OrganizationRegister.Api.Organization
             return Ok(mappedOrganizations);
         }
 
+
+
+        [HttpGet]
+        [GetRoute("organizationsandrolesforgroups/{groupIds}")]
+        public IHttpActionResult GetOrganizationsAndRolesForGroups(string groupIds)
+        {
+            IOrganizationListContainer organizations = organizationService.GetGroupOrganizationsAndRoles(groupIds);
+            var mapper = mapperFactory.CreateOrganizationListContainerMapper();
+            OrganizationListContainer mappedOrganizations = mapper.Map(organizations);
+            return Ok(mappedOrganizations);           
+        }
+
+
+
     }
 }

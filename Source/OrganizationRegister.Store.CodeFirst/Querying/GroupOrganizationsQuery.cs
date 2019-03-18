@@ -8,22 +8,14 @@ namespace OrganizationRegister.Store.CodeFirst.Querying
     internal class GroupOrganizationsQuery
     {
         private readonly IQueryable<Organization> organizations;
-        private readonly Guid groupId;
 
-        public GroupOrganizationsQuery(IQueryable<Organization> organizations, Guid groupId)
+        public GroupOrganizationsQuery(IQueryable<Organization> organizations)
         {
-            if (organizations == null)
-            {
-                throw new ArgumentNullException("organizations");
-            }
-            this.organizations = organizations;
-            this.groupId = groupId;
-
+            this.organizations = organizations ?? throw new ArgumentNullException("organizations");
         }
-
-        public IEnumerable<Organization> Execute()
+        
+        public IEnumerable<Organization> Execute(Guid groupId)
         {
-            //TODO:Get orgs with the specified groupId
             var now = DateTime.Now.Date;
             return
                 organizations.Where(
@@ -33,5 +25,18 @@ namespace OrganizationRegister.Store.CodeFirst.Querying
                     && o.AuthorizationGroups.Any(data => data.GroupId == groupId)
                     );
         }
+
+        public IEnumerable<Organization> Execute(Guid groupId, Guid roleId)
+        {
+            var now = DateTime.Now.Date;
+            return
+                organizations.Where(
+                    o => o.Active
+                    && (!o.ValidFrom.HasValue || o.ValidFrom.HasValue && o.ValidFrom.Value <= now)
+                    && (!o.ValidTo.HasValue || o.ValidTo.HasValue && o.ValidTo.Value >= now)
+                    && o.AuthorizationGroups.Any(data => data.GroupId == groupId && data.RoleId == roleId)
+                    );
+        }
+
     }
 }

@@ -69,6 +69,8 @@
     <Compile Include="Localization\MandatoryLocalizedSingleTexts.cs" />
     <Compile Include="HierarchicalCollection.cs" />
     <Compile Include="Organization\IAuthorizationInformation.cs" />
+    <Compile Include="Organization\IOrganizationListContainer.cs" />
+    <Compile Include="Organization\OrganizationListContainer.cs" />
     <Compile Include="Organization\OrganizationListItem.cs" />
     <Compile Include="Organization\IBasicInformation.cs" />
     <Compile Include="Organization\IContactInformation.cs" />
