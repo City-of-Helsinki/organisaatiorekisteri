@@ -21,9 +21,19 @@ namespace OrganizationRegister.Application.Organization
 
         public OrganizationService(IOrganizationRepository organizationRepository, ISettingsRepository settingsRepository, IAuthenticatedUserContext userContext = null)
         {
-            this.organizationRepository = organizationRepository ?? throw new ArgumentNullException("organizationRepository");
-            this.settingsRepository = settingsRepository ?? throw new ArgumentNullException("settingsRepository");
-           
+                      
+            if (organizationRepository == null)
+            {
+                throw new ArgumentNullException("organizationRepository");
+            }
+            if (settingsRepository == null)
+            {
+                throw new ArgumentNullException("settingsRepository");
+            }
+
+            this.organizationRepository = organizationRepository;
+            this.settingsRepository = settingsRepository;
+                       
             this.userContext = userContext;
         }
 
