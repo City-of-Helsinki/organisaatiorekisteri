@@ -11,7 +11,13 @@ namespace OrganizationRegister.Store.CodeFirst.Querying
 
         public GroupOrganizationsQuery(IQueryable<Organization> organizations)
         {
-            this.organizations = organizations ?? throw new ArgumentNullException("organizations");
+          
+            if (organizations == null)
+            {
+                throw new ArgumentNullException("organizations");
+            }
+            this.organizations = organizations;
+            
         }
         
         public IEnumerable<Organization> Execute(Guid groupId)
