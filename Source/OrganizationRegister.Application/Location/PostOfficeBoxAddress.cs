@@ -27,7 +27,11 @@ namespace OrganizationRegister.Application.Location
 
             var address = new PostOfficeBoxAddress(languageCodes)
             {
-                postalCode = string.IsNullOrWhiteSpace(postalCode) ? null : Affecto.Identifiers.Finnish.PostOfficeBoxPostalCode.Create(postalCode),
+                //postalCode = string.IsNullOrWhiteSpace(postalCode) ? null : Affecto.Identifiers.Finnish.PostOfficeBoxPostalCode.Create(postalCode),
+
+                // use postal code validation specification with post office box postal code validation
+                postalCode = string.IsNullOrWhiteSpace(postalCode) ? null : Affecto.Identifiers.Finnish.PostalCode.Create(postalCode),
+
                 PostOfficeBox = postOfficeBox
             };
 

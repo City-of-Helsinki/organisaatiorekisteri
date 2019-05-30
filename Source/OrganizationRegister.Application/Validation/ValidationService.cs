@@ -62,7 +62,10 @@ namespace OrganizationRegister.Application.Validation
 
         public bool ValidatePostOfficeBoxPostalCode(string postalCode)
         {
-            var specification = new PostOfficeBoxPostalCodeSpecification();
+            //var specification = new PostOfficeBoxPostalCodeSpecification();
+
+            // use postal code validation specification with post office box postal code validation
+            var specification = new PostalCodeSpecification();
             return specification.IsSatisfiedBy(postalCode);
         }
     }
