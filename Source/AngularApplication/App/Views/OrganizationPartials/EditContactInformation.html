@@ -11,11 +11,11 @@
 </div>
 <div class="row">
     <div class="col-xs-6">
-        <label for="phoneNumber">Vaihteen puhelinnumero <small>Esim. 09 12345</small></label>
+        <label for="phoneNumber">Vaihteen puhelinnumero <small>Esim. +358 9 1234567</small></label>
         <input type="text" id="phoneNumber" class="form-control" name="phoneNumber" maxlength="50" data-ng-model="controller.model.phoneNumber"
                data-ng-blur="controller.validatePhoneNumber()">
         <div id="phoneNumberErrorMessage" aria-live="polite" class="validation-message" data-ng-show="!controller.validPhoneNumber">
-            Virheellinen puhelinnumero
+            Virheellinen puhelinnumero. Jos syötät puhelinnumeron alkuun +358, jätä puhelinnumeron ensimmäinen nolla pois.
         </div>
     </div>
     <div class="col-xs-6"></div>
