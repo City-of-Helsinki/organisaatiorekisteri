@@ -16,6 +16,8 @@ namespace OrganizationRegister.Api.Organization
 
         public OpenOrganizationController(IOrganizationService organizationService, MapperFactory mapperFactory)
         {
+            W("OpenOrganizationController");
+
             if (organizationService == null)
             {
                 throw new ArgumentNullException("organizationService");
@@ -111,6 +113,8 @@ namespace OrganizationRegister.Api.Organization
         [GetRoute("organizationhierarchyfororganization/{organizationId}")]
         public IHttpActionResult GetOrganizationHierarchyForOrganization(Guid organizationId)
         {
+            W("organizationhierarchyfororganization organizationId: " + organizationId);
+
             IEnumerable<IHierarchicalOrganization> organizations = organizationService.GetCompleteOrganizationHierarchyForOrganization(organizationId);
             var mapper = mapperFactory.CreateHierarchicalOrganizationMapper();
             IEnumerable<HierarchicalOrganization> mappedOrganizations = mapper.Map(organizations);
@@ -121,6 +125,9 @@ namespace OrganizationRegister.Api.Organization
         [GetRoute("currentorganizationhierarchy")]
         public IHttpActionResult GetCurrentOrganizationHierarchy()
         {
+            W("currentorganizationhierarchy");
+         
+
             IEnumerable<IHierarchicalOrganization> organizations = organizationService.GetOrganizationHierarchy(false);
             var mapper = mapperFactory.CreateHierarchicalOrganizationMapper();
             IEnumerable<HierarchicalOrganization> mappedOrganizations = mapper.Map(organizations);
@@ -142,6 +149,8 @@ namespace OrganizationRegister.Api.Organization
         [GetRoute("currentorganizationhierarchyfororganization/{organizationId}")]
         public IHttpActionResult GetCurrentOrganizationHierarchyForOrganization(Guid organizationId)
         {
+            W("GetCurrentOrganizationHierarchyForOrganization organizationId: " + organizationId);
+
             IEnumerable<IHierarchicalOrganization> organizations = organizationService.GetOrganizationHierarchyForOrganization(organizationId, includeFutureOrganizations: false);
             var mapper = mapperFactory.CreateHierarchicalOrganizationMapper();
             IEnumerable<HierarchicalOrganization> mappedOrganizations = mapper.Map(organizations);
@@ -201,6 +210,97 @@ namespace OrganizationRegister.Api.Organization
             IEnumerable<OrganizationListItem> mappedOrganizations = mapper.Map(organizations);
             return Ok(mappedOrganizations);
         }
+
+
+        //PM 20.4.2021
+        [HttpGet]
+        [GetRoute("allauthorizationgroups")]
+        public IHttpActionResult GetAllAuthorizationGroups()
+        {
+            W("GetAllAuthorizationGroups");
+            int A = Environment.TickCount;
+
+            List<Common.AuthorizationGroup> authorizationGroups = null;
+            try
+            {
+                authorizationGroups = organizationService.GetAuthorizationGroups();
+            }
+            catch (Exception ex)
+            {
+                W(ex);
+                throw ex;
+            }
+
+            W("GetAllAuthorizationGroups TickCount: " + (Environment.TickCount - A));
+            return Ok(authorizationGroups);
+        }
+
+        private string GetAsciiList(string str)
+        {
+            string s = "";
+
+            foreach (char c in str.ToCharArray())
+            {
+                s += ((int)c) + ",";
+            }
+
+            return s;
+        }
+
+        //PM 20.4.2021
+        [HttpPost]
+        [PostRoute("authorizationgroups")]
+        public IHttpActionResult GetAuthorizationGroups([FromBody] string groupNames)
+        {
+            W("GetAuthorizationGroups GroupNames: " + groupNames);
+
+            
+            if (string.IsNullOrWhiteSpace(groupNames))
+            {
+                throw new Exception("GroupNames is null or empty.");
+            }
+
+            int A = Environment.TickCount;
+
+            List<Common.AuthorizationGroup> authorizationGroups = new List<Common.AuthorizationGroup>();
+
+            try
+            {
+                string[] arr = groupNames.ToLower().Split(new string[1] { "," }, StringSplitOptions.RemoveEmptyEntries);
+                List<string> liGroupNames = new List<string>();
+                liGroupNames.AddRange(arr);
+
+                List<Common.AuthorizationGroup>  ags = organizationService.GetAuthorizationGroups();
+                foreach (Common.AuthorizationGroup ag in ags)
+                {
+                    W("ags: [" + ag.Name + "][" + ag.OrganizationId + "][" + ag.RoleId + "]");
+
+                    if (liGroupNames.Contains(ag.Name.ToLower()))
+                    {
+                        authorizationGroups.Add(ag);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                W(ex);
+                throw ex;
+            }
+
+            W("GetAuthorizationGroups Count: " + authorizationGroups.Count + ", TickCount: " + (Environment.TickCount - A));
+            return Ok(authorizationGroups);
+
+        }
+
+        private void W(object s)
+        {
+            System.Diagnostics.Trace.WriteLine("Trace[" + this.GetType() + "][" + this.GetHashCode() + "] " + s);
+            System.Diagnostics.Debug.WriteLine("Debug[" + this.GetType() + "][" + this.GetHashCode() + "] " + s);
+            Console.WriteLine("Debug[" + this.GetType() + "][" + this.GetHashCode() + "] " + s);
+
+        }
+        
 
     }
 }

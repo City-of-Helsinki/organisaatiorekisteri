@@ -178,8 +178,31 @@ namespace OrganizationRegister.Store.CodeFirst
                 (dbOrganization.ParentOrganizationId != null) ? dbOrganization.ParentOrganization.Id : (Guid?) null, dbOrganization.ValidFrom, dbOrganization.ValidTo);
         }
 
+        public List<IOrganization> GetOrganizationsByPtvId(string ptvId)
+        {
+            List<IOrganization> l = new List<IOrganization>();
+            var dbOrganizations = context.Organizations.Where(a => a.PTVId == ptvId);
+            foreach (var dbOrganization in dbOrganizations)
+            {
+                var organization = OrganizationFactory.CreateOrganization(dbOrganization.Id);
+                organization.PTVId = dbOrganization.PTVId;
+                l.Add(organization);
+            }
+
+
+
+            return l;
+        }
+
+        public void W(object s)
+        {
+            System.Diagnostics.Trace.WriteLine("[" + this.GetType() + "][" + this.GetHashCode() + "] " + s);
+        }
+
         public IOrganization GetOrganization(Guid id)
         {
+            W("GetOrganization id: " + id);
+
             Organization dbOrganization = GetDbOrganization(id);
             ICollection<Model.WebPage> webPages = dbOrganization.WebPages;
 
@@ -205,7 +228,9 @@ namespace OrganizationRegister.Store.CodeFirst
 
             string emailAddress = (dbOrganization.EmailAddress != null) ? dbOrganization.EmailAddress.Email : null;
 
-            return OrganizationFactory.CreateOrganization(id, dbOrganization.NumericId, dbOrganization.BusinessId, dbOrganization.Oid, dbOrganization.Type.Name,
+    
+
+            var o =  OrganizationFactory.CreateOrganization(id, dbOrganization.NumericId, dbOrganization.BusinessId, dbOrganization.Oid, dbOrganization.PTVId, dbOrganization.Type.Name,
                 dbOrganization.GetNames(), dbOrganization.GetDescriptions(), dbOrganization.MunicipalityCode, dbOrganization.ValidFrom, dbOrganization.ValidTo,
                 phoneNumber, callChargeInfoType, CreatePhoneCallChargeInfos(phoneNumberId, languageSpecifiPhoneNumberData), emailAddress, CreateWebPages(webPages),
                 CreateStreetAddresses(visitingAddressId, languageSpecificAddressData), dbOrganization.GetStreetAddressPostalCode(),
@@ -221,6 +246,10 @@ namespace OrganizationRegister.Store.CodeFirst
                 dbOrganization.CanBeTransferredToFsc, 
                 dbOrganization.CanBeResponsibleDeptForService, 
                 CreateAuthorizationGroups(authorizationGroups));
+
+            W("GetOrganization Organization: " + (o != null ? o.Id + "": "null"));
+
+            return o;
         }
 
         public IOrganizationName GetOrganizationName(Guid id)
@@ -291,6 +320,7 @@ namespace OrganizationRegister.Store.CodeFirst
 
             Organization dbOrganization = GetDbOrganization(id);
             dbOrganization.Active = false;
+            dbOrganization.PTVId = null;
         }
 
         private Organization GetDbOrganization(Guid id)
@@ -465,7 +495,21 @@ namespace OrganizationRegister.Store.CodeFirst
             return filteredOrganizations;
         }
 
+        //PM 20.4.2021
+        public List<Common.AuthorizationGroup> GetAuthorizationGroups()
+        {
+            List<Common.AuthorizationGroup> l = new List<Common.AuthorizationGroup>();
 
+            var authorizationGroups = context.AuthorizationGroups;
+            foreach (var ag in authorizationGroups)
+            {
+                Common.AuthorizationGroup obj = new Common.AuthorizationGroup(ag.GroupName, ag.RoleId, ag.GroupId);
+                obj.OrganizationId = ag.OrganizationId;
+                l.Add(obj);
+            }
+
+            return l;
+        }
 
     }
 }

@@ -8,6 +8,7 @@ using OrganizationRegister.Common;
 using Affecto.Authentication.Claims;
 using OrganizationRegister.Application.User;
 using OrganizationRegister.Common.User;
+using OrganizationRegister.Application.Validation;
 
 namespace OrganizationRegister.Application.Organization
 {
@@ -190,12 +191,33 @@ namespace OrganizationRegister.Application.Organization
             return organizationRepository.GetOrganizationName(organizationId);
         }
 
-        public void SetOrganizationBasicInformation(Guid organizationId, string businessId, string oid, IEnumerable<LocalizedText> names, IEnumerable<LocalizedText> descriptions, 
-            string type, string municipalityCode, DateTime? validFrom, DateTime? validTo, IEnumerable<LocalizedText> nameAbbreviations, bool canBeTransferredToFsc, bool canBeResponsibleDeptForService)
+        public void W(object s)
         {
+            System.Diagnostics.Trace.WriteLine("[" + this.GetType()+ "][" + this.GetHashCode() + "] " + s);
+        }
+
+
+
+        public void SetOrganizationBasicInformation(Guid organizationId, string businessId, string oid, IEnumerable<LocalizedText> names, IEnumerable<LocalizedText> descriptions, 
+            string type, string municipalityCode, DateTime? validFrom, DateTime? validTo, IEnumerable<LocalizedText> nameAbbreviations, bool canBeTransferredToFsc, bool canBeResponsibleDeptForService, string ptvId)
+        {
+            W("SetOrganizationBasicInformation organizationId: " + organizationId  + ",  ptvId: " + ptvId);
+
             CheckManageOrganizationPermission(organizationId);
 
+            //tunnite sallittu missä tahansa organisaatiossa
+            //ValidationService validationService = new ValidationService(organizationRepository);
+            //var validationResult = validationService.ValidateUniquePtvId(ptvId, organizationId);
+            //if (!validationResult.IsValid)
+            //{
+            //    W(validationResult.ReasonForInvalidity);
+            //    throw new Exception(validationResult.ReasonForInvalidity);
+            //}
+
+
+
             Organization organization = GetOrganization(organizationId) as Organization;
+
             organization.BusinessId = businessId;
             organization.Oid = oid;
             organization.Names = names;
@@ -205,6 +227,7 @@ namespace OrganizationRegister.Application.Organization
             organization.SetType(type, municipalityCode);
             organization.SetValidity(validFrom, validTo);
             organization.SetCanBeResponsibleDeptForService(canBeResponsibleDeptForService);
+            organization.PTVId = ptvId;
             organizationRepository.UpdateOrganizationBasicInformation(organizationId, organization, organization is SubOrganization);
             organizationRepository.SaveChanges();
         }
@@ -301,6 +324,14 @@ namespace OrganizationRegister.Application.Organization
                 throw new ArgumentNullException("userContext");
             }
             userContext.CheckPermission(Permissions.Organization.MaintenanceOfAllOrganizationData);
+        }
+
+        //PM 20.4.2021
+        public List<AuthorizationGroup> GetAuthorizationGroups()
+        {
+            var authorizationGroups = organizationRepository.GetAuthorizationGroups();
+
+            return authorizationGroups;
         }
     }
 }

@@ -21,6 +21,8 @@ module Affecto.ExceptionHandling
 
         public get errorMessage(): string
         {
+          
+           
             var code: string = "ERROR_" + this.errorCode;
             var error: string = this.$translate.instant(code);
 

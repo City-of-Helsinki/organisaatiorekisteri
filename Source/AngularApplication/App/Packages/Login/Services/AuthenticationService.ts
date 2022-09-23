@@ -4,6 +4,8 @@ module Affecto.Login
 {
     export interface IAuthenticationService
     {
+        tunnistamoLogInWithCode(code: string): angular.IPromise<void>;
+
         logInWithCredentials(userName: string, password: string): angular.IPromise<void>;
         logInWithCookie(): angular.IPromise<void>;
         logInWithAccessToken(accessToken: string): angular.IPromise<void>;
@@ -32,8 +34,27 @@ module Affecto.Login
             this.authenticationState = null;
         }
 
+        public tunnistamoLogInWithCode(code: string): angular.IPromise<void>
+        {
+            console.log("tunnistamologInWithCode");
+            this.setAccessToken("yJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IlJ1UjRBVWNrelZQcGlsOWdBcHZRZUNjWHNlbyIsImtpZCI6IlJ1UjRBVWNrelZQcGlsOWdBcHZRZUNjWHNlbyJ9.eyJpc3MiOiJodHRwczovL2hraWRldnB0di5kZXYubG9jYWwvQXV0aGVudGljYXRpb25TZXJ2ZXIvY29yZSIsImF1ZCI6Imh0dHBzOi8vaGtpZGV2cHR2LmRldi5sb2NhbC9BdXRoZW50aWNhdGlvblNlcnZlci9jb3JlL3Jlc291cmNlcyIsImV4cCI6MTYyODA4MDE1NiwibmJmIjoxNjI3OTkzNzU3LCJjbGllbnRfaWQiOiJPckludGVybmFsVUkiLCJzY29wZSI6Ik9yQXBpIiwic3ViIjoiZDdjZThjMTQtOTMxZC00MzNiLWI3NDEtNmRkODFjZTAyMzIwIiwiYXV0aF90aW1lIjoxNjI3OTkzNzU3LCJpZHAiOiJpZHNydiIsIm5hbWUiOiJIS0kgSsOkcmplc3RlbG3DpG4gcMOkw6Rrw6R5dHTDpGrDpCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiZDdjZThjMTQtOTMxZC00MzNiLWI3NDEtNmRkODFjZTAyMzIwIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6IkhLSSBKw6RyamVzdGVsbcOkbiBww6TDpGvDpHl0dMOkasOkIiwiaHR0cDovL2FmZmVjdG8uY29tL2NsYWltcy9hY2NvdW50bmFtZSI6InN1cGVyYWRtaW5AaGVsLmZpIiwiaHR0cDovL2FmZmVjdG8uY29tL2NsYWltcy9jdXN0b21wcm9wZXJ0aWVzL09yZ2FuaXphdGlvbklkIjoiODNlNzQ2NjYtMDgzNi00YzFkLTk0OGEtNGIzNGE4YjkwMzAxIiwiaHR0cDovL2FmZmVjdG8uY29tL2NsYWltcy9jdXN0b21wcm9wZXJ0aWVzL0xhc3ROYW1lIjoiSEtJIiwiaHR0cDovL2FmZmVjdG8uY29tL2NsYWltcy9jdXN0b21wcm9wZXJ0aWVzL0VtYWlsQWRkcmVzcyI6InN1cGVyYWRtaW5AaGVsLmZpIiwiaHR0cDovL2FmZmVjdG8uY29tL2NsYWltcy9jdXN0b21wcm9wZXJ0aWVzL0ZpcnN0TmFtZSI6IkrDpHJqZXN0ZWxtw6RuIHDDpMOka8OkeXR0w6Rqw6QiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJKw6RyamVzdGVsbcOkbiBww6TDpGvDpHl0dMOkasOkIiwiaHR0cDovL2FmZmVjdG8uY29tL2NsYWltcy9wZXJtaXNzaW9uIjpbIk1BSU5URU5BTkNFX09GX09XTl9PUkdBTklaQVRJT05fVVNFUlMiLCJNQUlOVEVOQU5DRV9PRl9BTExfVVNFUlMiLCJVU0VSX01BSU5URU5BTkNFIiwiT1JHQU5JWkFUSU9OX0RBVEFfTUFJTlRFTkFOQ0UiLCJNQUlOVEVOQU5DRV9PRl9PV05fT1JHQU5JWkFUSU9OX0RBVEEiLCJNQUlOVEVOQU5DRV9PRl9BTExfT1JHQU5JWkFUSU9OX0RBVEEiXSwiYW1yIjpbInBhc3N3b3JkIl19.bG - yr7 - i6fvtb6ENaMpjEYQecXjIQ_5hjib7EULL1gIEhbFaFv6xCGQw0oCj2bH6rBa6gEMzYByp0WHLd4SSFuMSBjgy7aGfNl82 - _TqHJcLb - PmRHgzqtk8DIHTw7YwhhfwhtQBoR1jyAtHDX6p0PLQDF6b6cBuZrwtXHxmwoMPhEqT367yYkcePlOKS4Oa2B1uWWyO2dy35_6WAz5jbItPo5mmg7jz8AJevVB7MyevCj-jln8cXzveMn_Pbdv84mTj0OOcS0IJb-3vSzgto9xO4wJ3VrxRnVqE0hoB8VucNGI1EO4Z3jv9kJVA9-15QVBHPZST6OgEWrfuhaAo1A");
+            var user = this.authenticatedUserFactory.createUser(code);
+            console.log("User");
+            console.log(user);
+            var authenticatedUser = this.setAuthenticatedUser(this.authenticatedUserFactory.createUser(user));
+            console.log("AuthenticatedUser");
+            console.log(authenticatedUser);
+            this.$rootScope.$broadcast(Events.userLoggedIn);
+
+
+
+            return 
+        }
+
         public logInWithCredentials(userName: string, password: string): angular.IPromise<void>
         {
+            console.log("logInWithCredentials");
+
             var grant: string = "grant_type=password&username=" + encodeURIComponent(userName)
                 + "&password=" + encodeURIComponent(password);
 
@@ -62,12 +83,17 @@ module Affecto.Login
 
         public logInWithAccessToken(accessToken: string): angular.IPromise<void>
         {
+            console.log("logInWithAccessToken");
+            console.log("accessToken: " + accessToken);
+            console.log("apiGetUserUrl: " + this.apiGetUserUrl);
+
             this.setAccessToken(accessToken);
             return this.$http.get(this.apiGetUserUrl)
                 .then((response: angular.IHttpPromiseCallbackArg<any>) =>
                 {
                     if (response != null && response.data != null)
                     {
+                        console.log("response.data: " + response.data);
                         this.setAuthenticatedUser(this.authenticatedUserFactory.createUser(response.data));
                         this.$rootScope.$broadcast(Events.userLoggedIn);
                     }
@@ -118,21 +144,33 @@ module Affecto.Login
         {
             this.clearAuthenticationState();
 
-            return this.$http
+            console.log("logIn");
+            console.log("tokenServiceUrl: " + this.tokenServiceUrl);
+            console.log("grant: " + grant);
+
+          
+
+            var r = this.$http
                 .post(this.tokenServiceUrl, grant,
                 {
-                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    headers: { "Content-Type": "application/x-www-form-urlencoded", "Accept": "application/json" },
                     withCredentials: includeCredentials
                 })
                 .error((data: any): void =>
                 {
+                    console.log("logIn Error");
                     var deferred: angular.IDeferred<any> = this.$q.defer();
                     deferred.reject(data);
                 })
                 .then((response: angular.IHttpPromiseCallbackArg<any>) =>
                 {
+                    console.log("logIn success");
                     return this.logInWithAccessToken(response.data.access_token);
                 });
+
+            console.log(r);
+
+            return r;
         }
 
         private getAuthenticationState(): AuthenticationState

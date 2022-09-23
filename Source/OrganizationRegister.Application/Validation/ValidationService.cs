@@ -2,12 +2,20 @@
 using Affecto.Identifiers;
 using Affecto.Identifiers.Finnish;
 using OrganizationRegister.Application.Organization;
+using OrganizationRegister.Common;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace OrganizationRegister.Application.Validation
 {
     internal class ValidationService : IValidationService
     {
         private readonly IOrganizationRepository organizationRepository;
+
+        private void W(object s)
+        {
+            System.Diagnostics.Trace.WriteLine("[" + this.GetType() + "][" + this.GetHashCode() +"] " + s);
+        }
 
         public ValidationService(IOrganizationRepository organizationRepository)
         {
@@ -16,6 +24,57 @@ namespace OrganizationRegister.Application.Validation
                 throw new ArgumentNullException("organizationRepository");
             }
             this.organizationRepository = organizationRepository;
+        }
+
+        //businessId = ptvId
+        //tunnisteen ei tarvitse olla uniikki sovelluksessa -> validointi tieto on informatiivinen
+        public IBusinessIdentifierValidationResult ValidateUniquePtvId(string businessId, Guid? organizationId)
+        {
+            W("ValidateUniquePtvId ptvId:" + businessId + ", organizationId: " + (organizationId != null ? organizationId + "": "null"));
+         
+            if (!string.IsNullOrWhiteSpace(businessId))
+            {
+                Guid oid = (Guid)organizationId;
+
+                List<string> messages = new List<string>();
+                var organizations = organizationRepository.GetOrganizationsByPtvId(businessId);
+                foreach (var organization in organizations)
+                {
+                    W("organizationId: " + organization.Id + ", ptvId: " + organization.PTVId);
+                    if (string.IsNullOrWhiteSpace(organization.PTVId)) { continue; }
+                    if (organization.Id == oid) { continue; }
+
+                    if (organization.PTVId == businessId)
+                    {
+                        string str = "?";
+
+                        try
+                        {
+                            IOrganization temp = organizationRepository.GetOrganization(organization.Id) as IOrganization;
+                            if (temp.Names != null)
+                            {
+                                LocalizedText localizedText = temp.Names.Where(a => a.LanguageCode == "fi").FirstOrDefault();
+                                str = (localizedText != null ? localizedText.LocalizedValue : "");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            str = ex.Message;
+                        }
+
+                        messages.Add(str + " (" + organization.Id + ")");
+
+                        //return new BusinessIdentifierValidationResult(false, "Tunniste on varattu organisatiolle " + str + " (" + organization.Id + ")");
+                    }
+                }
+
+                if (messages.Count > 0)
+                {
+                    return new BusinessIdentifierValidationResult(false, string.Join(", ", messages.ToArray()));
+                }
+            }
+
+            return new BusinessIdentifierValidationResult(true, "");
         }
 
         public IBusinessIdentifierValidationResult ValidateUniqueBusinessIdentifier(string businessId, Guid? organizationId)

@@ -26,6 +26,20 @@ namespace OrganizationRegister.Api.Validation
         }
 
         [HttpPost]
+        [PostRoute("ptvid")]
+        public IHttpActionResult ValidatePtvIdIdentifier(BusinessIdentifierValidationRequest request)
+        {
+            IBusinessIdentifierValidationResult result;
+
+            result = validationService.ValidateUniquePtvId(request.BusinessId, request.OrganizationId);
+
+            var mapper = mapperFactory.CreateBusinessIdentifierValidationResultMapper();
+            BusinessIdentifierValidationResult mappedResult = mapper.Map(result);
+            return Ok(mappedResult);
+        }
+
+
+        [HttpPost]
         [PostRoute("businessid")]
         public IHttpActionResult ValidateBusinessIdentifier(BusinessIdentifierValidationRequest request)
         {

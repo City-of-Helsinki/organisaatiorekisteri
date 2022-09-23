@@ -11,5 +11,8 @@ namespace OrganizationRegister.Application.Validation
         bool ValidateWebAddress(string webAddress);
         bool ValidatePostalCode(string postalCode);
         bool ValidatePostOfficeBoxPostalCode(string postalCode);
+
+        IBusinessIdentifierValidationResult ValidateUniquePtvId(string businessId, Guid? organizationId);
+        
     }
 }

@@ -24,7 +24,12 @@ namespace OrganizationRegister.Application.Organization
         private readonly LocalizedTextsContainer localizedTextsContainer;
 
         protected BusinessIdentifier businessId;
-        
+
+        public Organization(Guid id)
+        {
+            Id = id;
+        }
+
         public Organization(Guid id, long numericId, string businessId, string oid, string type, int? municipalityCode, IEnumerable<LocalizedText> names,
             IEnumerable<string> languageCodes, bool canBeTransferredToFsc, bool canBeResponsibleDeptForService)
             : this(id, businessId, oid, type, municipalityCode.HasValue ? municipalityCode.Value.ToString(CultureInfo.InvariantCulture) : null, names, languageCodes, canBeTransferredToFsc, canBeResponsibleDeptForService)
@@ -77,6 +82,7 @@ namespace OrganizationRegister.Application.Organization
 
         public string Oid { get; set; }
 
+        public string PTVId { get; set; }
 
         public bool CanBeTransferredToFsc { get; set; }
 

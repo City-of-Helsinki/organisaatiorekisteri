@@ -15,8 +15,17 @@ namespace OrganizationRegister.Api.Settings
         private readonly Lazy<IUserService> userService;
         private readonly MapperFactory mapperFactory;
 
+        public void W(object s)
+        {
+            Console.WriteLine("Console[" + this.GetType() + "][" + this.GetHashCode() + "] " + s);
+            System.Diagnostics.Trace.WriteLine("Trace[" + this.GetType() + "][" + this.GetHashCode() + "] " + s);
+            System.Diagnostics.Debug.WriteLine("Debug[" + this.GetType() + "][" + this.GetHashCode() + "] " + s);
+        }
+
         public OpenSettingsController(Lazy<ISettingsService> settingsService, Lazy<IUserService> userService, MapperFactory mapperFactory)
         {
+            W("OpenSettingsController");
+
             if (settingsService == null)
             {
                 throw new ArgumentNullException("settingsService");
@@ -33,6 +42,11 @@ namespace OrganizationRegister.Api.Settings
             this.settingsService = settingsService;
             this.userService = userService;
             this.mapperFactory = mapperFactory;
+
+            W("settingsService: " + settingsService.GetType());
+            W("userService: " + userService.GetType());
+            W("mapperFactory: " + mapperFactory.GetType());
+
         }
 
         [HttpGet]
@@ -55,8 +69,21 @@ namespace OrganizationRegister.Api.Settings
         [GetRoute("roles")]
         public IHttpActionResult GetRoles()
         {
-            IEnumerable<IRole> roles = userService.Value.GetRoles();
-            IMapper<IRole, Role> mapper = mapperFactory.CreateRoleMapper();
+            W("GetRoles");
+
+           IEnumerable<IRole> roles = null;
+           IMapper <IRole, Role> mapper = null;
+
+            try
+            {
+                roles = userService.Value.GetRoles();
+                mapper = mapperFactory.CreateRoleMapper();
+            } catch (Exception ex)
+            {
+                W(ex);
+                throw ex;
+            }
+  
 
             return Ok(mapper.Map(roles));
         }

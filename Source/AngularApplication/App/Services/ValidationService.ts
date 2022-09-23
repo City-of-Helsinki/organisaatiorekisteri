@@ -10,6 +10,16 @@ module OrganizationRegister
         {
         }
 
+
+        public validatePtvId(ptvId: string, organizationId: string, allowDuplicates: boolean): angular.IPromise<BusinessIdentifierValidationResult> {
+            
+            return this.$http.post(this.apiBaseUrl + "organizationregister/ptvid", this.createBusinessIdValidationObject(ptvId, organizationId, allowDuplicates))
+                .then((response: angular.IHttpPromiseCallbackArg<any>): BusinessIdentifierValidationResult => {
+                    return new BusinessIdentifierValidationResult(response.data.isValid, response.data.reasonForInvalidity);
+                });
+        }
+
+
         public validateBusinessId(businessId: string, organizationId: string, allowDuplicates: boolean): angular.IPromise<BusinessIdentifierValidationResult>
         {
             return this.$http.post(this.apiBaseUrl + "organizationregister/businessid", this.createBusinessIdValidationObject(businessId, organizationId, allowDuplicates))

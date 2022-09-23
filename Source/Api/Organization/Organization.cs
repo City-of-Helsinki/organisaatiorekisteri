@@ -34,5 +34,7 @@ namespace OrganizationRegister.Api.Organization
         public bool CanBeResponsibleDeptForService { get; set; }
 
         public IEnumerable<AuthorizationGroup> AuthorizationGroups { get; set; }
+
+        public string PTVId { get; set; }
     }
 }

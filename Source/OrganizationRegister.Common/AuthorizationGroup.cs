@@ -1,6 +1,5 @@
-﻿
+﻿using System;
 
-using System;
 
 namespace OrganizationRegister.Common
 { 
@@ -22,6 +21,9 @@ namespace OrganizationRegister.Common
         public string Name { get; set; }
         public Guid RoleId { get; set; }
         public Guid? GroupId { get; set; }
+
+        //PM 20.4.2021
+        public Guid? OrganizationId { get; set; }
 
     }
 

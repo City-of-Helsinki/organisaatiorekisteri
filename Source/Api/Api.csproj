@@ -78,6 +78,9 @@
       <HintPath>..\packages\Affecto.WebApi.Toolkit.1.7.0\lib\net45\Affecto.WebApi.Toolkit.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Autofac">
       <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
       <Private>True</Private>
@@ -204,6 +207,12 @@
     <Reference Include="System.Web.Http.WebHost">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
       <Private>True</Private>
@@ -229,6 +238,9 @@
     <Reference Include="System.Net.Http.WebRequest">
     </Reference>
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Owin">
@@ -239,6 +251,9 @@
     <Compile Include="..\SharedFiles\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="AuthenticatedUser\AuthenticatedUser.cs" />
     <Compile Include="AuthenticatedUser\AuthorizedAuthenticatedUserController.cs" />
     <Compile Include="AuthenticatedUser\AuthenticatedUserFactory.cs" />
@@ -248,6 +263,9 @@
     <Compile Include="Authentication\IdentityServerOptionsFactory.cs" />
     <Compile Include="Authentication\AuthenticationServerConfiguration.cs" />
     <Compile Include="Authentication\IAuthenticationServerConfiguration.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Organization\AuthorizedOrganizationController.cs" />
     <Compile Include="Organization\AuthorizationInformation.cs" />
     <Compile Include="Organization\OpenOrganizationController.cs" />
@@ -258,6 +276,7 @@
     <Compile Include="Settings\RoleMapper.cs" />
     <Compile Include="Settings\OpenSettingsController.cs" />
     <Compile Include="Settings\Role.cs" />
+    <Compile Include="Tunnistamo\TunnistamoController.cs" />
     <Compile Include="User\UserListItem.cs" />
     <Compile Include="User\UserListItemMapper.cs" />
     <Compile Include="User\User.cs" />
@@ -283,6 +302,23 @@
     <Compile Include="WebApiModule.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -290,36 +326,46 @@
   <ItemGroup>
     <ProjectReference Include="..\OrganizationRegister.Autofac\OrganizationRegister.Autofac.csproj">
       <Project>{153BB75E-6161-4012-AFF4-FED808779C65}</Project>
-      <Name>ServiceRegister.Autofac</Name>
+      <Name>OrganizationRegister.Autofac</Name>
     </ProjectReference>
     <ProjectReference Include="..\OrganizationRegister.Application\OrganizationRegister.Application.csproj">
       <Project>{4F322916-C66E-415E-A4A9-45407618B62D}</Project>
-      <Name>ServiceRegister.Application</Name>
+      <Name>OrganizationRegister.Application</Name>
     </ProjectReference>
     <ProjectReference Include="..\OrganizationRegister.Common\OrganizationRegister.Common.csproj">
       <Project>{39415FC6-B6EF-4EE6-8E95-DF098E6B7394}</Project>
-      <Name>ServiceRegister.Common</Name>
+      <Name>OrganizationRegister.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\OrganizationRegister.Store.CodeFirst.Mocking\OrganizationRegister.Store.CodeFirst.Mocking.csproj">
       <Project>{72B6DD69-C4EB-4CC5-9F37-D3A2D8B40CAA}</Project>
-      <Name>ServiceRegister.Store.CodeFirst.Mocking</Name>
+      <Name>OrganizationRegister.Store.CodeFirst.Mocking</Name>
     </ProjectReference>
     <ProjectReference Include="..\OrganizationRegister.Store.CodeFirst\OrganizationRegister.Store.CodeFirst.csproj">
       <Project>{531DD032-A527-4B0C-84CB-D14066F3CEC8}</Project>
-      <Name>ServiceRegister.Store.CodeFirst</Name>
+      <Name>OrganizationRegister.Store.CodeFirst</Name>
     </ProjectReference>
     <ProjectReference Include="..\OrganizationRegister.UserManagement\OrganizationRegister.UserManagement.csproj">
       <Project>{54ED5CD0-DCC3-4AEF-A3E2-D6C74A7B4052}</Project>
-      <Name>ServiceRegister.UserManagement</Name>
+      <Name>OrganizationRegister.UserManagement</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="DatabaseConnectionStrings.config" />
-    <None Include="Authentication.config" />
+    <None Include="Authentication.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="DatabaseSchemas.config" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\web.config" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Api.nuspec" />
@@ -328,7 +374,12 @@
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="Models\" />
+    <Folder Include="Views\Tunnistamo\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

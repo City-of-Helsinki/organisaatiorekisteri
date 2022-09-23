@@ -9,7 +9,7 @@ namespace OrganizationRegister.Application.Organization
         string BusinessId { get; }
         string Oid { get; }
         string Type { get; }
-        IEnumerable<LocalizedText> Names { get; }
+        IEnumerable<LocalizedText> Names { get;  }
         IEnumerable<LocalizedText> Descriptions { get; }
         IEnumerable<LocalizedText> NameAbbreviations { get; }
         string MunicipalityCode { get; }
@@ -19,5 +19,7 @@ namespace OrganizationRegister.Application.Organization
 
         bool CanBeTransferredToFsc { get; set; }
         bool CanBeResponsibleDeptForService { get; set; }
+
+        string PTVId { get; set; }
     }
 }

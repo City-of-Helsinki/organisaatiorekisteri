@@ -20,6 +20,7 @@ using OrganizationRegister.Store.CodeFirst;
 using OrganizationRegister.Store.CodeFirst.Mocking;
 using OrganizationRegister.UserManagement;
 using Owin;
+using System;
 
 [assembly: OwinStartup(typeof(Startup))]
 namespace OrganizationRegister.Api
@@ -28,6 +29,17 @@ namespace OrganizationRegister.Api
     {
         public void Configuration(IAppBuilder app)
         {
+
+
+
+
+            System.Net.ServicePointManager.ServerCertificateValidationCallback +=
+               (se, cert, chain, sslerror) =>
+               {
+                   return true;
+               };
+
+
             var builder = new ContainerBuilder();
 
             builder.RegisterModule<WebApiModule>();
@@ -73,10 +85,18 @@ namespace OrganizationRegister.Api
 
         private static void ConfigureWebApi(HttpConfiguration config)
         {
+            W("ConfigureWebApi");
             config.MapHttpAttributeRoutes();
 
             JsonMediaTypeFormatter jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
             jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+        }
+
+        public static void W(object s)
+        {
+            System.Diagnostics.Trace.WriteLine("Trace[OrganizationRegister.Api.Startup] " + s);
+            System.Diagnostics.Debug.WriteLine("Debug[OrganizationRegister.Api.Startup]  " + s);
+            Console.WriteLine("Console[OrganizationRegister.Api.Startup] " + s);
         }
     }
 }

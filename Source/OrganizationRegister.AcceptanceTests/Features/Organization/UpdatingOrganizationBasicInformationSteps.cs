@@ -25,10 +25,10 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
         [Given(@"the following basic information is set to the organization:")]
         public void WhenTheFollowingBasicInformationIsSetToTheOrganization(Table basicInformation)
         {
-            TableRow info = basicInformation.Rows.Single();
-            Try(() => OrganizationService.SetOrganizationBasicInformation(CurrentScenarioContext.OrganizationId, info["Business id"], info.GetOptionalValue("Oid"), 
-                LocalizedTextHelper.CreateNamesCollection(info), LocalizedTextHelper.CreateDescriptionsCollection(info), info["Type"], info.GetOptionalValue("Municipality code"),
-                info.GetOptionalFinnishDate("Valid from"), info.GetOptionalFinnishDate("Valid to"), LocalizedTextHelper.CreateNameAbbreviationsCollection(info), bool.Parse(info["Can be added to FSC"]), bool.Parse(info["Can Be Responsible Dept For Service"])));
+            //TableRow info = basicInformation.Rows.Single();
+            //Try(() => OrganizationService.SetOrganizationBasicInformation(CurrentScenarioContext.OrganizationId, info["Business id"], info.GetOptionalValue("Oid"), 
+            //    LocalizedTextHelper.CreateNamesCollection(info), LocalizedTextHelper.CreateDescriptionsCollection(info), info["Type"], info.GetOptionalValue("Municipality code"),
+            //    info.GetOptionalFinnishDate("Valid from"), info.GetOptionalFinnishDate("Valid to"), LocalizedTextHelper.CreateNameAbbreviationsCollection(info), bool.Parse(info["Can be added to FSC"]), bool.Parse(info["Can Be Responsible Dept For Service"])));
         }
 
         [Then(@"the organization has the following basic information:")]
@@ -57,11 +57,11 @@ namespace OrganizationRegister.AcceptanceTests.Features.Organization
         [When(@"the following basic information is set to organization '(.+)':")]
         public void WhenTheFollowingBasicInformationIsSetToOrganization(string organizationName, Table basicInformation)
         {
-            TableRow info = basicInformation.Rows.Single();
-            IOrganizationName organization = OrganizationService.GetOrganizations().Single(o => o.Names.Any(name => name.LocalizedValue.Equals(organizationName)));
-            Try(() => OrganizationService.SetOrganizationBasicInformation(organization.Id, info["Business id"], info.GetOptionalValue("Oid"),
-                LocalizedTextHelper.CreateNamesCollection(info), LocalizedTextHelper.CreateDescriptionsCollection(info), info["Type"],
-                info.GetOptionalValue("Municipality code"), info.GetOptionalFinnishDate("Valid from"), info.GetOptionalFinnishDate("Valid to"),null, bool.Parse(info["Can be added to FSC"]), bool.Parse(info["Can Be Responsible Dept For Service"])));
+            //TableRow info = basicInformation.Rows.Single();
+            //IOrganizationName organization = OrganizationService.GetOrganizations().Single(o => o.Names.Any(name => name.LocalizedValue.Equals(organizationName)));
+            //Try(() => OrganizationService.SetOrganizationBasicInformation(organization.Id, info["Business id"], info.GetOptionalValue("Oid"),
+            //    LocalizedTextHelper.CreateNamesCollection(info), LocalizedTextHelper.CreateDescriptionsCollection(info), info["Type"],
+            //    info.GetOptionalValue("Municipality code"), info.GetOptionalFinnishDate("Valid from"), info.GetOptionalFinnishDate("Valid to"),null, bool.Parse(info["Can be added to FSC"]), bool.Parse(info["Can Be Responsible Dept For Service"])));
         }
 
         [Then(@"the organization '(.+)' has the following basic information:")]

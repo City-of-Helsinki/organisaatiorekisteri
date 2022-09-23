@@ -17,5 +17,6 @@ namespace OrganizationRegister.Api.Organization
         public DateTime? ValidTo { get; set; }
         public bool CanBeTransferredToFsc { get; set; }
         public bool CanBeResponsibleDeptForService { get; set; }
+        public string PTVId { get; set; }
     }
 }

@@ -163,11 +163,11 @@
   <ItemGroup>
     <ProjectReference Include="..\OrganizationRegister.Application\OrganizationRegister.Application.csproj">
       <Project>{4F322916-C66E-415E-A4A9-45407618B62D}</Project>
-      <Name>ServiceRegister.Application</Name>
+      <Name>OrganizationRegister.Application</Name>
     </ProjectReference>
     <ProjectReference Include="..\OrganizationRegister.Common\OrganizationRegister.Common.csproj">
       <Project>{39415FC6-B6EF-4EE6-8E95-DF098E6B7394}</Project>
-      <Name>ServiceRegister.Common</Name>
+      <Name>OrganizationRegister.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

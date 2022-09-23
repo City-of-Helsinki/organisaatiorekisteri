@@ -8,8 +8,16 @@ article {
   position: absolute;
 }
 
+.information-message {
+    position: absolute;
+}
+
 .validation-message.no-wrap {
   white-space: nowrap;
+}
+
+.information-message.no-wrap {
+    position: absolute;
 }
 
 .content-box-inner label.no-wrap {

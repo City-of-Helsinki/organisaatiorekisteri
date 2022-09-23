@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using OrganizationRegister.Application.Location;
+using System.Linq;
 
 namespace OrganizationRegister.Application.Organization
 {
@@ -43,5 +44,11 @@ namespace OrganizationRegister.Application.Organization
         void RemoveOrganization(Guid id);
         void DeactivateOrganization(Guid id);
         IOrganizationName GetOrganizationName(Guid id);
+
+        //PM 20.4.2021
+        List<Common.AuthorizationGroup> GetAuthorizationGroups();
+
+        List<IOrganization> GetOrganizationsByPtvId(string ptvId);
+
     }
 }

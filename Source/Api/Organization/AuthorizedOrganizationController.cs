@@ -15,8 +15,11 @@ namespace OrganizationRegister.Api.Organization
         private readonly IOrganizationService organizationService;
         private readonly Lazy<IGroupService> groupService;
 
+
         public AuthorizedOrganizationController(IOrganizationService organizationService, Lazy<IGroupService> groupService, MapperFactory mapperFactory)
         {
+            W("AuthorizedOrganizationController");
+
             if (organizationService == null)
             {
                 throw new ArgumentNullException("organizationService");
@@ -48,6 +51,15 @@ namespace OrganizationRegister.Api.Organization
             return Ok(organizationId);
         }
 
+
+        public void W(object s)
+        {
+            System.Diagnostics.Trace.WriteLine("Trace[" + this.GetType() + "][" + this.GetHashCode() + "] " + s);
+            System.Diagnostics.Debug.WriteLine("Debug[" + this.GetType() + "][" + this.GetHashCode() + "] " + s);
+            Console.WriteLine("Debug[" + this.GetType() + "][" + this.GetHashCode() + "] " + s);
+
+        }
+
         [HttpPost]
         [PostRoute("organizations/{parentOrganizationId}/organizations")]
         public IHttpActionResult AddSubOrganization(Guid parentOrganizationId, BasicInformation organization)
@@ -70,8 +82,21 @@ namespace OrganizationRegister.Api.Organization
             {
                 throw new ArgumentNullException("information");
             }
-            organizationService.SetOrganizationBasicInformation(organizationId, information.BusinessId, information.Oid, information.Names, information.Descriptions, 
-                information.Type, information.MunicipalityCode, information.ValidFrom, information.ValidTo, information.NameAbbreviations, information.CanBeTransferredToFsc, information.CanBeResponsibleDeptForService);
+
+            try
+            {
+                organizationService.SetOrganizationBasicInformation(organizationId, information.BusinessId, information.Oid, information.Names, information.Descriptions,
+                    information.Type, information.MunicipalityCode, information.ValidFrom, information.ValidTo, information.NameAbbreviations, information.CanBeTransferredToFsc, information.CanBeResponsibleDeptForService,
+                    information.PTVId);
+
+            }
+            catch (Exception ex)
+            {
+                W(ex);
+                return InternalServerError(ex);
+                //return BadRequest(ex.Message);
+            }
+
             return Ok();
         }
 

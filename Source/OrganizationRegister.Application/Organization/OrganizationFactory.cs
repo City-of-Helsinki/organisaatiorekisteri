@@ -6,7 +6,13 @@ namespace OrganizationRegister.Application.Organization
 {
     public class OrganizationFactory
     {
-        public static IOrganization CreateOrganization(Guid id, long numericId, string businessId, string oid, string type, IEnumerable<LocalizedText> names, 
+        public static IOrganization CreateOrganization(Guid id)
+        {
+            Organization organization = new Organization(id);
+            return organization;
+        }
+
+        public static IOrganization CreateOrganization(Guid id, long numericId, string businessId, string oid, string ptvId, string type, IEnumerable<LocalizedText> names, 
             IEnumerable<LocalizedText> descriptions, int? municipalityCode, DateTime? validFrom, DateTime? validTo, string phoneNumber, string callChargeType, IEnumerable<LocalizedText> phoneCallChargeInfos, string emailAddress, 
             IEnumerable<WebPage> webPages, IEnumerable<LocalizedText> visitingStreetAddresses, string visitingAddressPostalCode, IEnumerable<LocalizedText> visitingAddressLocalities,
             IEnumerable<LocalizedText> visitingAddressQualifier, IEnumerable<LocalizedText> postalStreetAddresses, string postalStreetAddressPostalCode, 
@@ -28,6 +34,9 @@ namespace OrganizationRegister.Application.Organization
             organization.HomepageUrls = homepageUrls;
             organization.NameAbbreviations = nameAbbreviations;
             organization.AuthorizationGroups = authorizationGroups;
+
+            organization.PTVId = ptvId;
+
             return organization;
         }
 

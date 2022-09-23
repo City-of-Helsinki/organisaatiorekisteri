@@ -14,6 +14,7 @@ module OrganizationRegister
         public validBusinessId: boolean;
         public validValidity: boolean;
         public validPhoneNumber: boolean;
+        public validPtvId: boolean;
         public validEmailAddress: boolean;
         public validWebPageUrl: boolean;
         public validEditedWebPageUrl: boolean;
@@ -24,6 +25,7 @@ module OrganizationRegister
         public isValidFromCalendarShown: boolean;
         public isValidToCalendarShown: boolean;
         public businessIdErrorMessage: string;
+        public ptvIdErrorMessage: string;
         public webPageUrlBeforeEditing: string;
         public toBeAddedPostalAddressType: string;
         public editedSection: EditedOrganizationSection;
@@ -64,6 +66,7 @@ module OrganizationRegister
             this.webPageEditModeOn = false;
             this.isValidFromCalendarShown = false;
             this.isValidToCalendarShown = false;
+            this.validPtvId = true;
 
             this.fetchServerData($routeParams);
             this.initializeEditedSection($route);
@@ -98,6 +101,7 @@ module OrganizationRegister
 
         public canSaveEditedWebPage(): boolean
         {
+          
             return this.webPageEditModeOn && this.model.hasEditedWebPage() && this.validEditedWebPageUrl;
         }
 
@@ -223,6 +227,7 @@ module OrganizationRegister
         public resetAllFormFieldsAsValid(): void
         {
             this.setFormFieldValidity(this.basicInformationForm, "businessId", true);
+            this.setFormFieldValidity(this.basicInformationForm, "ptvId", true);
             this.setValidityValidity(true);
             this.setEmailAddressValidity(true);
             this.setPhoneNumberValidity(true);
@@ -232,6 +237,7 @@ module OrganizationRegister
             this.setWebPageUrlValidity(true);
             this.setEditedWebPageUrlValidity(true);
             this.setHomepageUrlsValidity(true);
+           
         }
 
         public cancelEditing(): void
@@ -246,6 +252,7 @@ module OrganizationRegister
         public editOrganizationBasicInformation(): void
         {
             this.businessIdErrorMessage = null;
+            this.ptvIdErrorMessage = null;
             this.originalModel = angular.copy(this.model);
             this.basicInformationForm.$setPristine();
             this.basicInformationForm.$setUntouched();
@@ -254,6 +261,7 @@ module OrganizationRegister
 
         public saveEditOrganizationBasicInformation(): angular.IPromise<void>
         {
+            
             this.editedSection = EditedOrganizationSection.None;
             if (this.isModelChanged())
             {
@@ -625,10 +633,34 @@ module OrganizationRegister
             this.toBeAddedPostalAddressType = this.model.postalAddressTypes.available.firstOrDefault();
         }
 
+        //public validatePtvId(): void
+        //{
+        //    if (this.model.ptvId != "")
+        //    {
+        //        this.setPtvIdValidity(false);
+        //    }
+        //    else
+        //    {
+        //        this.setPtvIdValidity(true);
+        //    }
+        //}
+
+        public validatePtvId(): angular.IPromise<void> {
+            if (this.model.hasPtvId()) {
+                return this.validationService.validatePtvId(this.model.ptvId, this.model.id, false)
+                    .then(this.setPtvIdValidity);
+            }
+            else {
+                this.setPtvIdValidity(new BusinessIdentifierValidationResult(true, null));
+            }
+        }
+
+
         public validateBusinessId(): angular.IPromise<void>
         {
             if (this.model.hasBusinessId())
             {
+                //alert('validateBusinessId this.model.id:' + this.model.id);
                 return this.validationService.validateBusinessId(this.model.businessId, this.model.id, this.isSubOrganization())
                     .then(this.setBusinessIdValidity);
             }
@@ -950,6 +982,26 @@ module OrganizationRegister
 
             this.setFormFieldValidity(this.basicInformationForm, "businessId", validationResult.isValid);
         }
+
+        private setPtvIdValidity = (validationResult: BusinessIdentifierValidationResult): void => {
+            this.validPtvId = validationResult.isValid;
+
+            if (validationResult.isValid)
+            {
+                this.ptvIdErrorMessage = null;
+            }
+            else
+            {
+                this.ptvIdErrorMessage = "Tunniste on käytössä myös organisaatioissa: " + validationResult.reasonForInvalidity;
+
+            }
+
+            this.validPtvId = true;
+            this.setFormFieldValidity(this.basicInformationForm, "ptvId", true);
+        }
+
+
+
 
         private setPhoneNumberValidity = (isValid: boolean): void =>
         {

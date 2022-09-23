@@ -127,9 +127,24 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-xs-5">
+        <label>
+            PTV ID
+            <affecto-help-popup paragraphs='["Palvelutietovarannon organisaatioId. PTV vienti kohdistetaan tähän organisaatioon palvelutietovarannossa kun seuraavat ehdot täyttyvät: - Tunniste on asetettu - Organisaatioyksikön toimipisteiden tiedot saa viedä kansalliseen palvelutietovarantoon (PTV)- Organisaatioyksikkö voi olla palvelurekisterissä vastuuyksikkö."]' />
+        </label>
+        <input id="ptvId" type="text" name="ptvId" class="form-control" maxlength="100" data-ng-model="controller.model.ptvId" data-ng-blur="controller.validatePtvId()" />
+    </div>
+   
+</div>
 
-
-
+<div class="row">
+    <div class="col-xs-12">
+        <div id="ptvIdErrorMessage" name="ptvIdErrorMessage" aria-live="polite" class="information-message" data-ng-show="true" ng-bind="controller.ptvIdErrorMessage">
+          
+        </div>
+    </div>
+ </div>
 
 
 

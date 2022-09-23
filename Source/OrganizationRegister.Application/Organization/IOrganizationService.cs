@@ -19,7 +19,7 @@ namespace OrganizationRegister.Application.Organization
         IEnumerable<IOrganizationName> GetMainOrganizationsNames();
         IOrganization GetOrganization(Guid organizationId);
         void SetOrganizationBasicInformation(Guid organizationId, string businessId, string oid, IEnumerable<LocalizedText> names, IEnumerable<LocalizedText> descriptions, 
-            string type, string municipalityCode, DateTime? validFrom, DateTime? validTo, IEnumerable<LocalizedText> nameAbbreviations, bool canBeTransferredToFsc, bool canBeResponsibleDeptForService);
+            string type, string municipalityCode, DateTime? validFrom, DateTime? validTo, IEnumerable<LocalizedText> nameAbbreviations, bool canBeTransferredToFsc, bool canBeResponsibleDeptForService, string ptvId);
         //void SetOrganizationContactInformation(Guid organizationId, string phoneNumber, string phoneCallFee, string emailAddress, IEnumerable<WebPage> webSites, IEnumerable<LocalizedText> homepgeUrls);
 
         void SetOrganizationContactInformation(Guid organizationId, string phoneNumber, string callChargeType, IEnumerable<LocalizedText> callChargeInfos,
@@ -47,5 +47,9 @@ namespace OrganizationRegister.Application.Organization
         IEnumerable<IOrganizationListItem> GetOrganizationListForOrganization(string businessId);
 
         IEnumerable<IOrganizationListItem> GetMainOrganizationList();
+
+        List<AuthorizationGroup> GetAuthorizationGroups();
+    
+
     }
 }

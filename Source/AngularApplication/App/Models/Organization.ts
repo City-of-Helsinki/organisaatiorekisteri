@@ -30,7 +30,7 @@ module OrganizationRegister
         public authorizationGroupRole: UserRole;
         public editedAuthorizationGroupName: string;
         public editedAuthorizationGroupRole: UserRole;
-
+   
       
 
 
@@ -59,8 +59,12 @@ module OrganizationRegister
             public isSubOrganization?: boolean,
             public canBeTransferredToFsc?: boolean,
             public canBeResponsibleDeptForService?: boolean,
-            public authorizationGroups?: Array<AuthorizationGroup>)
+            public authorizationGroups?: Array<AuthorizationGroup>,
+            public ptvId?: string)
         {
+
+            
+
             this.initializeLocalizedNames(names);
             this.initializeLocalizedNameAbbreviations(nameAbbreviations);
             this.initializeLocalizedDescriptions(descriptions);
@@ -390,6 +394,10 @@ module OrganizationRegister
         public hasBusinessId(): boolean
         {
             return this.businessId != null && this.businessId !== "";
+        }
+
+        public hasPtvId(): boolean {
+            return this.ptvId != null && this.ptvId !== "";
         }
 
         public hasPhoneNumber(): boolean

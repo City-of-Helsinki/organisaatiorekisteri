@@ -30,6 +30,7 @@ namespace OrganizationRegister.Store.CodeFirst.Model
         public string BusinessId { get; set; }
         public int? MunicipalityCode { get; set; }
         public string Oid { get; set; }
+        public string PTVId { get; set; }
         public DateTime? ValidTo { get; set; }
         public DateTime? ValidFrom { get; set; }
         public bool Active { get; set; }
@@ -321,6 +322,7 @@ namespace OrganizationRegister.Store.CodeFirst.Model
             ValidTo = information.ValidTo;
             CanBeTransferredToFsc = information.CanBeTransferredToFsc;
             CanBeResponsibleDeptForService = information.CanBeResponsibleDeptForService;
+            PTVId = information.PTVId;
 
             SetLocalizedTexts(information, context);
 

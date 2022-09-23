@@ -213,6 +213,16 @@ input[disabled]{
 	}
 }
 
+.information-message {
+    color: #0094ff;
+    @include rem(font-size, 14px);
+    @extend .strong;
+
+    &:empty {
+        display: none;
+    }
+}
+
 input[type="button"],
 input[type="submit"],
 input[type="reset"],
@@ -415,4 +425,11 @@ select {
     color: #e7394e;
     font-size: 0.875rem;
 	font-weight: 400;
+}
+
+
+.information-message {
+    color: #0094ff;
+    font-size: 0.875rem;
+    font-weight: 400;
 }
